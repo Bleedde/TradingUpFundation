@@ -1,0 +1,1 @@
+export const IMAGEN_LOGO = 'assets/img/logo.png'
