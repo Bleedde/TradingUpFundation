@@ -15,3 +15,10 @@
         padding: 3px;
 
 }
+
+@media screen and (max-width:767px){
+    .mt_5{
+        margin-top: calc(3vh);
+    }
+    
+}

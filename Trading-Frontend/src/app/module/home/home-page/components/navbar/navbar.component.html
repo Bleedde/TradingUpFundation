@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top p-3">
+<nav [ngClass]="{ 'scrolled': scrolled }" class="navbar navbar-expand-lg navbar-dark fixed-top p-3">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="#">
         <img [src]="imagen_logo" width="70px" alt="">  Trading Up Fundation
@@ -9,10 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#quienesSomos" routerLink="quienesSomos">Quienes somos?</a>
+            <button class="nav-link" (click)="scroll('quienesSomos')">Quienes somos?</button>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#nuestroteam">Nuestro team</a>
+            <button class="nav-link" (click)="scroll('misionVision')">Vision y Mision</button>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.ht|ml">Curso</a>
