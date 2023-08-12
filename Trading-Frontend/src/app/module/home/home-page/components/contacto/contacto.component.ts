@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, QueryList } from '@angular/core';
+import { QRCODE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-contacto',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./contacto.component.scss']
 })
 export class ContactoComponent {
-
+  QR = QRCODE;
 }

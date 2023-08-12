@@ -1,1 +1,36 @@
-<p>contacto works!</p>
+<div class="container mt-5 contactoz" id="contact">
+    <div class="row justify-content-center text-white">
+      <div class="col-md-6">
+        <form class="custom-form">
+          <h1>Contactanos</h1>
+          <div class="mb-3 mx-3">
+            <label for="nombre" class="form-label">Nombres:</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombres">
+          </div>
+  
+          <div class="mb-3 mx-3">
+            <label for="apellidos" class="form-label">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+          </div>
+  
+          <div class="mb-3 mx-3">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input type="number" class="form-control" id="telefono" placeholder="Teléfono">
+          </div>
+  
+          <div class="mb-5 mx-3">
+            <label for="correo" class="form-label">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="correo" placeholder="Correo Electrónico">
+          </div>
+  
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary custom-button fs-4 mb-3">Enviar Consulta</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6 d-flex flex-column align-items-center justify-content-center mt-3 mt-md-0">
+        <p class="fs-3 text-center mb-3 text-black">Te enviaremos un correo con todos los detalles sobre TradingUpFoundation y el curso que te interesa. ¡Contáctanos!</p>
+        <img [src]="QR" width="190px" alt="Imagen" class="img-fluid">
+      </div>
+    </div>
+  </div>
