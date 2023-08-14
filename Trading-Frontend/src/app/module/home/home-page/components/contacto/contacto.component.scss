@@ -28,6 +28,12 @@ h1
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+
+}
+
+@media screen and (max-width:767px){
+    .mt_5{
+        margin-top: calc(5vh);
+    }
+    
 }
