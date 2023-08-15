@@ -12,6 +12,7 @@ import { ComunidadComponent } from './home-page/components/comunidad/comunidad.c
 import { ContactoComponent } from './home-page/components/contacto/contacto.component';
 import { FooterComponent } from './home-page/components/footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { InfoCursosComponent } from './home-page/components/info-cursos/info-cursos.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     EquipoComponent,
     ComunidadComponent,
     ContactoComponent,
-    FooterComponent
+    FooterComponent,
+    InfoCursosComponent
   ],
   imports: [
     CommonModule,

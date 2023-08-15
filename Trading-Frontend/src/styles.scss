@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+.background{
+    background: #000000;   /*fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #000000, #16003d);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #000000, #16003d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* #200f25d5 morado clarito #0b0414 */
+}

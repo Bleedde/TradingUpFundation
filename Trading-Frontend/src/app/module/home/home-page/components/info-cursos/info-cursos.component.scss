@@ -1,0 +1,37 @@
+@import url(/src/styles.scss);
+
+img{
+    width: 26%;
+}
+
+.tituloNivel{
+    color: #3B216F;
+}
+
+p{
+    font-size: calc(0.7em + 0.7vh);
+}
+.nivel{
+    height: calc(24em + 24vh);
+}
+
+.nivel:hover{
+    transition: 0.30s;
+    height:  calc(25em + 25vh);
+}
+
+@media screen and (max-width:992px){
+    .grid_columns{
+       display: grid;
+    }
+
+    
+}
+
+@media screen and (min-width:993px){
+    .flex_columns{
+       display: flex;
+    }
+    
+}
+

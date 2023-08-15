@@ -1,20 +1,17 @@
 .team{
-    background: #000000;   /*fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #000000, #16003d);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #000000, #16003d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /* #200f25d5 morado clarito #0b0414 */
+    background-color: white;
 }
 
 h1{
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    color: white;
+    color: black;
 }
 
 h1::after{
     content: '';
-    background-color: white;
+    background-color: black;
     display: block;
     height: 3px;
     width: 270px;
@@ -36,5 +33,9 @@ h1::after{
     font-size: 22px;
     font-weight: bold;
     margin-top: 15px;
+}
+
+img{
+    width: 45%;
 }
 
