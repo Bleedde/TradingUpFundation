@@ -1,5 +1,6 @@
 import { Component, QueryList } from '@angular/core';
 import { QRCODE } from 'src/app/shared/constants';
+import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-contacto',
@@ -8,4 +9,5 @@ import { QRCODE } from 'src/app/shared/constants';
 })
 export class ContactoComponent {
   QR = QRCODE;
+
 }

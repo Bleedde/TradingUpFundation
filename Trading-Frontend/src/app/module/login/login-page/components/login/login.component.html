@@ -1,0 +1,43 @@
+<div class="container w-100 bg-light rounded background">
+    <div class="row align-items-stretch">
+        <div class="col bg-image d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
+                
+        </div>
+        <div class="col bg-white p-5 rounded-end">
+            <div class="text-end">
+                <img [src]="logo" width="70px"  class="my-0.2"  alt="">
+            </div>
+            <h2 class="fw-bold text-center py-4">Bienvenido a Trading Up Fundation</h2>
+            
+            <form action="recibir-post.php" method="post">
+                <div class="mb-4">
+                    <label for="email" class="form-label">Correo Electronico</label>
+                    <input type="email" class="form-control" name="correo">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="contraseña">
+                </div>
+                <div class="mb-4 form-check">
+                    <input type="checkbox" name="connected" class="form-check-input" id="">
+                    <label for="connected" class="form-check-label">Mantenerme conectado</label>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+
+                </div>
+
+                <div class="my-3">
+                    <p>No tienes cuenta?</p>
+                    <span><a href="#">Contactanos</a></span>
+                </div>
+                
+
+            </form>
+
+            <!--Login con redes sociales-->
+        </div>
+    </div>
+</div>
+
