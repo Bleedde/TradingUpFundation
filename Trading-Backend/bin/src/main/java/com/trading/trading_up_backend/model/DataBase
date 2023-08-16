@@ -11,7 +11,7 @@ CREATE TABLE curso_1(
     FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     nivel INT,
-    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN_CURSO', 'APROBADO', 'CANCELADO')
+    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN_CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO')
     );
 CREATE TABLE curso_2(
 	id_curso_2 INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE curso_2(
     FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     nivel INT,
-    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN_CURSO', 'APROBADO', 'CANCELADO')
+    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN_CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO')
     );
 CREATE TABLE curso_3(
 	id_curso_3 INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +27,7 @@ CREATE TABLE curso_3(
     FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     nivel INT,
-    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO')
+    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO')
     );
 CREATE TABLE curso_4(
 	id_curso_4 INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,15 +35,15 @@ CREATE TABLE curso_4(
     FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     nivel INT,
-    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO')
+    estado ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO')
     );
 CREATE TABLE usuarios(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255),
     correo VARCHAR(255),
     contrasenia VARCHAR(255),
-    estado_curso_1 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO'),
-    estado_curso_2 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO'),
-    estado_curso_3 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO'),
-    estado_curso_4 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'CANCELADO')
+    estado_curso_1 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO'),
+    estado_curso_2 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO'),
+    estado_curso_3 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO'),
+    estado_curso_4 ENUM('BLOQUEADO', 'DISPONIBLE', 'EN CURSO', 'APROBADO', 'SUSPENDIDO', 'CANCELADO')
     );
