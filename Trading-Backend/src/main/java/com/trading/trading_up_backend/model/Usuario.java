@@ -18,8 +18,8 @@ public class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
 
     @Column(name = "nombre")
     private String nombre;
@@ -29,16 +29,4 @@ public class Usuario {
 
     @Column(name = "contrasenia")
     private String contrasenia;
-
-    @Column(name = "estado_curso_1")
-    private CursoEstado estadoCurso1;
-
-    @Column(name = "estado_curso_2")
-    private CursoEstado estadoCurso2;
-
-    @Column(name = "estado_curso_3")
-    private CursoEstado estadoCurso3;
-
-    @Column(name = "estado_curso_4")
-    private CursoEstado estadoCurso4;
 }

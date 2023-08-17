@@ -1,30 +1,26 @@
 package com.trading.trading_up_backend.model;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name = "profesores")
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profesor{
+public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_profesor")
-    private Integer idProfesor;
+    @Column(name = "id_curso")
+    private Integer idCurso;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "nivel")
+    private Integer nivel;
 
-    @Column(name = "correo")
-    private String correo;
-
-    @Column(name = "contrasenia")
-    private String contrasenia;
+    @Column(name = "descripcion")
+    private String descricion;
 }

@@ -1,4 +1,5 @@
 package com.trading.trading_up_backend.model;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,23 +9,23 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name = "profesores")
-@Setter
-@Getter
+@Table(name = "inscripciones")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profesor{
+@Setter
+@Getter
+public class Inscripccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_profesor")
-    private Integer idProfesor;
+    @Column(name = "id_inscripcion")
+    private Integer idInscripcion;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "id_usuario")
+    private Usuario idUsuario;
 
-    @Column(name = "correo")
-    private String correo;
+    @Column(name = "id_curso")
+    private Curso idCurso;
 
-    @Column(name = "contrasenia")
-    private String contrasenia;
+    @Column(name = "estado_curso")
+    private EstadoCurso estadoCurso;
 }
