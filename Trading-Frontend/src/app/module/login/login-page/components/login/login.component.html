@@ -1,4 +1,5 @@
-<div class="container w-100 bg-light rounded background">
+<div class="container w-100 bg-light rounded background mt_5">
+
     <div class="row align-items-stretch">
         <div class="col bg-image d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
                 
@@ -9,7 +10,7 @@
             </div>
             <h2 class="fw-bold text-center py-4">Bienvenido a Trading Up Fundation</h2>
             
-            <form action="recibir-post.php" method="post">
+            <form action="#" method="post">
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electronico</label>
                     <input type="email" class="form-control" name="correo">
@@ -24,19 +25,18 @@
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                    <button type="submit" class="btn mx-start text-white">Iniciar Sesion</button>
 
                 </div>
 
                 <div class="my-3">
                     <p>No tienes cuenta?</p>
-                    <span><a href="#">Contactanos</a></span>
+                    <span><a href="#" routerLink="/home-page" (click)="scrollToComponent()">Contactanos</a></span>
                 </div>
                 
 
             </form>
 
-            <!--Login con redes sociales-->
         </div>
     </div>
 </div>

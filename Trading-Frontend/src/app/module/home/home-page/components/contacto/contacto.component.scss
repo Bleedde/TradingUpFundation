@@ -38,6 +38,13 @@ h1
     
 }
 
+@media screen and (max-width:767px){
+    .mt_b5{
+        margin-bottom: calc(5vh);
+    }
+    
+}
+
 #contact{
     background-color: white;
 }
