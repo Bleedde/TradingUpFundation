@@ -35,19 +35,26 @@ a{
 }
 
 
-@media screen and (max-width:1200px) {
+
+
+@media screen and (max-width:1999px) {
     .mt_5{
         margin-top: calc(10vh);
         margin-bottom: calc(10vh);
     }
 }
 
-@media screen and (max-width:99px) {
+@media screen and (max-width:2000px) {
     .mt_5{
-        margin-top: calc(10vh);
-        margin-bottom: calc(10vh);
+        margin-top: calc(15vh);
+        margin-bottom: calc(15vh);
     }
 }
+
+
+
+
+
 
 button{
     background-color: #552486!important;
@@ -59,6 +66,14 @@ input{
     border-color: rgb(73, 72, 72);
     border-width: 1px;
 }
+
+/* CSS personalizado */
+.custom-input:focus {
+   /* Elimina el resaltado predeterminado */
+    box-shadow: 0 0 10px 1px #ba74ff;
+    border-color: rgb(46, 9, 68); /* Agrega un borde sombreado de color rojo al hacer foco */
+}
+
 
 
 

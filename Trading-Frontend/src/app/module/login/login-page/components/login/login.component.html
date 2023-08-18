@@ -1,7 +1,6 @@
 <div class="container w-100 bg-light rounded background mt_5">
-
     <div class="row align-items-stretch">
-        <div class="col bg-image d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
+        <div class="col bg-image d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
                 
         </div>
         <div class="col bg-white p-5 rounded-end">
@@ -10,22 +9,22 @@
             </div>
             <h2 class="fw-bold text-center py-4">Bienvenido a Trading Up Fundation</h2>
             
-            <form action="#" method="post">
+            <form action="recibir-post.php" method="post">
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electronico</label>
-                    <input type="email" class="form-control" name="correo">
+                    <input type="email" class="form-control custom-input" name="correo" required>
                 </div>
                 <div class="mb-4">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="contraseña">
+                    <input type="password" class="form-control custom-input" name="contraseña" required>
                 </div>
                 <div class="mb-4 form-check">
-                    <input type="checkbox" name="connected" class="form-check-input" id="">
+                    <input type="checkbox" name="connected" class="form-check-input custom-input" id="">
                     <label for="connected" class="form-check-label">Mantenerme conectado</label>
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn mx-start text-white">Iniciar Sesion</button>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
 
                 </div>
 
@@ -33,11 +32,10 @@
                     <p>No tienes cuenta?</p>
                     <span><a href="#" routerLink="/home-page" (click)="scrollToComponent()">Contactanos</a></span>
                 </div>
-                
-
             </form>
-
         </div>
     </div>
 </div>
+
+
 

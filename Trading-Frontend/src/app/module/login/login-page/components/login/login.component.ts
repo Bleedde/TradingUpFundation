@@ -23,6 +23,6 @@ export class LoginComponent {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 2000); // Espera 500 ms para dar tiempo a que Angular realice la navegación
+    }, 500); // Espera 500 ms para dar tiempo a que Angular realice la navegación
   }
 }
