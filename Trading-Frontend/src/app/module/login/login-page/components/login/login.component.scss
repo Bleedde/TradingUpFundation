@@ -51,6 +51,13 @@ a{
     }
 }
 
+@media screen and (max-width:1400px) {
+    .mt_5{
+        margin-top: calc(10vh);
+        margin-bottom: calc(10vh);
+    }
+}
+
 
 
 

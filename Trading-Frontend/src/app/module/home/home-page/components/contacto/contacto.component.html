@@ -16,30 +16,18 @@
   
           <div class="mb-3 mx-3">
             <label for="telefono" class="form-label">Teléfono:</label>
-            <input type="number" class="form-control" id="telefono" placeholder="Teléfono" name="telefono" required>
+            <input type="number" class="form-control" id="telefono" placeholder="Teléfono"name="telefono" required>
           </div>
   
           <div class="mb-5 mx-3">
             <label for="correo" class="form-label">Correo Electrónico:</label>
-            <input type="email" class="form-control" id="correo" placeholder="Email Address" name="email" required>
+            <input type="email" class="form-control" id="correo" placeholder="Email Address"name="email" required>
           </div>
 
           <input type="hidden" name="_next" value="http://localhost:4200/home-page">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_subject" value="TradingUpFundation">
-          <input type="hidden" name="_autoresponse" value="Espero que te encuentres muy bien. En nombre de todo el equipo de TradingUpFoundation, queremos agradecerte por tu interés y confianza en nosotros como tu socio en el mundo del trading.
-          
-
-          Sabemos que cada paso en tu camino como trader es crucial, y es por eso que hemos diseñado cursos excepcionales para llevarte al siguiente nivel. Nuestra pasión por el trading y el compromiso con la educación financiera nos han llevado a crear programas que te proporcionarán las herramientas necesarias para tomar decisiones informadas y estratégicas en los mercados.
-          
-          Nuestros cursos están cuidadosamente elaborados y cubren una amplia gama de temas, desde conceptos básicos hasta estrategias avanzadas. Ya sea que estés comenzando tu viaje en el trading o desees perfeccionar tus habilidades, tenemos algo para ti. Algunos de los beneficios que nuestros estudiantes han experimentado incluyen:
-          
-          - Comprender los fundamentos del trading en los mercados financieros.
-          - Desarrollar estrategias sólidas respaldadas por análisis técnico y fundamental.
-          - Aprender a gestionar el riesgo de manera efectiva y a proteger tus inversiones.
-
-
-          ">
+          <input type="hidden" name="_autoresponse" [value]="mensaje">
           
   
           <div class="d-flex justify-content-center">

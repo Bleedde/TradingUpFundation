@@ -13,6 +13,8 @@ import { ContactoComponent } from './home-page/components/contacto/contacto.comp
 import { FooterComponent } from './home-page/components/footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { InfoCursosComponent } from './home-page/components/info-cursos/info-cursos.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { InfoCursosComponent } from './home-page/components/info-cursos/info-cur
   imports: [
     CommonModule,
     HomeRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+
   ]
 })
 export class HomeModule { }
