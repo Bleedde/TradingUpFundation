@@ -1,10 +1,13 @@
 package com.trading.trading_up_backend.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 @Entity
@@ -22,5 +25,8 @@ public class Curso {
     private Integer nivel;
 
     @Column(name = "descripcion")
-    private String descricion;
+    private String descripcion;
+
+    @OneToMany(mappedBy = "idInscripcion")
+    private List<Inscripcion> inscripciones;
 }
