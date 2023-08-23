@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.trading.trading_up_backend.model.Usuario;
-import com.trading.trading_up_backend.repository.IUsuarioRepository;
+
+import com.trading.trading_up_backend.model.Profesor;
+import com.trading.trading_up_backend.repository.IProfesorRepository;
 
 @Service
-public class UsuarioService {
+public class ProfesorService {
     
     @Autowired
-    private IUsuarioRepository repository;
+    private IProfesorRepository repository;
 
-    public List<Usuario> getTodosLosUsuarios(){
+    public List<Profesor> getTodosLosUsuarios(){
         return repository.findAll();
     }
 
+    /* 
     public boolean login(Usuario nuevoUsuario){
         boolean usuarioExistente = repository.existByCorreoAndContrasenia(nuevoUsuario.getCorreo(), nuevoUsuario.getContrasenia());
         if(usuarioExistente){
@@ -25,6 +27,7 @@ public class UsuarioService {
             return false;
         } 
     }
+    
 
     public String register(Usuario nuevoUsuario){
         if(repository.findById(nuevoUsuario.getId()) == null){
@@ -34,4 +37,5 @@ public class UsuarioService {
             return "Usuario ya existente";
         }
     }
+    */
 }
