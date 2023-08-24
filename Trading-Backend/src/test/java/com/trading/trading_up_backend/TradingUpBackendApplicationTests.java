@@ -1,10 +1,10 @@
-package com.example.demo;
+package com.trading.trading_up_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TradingBackendApplicationTests {
+class TradingUpBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
