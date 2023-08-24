@@ -1,4 +1,5 @@
-package com.trading.trading_up_backend.model;
+package Model;
+
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -11,26 +12,31 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name = "profesores")
+@Table(name = "usuarios")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profesor{
+public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_profesor")
-    private Integer idProfesor;
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "username", nullable = false, length = 255)
+    private String username;
 
-    @Column(name = "correo")
+    @Column(name = "correo", nullable = false, length = 255)
     private String correo;
 
-    @Column(name = "contrasenia")
+    @Column(name = "contrasenia", nullable = false, length = 255)
     private String contrasenia;
 
-    @OneToMany(mappedBy = "idInscripcion")
+    @OneToMany(mappedBy = "usuario")
     private List<Inscripcion> inscripciones;
+
+    public Integer getId(){
+        return this.idUsuario;
+    }
 }

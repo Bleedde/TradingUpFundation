@@ -1,4 +1,4 @@
-package com.trading.trading_up_backend.model;
+package Model;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 @Entity
@@ -19,7 +20,7 @@ public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
-    private Integer idCurso;
+    private Integer id;
 
     @Column(name = "nivel")
     private Integer nivel;
@@ -27,6 +28,7 @@ public class Curso {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(mappedBy = "idInscripcion")
+    @OneToMany(mappedBy = "curso")
+    @JsonManagedReference
     private List<Inscripcion> inscripciones;
 }

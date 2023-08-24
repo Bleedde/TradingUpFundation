@@ -1,5 +1,5 @@
-package com.trading.trading_up_backend.model;
-
+package Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,27 +24,26 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_curso")
-    private Curso idCurso;
+    @JsonBackReference
+    private Curso curso;
 
+    @Getter
     @Column(name = "estado_inscripcion")
     private EstadoInscripcion estadoInscripcion;
 
 
     public Integer getIdUsuario(){
-        return idUsuario.getId();
+        return usuario.getId();
     }
 
     public Integer getIdCurso(){
-        return idCurso.getIdCurso();
+        return curso.getId();
     }
 
-    public EstadoInscripcion getEstadoInscripcion(){
-        return this.estadoInscripcion;
-    }
     public void setEstadoCurso(EstadoInscripcion nuevoEstado){
         this.estadoInscripcion = nuevoEstado;
     }

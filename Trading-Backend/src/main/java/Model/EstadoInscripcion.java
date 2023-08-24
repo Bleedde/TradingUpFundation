@@ -1,2 +1,3 @@
-package com.trading.trading_up_backend.model;
+package Model;
+
 public enum EstadoInscripcion {BLOQUEADO, DISPONIBLE, EN_CURSO, APROBADO, CANCELADO}
