@@ -1,3 +1,4 @@
+//Creacion de base de datos del proyecto "Trading Up Fundation"
 CREATE DATABASE trading_up_fundation;
 USE trading_up_fundation;
 CREATE TABLE profesores(
