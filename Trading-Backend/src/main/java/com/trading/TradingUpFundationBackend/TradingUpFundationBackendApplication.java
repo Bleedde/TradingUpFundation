@@ -1,13 +1,13 @@
-package com.trading.trading_up_backend;
+package com.trading.TradingUpFundationBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TradingUpBackendApplication {
+public class TradingUpFundationBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TradingUpBackendApplication.class, args);
+		SpringApplication.run(TradingUpFundationBackendApplication.class, args);
 	}
 2
 }
