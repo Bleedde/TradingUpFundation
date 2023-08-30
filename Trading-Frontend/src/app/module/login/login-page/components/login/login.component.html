@@ -9,14 +9,14 @@
             </div>
             <h2 class="fw-bold text-center py-4">Bienvenido a Trading Up Fundation</h2>
             
-            <form action="recibir-post.php" method="post">
+            <form (ngSubmit)="serviceLogin()" [formGroup]="userForm" action="">
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electronico</label>
-                    <input type="email" class="form-control custom-input" name="correo" required>
+                    <input type="email" class="form-control custom-input" name="correo" formControlName="email" required>
                 </div>
                 <div class="mb-4">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control custom-input" name="contraseña" required>
+                    <input type="password" class="form-control custom-input" name="contraseña" formControlName="password" required>
                 </div>
                 <div class="mb-4 form-check">
                     <input type="checkbox" name="connected" class="form-check-input custom-input" id="">

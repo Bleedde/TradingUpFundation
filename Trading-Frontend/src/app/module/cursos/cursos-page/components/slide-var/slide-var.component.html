@@ -1,28 +1,30 @@
-<div class="pt-3 px-4">
-    <h4 class="text-white" type="submit" (click)="dropDown()">Entregas</h4>
-    <div *ngIf="dropdown">
+<div class="pt-3 px-4 pe">
+    <h4 class="text-white" type="submit" (click)="dropDown1()">Entregas&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+    <div *ngIf="dropdown1">
         <ul class="text-white px-5"> 
             <li class="">Backtesting</li>
         </ul>
     </div>
 </div>
 
-<div class="pt-2 px-4">
-    <h4 class="text-white" type="submit" (click)="dropDown()">Clases</h4>
-    <div *ngIf="dropdown">
+<div class="pt-2 px-4 pe">
+    <h4 class="text-white" type="submit" (click)="dropDown2()">Clases&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+    <div *ngIf="dropdown2">
         <ul class="text-white px-5"> 
             <li class="pb-1"><a href="">Contenido del Curso</a></li>
-            <li class="pb-1">Clases</li>
-            <li>Ejercicios en clase</li>
+            <li class="pb-1"><a href="">Clases</a></li>
+            <li><a href="">Ejercicios en clase</a></li>
         </ul>
     </div>
 </div>
 
-<div class="pt-2 px-4">
-    <h4 class="text-white">Biblioteca</h4>
-    <ul class="text-white px-5"> 
-        <li>Libros PDF</li>
-    </ul>
+<div class="pt-2 px-4 pe">
+    <h4 class="text-white" type="submit" (click)="dropDown3()">Biblioteca&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+    <div *ngIf="dropdown3">
+        <ul class="text-white px-5"> 
+            <li>Libros PDF</li>
+        </ul>
+    </div>
 </div> 
 
 
