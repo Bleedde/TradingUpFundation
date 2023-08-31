@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CursoAdminPageComponent {
 
+  sectionUser!: boolean;
+
+  modalActivate(datos: boolean) {
+    this.sectionUser = datos;
+  }
 }

@@ -1,0 +1,25 @@
+.card-header{
+    background-color: #6037a9;
+}
+
+.btn{
+    background-color: #6037a9!important;
+}
+
+.card{
+    border-color: #4C288A;
+    border-width: 2px;
+}
+
+.form-control:focus {
+    /* Elimina el resaltado predeterminado */
+     box-shadow: 0 0 10px 0px #ba74ff;
+     border-color: rgb(46, 9, 68); /* Agrega un borde sombreado de color rojo al hacer foco */
+ }
+
+ .form-select:focus{
+    
+    box-shadow: 0 0 10px 0px #ba74ff;
+    border-color: rgb(46, 9, 68); 
+ }
+ 

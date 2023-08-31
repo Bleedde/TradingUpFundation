@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-slide-var',
@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./slide-var.component.scss']
 })
 export class SlideVarComponent {
+
+  @Output() activateSection = new EventEmitter<boolean>();
+
+  datos = false;
 
   dropdown1: boolean = true;
   dropdown2: boolean = true;
@@ -26,5 +30,9 @@ export class SlideVarComponent {
 
   dropDown4(){
     this.dropdown4 = !this.dropdown4; 
+  }
+
+  activateSectionUser(){
+    this.activateSection.emit(this.datos = !this.datos);
   }
 }
