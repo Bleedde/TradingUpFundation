@@ -1,7 +1,17 @@
 .inherit{
-    height: inherit;
+    height: 13vh;
     background: #000000;   /*fallback for old browsers */
     background: -webkit-linear-gradient(to left, #000000, #300579);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #000000, #300579); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* #200f25d5 morado clarito #0b0414 */
+    padding-top: 3.5vh;
+}
+
+.far{
+    font-size:  30px ;
+    color: white;
+}
+
+.dropdown-toggle{
+    color: white;
 }

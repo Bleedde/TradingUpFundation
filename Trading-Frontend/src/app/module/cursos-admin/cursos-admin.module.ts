@@ -5,13 +5,15 @@ import { CursosAdminRoutingModule } from './cursos-admin-routing.module';
 import { CursoAdminPageComponent } from './curso-admin-page/curso-admin-page.component';
 import { SlideVarComponent } from './curso-admin-page/components/slide-var/slide-var.component';
 import { HeaderComponent } from './curso-admin-page/components/header/header.component';
+import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
 
 
 @NgModule({
   declarations: [
     CursoAdminPageComponent,
     SlideVarComponent,
-    HeaderComponent
+    HeaderComponent,
+    UsuariosComponent
   ],
   imports: [
     CommonModule,
