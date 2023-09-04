@@ -32,23 +32,23 @@ public class LevelTrading {
     @Column(name = "level_amount", nullable = false)
     private Integer amount;
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "levelTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<RegistrationTrading> registrationTradingRelation;
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "levelTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ContentTrading> contentTradingRelation;
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "levelTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ExcerciseTrading> excerciseTradingRelation;
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "levelTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<BookTrading> bookTradingRelation;
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "levelTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ClassTrading> classTradingRelation;
 }

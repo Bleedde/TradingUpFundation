@@ -42,7 +42,7 @@ public class UserTrading {
     @JoinColumn(name = "admin_id")
     private AdminTrading adminTradingRelation;
 
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<RegistrationTrading> registrationTradingRelation;
 }

@@ -25,7 +25,7 @@ public class AdminTrading {
     @Column(name = "admin_password", length = 255, nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "adminTradingRelation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<UserTrading> userTradingRelation;
 }
