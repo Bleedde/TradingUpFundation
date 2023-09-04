@@ -1,12 +1,14 @@
 <section class="min-vh-100 bg_color col-12">
-    <app-header class="h_13 col-12"></app-header>
+    <app-header (activateSlideVar)="slideActivate($event)" class="h_13 col-12"></app-header>
     <div class="d-flex">
-        <div class="col-2 h_87 d-none d-md-flex">
-            <app-slide-var (activateSection)="modalActivate($event)" class=""></app-slide-var>
+        <div class="col-2 h_87 d-none d-md-flex" *ngIf="slideDatos">
+            <app-slide-var  (activateSection)="modalActivate($event)" class=""></app-slide-var>
         </div>
-        <div class="col-10 py-5 px-5">
+        <div class="col-10 py-5 px-5" [ngClass]="{'col-12': !slideDatos}" >
             <app-usuarios *ngIf="sectionUser"></app-usuarios>
-
+        </div>
+        <div>
+            
         </div>
     </div>
 </section>

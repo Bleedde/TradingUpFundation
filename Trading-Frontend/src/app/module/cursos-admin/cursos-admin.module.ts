@@ -6,6 +6,7 @@ import { CursoAdminPageComponent } from './curso-admin-page/curso-admin-page.com
 import { SlideVarComponent } from './curso-admin-page/components/slide-var/slide-var.component';
 import { HeaderComponent } from './curso-admin-page/components/header/header.component';
 import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
+import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuari
     CursoAdminPageComponent,
     SlideVarComponent,
     HeaderComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    ContenidoCursoComponent
   ],
   imports: [
     CommonModule,

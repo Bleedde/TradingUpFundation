@@ -9,6 +9,7 @@ export class SlideVarComponent {
 
   @Output() activateSection = new EventEmitter<boolean>();
 
+
   datos = false;
 
   dropdown1: boolean = true;
@@ -35,4 +36,8 @@ export class SlideVarComponent {
   activateSectionUser(){
     this.activateSection.emit(this.datos = !this.datos);
   }
+
+
+
+  
 }
