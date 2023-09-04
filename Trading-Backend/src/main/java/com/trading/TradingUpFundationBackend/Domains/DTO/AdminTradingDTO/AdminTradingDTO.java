@@ -15,4 +15,8 @@ public class AdminTradingDTO implements Serializable {
     private String email;
     private String password;
     private List<UserTrading> userTradingRelation;
+
+
+
+
 }
