@@ -11,9 +11,17 @@ export class CursoAdminPageComponent {
   sectionContent!: boolean;
   slideDatos!: boolean;
 
-  modalActivate(datos: boolean) {
+  modalActivateUser(datos: boolean) {
+    this.sectionContent = false;
     this.sectionUser = datos;
-    this.slideDatos = false;
+    this.slideDatos = true;
+    console.log("brahian esta aqui" + "", datos)
+  }
+
+  modalActivateContent(datos:boolean){
+    this.sectionUser = false;
+    this.sectionContent = datos;
+    console.log("brahian esta aqui" + "", datos)
   }
 
   slideActivate(datos:boolean){

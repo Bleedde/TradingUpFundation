@@ -16,3 +16,13 @@ a{
     font-size: 5px;
 
 }
+
+li{
+    display: flex;
+    align-items: center;
+}
+
+li i{
+    margin-right: 10px;
+    font-size: 8px;
+}
