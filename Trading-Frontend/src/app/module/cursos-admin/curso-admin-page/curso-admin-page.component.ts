@@ -8,8 +8,15 @@ import { Component } from '@angular/core';
 export class CursoAdminPageComponent {
 
   sectionUser!: boolean;
+  sectionContent!: boolean;
+  slideDatos!: boolean;
 
   modalActivate(datos: boolean) {
     this.sectionUser = datos;
+    this.slideDatos = false;
+  }
+
+  slideActivate(datos:boolean){
+    this.slideDatos = datos;
   }
 }
