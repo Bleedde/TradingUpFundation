@@ -1,5 +1,6 @@
 package com.trading.TradingUpFundationBackend.Commons.Converter.AdminTradingConverter;
 
+import com.trading.TradingUpFundationBackend.Commons.Constant.Response.AdminTradingResponse.IAdminTradingResponse;
 import com.trading.TradingUpFundationBackend.Commons.Constant.Response.GeneralResponse;
 import com.trading.TradingUpFundationBackend.Commons.Domains.DTO.AdminTradingDTO.AdminTradingDTO;
 import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.AdminTradinEntity.AdminTradingEntity;
@@ -15,7 +16,7 @@ public class AdminTradingConverter {
         try {
             adminTradingDTO = HelperMapper.modelMapper().map(adminTradingEntity, AdminTradingDTO.class);
         } catch (Exception e){
-            log.error(GeneralResponse.DOCUMENT_FAIL + e);
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR + e);
         }
         return adminTradingDTO;
     }
@@ -25,7 +26,7 @@ public class AdminTradingConverter {
         try {
             adminTradingEntity = HelperMapper.modelMapper().map(adminTradingDTO, AdminTradingEntity.class);
         } catch (Exception e){
-            log.error(GeneralResponse.DOCUMENT_FAIL + e);
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR + e);
         }
         return adminTradingEntity;
     }

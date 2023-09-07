@@ -8,6 +8,6 @@ public interface IBookTradingResponse {
     String BOOK_DESCRIPTION_SUCCESS = "Successful book description registration";
     String BOOK_DESCRIPTION_FAILED = "Failed book description registration";
     String BOOK_IMAGE_SUCCESS = "Successful book image registration";
-    String BOOK_IMAGE_FAILED = "Failes book image registration";
+    String BOOK_IMAGE_FAILED = "Failed book image registration";
     String BOOK_FILES_SUCCESS = "Successful book file registration";
 }
