@@ -1,15 +1,18 @@
 <section class="min-vh-100 bg_color col-12">
     <app-header (activateSlideVar)="slideActivate($event)" class="h_13 col-12"></app-header>
     <div class="d-flex">
-        <div class="col-2 h_87 d-none d-md-flex" *ngIf="slideDatos">
-            <app-slide-var  (activateSectionUsers)="modalActivateUser($event)" (activateSectionContents)="modalActivateContent($event)" class="" [datosUser1]="sectionUser" [datosContent1]="sectionContent"></app-slide-var>
+        <div class="col-2 h_87 d-md-flex" *ngIf="!slideDatos">
+            <app-slide-var  (activateSectionUsers)="modalActivateUser($event)" (activateSectionContents)="modalActivateContent($event)" (activateSectionBooks)="modalActivateBook($event)" class="" [datosUser1]="sectionUser" [datosContent1]="sectionContent" [datosBooks1]="sectionBook"></app-slide-var>
         </div>
-        <div class="col-10 d-flex flex-column" [ngClass]="{'col-12': !slideDatos}">
-            <div class="col-12 py-5 px-5"  >
+        <div class="col-10 col-sm-10 d-flex flex-column p-5" [ngClass]="{'col-12': !slideDatos}">
+            <div class="col-12"  >
                 <app-usuarios *ngIf="sectionUser"></app-usuarios>
             </div>
-            <div class="col-12 py-5 px-5" *ngIf="sectionContent">
-                <app-contenido-curso ></app-contenido-curso>
+            <div class="col-12">
+                <app-contenido-curso  *ngIf="sectionContent"></app-contenido-curso>
+            </div>
+            <div class="col-12">
+                <app-libros *ngIf="sectionBook"></app-libros>
             </div>
         </div>
     </div>

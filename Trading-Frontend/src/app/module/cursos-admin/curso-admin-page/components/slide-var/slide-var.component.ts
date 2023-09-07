@@ -11,15 +11,20 @@ export class SlideVarComponent implements OnChanges {
     console.log("cambio efectuado " + changes['datosUser1'])
     this.datosUser = this.datosUser1;
     this.datosContent = this.datosContent1;
+    this.datosBooks = this.datosBooks1;
   }
 
   @Input() datosUser1!: boolean;
   @Input() datosContent1!: boolean;
+  @Input() datosBooks1!: boolean;
+
   @Output() activateSectionUsers = new EventEmitter<boolean>();
   @Output() activateSectionContents = new EventEmitter<boolean>();
+  @Output() activateSectionBooks = new EventEmitter<boolean>();
 
   datosUser = false;
   datosContent = false;
+  datosBooks = false;
 
   dropdown1: boolean = true;
   dropdown2: boolean = true;
@@ -48,6 +53,10 @@ export class SlideVarComponent implements OnChanges {
 
   activateSectionContent(){
     this.activateSectionContents.emit(this.datosContent = !this.datosContent);
+  }
+
+  activateSectionBook(){
+    this.activateSectionBooks.emit(this.datosBooks = !this.datosBooks);
   }
 
 
