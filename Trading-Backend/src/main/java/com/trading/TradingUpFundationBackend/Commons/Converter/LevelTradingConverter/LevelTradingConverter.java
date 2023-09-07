@@ -19,4 +19,14 @@ public class LevelTradingConverter {
         }
         return levelTradingEntity;
     }
+
+    public LevelTradingDTO convertLevelTradingEntityToLevelTradingDTO(LevelTradingEntity levelTradingEntity){
+        LevelTradingDTO levelTradingDTO = new LevelTradingDTO();
+        try {
+            levelTradingDTO = HelperMapper.modelMapper().map(levelTradingEntity, LevelTradingDTO.class);
+        }catch (Exception e){
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR + e);
+        }
+        return levelTradingDTO;
+    }
 }
