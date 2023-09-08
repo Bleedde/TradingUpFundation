@@ -10,30 +10,37 @@ export class CursoAdminPageComponent {
   sectionUser!: boolean;
   sectionContent!: boolean;
   sectionBook!: boolean;
-  slideDatos!: boolean;
+  slideDatos: boolean = true;
+ 
+  datosPrueba!: boolean;
 
   modalActivateUser(datos: boolean) {
     this.sectionContent = false;
     this.sectionUser = datos;
     this.sectionBook = false;
-    console.log("brahian esta aqui" + "", datos)
+    this.datosPrueba = !datos;
+    console.log("Prueba del user: " + !datos)
   }
 
   modalActivateContent(datos:boolean){
     this.sectionUser = false;
     this.sectionContent = datos;
     this.sectionBook = false;
-    console.log("brahian esta aqui" + "", datos)
+    
   }
 
   modalActivateBook(datos:boolean){
     this.sectionUser = false;
     this.sectionBook = datos;
     this.sectionContent = false;
-    console.log("brahian esta aqui" + "", datos)
+    
   }
 
   slideActivate(datos:boolean){
+    console.log("prueba " + this.datosPrueba)
     this.slideDatos = datos;
+    this.datosPrueba = !datos;
+    console.log("parametro " + datos)
+    console.log("datos prueba: " + this.datosPrueba);
   }
 }

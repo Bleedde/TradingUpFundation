@@ -1,5 +1,54 @@
-.card{
-    border-color: purple!important;
+.cards{
+    border-color: #9965dd;
+    box-shadow: 0px 4px 16px 0px #9965dd;
     border-width: 2px;
     padding: 10px;
+    width: 16rem;
 }
+
+.cards:hover{
+    background-color: white;
+    filter: brightness(92%);
+}
+
+.btn-danger{
+    background-color: #2d2b45;
+    border-color: white;
+}
+
+.btn-warning{
+    background-color: #5a4268;
+    border-color: white;
+}
+
+.btn-success{
+    background-color: #655d92;
+    border-color: white;
+}
+
+
+.card-header{
+    background-color: #6037a9;
+}
+
+.buttonF{
+    background-color: #6037a9!important;
+}
+
+.cardF{
+    border-color: #4C288A;
+    border-width: 2px;
+}
+
+.form-control:focus {
+    /* Elimina el resaltado predeterminado */
+     box-shadow: 0 0 10px 0px #ba74ff;
+     border-color: rgb(46, 9, 68); /* Agrega un borde sombreado de color rojo al hacer foco */
+ }
+
+ .form-select:focus{
+    
+    box-shadow: 0 0 10px 0px #ba74ff;
+    border-color: rgb(46, 9, 68); 
+ }
+

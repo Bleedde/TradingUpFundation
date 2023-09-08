@@ -8,17 +8,14 @@ import { IMAGEN_LOGO } from 'src/app/shared/constants';
 })
 export class HeaderComponent {
   
-  
-  @Input() datos1!:boolean;
-  
   @Output() activateSlideVar = new EventEmitter<boolean>();
-  datos = false;
+  datos = true;
   logo = IMAGEN_LOGO; 
 
   
   clickSlide(){
     this.activateSlideVar.emit(this.datos = !this.datos);
-    console.log("brahian esta aqui " + this.datos)
+  
   }
 
 }
