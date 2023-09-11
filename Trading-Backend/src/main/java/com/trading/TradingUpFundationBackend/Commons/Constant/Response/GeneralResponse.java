@@ -1,5 +1,8 @@
 package com.trading.TradingUpFundationBackend.Commons.Constant.Response;
 
+/**
+ * interface to represent a response for each possible situation in the services
+ */
 public interface GeneralResponse {
     String OPERATION_SUCCESS = "Successful operation";
     String OPERATION_FAIL = "Failed operation";

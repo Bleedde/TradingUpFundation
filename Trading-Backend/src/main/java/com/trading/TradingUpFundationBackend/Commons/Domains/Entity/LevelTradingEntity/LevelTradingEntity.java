@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.Commons.Domains.Entity.LevelTradingEntity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;//Package to send data in Json format
 import com.fasterxml.jackson.annotation.JsonManagedReference;//Package to deny the recursion of the side "One"
 import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.BookTradingEntity.BookTradingEntity;//Import the entity "Book" to represent the relation between these entities
 import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.ClassTradingEntity.ClassTradingEntity;//Import the entity "Class" to represent the relation between these entities
 import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.ExcerciseTradingEntity.ExcerciseTradingEntity;//Import the entity "Excercise" to represent the relation between these entities
-import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.RegistrationTradingEntity.RegistrationTradingEntity;//Import the entity "Registration" to represent the relation between these entities
+import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.UserTradingEntity.RegistrationTradingEntity.RegistrationTradingEntity;//Import the entity "Registration" to represent the relation between these entities
 import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.ContentTradingEntity.ContentTradingEntity;//Import the entity "Content" to represent the relation between these entities
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
