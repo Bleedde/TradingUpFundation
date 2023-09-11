@@ -8,6 +8,7 @@ import { HeaderComponent } from './curso-admin-page/components/header/header.com
 import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
 import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
 import { LibrosComponent } from './curso-admin-page/components/libros/libros.component';
+import { StartAComponent } from './curso-admin-page/components/start-a/start-a.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LibrosComponent } from './curso-admin-page/components/libros/libros.com
     HeaderComponent,
     UsuariosComponent,
     ContenidoCursoComponent,
-    LibrosComponent
+    LibrosComponent,
+    StartAComponent
   ],
   imports: [
     CommonModule,

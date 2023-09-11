@@ -11,14 +11,14 @@ export class CursoAdminPageComponent {
   sectionContent!: boolean;
   sectionBook!: boolean;
   slideDatos: boolean = true;
- 
+  startA = true;
   datosPrueba!: boolean;
 
   modalActivateUser(datos: boolean) {
     this.sectionContent = false;
     this.sectionUser = datos;
     this.sectionBook = false;
-    this.datosPrueba = !datos;
+    this,this.startA = false;
     console.log("Prueba del user: " + !datos)
   }
 
@@ -26,13 +26,14 @@ export class CursoAdminPageComponent {
     this.sectionUser = false;
     this.sectionContent = datos;
     this.sectionBook = false;
-    
+    this,this.startA = false;
   }
 
   modalActivateBook(datos:boolean){
     this.sectionUser = false;
     this.sectionBook = datos;
     this.sectionContent = false;
+    this,this.startA = false;
     
   }
 
