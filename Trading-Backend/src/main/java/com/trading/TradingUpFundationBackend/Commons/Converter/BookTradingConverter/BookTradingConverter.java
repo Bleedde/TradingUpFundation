@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;//Package to represent this clas
  */
 public class BookTradingConverter {
     /**
-     * Method to turn a object with a type "BookTradingEntity" to an object with type "BookTradingDTO"
+     * Method to turn an object with a type "BookTradingEntity" to an object with type "BookTradingDTO"
      * @param bookTradingEntity The object who is going to turn into a BookTradingDTO
      * @return The object gave for param converted to a BookTradingDTO type
      */
