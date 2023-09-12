@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,24 +61,86 @@ public class BookTradingService implements IBookTradingService {
         try {
             Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
             if(!bookTradingExist.isPresent()){
-                return new ResponseEntity(GenericResponseDTO.builder()
+                return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(bookTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
+            }else{
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_FAIL)
+                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .httpResponse(HttpStatus.BAD_REQUEST.value())
+                        .build());
             }
+        }catch (Exception e){
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                            .objectResponse(null)
+                            .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
         }
 
     }
 
     @Override
     public ResponseEntity<GenericResponseDTO> readBooksTrading() {
-        return null;
+        try {
+            List<BookTradingEntity> booksExist = this.repository.findAll();
+            if (!booksExist.isEmpty()){
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_SUCCESS)
+                        .objectResponse(booksExist)
+                        .httpResponse(HttpStatus.OK.value())
+                        .build());
+            }else {
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_FAIL)
+                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .httpResponse(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+        }catch (Exception e) {
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                            .objectResponse(null)
+                            .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
     }
 
     @Override
     public ResponseEntity<GenericResponseDTO> updateBookTrading(BookTradingDTO bookTradingDTO) {
-        return null;
+        try {
+            Optional<BookTradingEntity> inventoryExist = this.repository.findById(bookTradingDTO.getId());
+            if (inventoryExist.isPresent()){
+                BookTradingEntity inventoryEntity = this.converter.convertBookTradingDTOToBookTradingEntity(bookTradingDTO);
+                this.repository.save(inventoryEntity);
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_SUCCESS)
+                        .objectResponse(GeneralResponse.UPDATE_SUCCESS)
+                        .httpResponse(HttpStatus.OK.value())
+                        .build());
+            }else {
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_FAIL)
+                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .httpResponse(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+        }catch (Exception e) {
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                            .objectResponse(null)
+                            .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
     }
 
     @Override
