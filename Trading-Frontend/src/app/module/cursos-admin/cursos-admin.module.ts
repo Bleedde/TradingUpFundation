@@ -9,6 +9,7 @@ import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuari
 import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
 import { LibrosComponent } from './curso-admin-page/components/libros/libros.component';
 import { StartAComponent } from './curso-admin-page/components/start-a/start-a.component';
+import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { StartAComponent } from './curso-admin-page/components/start-a/start-a.c
     UsuariosComponent,
     ContenidoCursoComponent,
     LibrosComponent,
-    StartAComponent
+    StartAComponent,
+    EjerciciosClaseComponent
   ],
   imports: [
     CommonModule,

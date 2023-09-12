@@ -13,7 +13,8 @@ export class LibrosComponent {
   registroPdf: any [][] = [[],[]];
   
   constructor(){
-    this.registroPdf = [[{imagen: this.book1, titulo: "Tradin Sin Ego", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
+    this.registroPdf = [[
+      {imagen: this.book1, titulo: "Tradin Sin Ego", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
     {imagen: this.book2, titulo: "Chartismo", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
     {imagen: this.book1, titulo: "Velas Japonesas", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"}],
 
