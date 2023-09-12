@@ -1,0 +1,70 @@
+CREATE DATABASE trading_up_fundation;
+USE trading_up_fundation;
+CREATE TABLE admin_trading(
+    admin_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    admin_name VARCHAR(255) NOT NULL,
+    admin_email VARCHAR(255) NOT NULL,
+    admin_password VARCHAR(255) NOT NULL
+);
+CREATE TABLE user_trading(
+    user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    user_password VARCHAR(255) NOT NULL,
+    user_current_level INTEGER NOT NULL,
+    user_status BOOLEAN NOT NULL,
+    user_backtesting_link VARCHAR(255),
+    user_audited_account VARCHAR(255),
+    admin_id INTEGER,
+    FOREIGN KEY (admin_id) REFERENCES admin_trading(admin_id)
+);
+CREATE TABLE level_trading(
+    level_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    level_name VARCHAR(255) NOT NULL,
+    level_data_start VARCHAR(255) NOT NULL,
+    level_data_end VARCHAR(255) NOT NULL,
+    level_amount INTEGER NOT NULL
+);
+CREATE TABLE registration_trading(
+    registration_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER,
+    level_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES user_trading(user_id),
+    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+);
+CREATE TABLE content_trading(
+    content_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    content_title VARCHAR(255) NOT NULL,
+    content_subtitle VARCHAR(255) NOT NULL,
+    content_description VARCHAR(255) NOT NULL,
+    content_url_video VARCHAR(255) NOT NULL,
+    level_id INTEGER,
+    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+);
+CREATE TABLE excercise_trading(
+    excercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    excercise_title VARCHAR(255) NOT NULL,
+    excercise_description VARCHAR(255) NOT NULL,
+    excercise_data_start VARCHAR(255) NOT NULL,
+    excercise_data_end VARCHAR(255) NOT NULL,
+    excercise_subtitle VARCHAR(255) NOT NULL,
+    level_id INTEGER,
+    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+);
+CREATE TABLE book_trading(
+    book_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    book_name VARCHAR(255) NOT NULL,
+    book_description VARCHAR(255) NOT NULL,
+    book_image VARCHAR(255) NOT NULL,
+    book_file VARCHAR(255) NOT NULL,
+    level_id INTEGER,
+    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+);
+CREATE TABLE class_trading(
+    class_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    class_title VARCHAR(255) NOT NULL,
+    class_subtitle VARCHAR(255) NOT NULL,
+    clas_description VARCHAR(255) NOT NULL,
+    level_id INTEGER,
+    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+);
