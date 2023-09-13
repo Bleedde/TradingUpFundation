@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,13 +122,13 @@ public class BookTradingService implements IBookTradingService {
                 this.repository.save(inventoryEntity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(GeneralResponse.UPDATE_SUCCESS)
+                        .objectResponse(IBookTradingResponse.BOOK_UPDATED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .objectResponse(IBookTradingResponse.BOOK_UPDATE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -144,6 +145,29 @@ public class BookTradingService implements IBookTradingService {
 
     @Override
     public ResponseEntity<GenericResponseDTO> deleteBookTrading(Integer bookId) {
-        return null;
+        try{
+            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookId);
+            if(bookTradingExist.isPresent()){
+                this.repository.deleteById(bookId);
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_SUCCESS)
+                        .objectResponse(IBookTradingResponse.BOOK_DELETED_SUCCESS)
+                        .httpResponse(HttpStatus.OK.value())
+                        .build());
+            }else{
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(GeneralResponse.OPERATION_FAIL)
+                        .objectResponse(IBookTradingResponse.BOOK_DELETED_FAILED)
+                        .httpResponse(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+        }catch (Exception e){
+            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
+                    .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .objectResponse(null)
+                    .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .build());
+        }
     }
 }

@@ -121,13 +121,13 @@ public class AdminTradingService implements IAdminTradingService {
                 this.respository.save(adminTradingEntity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(GeneralResponse.UPDATE_SUCCESS)
+                        .objectResponse(IAdminTradingResponse.ADMIN_UPDATE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IAdminTradingResponse.ADMIN_REGISTRATION_FAILED)
+                        .objectResponse(IAdminTradingResponse.ADMIN_UPDATE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -150,13 +150,13 @@ public class AdminTradingService implements IAdminTradingService {
                 this.respository.deleteById(adminId);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(GeneralResponse.DELETE_SUCCESS)
+                        .objectResponse(IAdminTradingResponse.ADMIN_DELETE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IAdminTradingResponse.ADMIN_REGISTRATION_FAILED)
+                        .objectResponse(IAdminTradingResponse.ADMIN_DELETE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -170,6 +170,4 @@ public class AdminTradingService implements IAdminTradingService {
                             .build());
         }
     }
-
-
 }
