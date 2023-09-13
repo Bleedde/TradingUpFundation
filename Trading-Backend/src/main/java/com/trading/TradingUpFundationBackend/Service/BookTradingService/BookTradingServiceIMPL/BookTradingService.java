@@ -9,7 +9,6 @@ import com.trading.TradingUpFundationBackend.Commons.Domains.ResponseDTO.Generic
 import com.trading.TradingUpFundationBackend.Repository.BookTradingRepository.IBookTradingRepository;
 import com.trading.TradingUpFundationBackend.Service.BookTradingService.IBookTradingService;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.internal.asm.tree.TryCatchBlockNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
