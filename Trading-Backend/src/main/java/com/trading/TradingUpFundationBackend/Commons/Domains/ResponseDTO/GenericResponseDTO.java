@@ -11,7 +11,7 @@ import java.io.Serializable;//Package to use this class like a byte sequence
  * Class who creates a response with the type DTO
  * Implements the interface Serializable
  */
-public class GenericResponseDTO implements Serializable, HttpStatusCode {
+public class GenericResponseDTO implements Serializable{
     public String message;
     public Integer httpResponse;
     public Object objectResponse;
