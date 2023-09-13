@@ -10,4 +10,5 @@ public interface IClassTradingResponse {
     String CLASS_UPDATED_FAILED = "Failed class updated";
     String CLASS_DELETED_SUCCESS = "Successfully class deleted";
     String CLASS_DELETED_FAILED = "Failed class deleted";
+    String CLASS_SEARCHED_FAILED = "Failed class searched";
 }
