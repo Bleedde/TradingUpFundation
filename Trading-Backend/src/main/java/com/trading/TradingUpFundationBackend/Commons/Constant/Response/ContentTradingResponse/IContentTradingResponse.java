@@ -10,4 +10,5 @@ public interface IContentTradingResponse {
     String CONTENT_UPDATE_FAILED = "Failed content updated";
     String CONTENT_DELETE_SUCCESS = "Successfully content deleted";
     String CONTENT_DELETED_FAILED = "Failed content deleted";
+    String CONTENT_SEARCHED_FAILED = "Failed content searched";
 }

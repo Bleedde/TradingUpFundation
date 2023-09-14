@@ -9,4 +9,5 @@ public interface IUserTradingResponse {
     String USER_UPDATED_FAILED = "Failed user updated";
     String USER_DELETED_SUCCESS = "Successfully user deleted";
     String USER_DELETED_FAILED = "Failed user deleted";
+    String USER_SEARCHED_FAILED = "Failed user searched";
 }
