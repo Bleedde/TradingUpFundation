@@ -1,39 +1,39 @@
-package com.trading.TradingUpFundationBackend.Service.ClassTradingService.ClassTradingServiceIMPL;
+package com.trading.TradingUpFundationBackend.Service.RegistrationTradingService.RegistrationTradingServiceIMPL;
 
 import com.trading.TradingUpFundationBackend.Commons.Constant.Response.ClassTradingResponse.IClassTradingResponse;
 import com.trading.TradingUpFundationBackend.Commons.Constant.Response.GeneralResponse;
-import com.trading.TradingUpFundationBackend.Commons.Converter.ClassTradingConverter.ClassTradingConverter;
-import com.trading.TradingUpFundationBackend.Commons.Domains.DTO.ClassTradingDTO.ClassTradingDTO;
-import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.ClassTradingEntity.ClassTradingEntity;
+import com.trading.TradingUpFundationBackend.Commons.Constant.Response.RegistrationTradingResponse.IRegistrationTradingResponse;
+import com.trading.TradingUpFundationBackend.Commons.Converter.RegistrationTradingConverter.RegistrationTradingConverter;
+import com.trading.TradingUpFundationBackend.Commons.Domains.DTO.RegistrationTradingDTO.RegistrationTradingDTO;
+import com.trading.TradingUpFundationBackend.Commons.Domains.Entity.UserTradingEntity.RegistrationTradingEntity.RegistrationTradingEntity;
 import com.trading.TradingUpFundationBackend.Commons.Domains.ResponseDTO.GenericResponseDTO;
-import com.trading.TradingUpFundationBackend.Repository.ClassTradingRepository.IClassTradingRepository;
-import com.trading.TradingUpFundationBackend.Service.ClassTradingService.IClassTradingService;
+import com.trading.TradingUpFundationBackend.Repository.RegistrationTradingRepository.IRegistrationTradingRepository;
+import com.trading.TradingUpFundationBackend.Service.RegistrationTradingService.IRegistrationTradingService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @Log4j2
-public class ClassTradingService implements IClassTradingService {
+public class RegistrationTradingService implements IRegistrationTradingService {
     @Autowired
-    private IClassTradingRepository repository;
+    private IRegistrationTradingRepository repository;
     @Autowired
-    private ClassTradingConverter converter;
-
+    private RegistrationTradingConverter converter;
     @Override
-    public ResponseEntity<GenericResponseDTO> createClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<GenericResponseDTO> createRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try{
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(!classTradingExist.isPresent()){
-                ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
+            Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
+            if(!registrationTradingExist.isPresent()){
+                RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(IClassTradingResponse.CLASS_REGISTRATION_SUCCESS)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_REGISTRATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
@@ -55,19 +55,19 @@ public class ClassTradingService implements IClassTradingService {
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> readClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<GenericResponseDTO> readRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(!classTradingExist.isPresent()){
+            Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
+            if(!registrationTradingExist.isPresent()){
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(classTradingExist)
+                        .objectResponse(registrationTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IClassTradingResponse.CLASS_SEARCHED_FAILED)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -83,19 +83,19 @@ public class ClassTradingService implements IClassTradingService {
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> readClassesTrading() {
+    public ResponseEntity<GenericResponseDTO> readRegistrationsTrading() {
         try {
-            List<ClassTradingEntity> classTradingList = this.repository.findAll();
-            if(!classTradingList.isEmpty()){
+            List<RegistrationTradingEntity> registrationTradingList = this.repository.findAll();
+            if(!registrationTradingList.isEmpty()){
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(classTradingList)
+                        .objectResponse(registrationTradingList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IClassTradingResponse.CLASS_SEARCHED_FAILED)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -111,20 +111,20 @@ public class ClassTradingService implements IClassTradingService {
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> updateClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<GenericResponseDTO> updateRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(classTradingExist.isPresent()){
-                ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
+            Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
+            if(registrationTradingExist.isPresent()){
+                RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(IClassTradingResponse.CLASS_UPDATED_SUCCESS)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_UPDATED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IClassTradingResponse.CLASS_UPDATED_FAILED)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_UPDATED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -140,20 +140,20 @@ public class ClassTradingService implements IClassTradingService {
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteClassTrading(Integer classId) {
+    public ResponseEntity<GenericResponseDTO> deleteRegistrationTrading(Integer registrationId) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classId);
-            if(classTradingExist.isPresent()){
-                this.repository.deleteById(classId);
+            Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationId);
+            if(registrationTradingExist.isPresent()){
+                this.repository.deleteById(registrationId);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(IClassTradingResponse.CLASS_DELETED_SUCCESS)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_DELETED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IClassTradingResponse.CLASS_DELETED_FAILED)
+                        .objectResponse(IRegistrationTradingResponse.REGISTRATION_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }

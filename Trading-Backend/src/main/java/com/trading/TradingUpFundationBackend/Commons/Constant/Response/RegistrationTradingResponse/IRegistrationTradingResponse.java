@@ -10,4 +10,5 @@ public interface IRegistrationTradingResponse {
     String REGISTRATION_UPDATED_FAILED = "Failed registration updated";
     String REGISTRATION_DELETED_SUCCESS = "Successfully registration deleted";
     String REGISTRATION_DELETED_FAILED = "Failed registration deleted";
+    String REGISTRATION_SEARCHED_FAILED = "Failed registration searched";
 }
