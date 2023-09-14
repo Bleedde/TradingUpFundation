@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GRAFICEXERCISE } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-ejercicios-clase',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./ejercicios-clase.component.scss']
 })
 export class EjerciciosClaseComponent {
-
+  graficExercise = GRAFICEXERCISE;
 }
