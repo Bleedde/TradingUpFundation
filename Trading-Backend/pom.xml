@@ -12,7 +12,7 @@
 	<artifactId>TradingUpFundationBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TradingUpFundationBackend</name>
-	<description>Formative proyecto to develope a web site for the fundation &quot;Trading Up Fundation&quot;</description>
+	<description>Formative proyect to develope a website for the fundation &quot;Trading Up Fundation&quot;</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -20,6 +20,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.3</version> <!-- Utiliza la última versión disponible -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
