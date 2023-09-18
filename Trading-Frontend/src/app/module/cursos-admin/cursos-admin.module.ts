@@ -10,6 +10,8 @@ import { ContenidoCursoComponent } from './curso-admin-page/components/contenido
 import { LibrosComponent } from './curso-admin-page/components/libros/libros.component';
 import { StartAComponent } from './curso-admin-page/components/start-a/start-a.component';
 import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
+import { ClasesGrabadasComponent } from './curso-admin-page/components/clases-grabadas/clases-grabadas.component';
+import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases-pregrabadas/clases-pregrabadas.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercici
     ContenidoCursoComponent,
     LibrosComponent,
     StartAComponent,
-    EjerciciosClaseComponent
+    EjerciciosClaseComponent,
+    ClasesGrabadasComponent,
+    ClasesPregrabadasComponent
   ],
   imports: [
     CommonModule,

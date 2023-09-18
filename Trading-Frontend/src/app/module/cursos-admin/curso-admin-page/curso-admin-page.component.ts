@@ -11,6 +11,9 @@ export class CursoAdminPageComponent {
   sectionContent!: boolean;
   sectionBook!: boolean;
   sectionExercises!: boolean;
+  sectionClass!: boolean;
+  sectionPrerecorded!: boolean;
+
   slideDatos: boolean = true;
   startA = true;
   datosPrueba!: boolean;
@@ -19,6 +22,8 @@ export class CursoAdminPageComponent {
     this.sectionContent = false;
     this.sectionUser = datos;
     this.sectionBook = false;
+    this.sectionClass = false;
+    this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
     console.log("Prueba del user: " + !datos)
@@ -28,6 +33,8 @@ export class CursoAdminPageComponent {
     this.sectionUser = false;
     this.sectionContent = datos;
     this.sectionBook = false;
+    this.sectionClass = false;
+    this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
   }
@@ -36,6 +43,8 @@ export class CursoAdminPageComponent {
     this.sectionUser = false;
     this.sectionBook = datos;
     this.sectionContent = false;
+    this.sectionClass = false;
+    this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = false;
     
@@ -45,8 +54,30 @@ export class CursoAdminPageComponent {
     this.sectionUser = false;
     this.sectionBook = false;
     this.sectionContent = false;
+    this.sectionClass = false;
+    this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = datos;
+  }
+
+  modalActivateClasses(datos:boolean){
+    this.sectionUser = false;
+    this.sectionBook = false;
+    this.sectionContent = false;
+    this.sectionClass = datos;
+    this.sectionPrerecorded = false;
+    this.startA = false;
+    this.sectionExercises = false;
+  }
+
+  modalActivatePrerecordeds(datos:boolean){
+    this.sectionUser = false;
+    this.sectionBook = false;
+    this.sectionContent = false;
+    this.sectionClass = false;
+    this.sectionPrerecorded = datos;
+    this.startA = false;
+    this.sectionExercises = false;
   }
 
   slideActivate(datos:boolean){
