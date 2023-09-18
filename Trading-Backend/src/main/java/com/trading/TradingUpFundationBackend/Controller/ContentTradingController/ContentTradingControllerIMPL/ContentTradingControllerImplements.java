@@ -1,4 +1,0 @@
-package com.trading.TradingUpFundationBackend.Controller.ContentTradingController.ContentTradingControllerIMPL;
-
-public class ContentTradingControllerImplements {
-}
