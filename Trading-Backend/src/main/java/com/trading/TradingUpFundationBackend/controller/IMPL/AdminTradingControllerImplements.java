@@ -14,8 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "Admin database manage system", description = "Create, read, delete and update admins")
@@ -41,6 +40,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
+    @PostMapping(IAdminTradingEndPoints.URL_ADMIN_CREATE)
     public ResponseEntity<GenericResponseDTO> createAdminTrading(AdminTradingDTO adminTradingDTO) {
         return this.service.createAdminTrading(adminTradingDTO);
     }
@@ -58,6 +58,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
+    @GetMapping(IAdminTradingEndPoints.ULR_ADMIN_READ)
     public ResponseEntity<GenericResponseDTO> readAdminTrading(AdminTradingDTO adminTradingDTO) {
         return this.service.readAdminTrading(adminTradingDTO);
     }
@@ -75,6 +76,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
+    @GetMapping(IAdminTradingEndPoints.URL_ADMINS_READ)
     public ResponseEntity<GenericResponseDTO> readAdminsTrading() {
         return this.service.readAdminsTrading();
     }
@@ -92,6 +94,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
+    @PutMapping(IAdminTradingEndPoints.URL_ADMIN_UPDATE)
     public ResponseEntity<GenericResponseDTO> updateAdminTrading(AdminTradingDTO adminTradingDTO) {
         return this.service.updateAdminTrading(adminTradingDTO);
     }
@@ -109,6 +112,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
+    @DeleteMapping(IAdminTradingEndPoints.URL_ADMIN_DELETE)
     public ResponseEntity<GenericResponseDTO> deleteAdminTrading(Integer adminId) {
         return this.service.deleteAdminTrading(adminId);
     }

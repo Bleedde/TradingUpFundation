@@ -15,29 +15,32 @@ import org.springframework.http.ResponseEntity;//Package that allows the creatio
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
 import java.util.List;//Package that allows the use of dynamic list
-import java.util.Optional;//Package
+import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
-@Service
-@Log4j2
+@Service//Annotation who represent this class like a component with type "Service" in the spring context
+@Log4j2//Annotation who allows the use of specifics responses
+/**
+ * Class that represents all the services of the entity "AdminTrading"
+ */
 public class AdminTradingService implements IAdminTradingService {
 
-    @Autowired
-    private IAdminTradingRepository respository;
-    @Autowired
+    @Autowired//Annotation that injects the dependencies from de repository related with the entity "AdminTrading"
+    private IAdminTradingRepository repository;
+    @Autowired//Annotation that injects the dependencies from the converter related with the entity "AdminTrading"
     private AdminTradingConverter converter;
 
     /**
-     * Method who creates an admin
-     * @param adminTradingDTO An admin who is gonna bre created
+     * Method that creates an admin
+     * @param adminTradingDTO The admin to be created
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> createAdminTrading(AdminTradingDTO adminTradingDTO) {
         try {
-            Optional<AdminTradingEntity> adminTradingExist = this.respository.findById(adminTradingDTO.getId());
+            Optional<AdminTradingEntity> adminTradingExist = this.repository.findById(adminTradingDTO.getId());
             if (!adminTradingExist.isPresent()) {
                 AdminTradingEntity entity = this.converter.convertAdminTradingDTOToAdminTradingEntity(adminTradingDTO);
-                this.respository.save(entity);
+                this.repository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IAdminTradingResponse.ADMIN_REGISTRATION_SUCCESS)
@@ -62,14 +65,14 @@ public class AdminTradingService implements IAdminTradingService {
     }
 
     /**
-     * Method who reads an admin
-     * @param adminTradingDTO An admin who is gonna be readed
+     * Method that reads an admin
+     * @param adminTradingDTO The admin to be read
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> readAdminTrading(AdminTradingDTO adminTradingDTO) {
         try {
-            Optional<AdminTradingEntity> adminTradingExist = this.respository.findById(adminTradingDTO.getId());
+            Optional<AdminTradingEntity> adminTradingExist = this.repository.findById(adminTradingDTO.getId());
             if(!adminTradingExist.isPresent()){
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
@@ -95,13 +98,13 @@ public class AdminTradingService implements IAdminTradingService {
     }
 
     /**
-     * Method who reads all the admins
+     * Method that reads all the admins
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> readAdminsTrading() {
         try {
-            List<AdminTradingEntity> listAdminsTrading = this.respository.findAll();
+            List<AdminTradingEntity> listAdminsTrading = this.repository.findAll();
             if(!listAdminsTrading.isEmpty()){
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
@@ -127,17 +130,17 @@ public class AdminTradingService implements IAdminTradingService {
     }
 
     /**
-     * Method that update an admin
-     * @param adminTradingDTO The admin who is gonna be updated
+     * Method that updates an admin
+     * @param adminTradingDTO The admin to be updated
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> updateAdminTrading(AdminTradingDTO adminTradingDTO) {
         try {
-            Optional<AdminTradingEntity> adminTradingExist = this.respository.findById(adminTradingDTO.getId());
+            Optional<AdminTradingEntity> adminTradingExist = this.repository.findById(adminTradingDTO.getId());
             if(!adminTradingExist.isPresent()){
                 AdminTradingEntity adminTradingEntity = this.converter.convertAdminTradingDTOToAdminTradingEntity(adminTradingDTO);
-                this.respository.save(adminTradingEntity);
+                this.repository.save(adminTradingEntity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IAdminTradingResponse.ADMIN_UPDATE_SUCCESS)
@@ -162,16 +165,16 @@ public class AdminTradingService implements IAdminTradingService {
     }
 
     /**
-     * Method that update an admin
-     * @param adminId The id of the admin who is gonna be deleted
+     * Method that deletes a admin
+     * @param adminId The id of the book to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> deleteAdminTrading(Integer adminId) {
         try {
-            Optional<AdminTradingEntity> adminTradingExist = this.respository.findById(adminId);
+            Optional<AdminTradingEntity> adminTradingExist = this.repository.findById(adminId);
             if(adminTradingExist.isPresent()){
-                this.respository.deleteById(adminId);
+                this.repository.deleteById(adminId);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IAdminTradingResponse.ADMIN_DELETE_SUCCESS)

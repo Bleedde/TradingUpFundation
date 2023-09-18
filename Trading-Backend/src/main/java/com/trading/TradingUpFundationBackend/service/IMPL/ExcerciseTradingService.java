@@ -1,10 +1,9 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IContentTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExcerciseTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.ExcerciseTradingConverter;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExcerciseTradingDTO;
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExcerciseTradingResponse;//Package that allows the use of the response of the entity ExcerciseTrading
+import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.ExcerciseTradingConverter;//Package that allows use the object ExcerciseTradingConverter
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExcerciseTradingDTO;//Package that allows to use the serializable version of the entity ExcerciseTradingEntity; ExcerciseTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExcerciseTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;
 import com.trading.TradingUpFundationBackend.repository.IExcerciseTradingRepository;
@@ -68,7 +67,7 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
             } else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IContentTradingResponse.CONTENT_SEARCHED_FAILED)
+                        .objectResponse(IExcerciseTradingResponse.EXERCISE_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
