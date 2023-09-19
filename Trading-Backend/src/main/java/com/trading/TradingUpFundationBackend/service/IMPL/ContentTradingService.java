@@ -66,7 +66,7 @@ public class ContentTradingService implements IContentTradingService {
 
     /**
      * Method that reads a content
-     * @param contentTradingDTO The content to be created
+     * @param contentTradingDTO The content to be readed
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
