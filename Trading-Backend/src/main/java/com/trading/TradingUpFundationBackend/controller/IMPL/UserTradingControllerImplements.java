@@ -41,7 +41,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
-    public ResponseEntity<GenericResponseDTO> createUserTrading(UserTradingDTO userTradingDTO) {
+    public ResponseEntity<GenericResponseDTO> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
         return this.service.createUserTrading(userTradingDTO);
     }
 
@@ -59,7 +59,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IUserTradingEndPoints.URL_USER_READ)
-    public ResponseEntity<GenericResponseDTO> readUserTrading(UserTradingDTO usertradingDTO) {
+    public ResponseEntity<GenericResponseDTO> readUserTrading(@RequestBody UserTradingDTO usertradingDTO) {
         return this.service.readUserTrading(usertradingDTO);
     }
 
@@ -95,7 +95,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PutMapping(IUserTradingEndPoints.URL_USER_UPDATE)
-    public ResponseEntity<GenericResponseDTO> updateUserTrading(UserTradingDTO userTradingDTO) {
+    public ResponseEntity<GenericResponseDTO> updateUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
         return this.service.updateUserTrading(userTradingDTO);
     }
 
@@ -113,7 +113,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @DeleteMapping(IUserTradingEndPoints.URL_USER_DELETE)
-    public ResponseEntity<GenericResponseDTO> deleteUserTrading(Integer userId) {
+    public ResponseEntity<GenericResponseDTO> deleteUserTrading(@PathVariable Integer userId) {
         return this.service.deleteUserTrading(userId);
     }
 }

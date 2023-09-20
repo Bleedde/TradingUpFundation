@@ -1,5 +1,7 @@
 package com.trading.TradingUpFundationBackend.commons.domains.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.AdminTradingEntity;//Import of the entity "Admin"
 import com.trading.TradingUpFundationBackend.commons.domains.entity.RegistrationTradingEntity;//Import of the entity "Registration"
 import lombok.AllArgsConstructor;//Import to use all the arguments that a constructor normally has
@@ -27,6 +29,6 @@ public class UserTradingDTO implements Serializable {
     private boolean status;
     private String backtesting;
     private String auditedAccount;
+    @JsonIdentityReference(alwaysAsId = true)
     private AdminTradingEntity adminTradingEntityRelation;
-    private List<RegistrationTradingEntity> registrationTradingEntityRelation;
 }

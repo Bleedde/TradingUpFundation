@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 public interface IUserTradingController {
     @PostMapping
-    ResponseEntity<GenericResponseDTO> createUserTrading(@RequestBody UserTradingDTO userTradingDTO);
+    ResponseEntity<GenericResponseDTO> createUserTrading(@RequestBody  UserTradingDTO userTradingDTO);
     @GetMapping
     ResponseEntity<GenericResponseDTO> readUserTrading(@RequestBody UserTradingDTO usertradingDTO);
     @GetMapping

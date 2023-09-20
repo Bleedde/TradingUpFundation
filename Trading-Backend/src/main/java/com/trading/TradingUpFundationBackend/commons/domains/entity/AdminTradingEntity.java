@@ -1,5 +1,6 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;//Package to deny the recursion of the side "One"
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
@@ -29,5 +30,6 @@ public class AdminTradingEntity {
 
     @OneToMany(mappedBy = "adminTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to be
     private List<UserTradingEntity> userTradingEntityRelation;
 }

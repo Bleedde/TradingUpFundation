@@ -41,6 +41,9 @@ public class UserTradingService implements IUserTradingService {
             Optional<UserTradingEntity> userTradingExist = this.repository.findById(userTradingDTO.getId());
             if (!userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
+                System.out.println("prueba DTO " + userTradingDTO.getAuditedAccount());
+                System.out.println("prueba entidad: " + entity.getAuditedAccount());
+                this.repository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())

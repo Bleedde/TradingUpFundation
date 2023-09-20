@@ -165,7 +165,7 @@ public class AdminTradingService implements IAdminTradingService {
     }
 
     /**
-     * Method that deletes a admin
+     * Method that deletes an admin
      * @param adminId The id of the book to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */

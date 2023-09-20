@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;//Package to represent this clas
  */
 public class ClassPrerecordedTradingConverter {
     /**
-     * Method to turn an object with a type "ClassTradingEntity" to an object with type "ClassTradingDTO"
+     *git  Method to turn an object with a type "ClassTradingEntity" to an object with type "ClassTradingDTO"
      * @param classPrerecordedTradingEntity The object who is going to turn into a ClassTradingDTO
      * @return The object gave for param converted to a ClassTradingDTO type
      */
