@@ -11,19 +11,18 @@
     filter: brightness(92%);
 }
 
-.btn-danger{
-    background-color: #2d2b45;
-    border-color: white;
+.boton{
+    background-color: white;
+    border-color: #4C288A;
+    border-width: 2px;
+    color: #4C288A;
 }
 
-.btn-warning{
-    background-color: #5a4268;
-    border-color: white;
-}
+.boton:hover{
 
-.btn-success{
-    background-color: #655d92;
-    border-color: white;
+    background-color: white;
+    filter: brightness(92%);
+
 }
 
 

@@ -1,23 +1,50 @@
-<div class="container col-12 d-flex flex-column align-items-center">
+<div class="container col-12 d-flex flex-column align-items-center min-vh-100">
     <div class="header d-flex justify-content-end align-items-start pe-4 pt-3 mb-5 col-12"   [ngStyle]="{'background-image': 'url(' + wallpaper1 + ')'}">
         <h1 class="text-white">Nivel 1</h1>
     </div>
+
+    <!--
     <div class="accordion col-10 mb-5" id="accordionExample">
-      <div class="accordion-item">
+      <div class="accordion-item bg-white">
         <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <button class="accordion-button bg_purple text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="flecha">
             Nivel 1
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            Aprenderas a negociar
+            Introduccion al Trading
+          </div>
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            Introduccion al Trading
+          </div>
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            Introduccion al Trading
           </div>
         </div>
       </div>
-
-      
-      
+    </div>-->
+    <div class="col-10">
+      <h2 class="text-center mb-4">Contenido del curso</h2>
+      <div class="accordion mb-4" id="accordionExample">
+        <div class="accordion-item bg-white">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button bg-black text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Nivel 1
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              This is the first item's accordion body.
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1920" height="200" preserveAspectRatio="none" viewBox="0 0 1920 1080" class="col-12">
