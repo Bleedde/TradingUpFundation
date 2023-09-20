@@ -9,5 +9,4 @@ public class TradingUpFundationBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TradingUpFundationBackendApplication.class, args);
 	}
-2
 }
