@@ -1,37 +1,41 @@
-<div class="pt-3 px-4 pe">
-    <h4 class="text-white" type="submit" (click)="dropDown4()">Usuarios&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
-    <div *ngIf="dropdown4">
-        <ul class="text-white px-5" > 
-            <li type="submit" (click)="activateSectionUser()">Registrar Usuarios</li>
-        </ul>
-    </div>
-</div> 
+<div class="fixed col-2">
+    <div class="pt-3 px-4 pe">
+        <h4 class="text-white" type="submit" (click)="dropDown4()">Usuarios&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+        <div *ngIf="dropdown4">
+            <ul class="text-white px-4" > 
+                <li type="submit" (click)="activateSectionUser()"><i class="fa-solid fa-circle"></i>Registrar Usuarios</li>
+            </ul>
+        </div>
+    </div> 
 
-<div class="pt-2 px-4 pe">
-    <h4 class="text-white" type="submit" (click)="dropDown1()">Entregas&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
-    <div *ngIf="dropdown1">
-        <ul class="text-white px-5"> 
-            <li class="">Backtesting</li>
-            <li class="">Ejercicios en clase</li>
-        </ul>
+    <div class="pt-2 px-4 pe">
+        <h4 class="text-white" type="submit" (click)="dropDown2()">Clases&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+        <div *ngIf="dropdown2">
+            <ul class="text-white px-4"> 
+                <li type="submit" class="pb-2" (click)="activateSectionContent()"><i class="fa-solid fa-circle"></i>Contenido del Curso</li>
+                <li type="submit" (click)="activateSectionClass()"><i class="fa-solid fa-circle"></i>Clases</li>
+                <li type="submit" (click)="activateSectionPrerecorded()" class="mt-2"><i class="fa-solid fa-circle" ></i>Pregrabadas</li>
+            </ul>
+        </div>
     </div>
+
+    <div class="pt-2 px-4 pe">
+        <h4 class="text-white" type="submit" (click)="dropDown1()">Entregas&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+        <div *ngIf="dropdown1">
+            <ul class="text-white px-4"> 
+                <li type="submit" (click)="activateSectionExercise()" class=""><i class="fa-solid fa-circle" ></i>Ejercicios de clase</li>
+            </ul>
+        </div>
+    </div>
+
+    
+
+    <div class="pt-2 px-4 pe">
+        <h4 class="text-white" type="submit" (click)="dropDown3()">Biblioteca&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
+        <div *ngIf="dropdown3">
+            <ul class="text-white px-4"> 
+                <li type="submit" (click)="activateSectionBook()"><i class="fa-solid fa-circle"></i>Libros PDF</li>
+            </ul>
+        </div>
+    </div> 
 </div>
-
-<div class="pt-2 px-4 pe">
-    <h4 class="text-white" type="submit" (click)="dropDown2()">Clases&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
-    <div *ngIf="dropdown2">
-        <ul class="text-white px-5"> 
-            <li type="submit">Contenido del Curso</li>
-            <li class="pb-1"><a href="">Clases</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="pt-2 px-4 pe">
-    <h4 class="text-white" type="submit" (click)="dropDown3()">Biblioteca&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
-    <div *ngIf="dropdown3">
-        <ul class="text-white px-5"> 
-            <li>Libros PDF</li>
-        </ul>
-    </div>
-</div> 

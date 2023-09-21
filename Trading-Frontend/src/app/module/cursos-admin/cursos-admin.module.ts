@@ -7,6 +7,11 @@ import { SlideVarComponent } from './curso-admin-page/components/slide-var/slide
 import { HeaderComponent } from './curso-admin-page/components/header/header.component';
 import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
 import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
+import { LibrosComponent } from './curso-admin-page/components/libros/libros.component';
+import { StartAComponent } from './curso-admin-page/components/start-a/start-a.component';
+import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
+import { ClasesGrabadasComponent } from './curso-admin-page/components/clases-grabadas/clases-grabadas.component';
+import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases-pregrabadas/clases-pregrabadas.component';
 
 
 @NgModule({
@@ -15,7 +20,12 @@ import { ContenidoCursoComponent } from './curso-admin-page/components/contenido
     SlideVarComponent,
     HeaderComponent,
     UsuariosComponent,
-    ContenidoCursoComponent
+    ContenidoCursoComponent,
+    LibrosComponent,
+    StartAComponent,
+    EjerciciosClaseComponent,
+    ClasesGrabadasComponent,
+    ClasesPregrabadasComponent
   ],
   imports: [
     CommonModule,

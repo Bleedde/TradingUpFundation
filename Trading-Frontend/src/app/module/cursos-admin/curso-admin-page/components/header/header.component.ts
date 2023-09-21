@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { IMAGEN_LOGO } from 'src/app/shared/constants';
 
 @Component({
@@ -9,12 +9,13 @@ import { IMAGEN_LOGO } from 'src/app/shared/constants';
 export class HeaderComponent {
   
   @Output() activateSlideVar = new EventEmitter<boolean>();
-  datos = false;
+  datos = true;
   logo = IMAGEN_LOGO; 
 
   
   clickSlide(){
     this.activateSlideVar.emit(this.datos = !this.datos);
+  
   }
 
 }
