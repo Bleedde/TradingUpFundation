@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;//Package that allows the use the 
 import java.util.List;//Package that allows the use of dynamic list
 import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
+import static java.lang.System.out;
+
 @Service//Annotation who represent this class like a component with type "Service" in the spring context
 @Log4j2//Annotation who allows the use of specifics responses
 
@@ -38,11 +40,9 @@ public class UserTradingService implements IUserTradingService {
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> createUserTrading(UserTradingDTO userTradingDTO) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findById(userTradingDTO.getId());
+            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (!userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
-                System.out.println("prueba DTO " + userTradingDTO.getAuditedAccount());
-                System.out.println("prueba entidad: " + entity.getAuditedAccount());
                 this.repository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
@@ -75,20 +75,20 @@ public class UserTradingService implements IUserTradingService {
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> readUserTrading(UserTradingDTO userTradingDTO) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findById(userTradingDTO.getId());
-            if (!userTradingExist.isPresent()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
-                        .objectResponse(userTradingExist)
-                        .httpResponse(HttpStatus.OK.value())
-                        .build());
-            } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
-                        .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
-                        .httpResponse(HttpStatus.BAD_REQUEST.value())
-                        .build());
-            }
+            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
+            if (userTradingExist.isPresent()) {
+                    return ResponseEntity.ok(GenericResponseDTO.builder()
+                            .message(GeneralResponse.OPERATION_SUCCESS)
+                            .objectResponse(userTradingExist)
+                            .httpResponse(HttpStatus.OK.value())
+                            .build());
+                } else {
+                    return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                            .message(GeneralResponse.OPERATION_FAIL)
+                            .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
+                            .httpResponse(HttpStatus.BAD_REQUEST.value())
+                            .build());
+                }
         } catch (Exception e) {
             log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
@@ -139,9 +139,11 @@ public class UserTradingService implements IUserTradingService {
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<GenericResponseDTO> updateUserTrading(UserTradingDTO userTradingDTO) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findById(userTradingDTO.getId());
-            if (!userTradingExist.isPresent()) {
+            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
+            if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
+                entity.setId(userTradingExist.get().getId());
+                this.repository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IUserTradingResponse.USER_UPDATED_SUCCESS)
@@ -171,11 +173,11 @@ public class UserTradingService implements IUserTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteUserTrading(Integer userId) {
+    public ResponseEntity<GenericResponseDTO> deleteUserTrading(UserTradingDTO userTradingDTO) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findById(userId);
+            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
-                this.repository.deleteById(userId);
+                this.repository.deleteById(userTradingExist.get().getId());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IUserTradingResponse.USER_DELETED_SUCCESS)

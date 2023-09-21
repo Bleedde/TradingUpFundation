@@ -46,7 +46,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
     }
 
     @Override
-    @Operation(summary = "Read a new user")
+    @Operation(summary = "Read an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = GeneralResponse.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -113,7 +113,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @DeleteMapping(IUserTradingEndPoints.URL_USER_DELETE)
-    public ResponseEntity<GenericResponseDTO> deleteUserTrading(@PathVariable Integer userId) {
-        return this.service.deleteUserTrading(userId);
+    public ResponseEntity<GenericResponseDTO> deleteUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+        return this.service.deleteUserTrading(userTradingDTO);
     }
 }

@@ -1,6 +1,7 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;//Package to send data in Json format
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;//Package to deny the recursion of the side "One"
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
@@ -36,25 +37,31 @@ public class LevelTradingEntity {
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<RegistrationTradingEntity> registrationTradingEntityRelation;
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ContentTradingEntity> contentTradingEntityRelation;
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ExcerciseTradingEntity> excerciseTradingEntityRelation;
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<BookTradingEntity> bookTradingEntityRelation;
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ClassTradingEntity> classTradingEntityRelation;
 
     @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ClassTradingEntity> classPrerecordedTradingEntityRelation;
 }

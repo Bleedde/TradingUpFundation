@@ -9,5 +9,5 @@ public interface IUserTradingService {
     ResponseEntity<GenericResponseDTO> readUserTrading(UserTradingDTO userTradingDTO);
     ResponseEntity<GenericResponseDTO> readUsersTrading();
     ResponseEntity<GenericResponseDTO> updateUserTrading(UserTradingDTO userTradingDTO);
-    ResponseEntity<GenericResponseDTO> deleteUserTrading(Integer userId);
+    ResponseEntity<GenericResponseDTO> deleteUserTrading(UserTradingDTO userTradingDTO);
 }
