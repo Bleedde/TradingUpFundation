@@ -12,6 +12,9 @@ import { StartAComponent } from './curso-admin-page/components/start-a/start-a.c
 import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
 import { ClasesGrabadasComponent } from './curso-admin-page/components/clases-grabadas/clases-grabadas.component';
 import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases-pregrabadas/clases-pregrabadas.component';
+import { CreateUserServiceService } from './curso-admin-page/service/create-user-service.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,7 +32,13 @@ import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases
   ],
   imports: [
     CommonModule,
-    CursosAdminRoutingModule
+    CursosAdminRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  providers: [
+    CreateUserServiceService
   ]
 })
 export class CursosAdminModule { }
