@@ -1,5 +1,6 @@
 package com.trading.TradingUpFundationBackend.commons.domains.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.LevelTradingEntity;//Import of the entity "Level"
 import lombok.AllArgsConstructor;//Import to use all the arguments that a constructor normally has
 import lombok.Builder;//Import to create objects easier
@@ -21,5 +22,6 @@ public class ContentTradingDTO implements Serializable {
     private String subTitle;
     private String description;
     private String urlVideo;
+    @JsonIdentityReference(alwaysAsId = true)
     private LevelTradingEntity levelTradingEntityRelation;
 }
