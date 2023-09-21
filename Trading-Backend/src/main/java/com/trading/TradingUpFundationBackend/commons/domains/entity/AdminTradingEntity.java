@@ -30,6 +30,6 @@ public class AdminTradingEntity {
 
     @OneToMany(mappedBy = "adminTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
-    @JsonIgnore//Annotation to ignore this list in the moment to be
+    @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<UserTradingEntity> userTradingEntityRelation;
 }

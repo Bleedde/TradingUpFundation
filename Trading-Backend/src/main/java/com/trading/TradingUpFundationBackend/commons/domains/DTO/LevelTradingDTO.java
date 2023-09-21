@@ -29,9 +29,4 @@ public class LevelTradingDTO implements Serializable {
     private Date dataStart;
     private Date dataEnd;
     private Integer amount;
-    private List<RegistrationTradingEntity> registrationTradingEntityRelation;
-    private List<ContentTradingEntity> contentTradingEntityRelation;
-    private List<ExcerciseTradingEntity> excerciseTradingEntityRelation;
-    private List<BookTradingEntity> bookTradingEntityRelation;
-    private List<ClassTradingEntity> classTradingEntityRelation;
 }
