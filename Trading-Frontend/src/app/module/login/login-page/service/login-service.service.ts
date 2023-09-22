@@ -13,7 +13,7 @@ export class LoginServiceService {
 
   loginService(params:{correo : string, contrasenia : string}): Observable<GenericResponse>{
     return this.http.post<any>(
-      "http://localhost:8080/usuario" + "/service",  params
+      "http://localhost:8080/user" + "/service",  params
     )
   }
 }
