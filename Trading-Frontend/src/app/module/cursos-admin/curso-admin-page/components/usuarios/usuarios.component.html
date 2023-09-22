@@ -4,23 +4,78 @@
             Registro de Usuarios
         </div>
         <div class="card-body p-5">
-          <form (submit)="createUser()" [formGroup]="userForm">
+          <form *ngIf="!editUserDomain" (submit)="createUser()" [formGroup]="userForm">
+            <div class="row mb-3">
+              <label for="" class="col-sm-2 col-form-label">Nombre:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="" class="col-sm-2 col-form-label">Correo Electronico:</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="" class="col-sm-2 col-form-label">Contraseña:</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" formControlName="password">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="" class="col-sm-2 col-form-label only">Nivel:</label>
+              <div class="col-sm-10">
+                <select class="form-select" formControlName="level">
+                  <option value="1" selected>Nivel 1</option>
+                  <option value="2">Nivel 2</option>
+                  <option value="3">Nivel 3</option>
+                  <option value="4">Nivel 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Estados:</label>
+              <div class="col-sm-10">
+                  <select class="form-select" formControlName="status">
+                      <option value="true">Activo</option>
+                      <option value="false">Inactivo</option>
+                    </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Backtesting Link:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="backtesting">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Cuenta Auditada:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="auditedAccount"> 
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+              <button type="submit" class="btn text-white px-5">Agregar</button>
+            </div>
+        </form>
+          <form *ngIf="editUserDomain" (submit)="updateUser()" [formGroup]="userForm">
               <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">Nombre:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" formControlName="name">
+                  <input type="text" class="form-control" placeholder="{{user.name}}" formControlName="name">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">Correo Electronico:</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" formControlName="email">
+                  <input type="email" class="form-control" placeholder="{{user.email}}" formControlName="email">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">Contraseña:</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" formControlName="password">
+                  <input type="password" class="form-control" placeholder="{{user.password}}" formControlName="password">
                 </div>
               </div>
               <div class="row mb-3">
@@ -46,22 +101,27 @@
               <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Backtesting Link:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" formControlName="backtesting">
+                  <input type="text" class="form-control" placeholder="{{user.backtesting}}" formControlName="backtesting">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Cuenta Auditada:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" formControlName="auditedAccount"> 
+                  <input type="text" class="form-control" placeholder="{{user.auditedAccount}}" formControlName="auditedAccount"> 
                 </div>
               </div>
               <div class="d-flex align-items-center justify-content-center">
-                <button type="submit" class="btn text-white px-5">Agregar</button>
+                <button type="submit" class="btn text-white px-5">Actualizar</button>
               </div>
           </form>
         </div>
     </div>
 
+
+
+
+
+    
     <div class="card col-12">
       <div class="card-header text-white">
         Tabla Usuarios
@@ -73,7 +133,6 @@
               <tr class="">
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Contrasenia</th>
                 <th scope="col">Nivel</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Backtesting</th>
@@ -82,43 +141,16 @@
               </tr>
             </thead>
             <tbody class="text-center table-group-divider">
-              <tr class="">
-                <td scope="row">Brahian</td>
-                <td>ttreyygh@gmail.com</td>
-                <td>brahian123</td>
-                <td>Nivel 1</td>
-                <td>Activo</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
+              <tr class="" *ngFor="let userItem of listUserDomain; let i = index">
+                <td scope="row">{{userItem.name}}</td>
+                <td>{{userItem.email}}</td>
+                <td>{{userItem.userLevel}}</td>
+                <td>{{userItem.status}}</td>
+                <td>{{userItem.backtesting}}</td>
+                <td>{{userItem.auditedAccount}}</td>
                 <td class="d-flex">
-                  <a href="" class="btn btn-success border-white">Ver</a>
-                  <a href="" class="btn btn-success border-white">Editar</a>
-                </td>
-              </tr>
-              <tr class="">
-                <td scope="row">Brahian</td>
-                <td>ttreyygh@gmail.com</td>
-                <td>brahian123</td>
-                <td>Nivel 1</td>
-                <td>Activo</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
-                <td class="d-flex">
-                  <a href="" class="btn btn-success border-white">Ver</a>
-                  <a href="" class="btn btn-success border-white">Editar</a>
-                </td>
-              </tr>
-              <tr class="">
-                <td scope="row">Brahian</td>
-                <td>ttreyygh@gmail.com</td>
-                <td>brahian123</td>
-                <td>Nivel 1</td>
-                <td>Activo</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
-                <td>https://mail.google.com/mail/u/0/#inbox</td>
-                <td class="d-flex">
-                  <a href="" class="btn btn-success border-white">Ver</a>
-                  <a href="" class="btn btn-success border-white">Editar</a>
+                  <a (click)="editUser(i)"  class="btn btn-success border-white"><i class="fa-solid fa-pen"></i></a>
+                  <a (click)="deleteUser(i)" class="btn btn-success border-white"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>

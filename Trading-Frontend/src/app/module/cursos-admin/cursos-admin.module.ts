@@ -15,6 +15,9 @@ import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases
 import { CreateUserServiceService } from './curso-admin-page/service/create-user-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReadUsersServiceService } from './curso-admin-page/service/read-users-service.service';
+import { DeleteUserServiceService } from './curso-admin-page/service/delete-user-service.service';
+import { UpdateUsersServiceService } from './curso-admin-page/service/update-users-service.service';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    CreateUserServiceService
+    CreateUserServiceService,
+    ReadUsersServiceService,
+    UpdateUsersServiceService,
+    DeleteUserServiceService
   ]
 })
 export class CursosAdminModule { }
