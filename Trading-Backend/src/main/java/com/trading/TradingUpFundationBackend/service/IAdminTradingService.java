@@ -12,5 +12,5 @@ public interface IAdminTradingService {
     ResponseEntity<GenericResponseDTO> readAdminTrading(AdminTradingDTO adminTradingDTO);//Method reading ad admin
     ResponseEntity<GenericResponseDTO> readAdminsTrading();//Method that reads all the admins
     ResponseEntity<GenericResponseDTO> updateAdminTrading(AdminTradingDTO adminTradingDTO);//Method updating an admin
-    ResponseEntity<GenericResponseDTO> deleteAdminTrading(Integer adminId);//Method deleting an admin
+    ResponseEntity<GenericResponseDTO> deleteAdminTrading(AdminTradingDTO adminTradingDTO);//Method deleting an admin
 }
