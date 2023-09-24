@@ -14,6 +14,6 @@ public interface IUserTradingController {
     ResponseEntity<GenericResponseDTO> readUsersTrading();
     @PutMapping
     ResponseEntity<GenericResponseDTO> updateUserTrading(@RequestBody UserTradingDTO userTradingDTO);
-    @DeleteMapping
+    @PostMapping
     ResponseEntity<GenericResponseDTO> deleteUserTrading(@RequestBody UserTradingDTO userTradingDTO);
 }

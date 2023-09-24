@@ -166,15 +166,15 @@ public class AdminTradingService implements IAdminTradingService {
 
     /**
      * Method that deletes an admin
-     * @param adminId The id of the book to be deleted
+     * @param adminTradingDTO The admin to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteAdminTrading(Integer adminId) {
+    public ResponseEntity<GenericResponseDTO> deleteAdminTrading(AdminTradingDTO adminTradingDTO) {
         try {
-            Optional<AdminTradingEntity> adminTradingExist = this.repository.findById(adminId);
+            Optional<AdminTradingEntity> adminTradingExist = this.repository.findByEmail(adminTradingDTO.getEmail());
             if(adminTradingExist.isPresent()){
-                this.repository.deleteById(adminId);
+                this.repository.deleteByEmail(adminTradingExist.get().getEmail());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(GeneralResponse.OPERATION_SUCCESS)
                         .objectResponse(IAdminTradingResponse.ADMIN_DELETE_SUCCESS)
