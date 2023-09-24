@@ -13,4 +13,5 @@ public interface IUserTradingService {
     ResponseEntity<GenericResponseDTO> readUsersTrading();//Method that reads all the users
     ResponseEntity<GenericResponseDTO> updateUserTrading(UserTradingDTO userTradingDTO);//Method updating an user
     ResponseEntity<GenericResponseDTO> deleteUserTrading(UserTradingDTO userTradingDTO);//Method deleting an user
+
 }

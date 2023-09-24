@@ -9,7 +9,5 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 public interface ILoginTradingService {
-    Optional<UserTradingEntity> loginUser(UserTradingDTO userTradingDTO);
-    Optional<AdminTradingEntity> loginAdmin(AdminTradingDTO adminTradingDTO);
-    ResponseEntity<GenericResponseDTO> login(Optional<UserTradingDTO> userTradingDTO, Optional<AdminTradingDTO> adminTradingDTO);
+    ResponseEntity<GenericResponseDTO> login(UserTradingDTO userTradingDTO);
 }
