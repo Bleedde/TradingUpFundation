@@ -113,7 +113,7 @@ public class AdminTradingControllerImplements implements IAdminTradingController
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @DeleteMapping(IAdminTradingEndPoints.URL_ADMIN_DELETE)
-    public ResponseEntity<GenericResponseDTO> deleteAdminTrading(Integer adminId) {
-        return this.service.deleteAdminTrading(adminId);
+    public ResponseEntity<GenericResponseDTO> deleteAdminTrading(AdminTradingDTO adminTradinbgDTO) {
+        return this.service.deleteAdminTrading(adminTradinbgDTO);
     }
 }

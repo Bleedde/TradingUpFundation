@@ -41,6 +41,9 @@ public class UserTradingEntity {
     @Column(name = "user_audited_account", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
     private String auditedAccount;
 
+    @Column(name = "user_role")
+    private String roleUser;
+
     @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
     @JoinColumn(name = "admin_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
     @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation

@@ -169,7 +169,7 @@ public class UserTradingService implements IUserTradingService {
 
     /**
      * Method that deletes a user
-     * @param userId The id of the user to be deleted
+     * @param userTradingDTO The user to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface

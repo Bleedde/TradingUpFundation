@@ -42,9 +42,6 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
     public ResponseEntity<GenericResponseDTO> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
-        System.out.println("Prueba Datos: " + userTradingDTO.getName());
-        System.out.println("Prueba Datos: " + userTradingDTO.getEmail());
-        System.out.println("Prueba Datos: " + userTradingDTO.getPassword());
         return this.service.createUserTrading(userTradingDTO);
     }
 
@@ -97,8 +94,9 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PutMapping(IUserTradingEndPoints.URL_USER_UPDATE)
+    @PutMapping (IUserTradingEndPoints.URL_USER_UPDATE)
     public ResponseEntity<GenericResponseDTO> updateUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+        System.out.println(userTradingDTO);
         return this.service.updateUserTrading(userTradingDTO);
     }
 
@@ -115,7 +113,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @DeleteMapping(IUserTradingEndPoints.URL_USER_DELETE)
+    @PostMapping(IUserTradingEndPoints.URL_USER_DELETE)
     public ResponseEntity<GenericResponseDTO> deleteUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
         return this.service.deleteUserTrading(userTradingDTO);
     }

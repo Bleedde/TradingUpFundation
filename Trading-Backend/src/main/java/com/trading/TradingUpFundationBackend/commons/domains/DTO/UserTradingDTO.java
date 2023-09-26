@@ -29,6 +29,7 @@ public class UserTradingDTO implements Serializable {
     private boolean status;
     private String backtesting;
     private String auditedAccount;
+    private String roleUser;
     @JsonIdentityReference(alwaysAsId = true)
     private AdminTradingEntity adminTradingEntityRelation;
 }
