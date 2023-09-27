@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;//Package that gives the annota
  */
 public interface IAdminTradingController {
     @PostMapping()//Annotation that represent the header of an HTTP query that creates an admin with a POST query
-    ResponseEntity<GenericResponseDTO> createAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);//Method
+    ResponseEntity<GenericResponseDTO> createAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);//Method that creates an admin
     @GetMapping()//Annotation that represent the header of an HTTP query that reads an admin with a GET query
-    ResponseEntity<GenericResponseDTO> readAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);
+    ResponseEntity<GenericResponseDTO> readAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);//Method that reads an admin
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the admins with a GET query
-    ResponseEntity<GenericResponseDTO> readAdminsTrading();
+    ResponseEntity<GenericResponseDTO> readAdminsTrading();//Method that reads all the admins
     @PutMapping//Annotation that represent the header of an HTTP query that updates an admin with a PUT query
-    ResponseEntity<GenericResponseDTO> updateAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);
+    ResponseEntity<GenericResponseDTO> updateAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);//Method that updates an admin
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes an admin with a DELETE query
-    ResponseEntity<GenericResponseDTO> deleteAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);
+    ResponseEntity<GenericResponseDTO> deleteAdminTrading(@RequestBody AdminTradingDTO adminTradingDTO);//Method that deletes an admin
 }

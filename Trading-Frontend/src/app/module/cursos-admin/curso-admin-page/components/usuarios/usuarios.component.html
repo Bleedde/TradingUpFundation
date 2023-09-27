@@ -143,12 +143,12 @@
             <tbody class="text-center table-group-divider">
               <tr class="" *ngFor="let userItem of listUserDomain; let i = index">
                 <td scope="row">{{userItem.name}}</td>
-                <td>{{userItem.email}}</td>
+                <td class="">{{userItem.email}}</td>
                 <td>{{userItem.userLevel}}</td>
                 <td>{{userItem.status}}</td>
-                <td>{{userItem.backtesting}}</td>
+                <td><a href="">{{userItem.backtesting}}</a></td>
                 <td>{{userItem.auditedAccount}}</td>
-                <td class="d-flex">
+                <td class="">
                   <a (click)="editUser(i)"  class="btn btn-success border-white"><i class="fa-solid fa-pen"></i></a>
                   <a (click)="deleteUser(i)" class="btn btn-success border-white"><i class="fa-solid fa-trash"></i></a>
                 </td>

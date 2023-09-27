@@ -1,11 +1,5 @@
 CREATE DATABASE trading_up_fundation;
 USE trading_up_fundation;
-CREATE TABLE admin_trading(
-    admin_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    admin_name VARCHAR(255) NOT NULL,
-    admin_email VARCHAR(255) NOT NULL,
-    admin_password VARCHAR(255) NOT NULL
-);
 CREATE TABLE user_trading(
     user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
