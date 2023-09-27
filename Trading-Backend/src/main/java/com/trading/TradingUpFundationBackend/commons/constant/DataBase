@@ -1,23 +1,15 @@
 CREATE DATABASE trading_up_fundation;
 USE trading_up_fundation;
-CREATE TABLE admin_trading(
-    admin_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    admin_name VARCHAR(255) NOT NULL,
-    admin_email VARCHAR(255) NOT NULL,
-    admin_password VARCHAR(255) NOT NULL
-);
 CREATE TABLE user_trading(
     user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
     user_email VARCHAR(255) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
-    user_current_level INTEGER NOT NULL,
+    user_current_level INTEGER,
     user_status BOOLEAN NOT NULL,
     user_backtesting_link VARCHAR(255),
     user_audited_account VARCHAR(255),
-    user_role VARCHAR(255),
-    admin_id INTEGER,
-    FOREIGN KEY (admin_id) REFERENCES admin_trading(admin_id)
+    user_role VARCHAR(255) NOT NULL
 );
 CREATE TABLE level_trading(
     level_id INTEGER AUTO_INCREMENT PRIMARY KEY,

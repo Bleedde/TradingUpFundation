@@ -2,7 +2,6 @@ package com.trading.TradingUpFundationBackend.commons.constant.response.entittyR
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package to use a general response created in another package
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package to import the DTO object "User"
-import com.trading.TradingUpFundationBackend.commons.domains.entity.AdminTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package to import the entity "User"
 import com.trading.TradingUpFundationBackend.commons.helper.HelperMapper;//Package to import the object "HelpeperMapper"
 import lombok.extern.log4j.Log4j2;//Package who allows log better responses

@@ -2,15 +2,10 @@ package com.trading.TradingUpFundationBackend.service.IMPL;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.UserTradingConverter;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.ILevelTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.AdminTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.AdminTradingEntity;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.LevelTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
-import com.trading.TradingUpFundationBackend.repository.IAdminTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.ILoginTradingService;
 import lombok.extern.log4j.Log4j2;

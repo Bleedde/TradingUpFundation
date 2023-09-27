@@ -35,6 +35,8 @@ public class LoginTradingControllerImplements implements ILoginController {
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = GeneralResponse.NOT_FOUND,
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "405", description = GeneralResponse.OPERATION_FAIL,
+                    content = {@Content(mediaType = "aplication/json")}),
             @ApiResponse(responseCode  = "500", description = GeneralResponse.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     public ResponseEntity<GenericResponseDTO> login(@RequestBody UserTradingDTO userTradingDTO) {
