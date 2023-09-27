@@ -3,7 +3,8 @@ import { IMAGEN_LOGO, LOGIN } from 'src/app/shared/constants';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginServiceService } from '../../service/login-service.service';
-import { GenericResponse } from '../../response/GenericResponse';
+import { GeneralResponse } from 'src/app/shared/response/GeneralResponse';
+
 
 @Component({
   selector: 'app-login',
@@ -36,18 +37,22 @@ export class LoginComponent {
   }
 
   serviceLogin(){
-    console.log("he entrado al metodo");
-    console.log("prueba: " + this.userForm.controls['email'].value)
-
     const params = {
-      correo : this.userForm.controls['email'].value,
-      contrasenia : this.userForm.controls['password'].value
+      email : this.userForm.controls['email'].value,
+      password : this.userForm.controls['password'].value
     }
 
 
     this.loginService.loginService(params).subscribe(
-      (resp: GenericResponse) => 
-        console.log("esta es la respuesta: " + resp.statusCode)
+      (res: GeneralResponse) => {
+        console.log("respuesta " + res.objectResponse.roleUser)
+        if(res.objectResponse.roleUser == "admin"){
+          this.router.navigate(['cursosAdmin-page']);
+        }
+        if(res.objectResponse.roleUser == "user"){
+          this.router.navigate(['cursos-page']);
+        }
+      }
     )
 
   }
