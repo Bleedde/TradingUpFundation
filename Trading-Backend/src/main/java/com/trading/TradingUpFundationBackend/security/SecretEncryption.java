@@ -1,4 +1,4 @@
-package com.trading.TradingUpFundationBackend.utils.security;
+package com.trading.TradingUpFundationBackend.security;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
