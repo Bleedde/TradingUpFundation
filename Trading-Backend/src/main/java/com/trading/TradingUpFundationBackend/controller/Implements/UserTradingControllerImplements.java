@@ -12,13 +12,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "User database manage system", description = "Create, read, delete and update users")
-@Log4j2
 @RequestMapping(IUserTradingEndPoints.URL_USER)
 public class UserTradingControllerImplements implements IUserTradingController {
 

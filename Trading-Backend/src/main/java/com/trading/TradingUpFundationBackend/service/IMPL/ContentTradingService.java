@@ -41,6 +41,7 @@ public class ContentTradingService implements IContentTradingService {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentTradingDTO.getId());
             if (!contentTradingExist.isPresent()) {
                 ContentTradingEntity entity = this.converter.converContentTradingDTOToContentTradingEntity(contentTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
@@ -139,6 +140,7 @@ public class ContentTradingService implements IContentTradingService {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentTradingDTO.getId());
             if (!contentTradingExist.isPresent()) {
                 ContentTradingEntity entity = this.converter.converContentTradingDTOToContentTradingEntity(contentTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IContentTradingResponse.CONTENT_UPDATE_SUCCESS)
