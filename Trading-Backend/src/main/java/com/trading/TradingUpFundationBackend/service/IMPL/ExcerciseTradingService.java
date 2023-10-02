@@ -41,6 +41,7 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
             Optional<ExcerciseTradingEntity> excerciseTradingExist = this.repository.findById(excerciseTradingDTO.getId());
             if (!excerciseTradingExist.isPresent()) {
                 ExcerciseTradingEntity entity = this.converter.convertExcerciseTradingDTOToExcerciseTradingEntity(excerciseTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
@@ -139,6 +140,7 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
             Optional<ExcerciseTradingEntity> exerciseTradingExist = this.repository.findById(exerciseTradingDTO.getId());
             if (!exerciseTradingExist.isPresent()) {
                 ExcerciseTradingEntity entity = this.converter.convertExcerciseTradingDTOToExcerciseTradingEntity(exerciseTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_UPDATE_SUCCESS)

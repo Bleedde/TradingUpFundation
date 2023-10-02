@@ -1,7 +1,6 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.constant.deserializable.UserTradingDeserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
@@ -24,8 +23,6 @@ public class LoginTradingService implements ILoginTradingService {
 
     @Autowired
     private IUserTradingRepository repository;
-    @Autowired
-    private UserTradingDeserializable userConverter;
 
 
     @Override

@@ -41,6 +41,7 @@ public class LevelTradingService implements ILevelTradingService {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (!levelTradingExist.isPresent()) {
                 LevelTradingEntity entity = this.converter.converterLevelTradingDTOToLevelTradingEntity(levelTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
@@ -139,6 +140,7 @@ public class LevelTradingService implements ILevelTradingService {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (!levelTradingExist.isPresent()) {
                 LevelTradingEntity entity = this.converter.converterLevelTradingDTOToLevelTradingEntity(levelTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(ILevelTradingResponse.LEVEL_UPDATED_SUCCESS)

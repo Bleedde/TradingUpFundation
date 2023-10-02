@@ -41,6 +41,7 @@ public class RegistrationTradingService implements IRegistrationTradingService {
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
             if(!registrationTradingExist.isPresent()){
                 RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_REGISTRATION_SUCCESS)
@@ -140,6 +141,7 @@ public class RegistrationTradingService implements IRegistrationTradingService {
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
             if(registrationTradingExist.isPresent()){
                 RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_UPDATED_SUCCESS)

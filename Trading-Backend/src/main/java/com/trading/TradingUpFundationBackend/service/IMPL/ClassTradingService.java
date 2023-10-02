@@ -40,6 +40,7 @@ public class ClassTradingService implements IClassTradingService {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(!classTradingExist.isPresent()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_REGISTRATION_SUCCESS)
@@ -139,6 +140,7 @@ public class ClassTradingService implements IClassTradingService {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(classTradingExist.isPresent()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
+                this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_UPDATED_SUCCESS)
