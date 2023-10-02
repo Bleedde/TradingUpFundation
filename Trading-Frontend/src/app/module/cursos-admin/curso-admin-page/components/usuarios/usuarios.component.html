@@ -56,9 +56,14 @@
               </div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
-              <button type="submit" class="btn text-white px-5">Agregar</button>
+              <button type="submit" class="btn text-white px-5 buttonF">Agregar</button>
             </div>
         </form>
+
+
+        <!---->
+
+        
           <form *ngIf="editUserDomain" (submit)="updateUser()" [formGroup]="userForm">
               <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">Nombre:</label>
@@ -110,8 +115,9 @@
                   <input type="text" class="form-control" placeholder="{{user.auditedAccount}}" formControlName="auditedAccount"> 
                 </div>
               </div>
-              <div class="d-flex align-items-center justify-content-center">
-                <button type="submit" class="btn text-white px-5">Actualizar</button>
+              <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                <button type="submit" class="btn text-white px-5 buttonF me-md-2 me-0 mb-3 mb-md-0">Actualizar</button>
+                <button type="submit" class="btn text-white px-5 buttonF">Cancelar</button>
               </div>
           </form>
         </div>
@@ -142,15 +148,15 @@
             </thead>
             <tbody class="text-center table-group-divider">
               <tr class="" *ngFor="let userItem of listUserDomain; let i = index">
-                <td scope="row">{{userItem.name}}</td>
+                <td>{{userItem.name}}</td>
                 <td class="">{{userItem.email}}</td>
                 <td>{{userItem.userLevel}}</td>
                 <td>{{userItem.status}}</td>
-                <td><a href="">{{userItem.backtesting}}</a></td>
-                <td>{{userItem.auditedAccount}}</td>
-                <td class="">
-                  <a (click)="editUser(i)"  class="btn btn-success border-white"><i class="fa-solid fa-pen"></i></a>
-                  <a (click)="deleteUser(i)" class="btn btn-success border-white"><i class="fa-solid fa-trash"></i></a>
+                <td><a href="{{userItem.backtesting}}" target=”_blank”>click aqui</a></td>
+                <td><a href="{{userItem.auditedAccount}}" target=”_blank”>click aqui</a></td>
+                <td class="d-flex justify-content-evenly">
+                  <a (click)="editUser(i)"  class="btn btn-success boton"><i class="fa-solid fa-pen"></i></a>
+                  <a (click)="deleteUser(i)" class="btn btn-success boton"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>
