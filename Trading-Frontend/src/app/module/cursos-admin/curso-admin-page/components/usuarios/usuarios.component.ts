@@ -51,7 +51,8 @@ export class UsuariosComponent implements OnInit{
       userLevel: this.userForm.controls['level'].value,
       status: this.userForm.controls['status'].value,
       backtesting: this.userForm.controls['backtesting'].value,
-      auditedAccount: this.userForm.controls['auditedAccount'].value
+      auditedAccount: this.userForm.controls['auditedAccount'].value,
+      userRole : this.userForm.controls['userRole'].value
     }
 
     this.createUserServiceService.createUserService(this.userDomain).subscribe(
@@ -113,6 +114,9 @@ export class UsuariosComponent implements OnInit{
       auditedAccount :  this.userForm.controls['auditedAccount'].value != ''
         ? this.userForm.controls['auditedAccount'].value
         : this.listUserDomain[this.id].auditedAccount,
+      userRole :  this.userForm.controls['userRole'].value != ''
+        ? this.userForm.controls['userRole'].value
+        : this.listUserDomain[this.id].userRole,
     }
 
     this.updateUserService.updateUserService(this.user).subscribe(

@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IRegistrationTradingResponse;//Package that allows use the object RegistrationTradingConverter
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.RegistrationTradingConverter;//Package that allows use the object RegistrationTradingConverter
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IRegistrationTradingResponse;//Package that allows use the object RegistrationTradingDeserializable
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.RegistrationTradingDeserializable;//Package that allows use the object RegistrationTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.RegistrationTradingDTO;//Package that allows to use the serializable version of the entity RegistrationTradingEntity; RegistrationTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.RegistrationTradingEntity;//Package that allows to use the Entity RegistrationTradingEntity
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;//Package that allows a Generic Response with a type DTO
 import com.trading.TradingUpFundationBackend.repository.IRegistrationTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.service.IRegistrationTradingService;//Package that allows the use of the interface "ILevelTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -28,7 +28,7 @@ public class RegistrationTradingService implements IRegistrationTradingService {
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "LevelTrading"
     private IRegistrationTradingRepository repository;
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "LevelTrading"
-    private RegistrationTradingConverter converter;
+    private RegistrationTradingDeserializable converter;
 
     /**
      * Method that creates a registration
@@ -36,28 +36,28 @@ public class RegistrationTradingService implements IRegistrationTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> createRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
+    public ResponseEntity<ObjectResponse> createRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try{
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
             if(!registrationTradingExist.isPresent()){
                 RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_REGISTRATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_REGISTRATION_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR);
+            log.error(Responses.INTERNAL_SERVER_ERROR);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -70,27 +70,27 @@ public class RegistrationTradingService implements IRegistrationTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
+    public ResponseEntity<ObjectResponse> readRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try {
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
             if(!registrationTradingExist.isPresent()){
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(registrationTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -102,27 +102,27 @@ public class RegistrationTradingService implements IRegistrationTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readRegistrationsTrading() {
+    public ResponseEntity<ObjectResponse> readRegistrationsTrading() {
         try {
             List<RegistrationTradingEntity> registrationTradingList = this.repository.findAll();
             if(!registrationTradingList.isEmpty()){
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(registrationTradingList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -135,28 +135,28 @@ public class RegistrationTradingService implements IRegistrationTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> updateRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateRegistrationTrading(RegistrationTradingDTO registrationTradingDTO) {
         try {
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationTradingDTO.getId());
             if(registrationTradingExist.isPresent()){
                 RegistrationTradingEntity entity = this.converter.convertRegistrationTradingDTOToRegistrationTradingEntity(registrationTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_UPDATED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_UPDATED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -169,28 +169,28 @@ public class RegistrationTradingService implements IRegistrationTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteRegistrationTrading(Integer registrationId) {
+    public ResponseEntity<ObjectResponse> deleteRegistrationTrading(Integer registrationId) {
         try {
             Optional<RegistrationTradingEntity> registrationTradingExist = this.repository.findById(registrationId);
             if(registrationTradingExist.isPresent()){
                 this.repository.deleteById(registrationId);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_DELETED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IRegistrationTradingResponse.REGISTRATION_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());

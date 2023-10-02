@@ -7,4 +7,5 @@ export interface UserDomain {
     status: boolean;
     backtesting: string;
     auditedAccount: string;
+    userRole: String; 
 }
