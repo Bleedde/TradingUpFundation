@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import { CreateUserServiceService } from '../../service/create-user-service.service';
-import { DeleteUserServiceService } from '../../service/delete-user-service.service';
-import { ReadUsersServiceService } from '../../service/read-users-service.service';
 import { GenericResponse } from '../../service/response/GenericResponse';
-import { UpdateUsersServiceService } from '../../service/update-users-service.service';
+import { CreateUserServiceService } from '../../service/userServices/create-user-service.service';
+import { DeleteUserServiceService } from '../../service/userServices/delete-user-service.service';
+import { ReadUsersServiceService } from '../../service/userServices/read-users-service.service';
+import { UpdateUsersServiceService } from '../../service/userServices/update-users-service.service';
 import { UserDomain } from './domains/UserDomain';
+
 
 @Component({
   selector: 'app-usuarios',

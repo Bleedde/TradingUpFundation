@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { UserDomain } from '../components/usuarios/domains/UserDomain';
-import { GenericResponse } from './response/GenericResponse';
+import { UserDomain } from '../../components/usuarios/domains/UserDomain';
+import { GenericResponse } from '../response/GenericResponse';
+
 
 @Injectable({
   providedIn: 'root'
