@@ -1,10 +1,10 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.UserTradingConverter;
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.UserTradingDeserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.ILoginTradingService;
@@ -25,30 +25,30 @@ public class LoginTradingService implements ILoginTradingService {
     @Autowired
     private IUserTradingRepository repository;
     @Autowired
-    private UserTradingConverter userConverter;
+    private UserTradingDeserializable userConverter;
 
 
     @Override
-    public ResponseEntity<GenericResponseDTO> login(UserTradingDTO userTradingDTO) {
+    public ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO) {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent() && userTradingExist.get().getPassword().equals(userTradingDTO.getPassword())) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS + " I am " + userTradingExist.get().getRoleUser())
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
                         .objectResponse(userTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
-                    .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ObjectResponse.builder()
+                    .message(Responses.INTERNAL_SERVER_ERROR)
                     .objectResponse(null)
                     .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .build());

@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.LevelTradingDeserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.ILevelTradingResponse;//Package that allows the use of the response of the entity LevelTrading
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.LevelTradingConverter;//Package that allows use the object LevelTradingConverter
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.LevelTradingDTO;//Package that allows to use the serializable version of the entity LevelTradingEntity; LevelTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.LevelTradingEntity;//Package that allows to use the Entity LevelTradingEntity
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;//Package that allows a Generic Response with a type DTO
 import com.trading.TradingUpFundationBackend.repository.ILevelTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.service.ILevelTradingService;//Package that allows the use of the interface "ILevelTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -28,7 +28,7 @@ public class LevelTradingService implements ILevelTradingService {
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "LevelTrading"
     private ILevelTradingRepository repository;
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "LevelTrading"
-    private LevelTradingConverter converter;
+    private LevelTradingDeserializable converter;
 
     /**
      * Method that creates a level
@@ -36,28 +36,28 @@ public class LevelTradingService implements ILevelTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> createLevelTrading(LevelTradingDTO levelTradingDTO) {
+    public ResponseEntity<ObjectResponse> createLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (!levelTradingExist.isPresent()) {
                 LevelTradingEntity entity = this.converter.converterLevelTradingDTOToLevelTradingEntity(levelTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .objectResponse(ILevelTradingResponse.LEVEL_REGISTRATION_SUCCESS)
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(ILevelTradingResponse.LEVEL_REGISTRATION_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
-                    body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -70,26 +70,26 @@ public class LevelTradingService implements ILevelTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readLevelTrading(LevelTradingDTO levelTradingDTO) {
+    public ResponseEntity<ObjectResponse> readLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (!levelTradingExist.isPresent()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(levelTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(ILevelTradingResponse.LEVEL_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
-                    .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ObjectResponse.builder()
+                    .message(Responses.INTERNAL_SERVER_ERROR)
                     .objectResponse(null)
                     .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .build());
@@ -101,27 +101,27 @@ public class LevelTradingService implements ILevelTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readLevelsTrading() {
+    public ResponseEntity<ObjectResponse> readLevelsTrading() {
         try {
             List<LevelTradingEntity> levelTradingEntityList = this.repository.findAll();
             if (!levelTradingEntityList.isEmpty()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(levelTradingEntityList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(ILevelTradingResponse.LEVEL_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -134,28 +134,28 @@ public class LevelTradingService implements ILevelTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> updateLevelTrading(LevelTradingDTO levelTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (!levelTradingExist.isPresent()) {
                 LevelTradingEntity entity = this.converter.converterLevelTradingDTOToLevelTradingEntity(levelTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(ILevelTradingResponse.LEVEL_UPDATED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(ILevelTradingResponse.LEVEL_UPDATED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -168,28 +168,28 @@ public class LevelTradingService implements ILevelTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteLevelTrading(Integer levelId) {
+    public ResponseEntity<ObjectResponse> deleteLevelTrading(Integer levelId) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelId);
             if (levelTradingExist.isPresent()) {
                 this.repository.deleteById(levelId);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(ILevelTradingResponse.LEVEL_DELETED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(ILevelTradingResponse.LEVEL_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());

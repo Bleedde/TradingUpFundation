@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExcerciseTradingResponse;//Package that allows the use of the response of the entity ExcerciseTrading
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.ExcerciseTradingConverter;//Package that allows use the object ExcerciseTradingConverter
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ExcerciseTradingDeserializable;//Package that allows use the object ExcerciseTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExcerciseTradingDTO;//Package that allows to use the serializable version of the entity ExcerciseTradingEntity; ExcerciseTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExcerciseTradingEntity;//Package that allows to use the Entity ExcerciseTradingEntity
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;//Package that allows a Generic Response with a type DTO
 import com.trading.TradingUpFundationBackend.repository.IExcerciseTradingRepository;//Package that allows to use the repository IExcerciseTradingRepository
 import com.trading.TradingUpFundationBackend.service.IExcerciseTradingService;//Package that allows the use of the interface "IExcerciseTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -28,7 +28,7 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "ExcerciseTrading"
     private IExcerciseTradingRepository repository;
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "ExcerciseTrading"
-    private ExcerciseTradingConverter converter;
+    private ExcerciseTradingDeserializable converter;
 
     /**
      * Method that creates an excercise
@@ -36,28 +36,28 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> createExcerciseTrading(ExcerciseTradingDTO excerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> createExcerciseTrading(ExcerciseTradingDTO excerciseTradingDTO) {
         try {
             Optional<ExcerciseTradingEntity> excerciseTradingExist = this.repository.findById(excerciseTradingDTO.getId());
             if (!excerciseTradingExist.isPresent()) {
                 ExcerciseTradingEntity entity = this.converter.convertExcerciseTradingDTOToExcerciseTradingEntity(excerciseTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_REGISTRATION_SUCCESS)
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_REGISTRATION_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
-                    body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -70,26 +70,26 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readExcerciseTrading(ExcerciseTradingDTO excerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> readExcerciseTrading(ExcerciseTradingDTO excerciseTradingDTO) {
         try {
             Optional<ExcerciseTradingEntity> excerciseTradingExist = this.repository.findById(excerciseTradingDTO.getId());
             if (!excerciseTradingExist.isPresent()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(excerciseTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
-                    .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ObjectResponse.builder()
+                    .message(Responses.INTERNAL_SERVER_ERROR)
                     .objectResponse(null)
                     .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .build());
@@ -101,27 +101,27 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readExcecisesTrading() {
+    public ResponseEntity<ObjectResponse> readExcecisesTrading() {
         try {
             List<ExcerciseTradingEntity> exerciseTradingEntityList = this.repository.findAll();
             if (!exerciseTradingEntityList.isEmpty()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(exerciseTradingEntityList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -134,28 +134,28 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> updateExcerciseTrading(ExcerciseTradingDTO exerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateExcerciseTrading(ExcerciseTradingDTO exerciseTradingDTO) {
         try {
             Optional<ExcerciseTradingEntity> exerciseTradingExist = this.repository.findById(exerciseTradingDTO.getId());
             if (!exerciseTradingExist.isPresent()) {
                 ExcerciseTradingEntity entity = this.converter.convertExcerciseTradingDTOToExcerciseTradingEntity(exerciseTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_UPDATE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_UPDATE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -168,28 +168,28 @@ public class ExcerciseTradingService implements IExcerciseTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteExcerciseTrading(Integer exerciseId) {
+    public ResponseEntity<ObjectResponse> deleteExcerciseTrading(Integer exerciseId) {
         try {
             Optional<ExcerciseTradingEntity> exerciseTradingExist = this.repository.findById(exerciseId);
             if (exerciseTradingExist.isPresent()) {
                 this.repository.deleteById(exerciseId);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_DELETE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExcerciseTradingResponse.EXERCISE_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
