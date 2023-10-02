@@ -6,7 +6,7 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.entittyRe
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use the serializable version of the entity UserTradingEntity; RegistrationTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
-import com.trading.TradingUpFundationBackend.utils.security.SecretEncryption;
+import com.trading.TradingUpFundationBackend.security.SecretEncryption;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.service.IUserTradingService;//Package that allows the use of the interface "ILevelTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
