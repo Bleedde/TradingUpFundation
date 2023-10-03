@@ -57,7 +57,7 @@ CREATE TABLE class_trading(
     class_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     class_title VARCHAR(255) NOT NULL,
     class_subtitle VARCHAR(255) NOT NULL,
-    clas_description VARCHAR(255) NOT NULL,
+    class_description VARCHAR(255) NOT NULL,
     level_id INTEGER,
     FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
 );

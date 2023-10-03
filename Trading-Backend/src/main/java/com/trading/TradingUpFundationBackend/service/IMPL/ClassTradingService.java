@@ -73,7 +73,7 @@ public class ClassTradingService implements IClassTradingService {
     public ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO classTradingDTO) {
         try {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(!classTradingExist.isPresent()){
+            if(classTradingExist.isPresent()){
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(classTradingExist)

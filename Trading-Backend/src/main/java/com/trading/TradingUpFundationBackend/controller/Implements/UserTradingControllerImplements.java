@@ -36,6 +36,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
+                    content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
@@ -53,6 +55,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
@@ -72,6 +76,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
+                    content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IUserTradingEndPoints.URL_USERS_READ)
@@ -89,6 +95,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
@@ -108,6 +116,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))}),
             @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
