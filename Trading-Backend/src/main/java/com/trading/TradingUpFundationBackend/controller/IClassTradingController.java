@@ -18,6 +18,6 @@ public interface IClassTradingController {
     ResponseEntity<ObjectResponse> readClassesTrading();//Method that reads all the classes
     @PutMapping//Annotation that represent the header of an HTTP query that updates a class with a PUT query
     ResponseEntity<ObjectResponse> updateClassTrading(@RequestBody ClassTradingDTO classTradingDTO);//Method that updates a class
-    @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a class with a DELETE query
-    ResponseEntity<ObjectResponse> deleteBookTrading(@PathVariable Integer classId);//Method that deletes a class
+    @PostMapping//Annotation that represent the header of an HTTP query that deletes a class with a DELETE query
+    ResponseEntity<ObjectResponse> deleteBookTrading(@RequestBody ClassTradingDTO classTradingDTO);//Method that deletes a class
 }

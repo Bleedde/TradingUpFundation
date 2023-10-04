@@ -43,7 +43,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IClassTradingEndPoints.URL_CLASS_CREATE)
-    public ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> createClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
         return this.service.createClassTrading(classTradingDTO);
     }
 
@@ -63,8 +63,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IClassTradingEndPoints.URL_CLASS_READ)
-    public ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO classTradingDTO) {
-        System.out.println(classTradingDTO);
+    public ResponseEntity<ObjectResponse> readClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
         return this.service.readClassTrading(classTradingDTO);
     }
 
@@ -104,7 +103,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PutMapping(IClassTradingEndPoints.URL_CLASS_UPDATE)
-    public ResponseEntity<ObjectResponse> updateClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
         return this.service.updateClassTrading(classTradingDTO);
     }
 
@@ -123,8 +122,8 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @DeleteMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
-    public ResponseEntity<ObjectResponse> deleteBookTrading(Integer classId) {
-        return this.service.deleteClassTrading(classId);
+    @PostMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
+    public ResponseEntity<ObjectResponse> deleteBookTrading(@RequestBody ClassTradingDTO classTradingDTO) {
+        return this.service.deleteClassTrading(classTradingDTO);
     }
 }

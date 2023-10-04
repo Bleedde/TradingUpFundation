@@ -12,5 +12,5 @@ public interface IClassTradingService {
     ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO adminTradingDTO);//Method reading a class
     ResponseEntity<ObjectResponse> readClassesTrading();//Method that reads all the classes
     ResponseEntity<ObjectResponse> updateClassTrading(ClassTradingDTO adminTradingDTO);//Method updating a class
-    ResponseEntity<ObjectResponse> deleteClassTrading(Integer classId);//Method deleting a class
+    ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO);//Method deleting a class
 }

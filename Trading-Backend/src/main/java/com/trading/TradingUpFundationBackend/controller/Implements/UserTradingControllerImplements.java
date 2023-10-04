@@ -102,7 +102,6 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")})})
     @PutMapping (IUserTradingEndPoints.URL_USER_UPDATE)
     public ResponseEntity<ObjectResponse> updateUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
-        System.out.println(userTradingDTO);
         return this.service.updateUserTrading(userTradingDTO);
     }
 
