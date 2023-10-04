@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WALLPAPER, WALLPAPER1 } from 'src/app/shared/constants';
+import { GRAFICEXERCISE, WALLPAPER, WALLPAPER1 } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-start-a',
@@ -9,4 +9,5 @@ import { WALLPAPER, WALLPAPER1 } from 'src/app/shared/constants';
 export class StartAComponent {
   wallpaper = WALLPAPER;
   wallpaper1 = WALLPAPER1;
+
 }
