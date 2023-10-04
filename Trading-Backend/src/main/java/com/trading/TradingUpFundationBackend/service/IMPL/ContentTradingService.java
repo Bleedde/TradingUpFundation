@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ContentTradingDeserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IContentTradingResponse;//Package that allows the use of the response of the entity ContentTrading
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.ContentTradingConverter;//Package that allows use the object ContentTradingConverter
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ContentTradingDTO;//Package that allows to use the serializable version of the entity ContentTradingEntity; ContentTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ContentTradingEntity;//Package that allows to use the Entity ContentTradingEntity
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;//Package that allows a Generic Response with a type DTO
 import com.trading.TradingUpFundationBackend.repository.IContentTradingRepository;//Package that allows to use the repository IContentTradingRepository
 import com.trading.TradingUpFundationBackend.service.IContentTradingService;//Package that allows the use of the interface "IContentTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -28,7 +28,7 @@ public class ContentTradingService implements IContentTradingService {
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "ContentTrading"
     private IContentTradingRepository repository;
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "ContentTrading"
-    private ContentTradingConverter converter;
+    private ContentTradingDeserializable converter;
 
     /**
      * Method that creates a content
@@ -36,28 +36,29 @@ public class ContentTradingService implements IContentTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> createContentTrading(ContentTradingDTO contentTradingDTO) {
+    public ResponseEntity<ObjectResponse> createContentTrading(ContentTradingDTO contentTradingDTO) {
         try {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentTradingDTO.getId());
             if (!contentTradingExist.isPresent()) {
                 ContentTradingEntity entity = this.converter.converContentTradingDTOToContentTradingEntity(contentTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                this.repository.save(entity);
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .objectResponse(IContentTradingResponse.CONTENT_REGISTRATION_SUCCESS)
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IContentTradingResponse.CONTENT_REGISTRATION_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
-                    body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -70,26 +71,26 @@ public class ContentTradingService implements IContentTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readContentTrading(ContentTradingDTO contentTradingDTO) {
+    public ResponseEntity<ObjectResponse> readContentTrading(ContentTradingDTO contentTradingDTO) {
         try {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentTradingDTO.getId());
             if (!contentTradingExist.isPresent()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(contentTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IContentTradingResponse.CONTENT_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDTO.builder()
-                    .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ObjectResponse.builder()
+                    .message(Responses.INTERNAL_SERVER_ERROR)
                     .objectResponse(null)
                     .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .build());
@@ -101,27 +102,27 @@ public class ContentTradingService implements IContentTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readContentsTrading() {
+    public ResponseEntity<ObjectResponse> readContentsTrading() {
         try {
             List<ContentTradingEntity> contentTradingEntityList = this.repository.findAll();
             if (!contentTradingEntityList.isEmpty()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(contentTradingEntityList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IContentTradingResponse.CONTENT_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -134,28 +135,29 @@ public class ContentTradingService implements IContentTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> updateContentTrading(ContentTradingDTO contentTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateContentTrading(ContentTradingDTO contentTradingDTO) {
         try {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentTradingDTO.getId());
             if (!contentTradingExist.isPresent()) {
                 ContentTradingEntity entity = this.converter.converContentTradingDTOToContentTradingEntity(contentTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                this.repository.save(entity);
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IContentTradingResponse.CONTENT_UPDATE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IContentTradingResponse.CONTENT_UPDATE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -168,28 +170,28 @@ public class ContentTradingService implements IContentTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteContentTrading(Integer contentId) {
+    public ResponseEntity<ObjectResponse> deleteContentTrading(Integer contentId) {
         try {
             Optional<ContentTradingEntity> contentTradingExist = this.repository.findById(contentId);
             if (contentTradingExist.isPresent()) {
                 this.repository.deleteById(contentId);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IContentTradingResponse.CONTENT_DELETE_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IContentTradingResponse.CONTENT_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());

@@ -1,11 +1,11 @@
 package com.trading.TradingUpFundationBackend.service.IMPL;
 
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IClassTradingResponse;//Package that allows the use of the response of the entity ClassTrading
-import com.trading.TradingUpFundationBackend.commons.constant.response.GeneralResponse;//Package that allows the use of a GeneralResponse
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.Converter.ClassTradingConverter;//Package that allows use the object ClassTradingConverter
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ClassTradingDeserializable;//Package that allows use the object ClassTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;//Package that allows to use the serializable version of the entity ClassTradingEntity; ClassTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;//Package that allows to use the Entity ClassTradingEntity
-import com.trading.TradingUpFundationBackend.commons.domains.GenericResponseDTO;//Package that allows a Generic Response with a type DTO
 import com.trading.TradingUpFundationBackend.repository.IClassTradingRepository;//Package that allows to use the repository IClassTradingRepository
 import com.trading.TradingUpFundationBackend.service.IClassTradingService;//Package that allows the use of the interface "IClassTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -27,7 +27,7 @@ public class ClassTradingService implements IClassTradingService {
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "ClassTrading"
     private IClassTradingRepository repository;
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "ClassTrading"
-    private ClassTradingConverter converter;
+    private ClassTradingDeserializable converter;
 
     /**
      * Method that creates a class
@@ -35,28 +35,29 @@ public class ClassTradingService implements IClassTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> createClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO classTradingDTO) {
         try{
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(!classTradingExist.isPresent()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                this.repository.save(entity);
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_REGISTRATION_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IClassTradingResponse.CLASS_REGISTRATION_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e) {
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR);
+            log.error(Responses.INTERNAL_SERVER_ERROR);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -69,27 +70,27 @@ public class ClassTradingService implements IClassTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO classTradingDTO) {
         try {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(!classTradingExist.isPresent()){
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+            if(classTradingExist.isPresent()){
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(classTradingExist)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IClassTradingResponse.CLASS_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -101,27 +102,27 @@ public class ClassTradingService implements IClassTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> readClassesTrading() {
+    public ResponseEntity<ObjectResponse> readClassesTrading() {
         try {
             List<ClassTradingEntity> classTradingList = this.repository.findAll();
             if(!classTradingList.isEmpty()){
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(classTradingList)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IClassTradingResponse.CLASS_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -134,28 +135,29 @@ public class ClassTradingService implements IClassTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> updateClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateClassTrading(ClassTradingDTO classTradingDTO) {
         try {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(classTradingExist.isPresent()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                this.repository.save(entity);
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_UPDATED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IClassTradingResponse.CLASS_UPDATED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
@@ -164,33 +166,33 @@ public class ClassTradingService implements IClassTradingService {
 
     /**
      * Method that deletes an admin
-     * @param classId The id of the class to be deleted
+     * @param classTradingDTO The class to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<GenericResponseDTO> deleteClassTrading(Integer classId) {
+    public ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classId);
+            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(classTradingExist.isPresent()){
-                this.repository.deleteById(classId);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_SUCCESS)
+                this.repository.deleteById(classTradingExist.get().getId());
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_DELETED_SUCCESS)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(GeneralResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IClassTradingResponse.CLASS_DELETED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e){
-            log.error(GeneralResponse.INTERNAL_SERVER_ERROR, e);
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(GeneralResponse.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());

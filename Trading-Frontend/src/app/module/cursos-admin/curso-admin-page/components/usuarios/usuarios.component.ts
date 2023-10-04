@@ -49,6 +49,7 @@ export class UsuariosComponent implements OnInit{
       password : ['', [Validators.required]],
       level : [0, [Validators.required]],
       status : [[Validators.required]],
+      userRole : ['',[Validators.required]],
       backtesting : ['', [Validators.required]],
       auditedAccount : ['', [Validators.required]]
     });
@@ -86,6 +87,7 @@ export class UsuariosComponent implements OnInit{
         ? this.userForm.controls['level'].value
         : 1,
       status: this.userForm.controls['status'].value,
+      userRole: this.userForm.controls['userRole'].value,
       backtesting: this.userForm.controls['backtesting'].value,
       auditedAccount: this.userForm.controls['auditedAccount'].value
     }
@@ -155,6 +157,9 @@ export class UsuariosComponent implements OnInit{
       status :  this.userForm.controls['status'].value != null
         ? this.userForm.controls['status'].value
         : this.listUserDomain[this.id].status,
+      userRole :  this.userForm.controls['userRole'].value == null
+        ? 'User'
+        : this.listUserDomain[this.id].userRole,
       backtesting :  this.userForm.controls['backtesting'].value != ''
         ? this.userForm.controls['backtesting'].value
         : this.listUserDomain[this.id].backtesting,
