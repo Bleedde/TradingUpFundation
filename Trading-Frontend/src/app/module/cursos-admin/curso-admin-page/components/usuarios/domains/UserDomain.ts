@@ -5,6 +5,7 @@ export interface UserDomain {
     password: string;
     userLevel: number;
     status: boolean;
+    userRole: String; 
     backtesting: string;
     auditedAccount: string;
 }
