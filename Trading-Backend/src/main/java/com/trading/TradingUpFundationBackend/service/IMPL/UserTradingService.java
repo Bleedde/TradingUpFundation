@@ -52,8 +52,8 @@ public class UserTradingService implements IUserTradingService {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (!userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
-                SecretKey key = new SecretKeySpec(contrasenia.getBytes(), encryptedMethod);
-                entity.setPassword(SecretEncryption.encrypt(entity.getPassword(), key));
+                //SecretKey key = new SecretKeySpec(contrasenia.getBytes(), encryptedMethod);
+                //entity.setPassword(SecretEncryption.encrypt(entity.getPassword(), key));
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -89,8 +89,8 @@ public class UserTradingService implements IUserTradingService {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
                     UserTradingEntity entity = userTradingExist.get();
-                    SecretKey key = new SecretKeySpec(contrasenia.getBytes(), encryptedMethod);
-                    entity.setPassword(SecretEncryption.decrypt(entity.getPassword(), key));
+                    //SecretKey key = new SecretKeySpec(contrasenia.getBytes(), encryptedMethod);
+                    //entity.setPassword(SecretEncryption.decrypt(entity.getPassword(), key));
                     return ResponseEntity.ok(ObjectResponse.builder()
                             .message(Responses.OPERATION_SUCCESS)
                             .objectResponse(entity)

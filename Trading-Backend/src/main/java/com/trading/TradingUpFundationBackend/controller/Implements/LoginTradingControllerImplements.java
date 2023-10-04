@@ -22,7 +22,7 @@ public class LoginTradingControllerImplements implements ILoginController {
     private LoginTradingService service;
     @Override
     @PostMapping(ILoginEndPoints.URL_LOGIN)
-    @Operation(summary = "Delete an admin")
+    @Operation(summary = "Log in an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",

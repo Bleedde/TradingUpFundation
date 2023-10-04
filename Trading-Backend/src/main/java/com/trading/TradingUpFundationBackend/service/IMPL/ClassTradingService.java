@@ -73,7 +73,7 @@ public class ClassTradingService implements IClassTradingService {
     public ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO classTradingDTO) {
         try {
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
-            if(!classTradingExist.isPresent()){
+            if(classTradingExist.isPresent()){
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(classTradingExist)
@@ -166,16 +166,16 @@ public class ClassTradingService implements IClassTradingService {
 
     /**
      * Method that deletes an admin
-     * @param classId The id of the class to be deleted
+     * @param classTradingDTO The class to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteClassTrading(Integer classId) {
+    public ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classId);
+            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(classTradingExist.isPresent()){
-                this.repository.deleteById(classId);
+                this.repository.deleteById(classTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(IClassTradingResponse.CLASS_DELETED_SUCCESS)

@@ -16,7 +16,7 @@ import java.io.Serializable;//Package to use this class like a byte sequence
  * Implements the interface Serializable
  */
 
-public class ExcerciseTradingDTO implements Serializable {
+public class ExerciseTradingDTO implements Serializable {
     private Integer id;
     private String subtitle;
     private String description;
