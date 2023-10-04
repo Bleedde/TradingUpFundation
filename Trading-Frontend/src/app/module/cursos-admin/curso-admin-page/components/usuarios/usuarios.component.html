@@ -8,7 +8,7 @@
             <div class="row mb-3">
               <label for="" class="col-sm-2 col-form-label">Nombre:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="name">
+                <input type="text" class="form-control"  formControlName="name">
               </div>
             </div>
             <div class="row mb-3">
@@ -24,23 +24,23 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label for="" class="col-sm-2 col-form-label only">Nivel:</label>
+              <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
               <div class="col-sm-10">
                 <select class="form-select" formControlName="level">
-                  <option value="1" selected>Nivel 1</option>
-                  <option value="2">Nivel 2</option>
-                  <option value="3">Nivel 3</option>
-                  <option value="4">Nivel 4</option>
+                  <option *ngFor="let nivel of niveles" [value]="nivel.value" [selected]="nivel.value === nivelSeleccionado">
+                    {{ nivel.label }}
+                  </option>
                 </select>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputPassword3" class="col-sm-2 col-form-label">Estados:</label>
               <div class="col-sm-10">
-                  <select class="form-select" formControlName="status">
-                      <option value="true">Activo</option>
-                      <option value="false">Inactivo</option>
-                    </select>
+                <select class="form-select" formControlName="status">
+                  <option *ngFor="let estado of estados" [value]="estado.value" [selected]="estado.value === 'true'">
+                    {{ estado.label }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="row mb-3">
@@ -87,10 +87,9 @@
                 <label for="" class="col-sm-2 col-form-label only">Nivel:</label>
                 <div class="col-sm-10">
                   <select class="form-select" formControlName="level">
-                    <option value="1" selected>Nivel 1</option>
-                    <option value="2">Nivel 2</option>
-                    <option value="3">Nivel 3</option>
-                    <option value="4">Nivel 4</option>
+                    <option *ngFor="let nivel of niveles" [value]="nivel.value">
+                      {{ nivel.label }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -117,7 +116,7 @@
               </div>
               <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
                 <button type="submit" class="btn text-white px-5 buttonF me-md-2 me-0 mb-3 mb-md-0">Actualizar</button>
-                <button type="submit" class="btn text-white px-5 buttonF">Cancelar</button>
+                <a class="btn text-white px-5 buttonF" (click)="cancelarEdicion()">Cancelar</a>
               </div>
           </form>
         </div>

@@ -42,6 +42,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
     public ResponseEntity<GenericResponseDTO> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+        System.out.println("aaaaa" + userTradingDTO.getUserLevel());
         return this.service.createUserTrading(userTradingDTO);
     }
 
