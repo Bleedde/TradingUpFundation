@@ -40,5 +40,26 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
     filter: invert(100%);
   }
+
+  @media screen and (min-width:769px){
+    .imagestart{
+       width: 320px;
+    }
+    
+}
+
+  @media screen and (max-width:768px){
+    .imagestart{
+       width: 270px;
+    }
+    
+}
+
+.cards{
+    border-color: #9965dd;
+    box-shadow: 0px 4px 16px 0px #9965dd;
+    border-width: 2px;
+    padding: 10px;
+}
   
 
