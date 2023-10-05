@@ -41,7 +41,6 @@ public class UserTradingControllerImplements implements IUserTradingController {
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
-
     public ResponseEntity<ObjectResponse> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
 
         return this.service.createUserTrading(userTradingDTO);

@@ -17,6 +17,6 @@ public interface ILevelTradingController {
     ResponseEntity<ObjectResponse> readLevelsTrading();//Method that reads all the levels
     @PutMapping//Annotation that represent the header of an HTTP query that updates a level with a PUT query
     ResponseEntity<ObjectResponse> updateLevelTrading(@RequestBody LevelTradingDTO levelTradingDTO);//Method that updates a level
-    @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a level with a DELETE query
-    ResponseEntity<ObjectResponse> deleteLevelTrading(@PathVariable Integer levelId);//Method that deletes a level
+    @PostMapping//Annotation that represent the header of an HTTP query that deletes a level with a DELETE query
+    ResponseEntity<ObjectResponse> deleteLevelTrading(@RequestBody LevelTradingDTO levelTradingDTO);//Method that deletes a level
 }

@@ -19,7 +19,6 @@ import java.io.Serializable;//Package to use this class like a byte sequence
 public class ClassTradingDTO implements Serializable {
     private Integer id;
     private String name;
-    private String subtitle;
     private String description;
     @JsonIdentityReference(alwaysAsId = true)
     private LevelTradingEntity levelTradingEntityRelation;

@@ -17,13 +17,13 @@ public class ClassTradingEntity {
     private Integer id;
 
     @Column(name = "class_title", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String name;
+    private String title;
 
     @Column(name = "class_subtitle", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String subtitle;
 
-    @Column(name = "class_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String description;
+    @Column(name = "class_url_video", length = 255, nullable = false)
+    private String urlVideo;
 
     @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
     @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
