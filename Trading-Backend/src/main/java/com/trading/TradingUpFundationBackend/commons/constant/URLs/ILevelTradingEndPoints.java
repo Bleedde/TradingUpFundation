@@ -7,6 +7,6 @@ public interface ILevelTradingEndPoints {
     String URL_LEVEL_CREATE = "/level_create";//Create a level area
     String URL_LEVEL_DELETE = "/level_delete";//Delete a level area
     String URL_LEVEL_UPDATE = "/level_update";//Update a level area
-    String URL_LEVEL_SEARCH = "/level_search";//Search a level area
-    String URL_LEVELS_SEARCH = "/level_search";//Search all the levels area
+    String URL_LEVEL_READ = "/level_read";//Search a level area
+    String URL_LEVELS_READ = "/levels_read";//Search all the levels area
 }
