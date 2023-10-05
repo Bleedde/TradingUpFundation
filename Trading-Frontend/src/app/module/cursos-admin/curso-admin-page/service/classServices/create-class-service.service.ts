@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ClassDomain } from '../../components/clases-grabadas/domains/ClassDomain';
 import { GenericResponse } from '../response/GenericResponse';
 
 @Injectable({
@@ -12,12 +13,7 @@ export class CreateClassServiceService {
 
   API: string = "http://localhost:8080/class";
 
-  createUserService(userDomain: UserDomain): Observable<GenericResponse> {
-
-    console.log("Prueba Datos: " + userDomain.name)
-    console.log("Prueba Datos: " + userDomain.email)
-    console.log("Prueba Datos: " + userDomain.password)
-
+  createUserService(userDomain: ClassDomain): Observable<GenericResponse> {
     return this.http
     .post<GenericResponse>(this.API + "/class _create", userDomain )
   }

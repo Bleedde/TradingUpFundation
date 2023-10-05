@@ -42,6 +42,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
     public ResponseEntity<ObjectResponse> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+
         return this.service.createUserTrading(userTradingDTO);
     }
 
