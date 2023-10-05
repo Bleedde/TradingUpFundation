@@ -35,32 +35,32 @@ public class LevelTradingEntity {
     @Column(name = "level_amount", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
     private Integer amount;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<RegistrationTradingEntity> registrationTradingEntityRelation;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ContentTradingEntity> contentTradingEntityRelation;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ExerciseTradingEntity> excerciseTradingEntityRelation;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<BookTradingEntity> bookTradingEntityRelation;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ClassTradingEntity> classTradingEntityRelation;
 
-    @OneToMany(mappedBy = "levelTradingEntityRelation", cascade = CascadeType.ALL, orphanRemoval = true)//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
+    @OneToMany(mappedBy = "levelTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
     @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
     @JsonIgnore//Annotation to ignore this list in the moment to serialize this entity
     private List<ClassTradingEntity> classPrerecordedTradingEntityRelation;

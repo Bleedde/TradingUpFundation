@@ -12,5 +12,5 @@ public interface ILevelTradingService {
     ResponseEntity<ObjectResponse> readLevelTrading(LevelTradingDTO levelTradingDTO);//Method reading a level
     ResponseEntity<ObjectResponse> readLevelsTrading();//Method that reads all the levels
     ResponseEntity<ObjectResponse> updateLevelTrading(LevelTradingDTO levelTradingDTO);//Method updating a level
-    ResponseEntity<ObjectResponse> deleteLevelTrading(Integer levelId);//Method deleting a level
+    ResponseEntity<ObjectResponse> deleteLevelTrading(LevelTradingDTO levelTradingDTO);//Method deleting a level
 }

@@ -74,7 +74,7 @@ public class LevelTradingService implements ILevelTradingService {
     public ResponseEntity<ObjectResponse> readLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
-            if (!levelTradingExist.isPresent()) {
+            if (levelTradingExist.isPresent()) {
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(levelTradingExist)
@@ -138,8 +138,9 @@ public class LevelTradingService implements ILevelTradingService {
     public ResponseEntity<ObjectResponse> updateLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
             Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
-            if (!levelTradingExist.isPresent()) {
+            if (levelTradingExist.isPresent()) {
                 LevelTradingEntity entity = this.converter.converterLevelTradingDTOToLevelTradingEntity(levelTradingDTO);
+                entity.setId(levelTradingExist.get().getId());
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -166,15 +167,15 @@ public class LevelTradingService implements ILevelTradingService {
 
     /**
      * Method that deletes a level
-     * @param levelId The level to be deleted
+     * @param levelTradingDTO The level to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteLevelTrading(Integer levelId) {
+    public ResponseEntity<ObjectResponse> deleteLevelTrading(LevelTradingDTO levelTradingDTO) {
         try {
-            Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelId);
+            Optional<LevelTradingEntity> levelTradingExist = this.repository.findById(levelTradingDTO.getId());
             if (levelTradingExist.isPresent()) {
-                this.repository.deleteById(levelId);
+                this.repository.deleteById(levelTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(ILevelTradingResponse.LEVEL_DELETED_SUCCESS)
