@@ -26,7 +26,23 @@ public class UserTradingControllerImplements implements IUserTradingController {
         this.service = service;
     }
     @Override
+    @Operation(summary = "Create a new user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ObjectResponse.class))}),
+            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))}),
+            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "405", description = Responses.METHOD_FAIL,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
+                    content = {@Content(mediaType = "application/json")})})
+    @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
     public ResponseEntity<ObjectResponse> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+
         return this.service.createUserTrading(userTradingDTO);
     }
 

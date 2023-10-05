@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ClassDomain } from '../../components/clases-grabadas/domains/ClassDomain';
 import { GenericResponse } from '../response/GenericResponse';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class DeleteClassServiceService {
 
     API: string = "http://localhost:8080/class";
 
-  deleteUserService(userDomain : UserDomain) :Observable<GenericResponse> {
+  deleteUserService(userDomain :  ClassDomain) :Observable<GenericResponse> {
     return this.http.post<GenericResponse>(this.API + "/class_delete", userDomain)
   }
 }

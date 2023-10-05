@@ -8,7 +8,7 @@
             <div class="row mb-3">
               <label for="" class="col-sm-2 col-form-label">Nombre:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="name">
+                <input type="text" class="form-control"  formControlName="name">
               </div>
             </div>
             <div class="row mb-3">
@@ -24,23 +24,23 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label for="" class="col-sm-2 col-form-label only">Nivel:</label>
+              <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
               <div class="col-sm-10">
                 <select class="form-select" formControlName="level">
-                  <option value="1" selected>Nivel 1</option>
-                  <option value="2">Nivel 2</option>
-                  <option value="3">Nivel 3</option>
-                  <option value="4">Nivel 4</option>
+                  <option *ngFor="let nivel of niveles" [value]="nivel.value" [selected]="nivel.value === nivelSeleccionado">
+                    {{ nivel.label }}
+                  </option>
                 </select>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputPassword3" class="col-sm-2 col-form-label">Estados:</label>
               <div class="col-sm-10">
-                  <select class="form-select" formControlName="status">
-                      <option value="true">Activo</option>
-                      <option value="false">Inactivo</option>
-                    </select>
+                <select class="form-select" formControlName="status">
+                  <option *ngFor="let estado of estados" [value]="estado.value" [selected]="estado.value === 'true'">
+                    {{ estado.label }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="row mb-3">
@@ -53,15 +53,6 @@
               <label for="inputPassword3" class="col-sm-2 col-form-label">Cuenta Auditada:</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" formControlName="auditedAccount"> 
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Rol:</label>
-              <div class="col-sm-10">
-                  <select class="form-select" formControlName="userRole">
-                      <option value="admin">Profesor</option>
-                      <option value="user">Estudiante</option>
-                    </select>
               </div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
@@ -81,12 +72,6 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="" class="col-sm-2 col-form-label">Correo Electronico:</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" placeholder="{{user.email}}" formControlName="email">
-                </div>
-              </div>
-              <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">Contraseña:</label>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" placeholder="{{user.password}}" formControlName="password">
@@ -96,10 +81,9 @@
                 <label for="" class="col-sm-2 col-form-label only">Nivel:</label>
                 <div class="col-sm-10">
                   <select class="form-select" formControlName="level">
-                    <option value="1" selected>Nivel 1</option>
-                    <option value="2">Nivel 2</option>
-                    <option value="3">Nivel 3</option>
-                    <option value="4">Nivel 4</option>
+                    <option *ngFor="let nivel of niveles" [value]="nivel.value">
+                      {{ nivel.label }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -126,7 +110,7 @@
               </div>
               <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
                 <button type="submit" class="btn text-white px-5 buttonF me-md-2 me-0 mb-3 mb-md-0">Actualizar</button>
-                <button type="submit" class="btn text-white px-5 buttonF">Cancelar</button>
+                <a class="btn text-white px-5 buttonF" (click)="cancelarEdicion()">Cancelar</a>
               </div>
           </form>
         </div>
@@ -163,9 +147,9 @@
                 <td>{{userItem.status}}</td>
                 <td><a href="{{userItem.backtesting}}" target=”_blank”>click aqui</a></td>
                 <td><a href="{{userItem.auditedAccount}}" target=”_blank”>click aqui</a></td>
-                <td class="d-flex justify-content-evenly">
-                  <a (click)="editUser(i)"  class="btn btn-success boton"><i class="fa-solid fa-pen"></i></a>
-                  <a (click)="deleteUser(i)" class="btn btn-success boton"><i class="fa-solid fa-trash"></i></a>
+                <td class="d-flex justify-content-center">
+                  <a (click)="editUser(i)"  class="btn btn-warning boton me-3"><i class="fa-solid fa-pen"></i></a>
+                  <a (click)="deleteUser(i)" class="btn btn-danger boton"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>
