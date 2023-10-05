@@ -43,7 +43,7 @@ public class UserTradingControllerImplements implements IUserTradingController {
     @PostMapping(IUserTradingEndPoints.URL_USER_CREATE)
 
     public ResponseEntity<ObjectResponse> createUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
-        System.out.println("aaaaa" + userTradingDTO.getUserLevel());
+
         return this.service.createUserTrading(userTradingDTO);
     }
 

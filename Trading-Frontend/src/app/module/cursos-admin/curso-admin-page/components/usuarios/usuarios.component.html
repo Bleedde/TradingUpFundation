@@ -55,15 +55,6 @@
                 <input type="text" class="form-control" formControlName="auditedAccount"> 
               </div>
             </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Rol:</label>
-              <div class="col-sm-10">
-                  <select class="form-select" formControlName="userRole">
-                      <option value="admin">Profesor</option>
-                      <option value="user">Estudiante</option>
-                    </select>
-              </div>
-            </div>
             <div class="d-flex align-items-center justify-content-center">
               <button type="submit" class="btn text-white px-5 buttonF">Agregar</button>
             </div>
@@ -78,12 +69,6 @@
                 <label for="" class="col-sm-2 col-form-label">Nombre:</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="{{user.name}}" formControlName="name">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="" class="col-sm-2 col-form-label">Correo Electronico:</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" placeholder="{{user.email}}" formControlName="email">
                 </div>
               </div>
               <div class="row mb-3">
@@ -162,9 +147,9 @@
                 <td>{{userItem.status}}</td>
                 <td><a href="{{userItem.backtesting}}" target=”_blank”>click aqui</a></td>
                 <td><a href="{{userItem.auditedAccount}}" target=”_blank”>click aqui</a></td>
-                <td class="d-flex justify-content-evenly">
-                  <a (click)="editUser(i)"  class="btn btn-success boton"><i class="fa-solid fa-pen"></i></a>
-                  <a (click)="deleteUser(i)" class="btn btn-success boton"><i class="fa-solid fa-trash"></i></a>
+                <td class="d-flex justify-content-center">
+                  <a (click)="editUser(i)"  class="btn btn-warning boton me-3"><i class="fa-solid fa-pen"></i></a>
+                  <a (click)="deleteUser(i)" class="btn btn-danger boton"><i class="fa-solid fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>

@@ -14,7 +14,7 @@ export class ReadUsersServiceService {
   API: string = "http://localhost:8080/user";
 
   readUsersService() :Observable<GenericResponse> {
-    return this.http.get<GenericResponse>(this.API + "/users_search")
+    return this.http.get<GenericResponse>(this.API + "/users_read")
   }
 
 }
