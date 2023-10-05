@@ -22,9 +22,6 @@ public class ClassPrerecordedTradingEntity {
     @Column(name = "class_prerecorded_subtitle", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String subtitle;
 
-    @Column(name = "class_prerecorded_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String description;
-
     @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
     @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
     @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation

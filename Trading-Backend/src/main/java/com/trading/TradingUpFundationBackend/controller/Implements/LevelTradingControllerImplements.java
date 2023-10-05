@@ -1,7 +1,6 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.ILevelTradingEndPoints;
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IUserTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

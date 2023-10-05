@@ -6,7 +6,6 @@ import lombok.Data;//Import to add the normal methods that an object has
 import lombok.NoArgsConstructor;//Import who allow to create an object without args in the constructor
 
 import java.io.Serializable;//Package to use this class like a byte sequence
-import java.sql.Date;//Package to use the type of data "Date"
 
 @Data//Annotation to represent normal methods of a normal class
 @Builder//Annotation who allows to build an object in an easier way
@@ -19,8 +18,6 @@ import java.sql.Date;//Package to use the type of data "Date"
 
 public class LevelTradingDTO implements Serializable {
     private Integer id;
-    private String name;
-    private Date dataStart;
-    private Date dataEnd;
-    private Integer amount;
+    private String title;
+    private String description;
 }
