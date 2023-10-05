@@ -5,7 +5,8 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.Responses
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.IUserTradingController;
-import com.trading.TradingUpFundationBackend.service.IMPL.UserTradingService;
+import com.trading.TradingUpFundationBackend.service.Implements.UserTradingServiceImplements;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(IUserTradingEndPoints.URL_USER)
 public class UserTradingControllerImplements implements IUserTradingController {
 
-    private final UserTradingService service;
+    private final UserTradingServiceImplements service;
 
-    public UserTradingControllerImplements(UserTradingService service){
+    public UserTradingControllerImplements(UserTradingServiceImplements service){
         this.service = service;
     }
     @Override

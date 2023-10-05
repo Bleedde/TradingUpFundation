@@ -1,4 +1,4 @@
-package com.trading.TradingUpFundationBackend.service.IMPL;
+package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExcerciseTradingResponse;//Package that allows the use of the response of the entity ExcerciseTrading
@@ -23,7 +23,7 @@ import java.util.Optional;
 /**
  * Class that represents all the services of the entity "ExcerciseTrading"
  */
-public class ExerciseTradingService implements IExerciseTradingService {
+public class ExerciseTradingServiceImplements implements IExerciseTradingService {
 
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "ExcerciseTrading"
     private IExerciseTradingRepository repository;

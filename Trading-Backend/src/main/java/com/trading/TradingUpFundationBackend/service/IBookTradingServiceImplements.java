@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
 /**
  * Interface that creates the services, who represent the manage of information of the entity BookTrading
  */
-public interface IBookTradingService {
+public interface IBookTradingServiceImplements {
     ResponseEntity<ObjectResponse> createBookTrading(BookTradingDTO bookTradingDTOgDTO);//Method creating a book
     ResponseEntity<ObjectResponse> readABookTrading(BookTradingDTO bookTradingDTO);//Method reading a book
     ResponseEntity<ObjectResponse> readBooksTrading();//Method that reads all the books

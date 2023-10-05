@@ -5,7 +5,8 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.Responses
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.IBookTradingController;
-import com.trading.TradingUpFundationBackend.service.IMPL.BookTradingService;
+import com.trading.TradingUpFundationBackend.service.Implements.BookTradingServiceImplements;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(IBookTradingEndPoints.URL_BOOK)
 public class BookTradingControllerImplements implements IBookTradingController {
 
-    private final BookTradingService service;
+    private final BookTradingServiceImplements service;
 
-    public BookTradingControllerImplements(BookTradingService service) {
+    public BookTradingControllerImplements(BookTradingServiceImplements service) {
         this.service = service;
     }
 

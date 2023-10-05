@@ -1,4 +1,4 @@
-package com.trading.TradingUpFundationBackend.service.IMPL;
+package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.UserTradingDeserializable;
@@ -24,7 +24,7 @@ import java.util.Optional;//Package that allows the use of the datatype "Optiona
 /**
  * Class that represents all the services of the entity "UserTrading"
  */
-public class UserTradingService implements IUserTradingService {
+public class UserTradingServiceImplements implements IUserTradingService {
 
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "UserTrading"
     private IUserTradingRepository repository;

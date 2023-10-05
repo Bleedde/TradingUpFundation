@@ -11,26 +11,13 @@ CREATE TABLE user_trading(
     user_audited_account VARCHAR(255),
     user_role VARCHAR(255) NOT NULL
 );
-CREATE TABLE level_trading(
-    level_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    level_title VARCHAR(255) NOT NULL,
-    level_description VARHCAR(255) NOT NULL
-);
-CREATE TABLE registration_trading(
-    registration_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    user_id INTEGER,
-    level_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES user_trading(user_id),
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
-);
 CREATE TABLE content_trading(
     content_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     content_title VARCHAR(255) NOT NULL,
     content_subtitle VARCHAR(255) NOT NULL,
     content_description VARCHAR(255) NOT NULL,
-    content_url_video VARCHAR(255) NOT NULL,
-    level_id INTEGER,
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+    content_url_video VARCHAR(255) NOT NULL
+    content_level INTEGER NOT NULL
 );
 CREATE TABLE exercise_trading(
     exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -39,8 +26,7 @@ CREATE TABLE exercise_trading(
     exercise_data_start VARCHAR(255) NOT NULL,
     exercise_data_end VARCHAR(255) NOT NULL,
     exercise_subtitle VARCHAR(255) NOT NULL,
-    level_id INTEGER,
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+    exercise_level INTEGER NOT NULL
 );
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -48,22 +34,19 @@ CREATE TABLE book_trading(
     book_description VARCHAR(255) NOT NULL,
     book_image VARCHAR(255) NOT NULL,
     book_file VARCHAR(255) NOT NULL,
-    level_id INTEGER,
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+    book_level INTEGER NOT NULL
 );
 CREATE TABLE class_trading(
     class_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     class_title VARCHAR(255) NOT NULL,
-    class_subtitle VARCHAR(255) NOT NULL,
+    class_description VARCHAR(255) NOT NULL,
     class_url_video VARCHAR(255) NOT NULL,
-    level_id INTEGER,
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+    class_level INTEGER NOT NULL
 );
 CREATE TABLE class_prerecorded_trading(
     class_prerecorded_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     class_prerecorded_title VARCHAR(255) NOT NULL,
-    class_prerecorded_subtitle VARCHAR(255) NOT NULL,
+    class_prerecorded_description VARCHAR(255) NOT NULL,
     class_prerecorded_url_video VARCHAR(255) NOT NULL,
-    level_id INTEGER, 
-    FOREIGN KEY (level_id) REFERENCES level_trading(level_id)
+    class_prerecorded_level INTEGER NOT NULL
 );

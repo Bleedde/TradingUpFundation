@@ -1,6 +1,6 @@
 package com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse;
 
-public interface IClassPrerecordedeResponse {
+public interface IClassPrerecordedeTradingResponse {
     String CLASS_PRERECORDED_REGISTRATION_SUCCESS = "Successful class prerecorded registration";
     String CLASS_PRERECORDED_REGISTRATION_FAILED = "Failed class prerecorded registration";
     String CLASS_PRERECORDED_UPDATE_SUCCESS = "Successful class prerecorded update";
