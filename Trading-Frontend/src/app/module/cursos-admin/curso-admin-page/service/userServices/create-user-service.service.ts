@@ -17,9 +17,7 @@ export class CreateUserServiceService {
 
   createUserService(userDomain: UserDomain): Observable<GenericResponse> {
 
-    console.log("Prueba Datos: " + userDomain.name)
-    console.log("Prueba Datos: " + userDomain.email)
-    console.log("Prueba Datos: " + userDomain.password)
+    console.log("Prueba Datos: " + userDomain.userLevel)
 
     return this.http
     .post<GenericResponse>(this.API + "/user_create", userDomain )
