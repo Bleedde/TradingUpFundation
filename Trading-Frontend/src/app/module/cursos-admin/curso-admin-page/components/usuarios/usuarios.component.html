@@ -55,6 +55,15 @@
                 <input type="text" class="form-control" formControlName="auditedAccount"> 
               </div>
             </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Rol:</label>
+              <div class="col-sm-10">
+                  <select class="form-select" formControlName="userRole">
+                      <option value="admin">Profesor</option>
+                      <option value="user">Estudiante</option>
+                    </select>
+              </div>
+            </div>
             <div class="d-flex align-items-center justify-content-center">
               <button type="submit" class="btn text-white px-5 buttonF">Agregar</button>
             </div>
