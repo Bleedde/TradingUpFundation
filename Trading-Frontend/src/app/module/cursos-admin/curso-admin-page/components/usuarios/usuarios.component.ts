@@ -45,27 +45,25 @@ export class UsuariosComponent implements OnInit{
     private deleteUserServiceService: DeleteUserServiceService ){
     this.userForm = formulary.group({
       name : ['', [Validators.required]],
-      email : ['', [Validators.required]],
-      password : ['', [Validators.required]],
+      email : ['', [Validators.required, Validators.email]],
+      password : ['', [Validators.required, Validators.nullValidator]],
       level : [0, [Validators.required]],
       status : [[Validators.required]],
-      backtesting : ['', [Validators.required]],
-      auditedAccount : ['', [Validators.required]],
+      backtesting : ['', Validators.nullValidator],
+      auditedAccount : ['', Validators.nullValidator]
     });
   } 
 
   ngOnInit(): void {
 
-    
-
     this.userForm = this.formulary.group({
       name : ['', [Validators.required]],
-      email : ['', [Validators.required]],
+      email : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required]],
       level: [this.nivelSeleccionado],
       status : [this.estadoSeleccionado],
-      backtesting : ['', [Validators.required]],
-      auditedAccount : ['', [Validators.required]],
+      backtesting : ['', Validators.nullValidator],
+      auditedAccount : ['', Validators.nullValidator]
        // Nivel seleccionado por defecto
     });
     
@@ -77,28 +75,34 @@ export class UsuariosComponent implements OnInit{
   }
 
   createUser(){
-    this.userDomain = {
-      id: 0,
-      name: this.userForm.controls['name'].value,
-      email: this.userForm.controls['email'].value,
-      password: this.userForm.controls['password'].value,
-      userLevel: this.userForm.controls['level'].value != 0
-        ? this.userForm.controls['level'].value
-        : 1,
-      status: this.userForm.controls['status'].value,
-      backtesting: this.userForm.controls['backtesting'].value,
-      auditedAccount: this.userForm.controls['auditedAccount'].value,
-      userRole: 'user'
-    }
 
-    this.createUserServiceService.createUserService(this.userDomain).subscribe(
-      (res: GenericResponse) => {
-        console.log("Esta es la Respuesta: " + res.message)
-        if(res.httpResponse == 200){
-          window.location.reload()
-        }
+    if(!this.userForm.valid){
+      return this.userForm.markAllAsTouched()
+    }
+    else{
+      this.userDomain = {
+        id: 0,
+        name: this.userForm.controls['name'].value,
+        email: this.userForm.controls['email'].value,
+        password: this.userForm.controls['password'].value,
+        userLevel: this.userForm.controls['level'].value != 0
+          ? this.userForm.controls['level'].value
+          : 1,
+        status: this.userForm.controls['status'].value,
+        backtesting: this.userForm.controls['backtesting'].value,
+        auditedAccount: this.userForm.controls['auditedAccount'].value,
+        userRole: 'user'
       }
-    )
+  
+      this.createUserServiceService.createUserService(this.userDomain).subscribe(
+        (res: GenericResponse) => {
+          console.log("Esta es la Respuesta: " + res.message)
+          if(res.httpResponse == 200){
+            window.location.reload()
+          }
+        }
+      )
+    }
   }
 
   /*onSubmit(form: NgForm) {

@@ -6,21 +6,27 @@
         <div class="card-body p-5">
           <form *ngIf="!editUserDomain" (submit)="createUser()" [formGroup]="userForm">
             <div class="row mb-3">
-              <label for="" class="col-sm-2 col-form-label">Nombre:</label>
+              <label for="name" class="col-sm-2 col-form-label">Nombre:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control"  formControlName="name">
+                <input type="text" class="form-control"  formControlName="name"  [placeholder]="userForm.get('name')?.hasError('required') && userForm.get('name')?.touched ? 'El nombre es obligatorio.' : ''"
+                [ngClass]="{'error-placeholder': userForm.get('name')?.hasError('required') && userForm.get('name')?.touched}">
+                
               </div>
             </div>
             <div class="row mb-3">
-              <label for="" class="col-sm-2 col-form-label">Correo Electronico:</label>
+              <label for="email" class="col-sm-2 col-form-label">Correo Electronico:</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control" formControlName="email">
+                <input type="email" class="form-control" formControlName="email"  
+                [placeholder]="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched ? 'El correo electrónico es obligatorio y debe contener @.' : ''"
+                [ngClass]="{'error-placeholder': userForm.get('email')?.hasError('required') && userForm.get('email')?.touched}">
               </div>
             </div>
             <div class="row mb-3">
-              <label for="" class="col-sm-2 col-form-label">Contraseña:</label>
+              <label for="password" class="col-sm-2 col-form-label">Contraseña:</label>
               <div class="col-sm-10">
-                <input type="password" class="form-control" formControlName="password">
+                <input type="password" class="form-control" formControlName="password"
+                [placeholder]="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched ? 'La contraseña es obligatoria.' : ''"
+                [ngClass]="{'error-placeholder': userForm.get('password')?.hasError('required') && userForm.get('password')?.touched}">
               </div>
             </div>
             <div class="row mb-3">
@@ -41,18 +47,6 @@
                     {{ estado.label }}
                   </option>
                 </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Backtesting Link:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="backtesting">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Cuenta Auditada:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="auditedAccount"> 
               </div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
@@ -94,18 +88,6 @@
                         <option value="true">Activo</option>
                         <option value="false">Inactivo</option>
                       </select>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Backtesting Link:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="{{user.backtesting}}" formControlName="backtesting">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Cuenta Auditada:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="{{user.auditedAccount}}" formControlName="auditedAccount"> 
                 </div>
               </div>
               <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
