@@ -1,7 +1,11 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.ILevelTradingEndPoints;
+import com.trading.TradingUpFundationBackend.commons.constant.URLs.IClassPrerecordedTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
+import com.trading.TradingUpFundationBackend.controller.IClassPrerecordedTradingController;
+import com.trading.TradingUpFundationBackend.service.Implements.ClassPrerecordedTradingServiceImplements;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,25 +13,21 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.LevelTradingDTO;
-import com.trading.TradingUpFundationBackend.controller.ILevelTradingController;
-import com.trading.TradingUpFundationBackend.service.IMPL.LevelTradingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Tag(name = "Level database manage system", description = "Create, read, read all, update and delete a level")
-@RequestMapping(ILevelTradingEndPoints.URL_LEVEL)
-public class LevelTradingControllerImplements implements ILevelTradingController{
+@Tag(name = "Class prerecorded database manage system")
+@RequestMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED)
+public class ClassPrerecordedTradingControllerImplements implements IClassPrerecordedTradingController {
 
-    private final LevelTradingService service;
-    public LevelTradingControllerImplements(LevelTradingService service){
+    private final ClassPrerecordedTradingServiceImplements service;
+
+    public ClassPrerecordedTradingControllerImplements(ClassPrerecordedTradingServiceImplements service) {
         this.service = service;
     }
 
     @Override
-    @Operation(summary = "Create a lavel")
+    @Operation(summary = "Create a new class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -41,13 +41,13 @@ public class LevelTradingControllerImplements implements ILevelTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ILevelTradingEndPoints.URL_LEVEL_CREATE)
-    public ResponseEntity<ObjectResponse> createLevelTrading(@RequestBody LevelTradingDTO levelTradingDTO) {
-        return this.service.createLevelTrading(levelTradingDTO);
+    @PostMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_CREATE)
+    public ResponseEntity<ObjectResponse> createClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.createClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Read a level")
+    @Operation(summary = "Read a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -61,13 +61,13 @@ public class LevelTradingControllerImplements implements ILevelTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(ILevelTradingEndPoints.URL_LEVEL_READ)
-    public ResponseEntity<ObjectResponse> readLevelTrading( @RequestBody LevelTradingDTO levelTradingDTO) {
-        return this.service.readLevelTrading(levelTradingDTO);
+    @GetMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_READ)
+    public ResponseEntity<ObjectResponse> readClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.readClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Read all the levels")
+    @Operation(summary = "Read all the classes prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -81,13 +81,13 @@ public class LevelTradingControllerImplements implements ILevelTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(ILevelTradingEndPoints.URL_LEVELS_READ)
-    public ResponseEntity<ObjectResponse> readLevelsTrading() {
-        return this.service.readLevelsTrading();
+    @GetMapping(IClassPrerecordedTradingEndPoints.URL_CLASSES_PRERECORDED_READ)
+    public ResponseEntity<ObjectResponse> readClassesPrerecordedTrading() {
+        return this.service.readAllClassesPrerecordedTrading();
     }
 
     @Override
-    @Operation(summary = "Update a level")
+    @Operation(summary = "Update a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -101,13 +101,13 @@ public class LevelTradingControllerImplements implements ILevelTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PutMapping(ILevelTradingEndPoints.URL_LEVEL_UPDATE)
-    public ResponseEntity<ObjectResponse> updateLevelTrading(@RequestBody LevelTradingDTO levelTradingDTO) {
-        return this.service.updateLevelTrading(levelTradingDTO);
+    @PutMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_UPDATE)
+    public ResponseEntity<ObjectResponse> updateClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.updateClassPrerecordedtrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Delete a level")
+    @Operation(summary = "Delete a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -121,8 +121,8 @@ public class LevelTradingControllerImplements implements ILevelTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ILevelTradingEndPoints.URL_LEVEL_DELETE)
-    public ResponseEntity<ObjectResponse> deleteLevelTrading(@RequestBody LevelTradingDTO levelTradingDTO) {
-        return this.service.deleteLevelTrading(levelTradingDTO);
+    @PostMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_DELETE)
+    public ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.deleteClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 }

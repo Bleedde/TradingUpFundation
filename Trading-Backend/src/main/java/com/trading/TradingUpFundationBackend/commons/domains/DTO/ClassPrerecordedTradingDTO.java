@@ -1,7 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.LevelTradingEntity;//Import of the entity "Level"
 import lombok.AllArgsConstructor;//Import to use all the arguments that a constructor normally has
 import lombok.Builder;//Import to create objects easier
 import lombok.Data;//Import to add the normal methods that an object has
@@ -18,8 +16,6 @@ import java.io.Serializable;//Package to use this class like a byte sequence
  */
 public class ClassPrerecordedTradingDTO implements Serializable {
     private Integer id;
-    private String name;
+    private String title;
     private String description;
-    @JsonIdentityReference(alwaysAsId = true)
-    private LevelTradingEntity levelTradingEntityRelation;
 }

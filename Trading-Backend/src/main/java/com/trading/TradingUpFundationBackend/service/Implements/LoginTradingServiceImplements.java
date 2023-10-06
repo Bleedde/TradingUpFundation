@@ -1,4 +1,4 @@
-package com.trading.TradingUpFundationBackend.service.IMPL;
+package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Component
 @Log4j2
 @Service
-public class LoginTradingService implements ILoginTradingService {
+public class LoginTradingServiceImplements implements ILoginTradingService {
 
     @Autowired
     private IUserTradingRepository repository;

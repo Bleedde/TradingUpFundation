@@ -5,7 +5,8 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.Responses
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.ILoginController;
-import com.trading.TradingUpFundationBackend.service.IMPL.LoginTradingService;
+import com.trading.TradingUpFundationBackend.service.Implements.LoginTradingServiceImplements;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(ILoginEndPoints.URL_BASE_LOGIN)
 public class LoginTradingControllerImplements implements ILoginController {
     @Autowired
-    private LoginTradingService service;
+    private LoginTradingServiceImplements service;
     @Override
     @PostMapping(ILoginEndPoints.URL_LOGIN)
     @Operation(summary = "Log in an user")

@@ -1,6 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;//Package to deny the recursion of the side "Many"
 import com.fasterxml.jackson.annotation.JsonFormat;//Package to turn into Json data some attributes
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
@@ -36,8 +35,6 @@ public class ExerciseTradingEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataEnd;
 
-    @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
-    @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
-    @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation
-    private LevelTradingEntity levelTradingEntityRelation;
+    @Column(name = "exercise_level", nullable = false)
+    private Integer level;
 }

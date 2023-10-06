@@ -5,7 +5,8 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.Responses
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.IClassTradingController;
-import com.trading.TradingUpFundationBackend.service.IMPL.ClassTradingService;
+import com.trading.TradingUpFundationBackend.service.Implements.ClassTradingServiceImplements;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(IClassTradingEndPoints.URL_CLASS)
 public class ClassTradingControllerImplements implements IClassTradingController {
 
-    private final ClassTradingService service;
+    private final ClassTradingServiceImplements service;
 
-    public ClassTradingControllerImplements(ClassTradingService service) {
+    public ClassTradingControllerImplements(ClassTradingServiceImplements service) {
         this.service = service;
     }
 
@@ -122,7 +123,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
-    public ResponseEntity<ObjectResponse> deleteBookTrading(@RequestBody ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
         return this.service.deleteClassTrading(classTradingDTO);
     }
 }

@@ -1,6 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;//Package to deny the recursion of the side "Many"
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
 
@@ -28,8 +27,6 @@ public class BookTradingEntity {
     @Column(name = "book_file", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String file;
 
-    @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
-    @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
-    @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation
-    private LevelTradingEntity levelTradingEntityRelation;
+    @Column(name = "book_level", nullable = false)
+    private Integer level;
 }

@@ -1,6 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;//Package to deny the recursion of the side "One"
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
 
@@ -17,13 +16,14 @@ public class ClassPrerecordedTradingEntity {
     private Integer id;
 
     @Column(name = "class_prerecorded_title", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String name;
+    private String title;
 
-    @Column(name = "class_prerecorded_subtitle", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String subtitle;
+    @Column(name = "class_prerecorded_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
-    @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
-    @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation
-    private LevelTradingEntity levelTradingEntityRelation;
+    @Column(name = "class_prerecorded_url_video", length = 255, nullable = false)
+    private String urlVideo;
+
+    @Column(name = "class_prerecorded_level", nullable = false)
+    private Integer level;
 }
