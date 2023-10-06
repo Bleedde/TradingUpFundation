@@ -11,14 +11,6 @@ CREATE TABLE user_trading(
     user_audited_account VARCHAR(255),
     user_role VARCHAR(255) NOT NULL
 );
-CREATE TABLE content_trading(
-    content_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    content_title VARCHAR(255) NOT NULL,
-    content_subtitle VARCHAR(255) NOT NULL,
-    content_description VARCHAR(255) NOT NULL,
-    content_url_video VARCHAR(255) NOT NULL
-    content_level INTEGER NOT NULL
-);
 CREATE TABLE exercise_trading(
     exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     exercise_title VARCHAR(255) NOT NULL,

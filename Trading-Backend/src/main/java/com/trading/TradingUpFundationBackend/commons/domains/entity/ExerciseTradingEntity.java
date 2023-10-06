@@ -36,8 +36,6 @@ public class ExerciseTradingEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataEnd;
 
-    @ManyToOne(fetch = FetchType.LAZY)//Annotation to represent the relation "Many" to "One"
-    @JoinColumn(name = "level_id")//Annotation to represent to what column is gonna represent the ID who is the foreign key in this side of this relation
-    @JsonBackReference//Annotation to do only a query to the entity who represent the side "One" in the relation
-    private LevelTradingEntity levelTradingEntityRelation;
+    @Column(name = "exercise_level", nullable = false)
+    private Integer level;
 }

@@ -1,12 +1,12 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
+import com.trading.TradingUpFundationBackend.commons.constant.URLs.IClassPrerecordedTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.IClassTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.controller.IClassTradingController;
-import com.trading.TradingUpFundationBackend.service.Implements.ClassTradingServiceImplements;
-
+import com.trading.TradingUpFundationBackend.controller.IClassPrerecordedTradingController;
+import com.trading.TradingUpFundationBackend.service.Implements.ClassPrerecordedTradingServiceImplements;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,18 +17,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Tag(name = "Class database manage system", description = "Create, read one, read all, update and delete a class")
-@RequestMapping(IClassTradingEndPoints.URL_CLASS)
-public class ClassTradingControllerImplements implements IClassTradingController {
+@Tag(name = "Class prerecorded database manage system")
+@RequestMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED)
+public class ClassPrerecordedTradingControllerImplements implements IClassPrerecordedTradingController {
 
-    private final ClassTradingServiceImplements service;
+    private final ClassPrerecordedTradingServiceImplements service;
 
-    public ClassTradingControllerImplements(ClassTradingServiceImplements service) {
+    public ClassPrerecordedTradingControllerImplements(ClassPrerecordedTradingServiceImplements service) {
         this.service = service;
     }
 
     @Override
-    @Operation(summary = "Create a new class")
+    @Operation(summary = "Create a new class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -42,13 +42,13 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(IClassTradingEndPoints.URL_CLASS_CREATE)
-    public ResponseEntity<ObjectResponse> createClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
-        return this.service.createClassTrading(classTradingDTO);
+    @PostMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_CREATE)
+    public ResponseEntity<ObjectResponse> createClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.createClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Read a class")
+    @Operation(summary = "Read a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -62,13 +62,13 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(IClassTradingEndPoints.URL_CLASS_READ)
-    public ResponseEntity<ObjectResponse> readClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
-        return this.service.readClassTrading(classTradingDTO);
+    @GetMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_READ)
+    public ResponseEntity<ObjectResponse> readClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.readClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Read all the classes")
+    @Operation(summary = "Read all the classes prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -82,13 +82,13 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(IClassTradingEndPoints.URL_CLASSES_READ)
-    public ResponseEntity<ObjectResponse> readClassesTrading() {
-        return this.service.readClassesTrading();
+    @GetMapping(IClassPrerecordedTradingEndPoints.URL_CLASSES_PRERECORDED_READ)
+    public ResponseEntity<ObjectResponse> readClassesPrerecordedTrading() {
+        return this.service.readAllClassesPrerecordedTrading();
     }
 
     @Override
-    @Operation(summary = "Update a class")
+    @Operation(summary = "Update a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -102,13 +102,13 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PutMapping(IClassTradingEndPoints.URL_CLASS_UPDATE)
-    public ResponseEntity<ObjectResponse> updateClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
-        return this.service.updateClassTrading(classTradingDTO);
+    @PutMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_UPDATE)
+    public ResponseEntity<ObjectResponse> updateClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.updateClassPrerecordedtrading(classPrerecordedTradingDTO);
     }
 
     @Override
-    @Operation(summary = "Delete a class")
+    @Operation(summary = "Delete a class prerecorded")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
@@ -122,8 +122,8 @@ public class ClassTradingControllerImplements implements IClassTradingController
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
-    public ResponseEntity<ObjectResponse> deleteClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
-        return this.service.deleteClassTrading(classTradingDTO);
+    @PostMapping(IClassPrerecordedTradingEndPoints.URL_CLASS_PRERECORDED_DELETE)
+    public ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+        return this.service.deleteClassPrerecordedTrading(classPrerecordedTradingDTO);
     }
 }

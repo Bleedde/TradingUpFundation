@@ -42,8 +42,4 @@ public class UserTradingEntity {
 
     @Column(name = "user_role", length = 255, nullable = false)
     private String userRole;
-
-    @OneToMany(mappedBy = "userTradingEntityRelation")//Annotation to represent a relation "One" to "Many" where it is mapped the attribute in the another entity who represent the side "Many"
-    @JsonManagedReference//Annotation to do only a query to the entity who represent the side "Many" in the relation
-    private List<RegistrationTradingEntity> registrationTradingEntityRelation;
 }
