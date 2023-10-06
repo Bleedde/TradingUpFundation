@@ -34,7 +34,10 @@
 
     background-color: white;
     filter: brightness(85%);
-
 }
+
+.error-placeholder::placeholder {
+    color: #4C288A;
+  }
 
  
