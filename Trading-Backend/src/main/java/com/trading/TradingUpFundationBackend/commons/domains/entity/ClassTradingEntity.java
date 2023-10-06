@@ -21,9 +21,9 @@ public class ClassTradingEntity {
     @Column(name = "class_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String description;
 
-    @Column(name = "class_url_video", length = 255, nullable = false)
+    @Column(name = "class_url_video", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the lenght has to be 255 and it can be null
     private String urlVideo;
 
-    @Column(name = "class_level", nullable = false)
+    @Column(name = "class_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 }

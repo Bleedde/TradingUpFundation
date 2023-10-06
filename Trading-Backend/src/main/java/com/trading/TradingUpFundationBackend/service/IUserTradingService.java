@@ -8,10 +8,39 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
  * Interface that creates the services, who represent the manage of information of the entity UserTrading
  */
 public interface IUserTradingService {
-    ResponseEntity<ObjectResponse> createUserTrading(UserTradingDTO userTradingDTO);//Method creating an user
-    ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO);//Method reading an user
-    ResponseEntity<ObjectResponse> readUsersTrading();//Method that reads all the users
-    ResponseEntity<ObjectResponse> updateUserTrading(UserTradingDTO userTradingDTO);//Method updating an user
-    ResponseEntity<ObjectResponse> deleteUserTrading(UserTradingDTO userTradingDTO);//Method deleting an user
+
+    /**
+     * Method without body which creates an user
+     * @param userTradingDTO The user to be created
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> createUserTrading(UserTradingDTO userTradingDTO);
+
+    /**
+     * Method without body which reads an user
+     * @param userTradingDTO The user to be readed
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO);
+
+    /**
+     * Method without body which reads all the users
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readUsersTrading();
+
+    /**
+     * Method without body which updates an user
+     * @param userTradingDTO The user to be updated
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> updateUserTrading(UserTradingDTO userTradingDTO);
+
+    /**
+     * Method without body which deletes an user
+     * @param userTradingDTO The user to be deleted
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> deleteUserTrading(UserTradingDTO userTradingDTO);
 
 }

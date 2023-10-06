@@ -27,6 +27,6 @@ public class BookTradingEntity {
     @Column(name = "book_file", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String file;
 
-    @Column(name = "book_level", nullable = false)
+    @Column(name = "book_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 }

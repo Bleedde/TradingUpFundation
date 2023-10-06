@@ -35,6 +35,6 @@ public class ExerciseTradingEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataEnd;
 
-    @Column(name = "exercise_level", nullable = false)
+    @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 }

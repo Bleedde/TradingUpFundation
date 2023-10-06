@@ -8,9 +8,38 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
  * Interface that creates the services, who represent the manage of information of the entity ClassTrading
  */
 public interface IClassTradingService {
-    ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO adminTradingDTO);//Method creating a class
-    ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO adminTradingDTO);//Method reading a class
-    ResponseEntity<ObjectResponse> readClassesTrading();//Method that reads all the classes
-    ResponseEntity<ObjectResponse> updateClassTrading(ClassTradingDTO adminTradingDTO);//Method updating a class
-    ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO);//Method deleting a class
+
+    /**
+     * Method without body which creates a class
+     * @param adminTradingDTO The class to be created
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO adminTradingDTO);
+
+    /**
+     * Method without body which reads a class
+     * @param adminTradingDTO The class to be readed
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO adminTradingDTO);
+
+    /**
+     * Method without body which reads all the classes
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readClassesTrading();
+
+    /**
+     * Method without body which updates a class
+     * @param adminTradingDTO The class to be updated
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> updateClassTrading(ClassTradingDTO adminTradingDTO);
+
+    /**
+     * Method without body which deletes a class
+     * @param adminTradingDTO The class to be deleted
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO);
 }

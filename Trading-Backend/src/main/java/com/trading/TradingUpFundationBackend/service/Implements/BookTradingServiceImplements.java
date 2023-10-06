@@ -6,8 +6,8 @@ import com.trading.TradingUpFundationBackend.commons.constant.deserializable.Boo
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;//Package that allows to use the serializable version of the entity BookTradingEntity; BookTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like a object
 import com.trading.TradingUpFundationBackend.commons.domains.entity.BookTradingEntity;//Package that allows to use the Entity BookTradingEntity
-import com.trading.TradingUpFundationBackend.repository.IBookTradingRepository;//Package that allows to use the repository IAdminTradingRepository
-import com.trading.TradingUpFundationBackend.service.IBookTradingServiceImplements;//Package that allows the use of the interface "IAdminTradingService"
+import com.trading.TradingUpFundationBackend.repository.IBookTradingRepository;//Package that allows to use the repository IBookTradingRepository
+import com.trading.TradingUpFundationBackend.service.IBookTradingService;//Package that allows the use of the interface "IBookTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
 import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
@@ -22,9 +22,11 @@ import java.util.Optional;//Package that allows the use of the datatype "Optiona
 /**
  * Class that represents all the services of the entity "BookTrading"
  */
-public class BookTradingServiceImplements implements IBookTradingServiceImplements {
+public class BookTradingServiceImplements implements IBookTradingService {
+
     @Autowired//Annotation that injects the dependencies from de repository related with the entity "BookTrading"
     private IBookTradingRepository repository;
+    
     @Autowired//Annotation that injects the dependencies from the converter related with the entity "BookTrading"
     private BookTradingDeserializable converter;
 
