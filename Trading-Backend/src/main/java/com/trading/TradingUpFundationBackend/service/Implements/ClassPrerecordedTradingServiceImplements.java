@@ -1,7 +1,5 @@
 package com.trading.TradingUpFundationBackend.service.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

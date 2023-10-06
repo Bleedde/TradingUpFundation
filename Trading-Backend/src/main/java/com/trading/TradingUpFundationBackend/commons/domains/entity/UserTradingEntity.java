@@ -1,10 +1,7 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;//Package to deny the recursion of the side "One"
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
-
-import java.util.List;//Package to manage a dynamic list
 
 @Entity//Annotation to represent this class like an entity of a database for spring
 @Table(name = "user_trading")//Annotation to represent this entity like a table in a database represented with a name

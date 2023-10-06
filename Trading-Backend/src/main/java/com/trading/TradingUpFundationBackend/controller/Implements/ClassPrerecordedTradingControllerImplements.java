@@ -1,7 +1,6 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.IClassPrerecordedTradingEndPoints;
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IClassTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;

@@ -1,6 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.AllArgsConstructor;//Import to use all the arguments that a constructor normally has
 import lombok.Builder;//Import to create objects easier
 import lombok.Data;//Import to add the normal methods that an object has
