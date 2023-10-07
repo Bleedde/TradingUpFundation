@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CursosAdminRoutingModule } from './cursos-admin-routing.module';
 import { CursoAdminPageComponent } from './curso-admin-page/curso-admin-page.component';
 import { SlideVarComponent } from './curso-admin-page/components/slide-var/slide-var.component';
@@ -18,9 +17,6 @@ import { CreateUserServiceService } from './curso-admin-page/service/userService
 import { ReadUsersServiceService } from './curso-admin-page/service/userServices/read-users-service.service';
 import { UpdateUsersServiceService } from './curso-admin-page/service/userServices/update-users-service.service';
 import { DeleteUserServiceService } from './curso-admin-page/service/userServices/delete-user-service.service';
-
-
-
 
 @NgModule({
   declarations: [
