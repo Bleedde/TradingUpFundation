@@ -13,6 +13,7 @@ export class LoginServiceService {
   constructor(private http: HttpClient) { }
 
   loginService(params:{email : string, password : string}): Observable<GeneralResponse>{
+    console.log("valor del params: " + params.email);
     return this.http.post<GeneralResponse>(
       "http://localhost:8080/login" + "/service",  params
     )

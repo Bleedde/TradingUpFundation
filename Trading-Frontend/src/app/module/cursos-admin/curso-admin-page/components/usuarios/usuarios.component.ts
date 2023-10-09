@@ -6,6 +6,7 @@ import { DeleteUserServiceService } from '../../service/userServices/delete-user
 import { ReadUsersServiceService } from '../../service/userServices/read-users-service.service';
 import { UpdateUsersServiceService } from '../../service/userServices/update-users-service.service';
 import { UserDomain } from './domains/UserDomain';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class UsuariosComponent implements OnInit{
 
   constructor(public formulary: FormBuilder, private createUserServiceService: CreateUserServiceService, 
     private readUsersServiceService: ReadUsersServiceService, private updateUserService: UpdateUsersServiceService, 
-    private deleteUserServiceService: DeleteUserServiceService ){
+    private deleteUserServiceService: DeleteUserServiceService, private compartidoServiceService: CompartidoServiceService ){
     this.userForm = formulary.group({
       name : ['', [Validators.required]],
       email : ['', [Validators.required, Validators.email]],
