@@ -1,33 +1,38 @@
 <div class="container w-100 bg-light rounded background mt_5">
     <div class="row align-items-stretch">
         <div class="col bg-image d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
-                
+
         </div>
         <div class="col bg-white p-5 rounded-end">
             <div class="text-end">
-                <img [src]="logo" width="70px"  class="my-0.2"  alt="">
+                <img [src]="logo" width="70px" class="my-0.2" alt="">
             </div>
             <h2 class="fw-bold text-center py-4">Bienvenido a TradingUpFundation</h2>
-            
+
             <form (ngSubmit)="serviceLogin()" [formGroup]="userForm" action="">
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control custom-input" name="correo" formControlName="email" required>
+                    <input type="email" class="form-control custom-input" name="correo" formControlName="email"
+                        [placeholder]="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched ? 'El correo electrónico es obligatorio y debe contener @.' : ''"
+                        [ngClass]="{'error-placeholder': userForm.get('email')?.hasError('required') && userForm.get('email')?.touched}">
                 </div>
-                <div class="mb-4">
+                <div class="mb-5">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control custom-input" name="contraseña" formControlName="password" required>
+                    <input type="password" class="form-control custom-input" name="contraseña"
+                        formControlName="password"
+                        [placeholder]="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched ? 'La contraseña es obligatoria.' : ''"
+                        [ngClass]="{'error-placeholder': userForm.get('password')?.hasError('required') && userForm.get('password')?.touched}">
+                        <div *ngIf="errorMessage" class="d-flex align-items-center mt-4">
+                            <i class="fa-solid fa-circle-exclamation me-2"></i>
+                            <div>
+                                {{errorMessage}}
+                            </div>
+                        </div>
                 </div>
-                <div class="mb-4 form-check">
-                    <input type="checkbox" name="connected" class="form-check-input custom-input" id="">
-                    <label for="connected" class="form-check-label">Recordar mi contraseña</label>
-                </div>
-
+                
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
-
                 </div>
-
                 <div class="my-3">
                     <p>No tienes cuenta?</p>
                     <span><a href="#" routerLink="/home-page" (click)="scrollToComponent()">Contactanos</a></span>
@@ -36,6 +41,3 @@
         </div>
     </div>
 </div>
-
-
-

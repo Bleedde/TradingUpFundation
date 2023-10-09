@@ -1,5 +1,5 @@
-<div class="fixed col-2">
-    <div class="pt-3 px-4 pe">
+<div class="fixed col-4 mt-3">
+    <div *ngIf="!user" class="pt-3 px-4 pe">
         <h4 class="text-white" type="submit" (click)="dropDown4()">Usuarios&nbsp;<i class="fa-solid fa-caret-down"></i></h4>
         <div *ngIf="dropdown4">
             <ul class="text-white px-4" > 
@@ -39,3 +39,4 @@
         </div>
     </div> 
 </div>
+

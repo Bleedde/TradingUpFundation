@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 
 @Component({
   selector: 'app-slide-var',
@@ -6,7 +7,6 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
   styleUrls: ['./slide-var.component.scss']
 })
 export class SlideVarComponent implements OnChanges {
-
   ngOnChanges(changes: SimpleChanges): void {
     console.log("cambio efectuado " + changes['datosUser1'])
     this.datosUser = this.datosUser1;
@@ -23,6 +23,12 @@ export class SlideVarComponent implements OnChanges {
   @Input() datosExercises1!: boolean;
   @Input() datosClass1!: boolean;
   @Input() datosPrerecorded1!: boolean;
+  
+  user!: boolean;
+  constructor(private compartidoServiceService:CompartidoServiceService){
+    this.user = this.compartidoServiceService.getData();
+  }
+
 
   @Output() activateSectionUsers = new EventEmitter<boolean>();
   @Output() activateSectionContents = new EventEmitter<boolean>();
@@ -84,8 +90,4 @@ export class SlideVarComponent implements OnChanges {
     console.log("prerecorded")
   }
 
-
-
-
-  
-}
+} 
