@@ -1,10 +1,10 @@
 package com.trading.TradingUpFundationBackend.service.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IClassTradingResponse;//Package that allows the use of the response of the entity ClassTrading
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ClassTradingDeserializable;//Package that allows use the object ClassTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;//Package that allows to use the serializable version of the entity ClassTradingEntity; ClassTradingDTO
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;//Package that allows to use the Entity ClassTradingEntity
 import com.trading.TradingUpFundationBackend.repository.IClassTradingRepository;//Package that allows to use the repository IClassTradingRepository
 import com.trading.TradingUpFundationBackend.service.IClassTradingService;//Package that allows the use of the interface "IClassTradingService"

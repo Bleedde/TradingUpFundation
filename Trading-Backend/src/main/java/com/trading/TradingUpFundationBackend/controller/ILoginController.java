@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;//Package that gives 
  * Interface that creates method without body to be implemented in the controller of the service LoginTradingService
  */
 public interface ILoginController {
+
+    /**
+     * Method without body which log-in a user with the service LoginTradingServiceImplements
+     * @param userTradingDTO The user to log-in
+     * @return An ObjectResponse with answers depending on the result
+     */
     @PostMapping()//Annotation that represent the header of an HTTP query that checks what is the rol of the user
-    ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO);//Method that logs an user if it is already registered
+    ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO);
 }

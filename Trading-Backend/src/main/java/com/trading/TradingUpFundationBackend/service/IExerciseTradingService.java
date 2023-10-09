@@ -8,9 +8,38 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
  * Interface that creates the services, who represent the manage of information of the entity ExerciseTrading
  */
 public interface IExerciseTradingService {
-    ResponseEntity<ObjectResponse> createExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);//Method creating an exercise
-    ResponseEntity<ObjectResponse> readExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);//Method reading an exercise
-    ResponseEntity<ObjectResponse> readExercisesTrading();//Method that reads all the exercises
-    ResponseEntity<ObjectResponse> updateExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);//Method updating an exercise
-    ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer exerciseId);//Method deleting an exercise
+
+    /**
+     * Method without body which creates an exercise
+     * @param exerciseTradingDTO The exercise to be created
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> createExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
+
+    /**
+     * Method without body which reads an exercise
+     * @param exerciseTradingDTO The exercise to be readed
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
+
+    /**
+     * Method without body which reads all the exercises
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> readExercisesTrading();
+
+    /**
+     * Method without body which updates an exercise
+     * @param exerciseTradingDTO The exercise to be updated
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> updateExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
+
+    /**
+     * Method without body which deletes an exercise
+     * @param exerciseTradingDTO The exercise to be deleted
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> deleteExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
 }

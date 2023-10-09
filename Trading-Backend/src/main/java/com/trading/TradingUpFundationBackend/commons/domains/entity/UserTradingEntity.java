@@ -16,13 +16,13 @@ public class UserTradingEntity {
     @Column(name = "user_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
-    @Column(name = "user_name",length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "user_name",length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255  or less and it cant be null
     private String name;
 
-    @Column(name = "user_email", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "user_email", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255  or less and it cant be null
     private String email;
 
-    @Column(name = "user_password", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "user_password", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255  or less and it cant be null
     private String password;
 
     @Column(name = "user_current_level", nullable = true)//Annotation to represent this attribute like a column with a name in the table, it cant be null
@@ -31,12 +31,12 @@ public class UserTradingEntity {
     @Column(name = "user_status")//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private boolean status;
 
-    @Column(name = "user_backtesting_link", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
+    @Column(name = "user_backtesting_link", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 or less
     private String backtesting;
 
-    @Column(name = "user_audited_account", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
+    @Column(name = "user_audited_account", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 or less
     private String auditedAccount;
 
-    @Column(name = "user_role", length = 255, nullable = false)
+    @Column(name = "user_role", length = 255, nullable = false)//Anottation to represent this attribute like a column with a name in the table, the lenght has to be 255 or less
     private String userRole;
 }

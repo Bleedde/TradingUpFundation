@@ -1,3 +1,4 @@
+/** 
 package com.trading.TradingUpFundationBackend.security;
 
 import javax.crypto.Cipher;
@@ -34,3 +35,4 @@ public class SecretEncryption {
         System.out.println("Decrypted: " + decryptedSecret);
     }
 }
+*/

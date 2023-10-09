@@ -1,40 +1,56 @@
 package com.trading.TradingUpFundationBackend.service.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
-import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
-import com.trading.TradingUpFundationBackend.service.ILoginTradingService;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;//Package that allows use the object UserTradingDeserializable
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use the serializable version of the entity UserTradingEntity; RegistrationTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
+import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
+import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
+import com.trading.TradingUpFundationBackend.service.ILoginTradingService;//Package that allows the use of the interface "ILoginTradingService"
+import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
+import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
+import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
+import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
+import org.springframework.stereotype.Component;//Package that allows to use the annotation @Component to represent this class like a spring component
+import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
 import java.util.Optional;
 
-@Component
-@Log4j2
-@Service
+@Component//Annotation which indicates this class like a spring component
+@Log4j2//Annotation who represent this class like a component with type "Service" in the spring context
+@Service//Annotation who allows the use of specifics responses
+
+/**
+ * Class that represents all the services of a log-in
+ */
 public class LoginTradingServiceImplements implements ILoginTradingService {
 
-    @Autowired
+    @Autowired//Annotation that injects the dependencies from de repository related with the entity "UserTrading"
     private IUserTradingRepository repository;
 
-
+    /**
+     * Method that log-in a user
+     * @param userTradingDTO The user to log-in
+     * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
+     */
     @Override
     public ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO) {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
-            if (userTradingExist.isPresent() && userTradingExist.get().getPassword().equals(userTradingDTO.getPassword())) {
-                return ResponseEntity.ok(ObjectResponse.builder()
-                        .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
-                        .objectResponse(userTradingExist)
-                        .httpResponse(HttpStatus.OK.value())
-                        .build());
+            if (userTradingExist.isPresent() && userTradingExist.get().getPassword().equals(userTradingDTO.getPassword()) ) {
+                if(userTradingExist.get().isStatus()) {
+                    return ResponseEntity.ok(ObjectResponse.builder()
+                            .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
+                            .objectResponse(userTradingExist)
+                            .httpResponse(HttpStatus.OK.value())
+                            .build());
+                } else {
+                    return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                            .message(Responses.OPERATION_FAIL)
+                            .httpResponse(HttpStatus.BAD_REQUEST.value())
+                            .objectResponse(IUserTradingResponse.USER_LOGIN_STATUS_FALSE)
+                            .build());
+                }
             } else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL)
