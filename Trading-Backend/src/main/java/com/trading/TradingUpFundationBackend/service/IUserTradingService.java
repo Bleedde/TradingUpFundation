@@ -10,15 +10,15 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
 public interface IUserTradingService {
 
     /**
-     * Method without body which creates an user
+     * Method without body which creates a user
      * @param userTradingDTO The user to be created
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> createUserTrading(UserTradingDTO userTradingDTO);
 
     /**
-     * Method without body which reads an user
-     * @param userTradingDTO The user to be readed
+     * Method without body which reads a user
+     * @param userTradingDTO The user to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO);

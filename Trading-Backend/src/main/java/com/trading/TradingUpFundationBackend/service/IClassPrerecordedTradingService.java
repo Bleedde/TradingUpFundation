@@ -19,7 +19,7 @@ public interface IClassPrerecordedTradingService {
 
     /**
      * Method without body which read a class prerecorded
-     * @param ClassPrerecordedTradingDTO The class prerecorded to be readed
+     * @param classPrerecordedTradingDTO The class prerecorded to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO);
@@ -32,14 +32,14 @@ public interface IClassPrerecordedTradingService {
 
     /**
      * Method without body which updates a class prerecorded
-     * @param ClassPrerecordedTradingDTO The class prerecorded to be updated
+     * @param classPrerecordedTradingDTO The class prerecorded to be updated
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> updateClassPrerecordedtrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO);
+    ResponseEntity<ObjectResponse> updateClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO);
 
     /**
      * Method without body which deleted a class prerecorded
-     * @param ClassPrerecordedTradingDTO The class prerecorded to be deleted
+     * @param classPrerecordedTradingDTO The class prerecorded to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO);

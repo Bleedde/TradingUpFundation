@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
 public interface ILoginTradingService {
 
     /**
-     * Method without body which log-in an user
+     * Method without body which log-in a user
      * @param userTradingDTO The user to log-in
      * @return An ObjectResponse with answers depending on the result
      */

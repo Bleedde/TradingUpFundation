@@ -18,7 +18,7 @@ public interface IClassTradingService {
 
     /**
      * Method without body which reads a class
-     * @param adminTradingDTO The class to be readed
+     * @param adminTradingDTO The class to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readClassTrading(ClassTradingDTO adminTradingDTO);
@@ -38,7 +38,7 @@ public interface IClassTradingService {
 
     /**
      * Method without body which deletes a class
-     * @param adminTradingDTO The class to be deleted
+     * @param classTradingDTO The class to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO);

@@ -14,11 +14,11 @@ public interface IBookTradingService {
      * @param bookTradingDTO The book to be created
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> createBookTrading(BookTradingDTO bookTradingDTOgDTO);
+    ResponseEntity<ObjectResponse> createBookTrading(BookTradingDTO bookTradingDTO);
 
     /**
      * Method without body which reads a book
-     * @param bookTradingDTO The book to be readed
+     * @param bookTradingDTO The book to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readABookTrading(BookTradingDTO bookTradingDTO);

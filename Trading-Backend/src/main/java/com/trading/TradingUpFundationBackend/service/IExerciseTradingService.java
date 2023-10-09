@@ -41,5 +41,5 @@ public interface IExerciseTradingService {
      * @param exerciseTradingDTO The exercise to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer exerciseId);
+    ResponseEntity<ObjectResponse> deleteExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;//Package to bring the element 
 
 @Repository//Annotation to represent this interface like a repository to connect with the database
 /**
- * Interface which represents a conection between the Springboot aplication and the database
+ * Interface which represents a connection between the Springboot application and the database
  * Connection between the entity BookTradingEntity and the table book_trading
  */
 public interface IBookTradingRepository extends JpaRepository<BookTradingEntity, Integer> {

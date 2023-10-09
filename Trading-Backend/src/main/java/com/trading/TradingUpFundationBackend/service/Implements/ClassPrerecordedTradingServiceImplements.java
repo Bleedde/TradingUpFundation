@@ -124,7 +124,7 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
     }
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> updateClassPrerecordedtrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
         try {
             Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
             if (classPrerecordedTradingExist.isPresent()) {
