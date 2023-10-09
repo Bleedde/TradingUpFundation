@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CompartidoServiceService } from '../../service/compartido-service.service';
+
 
 @Component({
   selector: 'app-curso-admin-page',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./curso-admin-page.component.scss']
 })
 export class CursoAdminPageComponent {
+
+  
 
   sectionUser!: boolean;
   sectionContent!: boolean;
@@ -27,6 +31,7 @@ export class CursoAdminPageComponent {
     this,this.startA = false;
     this.sectionExercises = false;
     console.log("Prueba del user: " + !datos)
+
   }
 
   modalActivateContent(datos:boolean){
@@ -87,4 +92,5 @@ export class CursoAdminPageComponent {
     console.log("parametro " + datos)
     console.log("datos prueba: " + this.datosPrueba);
   }
+
 }

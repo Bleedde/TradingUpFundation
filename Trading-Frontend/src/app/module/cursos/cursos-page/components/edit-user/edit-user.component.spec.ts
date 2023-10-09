@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlideVarComponent } from './slide-var.component';
+import { EditUserComponent } from './edit-user.component';
 
-describe('SlideVarComponent', () => {
-  let component: SlideVarComponent;
-  let fixture: ComponentFixture<SlideVarComponent>;
+describe('EditUserComponent', () => {
+  let component: EditUserComponent;
+  let fixture: ComponentFixture<EditUserComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SlideVarComponent]
+      declarations: [EditUserComponent]
     });
-    fixture = TestBed.createComponent(SlideVarComponent);
+    fixture = TestBed.createComponent(EditUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
