@@ -1,31 +1,43 @@
 package com.trading.TradingUpFundationBackend.service.Implements;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
+import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
+import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
-import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ClassPrerecordedTradingDeserializable;
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IClassPrerecordedeTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassPrerecordedTradingEntity;
-import com.trading.TradingUpFundationBackend.repository.IClassPrerecordedTradingRepository;
-import com.trading.TradingUpFundationBackend.service.IClassPrerecordedTradingService;
+import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ClassPrerecordedTradingDeserializable;//Package that allows the use of the object ClassPrerecordedTradingDeserializable
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that gives responses to possible situations
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IClassPrerecordedeTradingResponse;//Package that allows the use of the response of the entity ClassPrerecordedTrading
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like a object
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;//Package that allows the use of the response of the entity ClassPrerecordedTrading
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassPrerecordedTradingEntity;//Package that allows to use the Entity ClassPrereccordedTradingEntity
+import com.trading.TradingUpFundationBackend.repository.IClassPrerecordedTradingRepository;//Package that allows to use the repository IClassPrerecordedTradingRepository
+import com.trading.TradingUpFundationBackend.service.IClassPrerecordedTradingService;//Package that allows the use of the interface "IBookTradingService"
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
 
-import java.util.List;
-import java.util.Optional;
+import java.util.List;//Package that allows the use of dynamic list
+import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
-@Service
-@Log4j2
+@Service//Annotation who represents this class like a component with type "Service" in the spring context
+@Log4j2//Annotation who allows the use of specifics responses
+/**
+ * Class that represents all the services of the entity "ClassPrerecordedTrading"
+ */
 public class ClassPrerecordedTradingServiceImplements implements IClassPrerecordedTradingService{
 
+    @Autowired//Annotation that injects the dependencies from de repository related with the entity "ClassPrerecordedTrading"
     private IClassPrerecordedTradingRepository repository;
+
+    @Autowired//Annotation that injects the dependencies from the converter related with the entity "ClassPrerecordedTrading"
     private ClassPrerecordedTradingDeserializable converter;
 
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
+    /**
+     * Method that creates a class prerecorded
+     * @param classPrerecordedTradingDTO The class prerecorded to be created
+     * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
+     */
     public ResponseEntity<ObjectResponse> createClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
         try{
             Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
@@ -55,7 +67,7 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
         }
     }
 
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> readClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
         try{
             Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
@@ -84,7 +96,7 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
         
     }
 
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> readAllClassesPrerecordedTrading() {
         try{
             List<ClassPrerecordedTradingEntity> classPrerecordedTradingList = this.repository.findAll();
@@ -111,8 +123,8 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
         }
     }
 
-    @Override
-    public ResponseEntity<ObjectResponse> updateClassPrerecordedtrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+    @Override//Annotation that represent an override for a method in another interface
+    public ResponseEntity<ObjectResponse> updateClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
         try {
             Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
             if (classPrerecordedTradingExist.isPresent()) {
@@ -142,7 +154,7 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
         }
     }
 
-    @Override
+    @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
             try {
                 Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());

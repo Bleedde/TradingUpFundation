@@ -11,7 +11,7 @@ import java.io.Serializable;//Package to use this class like a byte sequence
  * Implements the interface Serializable
  */
 public class ObjectResponse implements Serializable{
-    public String message;
-    public Integer httpResponse;
-    public Object objectResponse;
+    public String message;//Its gonna send a message
+    public Integer httpResponse;//Its gonna send a code whit a HTTP type
+    public Object objectResponse;//Its gonna send a object
 }

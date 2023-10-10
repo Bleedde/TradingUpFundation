@@ -1,39 +1,49 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IBookTradingEndPoints;
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.controller.IBookTradingController;
-import com.trading.TradingUpFundationBackend.service.Implements.BookTradingServiceImplements;
+import com.trading.TradingUpFundationBackend.commons.constant.URLs.IBookTradingEndPoints;//Package which gives the urls for the entity BookTrading
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that gives responses to possible situations
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;//Package that allows to use the serializable version of the entity BookTradingEntity; BookTradingDTO
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like a object
+import com.trading.TradingUpFundationBackend.controller.IBookTradingController;//Package which implements the interface IBookTradingController
+import com.trading.TradingUpFundationBackend.service.Implements.BookTradingServiceImplements;//Package which bring the service of the entity BookTrading
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;//Package which give the annotation @Operation from the swagger documentation
+import io.swagger.v3.oas.annotations.media.Content;//Package which give the annotation @Content from the swagger documentation
+import io.swagger.v3.oas.annotations.media.Schema;//Package which give the annotation @Schema from the swagger documentation
+import io.swagger.v3.oas.annotations.responses.ApiResponse;//Package which give the annotation @ApiResponse from the swagger documentation
+import io.swagger.v3.oas.annotations.responses.ApiResponses;//Package which give the annotation @ApiResponses from the swagger documentation
+import io.swagger.v3.oas.annotations.tags.Tag;//Package which give the annotation @Tag from the swagger documentation
+import org.springframework.http.ResponseEntity;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
+import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
-@RestController
-@Tag(name = "Book database manage system", description = "Create. read one, rad all, update and delete a book")
-@RequestMapping(IBookTradingEndPoints.URL_BOOK)
+@RestController//Annotation that represents this class like  a controller in the spring context
+@Tag(name = "Book database manage system", description = "Create. read one, rad all, update and delete a book")//Annotation that documents this controller
+@RequestMapping(IBookTradingEndPoints.URL_BOOK)//Annotation which represent this controller with a specific url
+
+/**
+ * Controller of the entity BookTrading
+ * Implements the interface IBookTradingController
+ */
 public class BookTradingControllerImplements implements IBookTradingController {
 
-    private final BookTradingServiceImplements service;
+    private final BookTradingServiceImplements service;//Attribute which creates an unique instance of the service BookTradingServiceImplements
 
+    /**
+     * Constructor that injects dependencies to this class
+     * @param service
+     */
     public BookTradingControllerImplements(BookTradingServiceImplements service) {
         this.service = service;
     }
 
-
-    @Override
-    @Operation(summary = "Create a new book")
-    @ApiResponses(value = {
+    /**
+     * Method which creates a book using the service BookTradingServiceImplements
+     * @param bookTradingDTO The book to be created
+     * @return The method "createBookTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
+    @Operation(summary = "Create a new book")//Annotation used to describe a specific action that the method is going to do
+    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ObjectResponse.class))}),
@@ -49,9 +59,14 @@ public class BookTradingControllerImplements implements IBookTradingController {
         return this.service.createBookTrading(bookTradingDTO);
     }
 
-    @Override
+    /**
+     * Method which reads a book using the service BookTradingServiceImplements
+     * @param bookTradingDTO The book to be read
+     * @return The method "readBookTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
     @Operation(summary = "Read a book")
-    @ApiResponses(value = {
+    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ObjectResponse.class))}),
@@ -67,9 +82,13 @@ public class BookTradingControllerImplements implements IBookTradingController {
         return this.service.readABookTrading(bookTradingDTO);
     }
 
-    @Override
+    /**
+     * Method which reads a book using the service BookTradingServiceImplements
+     * @return The method "readBooksTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
     @Operation(summary = "Read all the books")
-    @ApiResponses(value = {
+    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ObjectResponse.class))}),
@@ -85,9 +104,14 @@ public class BookTradingControllerImplements implements IBookTradingController {
         return this.service.readBooksTrading();
     }
 
-    @Override
+    /**
+     * Method which updates a book using the service BookTradingServiceImplements
+     * @param bookTradingDTO The book to be updated
+     * @return The method "updatedBookTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
     @Operation(summary = "Update a book")
-    @ApiResponses(value = {
+    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ObjectResponse.class))}),
@@ -103,9 +127,14 @@ public class BookTradingControllerImplements implements IBookTradingController {
         return this.service.updateBookTrading(bookTradingDTO);
     }
 
-    @Override
+    /**
+     * Method which deletes a book using the service BookTradingServiceImplements
+     * @param bookTradingDTO The book to be deleted
+     * @return The method "deleteBookTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
     @Operation(summary = "Delete a book")
-    @ApiResponses(value = {
+    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
             @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ObjectResponse.class))}),
