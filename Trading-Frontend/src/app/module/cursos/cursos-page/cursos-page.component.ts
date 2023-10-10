@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { Location } from '@angular/common';
 import { CompartidoServiceService } from '../../service/compartido-service.service';
+import { UserDomain } from '../../cursos-admin/curso-admin-page/components/usuarios/domains/UserDomain';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class CursosPageComponent{
   sectionExercises!: boolean;
   sectionClass!: boolean;
   sectionPrerecorded!: boolean;
+  sectionEditUser!: boolean;
 
   slideDatos: boolean = true;
   startA = true;
@@ -93,15 +95,27 @@ export class CursosPageComponent{
     console.log("datos prueba: " + this.datosPrueba);
   }
 
+  // CursosPage
+
+  modalActivateEditUser(datos:boolean){
+    this.startA = false;
+    this.sectionEditUser = datos;
+  }
+
+
   
 
   constructor(private compartidoServiceService: CompartidoServiceService){
+    let userModel: UserDomain;
+    userModel = this.compartidoServiceService.getData();
+
     const currentUrl = window.location.href;
     console.log('URL exacta:', currentUrl);
     if(currentUrl == "http://localhost:4200/cursos-page")
     {
       this.compartidoServiceService.setData(true)
     }
+    
 
   }
 

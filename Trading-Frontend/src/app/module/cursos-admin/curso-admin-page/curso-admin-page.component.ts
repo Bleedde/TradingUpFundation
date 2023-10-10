@@ -8,7 +8,6 @@ import { CompartidoServiceService } from '../../service/compartido-service.servi
   styleUrls: ['./curso-admin-page.component.scss']
 })
 export class CursoAdminPageComponent {
-
   
 
   sectionUser!: boolean;

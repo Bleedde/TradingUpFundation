@@ -12,7 +12,7 @@ export class ReadUserServiceService {
 
   API: string = "http://localhost:8080/user";
 
-  readUserService(userId: number) :Observable<GenericResponse> {
+  readUserService(userEmail: string) :Observable<GenericResponse> {
     return this.http.get<GenericResponse>(this.API + "/user_read")
   }
 }
