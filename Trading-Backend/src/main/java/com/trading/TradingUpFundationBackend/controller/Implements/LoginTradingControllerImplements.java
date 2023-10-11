@@ -1,42 +1,40 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.ILoginEndPoints;
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
-import com.trading.TradingUpFundationBackend.controller.ILoginController;
-import com.trading.TradingUpFundationBackend.service.Implements.LoginTradingServiceImplements;
+import com.trading.TradingUpFundationBackend.commons.constant.URLs.ILoginEndPoints;//Package which bring the endpoints of the service LoginTrading
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package which brings the entity UserTrading converted in a DTO object
+import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like an object
+import com.trading.TradingUpFundationBackend.controller.ILoginController;//Importtation of the interface with empty methods ILoginController
+import com.trading.TradingUpFundationBackend.service.Implements.LoginTradingServiceImplements;//Importation of the service LoginTradingServiceImplements
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;//Package that allows the use a response to send data and the information of the actions to the front
+import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
-@RestController
-@RequestMapping(ILoginEndPoints.URL_BASE_LOGIN)
+@RestController//Annotation that represents this class like  a controller in the spring context
+@RequestMapping(ILoginEndPoints.URL_BASE_LOGIN)//Annotation which represent this controller with a specific url
+
+/**
+ * Controller of the service Log-in
+ * Implements the interface ILoginTradingController
+ */
 public class LoginTradingControllerImplements implements ILoginController {
-    @Autowired
-    private LoginTradingServiceImplements service;
-    @Override
-    @PostMapping(ILoginEndPoints.URL_LOGIN)
-    @Operation(summary = "Log in an user")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "405", description = Responses.OPERATION_FAIL,
-                    content = {@Content(mediaType = "aplication/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
+
+    private final LoginTradingServiceImplements service;
+
+    /**
+     * Constructor that injects dependencies to this class
+     * @param service
+     */
+    public LoginTradingControllerImplements(LoginTradingServiceImplements service){
+        this.service = service; 
+    }
+
+    /**
+     * Method which log-in a user using the service LoginTradingServiceImplements
+     * @param userTradingDTO The user to log-in
+     * @return The method "login" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
+    @PostMapping(ILoginEndPoints.URL_LOGIN)//Annotation which represent this method with a specific endPoint
     public ResponseEntity<ObjectResponse> login(@RequestBody UserTradingDTO userTradingDTO) {
         return this.service.login(userTradingDTO);
     }

@@ -1,12 +1,12 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IExerciseTradingEndPoints;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseTradingDTO;
+import com.trading.TradingUpFundationBackend.commons.constant.URLs.IExerciseTradingEndPoints;//Package which bring the endpoints of the entity ExerciseTrading
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseTradingDTO;//Package which brings the entity ExerciseTrading converted in a DTO object
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like an object
-import com.trading.TradingUpFundationBackend.controller.IExerciseTradingController;
+import com.trading.TradingUpFundationBackend.controller.IExerciseTradingController;//Importation of the interface with empty methods IExerciseController
 
-import com.trading.TradingUpFundationBackend.service.Implements.ExerciseTradingServiceImplements;
-import org.springframework.http.ResponseEntity;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
+import com.trading.TradingUpFundationBackend.service.Implements.ExerciseTradingServiceImplements;//Importation of the services implemented of the entity ExerciseTrading
+import org.springframework.http.ResponseEntity;//Package that allows the use a response to send data and the information of the actions to the front
 import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
 @RestController//Annotation that represents this class like  a controller in the spring context
@@ -34,7 +34,7 @@ public class ExerciseControllerImplements implements IExerciseTradingController 
      * @return The method "createExerciseTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_CREATE)
+    @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_CREATE)//Annotation which represent this method with a specific endPoint
     public ResponseEntity<ObjectResponse> createExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO) {
         return this.service.createExerciseTrading(exerciseTradingDTO);
     }
