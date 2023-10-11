@@ -34,13 +34,13 @@ export class EditUserComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    this.readUserServiceService.readUserService(1).subscribe(
-      (res: GenericResponse) => {
-        this.user = res.objectResponse;
-      }
-    )
+    console.log("leer usuario:" + this.compartidoServiceService.getData())
+    this.readDataUser();
   }
 
+  readDataUser(){
+    this.user = this.compartidoServiceService.getData();
+  }
 
   updateUser(){
     

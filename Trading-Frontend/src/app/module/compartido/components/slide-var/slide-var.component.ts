@@ -29,7 +29,6 @@ export class SlideVarComponent implements OnChanges {
     this.user = this.compartidoServiceService.getData();
   }
 
-
   @Output() activateSectionUsers = new EventEmitter<boolean>();
   @Output() activateSectionContents = new EventEmitter<boolean>();
   @Output() activateSectionBooks = new EventEmitter<boolean>();

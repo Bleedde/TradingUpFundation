@@ -13,14 +13,14 @@
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electrónico</label>
                     <input type="email" class="form-control custom-input" name="correo" formControlName="email"
-                        [placeholder]="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched ? 'El correo electrónico es obligatorio y debe contener @.' : ''"
+                        [placeholder]="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched ? 'Ingresa un correo electronico valido' : ''"
                         [ngClass]="{'error-placeholder': userForm.get('email')?.hasError('required') && userForm.get('email')?.touched}">
                 </div>
                 <div class="mb-5">
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control custom-input" name="contraseña"
                         formControlName="password"
-                        [placeholder]="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched ? 'La contraseña es obligatoria.' : ''"
+                        [placeholder]="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched ? 'Ingresa una contraseña valida' : ''"
                         [ngClass]="{'error-placeholder': userForm.get('password')?.hasError('required') && userForm.get('password')?.touched}">
                         <div *ngIf="errorMessage" class="d-flex align-items-center mt-4">
                             <i class="fa-solid fa-circle-exclamation me-2"></i>
