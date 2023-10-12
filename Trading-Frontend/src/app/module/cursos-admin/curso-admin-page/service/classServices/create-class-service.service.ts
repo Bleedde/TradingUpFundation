@@ -13,8 +13,8 @@ export class CreateClassServiceService {
 
   API: string = "http://localhost:8080/class";
 
-  createUserService(userDomain: ClassDomain): Observable<GenericResponse> {
+  createClassService(classDomain: ClassDomain): Observable<GenericResponse> {
     return this.http
-    .post<GenericResponse>(this.API + "/class _create", userDomain )
+    .post<GenericResponse>(this.API + "/class_create", classDomain )
   }
 }
