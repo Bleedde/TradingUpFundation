@@ -15,10 +15,12 @@ import { ClassDomain } from './domains/ClassDomain';
 })
 export class ClasesGrabadasComponent implements OnInit{
 
+  youtubeVideo: String = 'https://www.youtube.com/embed/';
+
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
   classForm!: FormGroup;
   classDomain!: ClassDomain;
-  listClassDomain: ClassDomain[] = [];
+  listClassDomain: ClassDomain [] = [];
   editClassDomain!: boolean;
   id!: number;
 
@@ -41,9 +43,8 @@ export class ClasesGrabadasComponent implements OnInit{
       classLevel: [0, [Validators.required]],
       urlVideo: ['', [Validators.required]],
     });
-
     // Marcar una URL como segura antes de usarla en tu plantilla
-    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.classForm.controls['urlVideo'].value);
+    
   }
 
   ngOnInit(): void {
@@ -55,9 +56,9 @@ export class ClasesGrabadasComponent implements OnInit{
       urlVideo: ['', [Validators.required]],
     });
 
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.classForm.controls['urlVideo'].value);
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.classForm.value;
-
 
     this.readClassesService();
   }
@@ -100,24 +101,27 @@ export class ClasesGrabadasComponent implements OnInit{
     this.readClassesServiceService.readClassesService().subscribe(
       (res: GenericResponse) => {
         for (let classItem of res.objectResponse) {
+          let url = classItem.urlVideo;
+          classItem.urlVideo = this.youtubeVideo + url;
+          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classItem.urlVideo);
+          classItem.urlVideo = this.safeUrl;
           this.listClassDomain.push(classItem);
         }
       }
     )
+
+
+
   }
 
   editClass(i: number) {
     this.editClassDomain = true;
     this.id = i;
     this.class = this.listClassDomain[this.id];
-
-
+    
     console.log(this.class);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
     this.nivelSeleccionado = this.class.classLevel.toString();
-
-
-
 
     /*Actualiza el FormGroup con los valores iniciales*/
     this.classForm.patchValue({
