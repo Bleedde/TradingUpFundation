@@ -21,20 +21,26 @@ public class ExerciseTradingEntity {
     @Column(name = "exercise_title", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String title;
 
-    @Column(name = "exercise_subtitle", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String subtitle;
-
     @Column(name = "exercise_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String descripcion;
+    private String description;
 
     @Column(name = "exercise_data_start", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataStart;
 
     @Column(name = "exercise_data_end", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dataEnd;
 
     @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
+
+    @Column(name = "exercise_url_homework", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    private String urlHomework;
+
+    @Column(name = "exercise_comment", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
+    private String comment;
+
+    @Column(name = "exercise_url_solution", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
+    private String urlSolution;
 }

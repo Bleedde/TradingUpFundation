@@ -14,6 +14,6 @@ public class ClassTradingDTO implements Serializable {
     private Integer id;
     private String title;
     private String description;
-    private Integer classLevel;
+    private Integer level;
     private String urlVideo;
 }

@@ -20,4 +20,8 @@ public class ExerciseTradingDTO implements Serializable {
     private String description;
     private String dataEnd;
     private String dataStart;
+    private Integer level;
+    private String urlHomework;
+    private String comment;
+    private String urlSolution;
 }
