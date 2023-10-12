@@ -13,7 +13,7 @@ export class DeleteClassServiceService {
 
     API: string = "http://localhost:8080/class";
 
-  deleteUserService(userDomain :  ClassDomain) :Observable<GenericResponse> {
-    return this.http.post<GenericResponse>(this.API + "/class_delete", userDomain)
+  deleteClassService(classDomain :  ClassDomain) :Observable<GenericResponse> {
+    return this.http.post<GenericResponse>(this.API + "/class_delete", classDomain)
   }
 }
