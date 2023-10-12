@@ -42,7 +42,8 @@ import { CompartidoModule } from '../compartido/compartido.module';
     DeleteUserServiceService
   ],
   exports:[
-    UsuariosComponent
+    UsuariosComponent,
+    ClasesGrabadasComponent
   ]
 })
 export class CursosAdminModule { }

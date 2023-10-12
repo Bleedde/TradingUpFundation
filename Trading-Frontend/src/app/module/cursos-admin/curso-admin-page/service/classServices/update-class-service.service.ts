@@ -13,7 +13,7 @@ export class UpdateClassServiceService {
 
   API: string = "http://localhost:8080/class";
 
-updateUserService(userDomain : ClassDomain) :Observable<GenericResponse> {
-  return this.http.put<GenericResponse>(this.API + "/class_update", userDomain)
+updateClassService(classDomain : ClassDomain) :Observable<GenericResponse> {
+  return this.http.put<GenericResponse>(this.API + "/class_update", classDomain)
 }
 }

@@ -36,6 +36,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
     @Override//Annotation that represent an override for a method in another interface
     @PostMapping(IClassTradingEndPoints.URL_CLASS_CREATE)
     public ResponseEntity<ObjectResponse> createClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
+           System.out.println("valores de prueba:");
         return this.service.createClassTrading(classTradingDTO);
     }
 
