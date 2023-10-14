@@ -1,4 +1,3 @@
-/** 
 package com.trading.TradingUpFundationBackend.security;
 
 import javax.crypto.Cipher;
@@ -8,14 +7,15 @@ import java.util.Base64;
 
 public class SecretEncryption {
     public static String encrypt(String secret, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, key);
+
         byte[] encryptedBytes = cipher.doFinal(secret.getBytes());
         return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
     public static String decrypt(String encryptedSecret, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] encryptedBytes = Base64.getDecoder().decode(encryptedSecret);
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
@@ -24,7 +24,7 @@ public class SecretEncryption {
 
     public static void main(String[] args) throws Exception {
         String secret = "ThisIsASecret";
-        SecretKey key = new SecretKeySpec("YourSecretKey".getBytes(), "AES");
+        SecretKey key = new SecretKeySpec("YourSecretKey".getBytes(), "AES/ECB/PKCS5Padding");
 
         // Encrypt the secret
         String encryptedSecret = encrypt(secret, key);
@@ -35,4 +35,3 @@ public class SecretEncryption {
         System.out.println("Decrypted: " + decryptedSecret);
     }
 }
-*/

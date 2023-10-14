@@ -25,9 +25,11 @@ CREATE TABLE solution_exercise_trading(
     solution_exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     solution_exercise_comment VARCHAR(255) NOT NULL,
     solution_exercise_url_solution VARCHAR(255) NOT NULL,
-    solution_exercise_id_user INTEGER,
-    solution_exercise_id_exercise INTEGER
-
+    user_id  INTEGER,
+    exercise_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES user_trading(user_id),
+    FOREIGN KEY (exercise_id) REFERENCES exercise_trading(exercise_id)
+);
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     book_name VARCHAR(255) NOT NULL,
