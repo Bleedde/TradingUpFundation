@@ -64,7 +64,6 @@ export class ClasesGrabadasComponent implements OnInit{
   }
 
   createClass() {
-
     if (!this.classForm.valid) {
       return this.classForm.markAllAsTouched()
     }
@@ -84,7 +83,7 @@ export class ClasesGrabadasComponent implements OnInit{
         urlVideo: this.classForm.controls['urlVideo'].value
       }
 
-      console.log("prueba de class" + this.classDomain)
+      console.log("prueba de class" + this.classDomain.classLevel)
 
       this.createClassServiceService.createClassService(this.classDomain).subscribe(
         (res: GenericResponse) => {
@@ -159,7 +158,7 @@ export class ClasesGrabadasComponent implements OnInit{
   }
 
   deleteClass(i: number) {
-    this.deleteClassServiceService.deleteClassService(this.listClassDomain[i]).subscribe(
+    this.deleteClassServiceService.deleteClassService(this.listClassDomain[i].id).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
 

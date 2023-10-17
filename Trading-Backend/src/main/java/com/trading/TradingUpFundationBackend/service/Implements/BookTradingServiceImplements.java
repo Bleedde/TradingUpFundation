@@ -116,7 +116,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
             }else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL)
-                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .objectResponse(IBookTradingResponse.BOOK_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -168,7 +168,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
 
     /**
      * Method that deletes a book
-     * @param bookTradingDTO The book to be deleted
+     * @param   id The book to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface

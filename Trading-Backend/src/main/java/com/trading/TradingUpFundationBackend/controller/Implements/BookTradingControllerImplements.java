@@ -73,7 +73,7 @@ public class BookTradingControllerImplements implements IBookTradingController {
 
     /**
      * Method which deletes a book using the service BookTradingServiceImplements
-     * @param bookTradingDTO The book to be deleted
+     * @param id The book to be deleted
      * @return The method "deleteBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
