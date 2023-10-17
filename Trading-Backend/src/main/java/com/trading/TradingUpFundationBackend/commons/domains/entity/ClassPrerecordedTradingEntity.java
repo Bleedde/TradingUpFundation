@@ -4,7 +4,7 @@ import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
 
 @Entity//Annotation to represent this class like an entity of a database for spring
-@Table(name = "classes_prerecording_trading")//Annotation to represent this entity like a table in a database represented with a name
+@Table(name = "class_prerecorded_trading")//Annotation to represent this entity like a table in a database represented with a name
 @Data//Annotation to represent normal methods of a normal class
 /**
  * Class to represent the entity "class_trading" in the modeling "TradingUpFoundation"

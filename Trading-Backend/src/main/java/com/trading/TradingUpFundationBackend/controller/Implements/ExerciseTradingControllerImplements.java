@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;//Package that gives the possib
  * Controller of the entity ExerciseTrading
  * Implements the interface IExerciseTradingController
  */
-public class ExerciseControllerImplements implements IExerciseTradingController {
+public class ExerciseTradingControllerImplements implements IExerciseTradingController {
 
     private final ExerciseTradingServiceImplements service;
 
@@ -24,7 +24,7 @@ public class ExerciseControllerImplements implements IExerciseTradingController 
      * Constructor that injects dependencies to this class
      * @param service
      */
-    public ExerciseControllerImplements(ExerciseTradingServiceImplements service) {
+    public ExerciseTradingControllerImplements(ExerciseTradingServiceImplements service) {
         this.service = service;
     }
 
