@@ -83,12 +83,12 @@
     <div class="card-body cards d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex flex-column flex-md-row col-12">
             
-            <iframe height="315" class="col-12 col-md-8 me-2"
+            <iframe class="col-12 col-md-8 me-2 rounded"
                [src]="classItem.urlVideo" frameborder="0" allowfullscreen>
             </iframe>
 
             <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
-                <h4>{{classItem.title}}</h4>
+                <h4 class="text-center">{{classItem.title}}</h4>
 
                 <p class="text-center">{{classItem.description}}</p>
                 <div>
@@ -96,8 +96,6 @@
                     &nbsp;
                     <a (click)="deleteClass(i)" class="btn boton btn-danger"><i class="fa-solid fa-trash"></i></a>
                 </div>
-
-
             </div>
         </div>
 

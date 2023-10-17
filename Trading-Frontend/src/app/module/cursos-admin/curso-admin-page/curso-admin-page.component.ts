@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CompartidoServiceService } from '../../service/compartido-service.service';
+import { UserDomain } from './components/usuarios/domains/UserDomain';
 
 
 @Component({
@@ -9,6 +10,20 @@ import { CompartidoServiceService } from '../../service/compartido-service.servi
 })
 export class CursoAdminPageComponent {
   
+
+  constructor(private compartidoServiceService: CompartidoServiceService){
+    let userModel: UserDomain;
+    userModel = this.compartidoServiceService.getData();
+
+    const currentUrl = window.location.href;
+    console.log('URL exacta:', currentUrl);
+    if(currentUrl == "http://localhost:4200/cursosAdmin-page")
+    {
+      this.compartidoServiceService.setData(false)
+    }
+    
+
+  }
 
   sectionUser!: boolean;
   sectionContent!: boolean;

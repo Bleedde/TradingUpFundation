@@ -34,9 +34,6 @@ a{
     }
 }
 
-
-
-
 @media screen and (max-width:1980px) {
     .mt_5{
         margin-top: calc(14vh);
@@ -76,6 +73,11 @@ button:activate{
 input{
     border-color: rgb(73, 72, 72);
     border-width: 1px;
+}
+
+
+input::placeholder{
+    color: #4C288A;;
 }
 
 /* CSS personalizado */
