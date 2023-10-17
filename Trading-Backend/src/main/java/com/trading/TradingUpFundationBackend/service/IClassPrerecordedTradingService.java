@@ -42,5 +42,5 @@ public interface IClassPrerecordedTradingService {
      * @param classPrerecordedTradingDTO The class prerecorded to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO);
+    ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(Integer id);
 }

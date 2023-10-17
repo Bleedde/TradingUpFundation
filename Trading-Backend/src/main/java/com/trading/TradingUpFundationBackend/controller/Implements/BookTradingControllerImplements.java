@@ -77,8 +77,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "deleteBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @PostMapping(IBookTradingEndPoints.URL_BOOK_DELETE)
-    public ResponseEntity<ObjectResponse> deleteBookTrading(@RequestBody BookTradingDTO bookTradingDTO) {
-        return this.service.deleteBookTrading(bookTradingDTO);
+    @DeleteMapping(IBookTradingEndPoints.URL_BOOK_DELETE)
+    public ResponseEntity<ObjectResponse> deleteBookTrading(@PathVariable Integer id) {
+        return this.service.deleteBookTrading(id);
     }
 }
