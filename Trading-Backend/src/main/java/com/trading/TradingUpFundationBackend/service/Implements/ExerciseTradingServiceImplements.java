@@ -172,9 +172,9 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteExerciseTrading(ExerciseTradingDTO exerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer id) {
         try {
-            Optional<ExerciseTradingEntity> exerciseTradingExist = this.repository.findById(exerciseTradingDTO.getId());
+            Optional<ExerciseTradingEntity> exerciseTradingExist = this.repository.findById(id);
             if (exerciseTradingExist.isPresent()) {
                 this.repository.deleteById(exerciseTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()

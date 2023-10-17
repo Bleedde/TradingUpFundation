@@ -78,8 +78,8 @@ public class ClassTradingControllerImplements implements IClassTradingController
      * @return The method "deleteClassTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @PostMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
-    public ResponseEntity<ObjectResponse> deleteClassTrading(@RequestBody ClassTradingDTO classTradingDTO) {
-        return this.service.deleteClassTrading(classTradingDTO);
+    @DeleteMapping(IClassTradingEndPoints.URL_CLASS_DELETE)
+    public ResponseEntity<ObjectResponse> deleteClassTrading(@PathVariable Integer id) {
+        return this.service.deleteClassTrading(id);
     }
 }

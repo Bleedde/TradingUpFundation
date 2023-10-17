@@ -78,8 +78,8 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
      */
     @Override//Annotation that represent an override for a method in another interface
     @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_DELETE)
-    public ResponseEntity<ObjectResponse> deleteExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO) {
-        return this.service.deleteExerciseTrading(exerciseTradingDTO);
+    public ResponseEntity<ObjectResponse> deleteExerciseTrading(@PathVariable Integer id) {
+        return this.service.deleteExerciseTrading(id);
     }
 }
 

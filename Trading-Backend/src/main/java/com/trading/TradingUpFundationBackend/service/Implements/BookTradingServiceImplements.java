@@ -172,9 +172,9 @@ public class BookTradingServiceImplements implements IBookTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteBookTrading(BookTradingDTO bookTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteBookTrading(Integer id) {
         try{
-            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
+            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(id);
             if(bookTradingExist.isPresent()){
                 this.repository.deleteById(bookTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()

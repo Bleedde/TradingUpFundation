@@ -41,5 +41,5 @@ public interface IClassTradingService {
      * @param classTradingDTO The class to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO);
+    ResponseEntity<ObjectResponse> deleteClassTrading(Integer id);
 }
