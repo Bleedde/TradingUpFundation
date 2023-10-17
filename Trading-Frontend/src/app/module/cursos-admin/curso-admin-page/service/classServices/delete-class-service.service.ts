@@ -14,6 +14,6 @@ export class DeleteClassServiceService {
     API: string = "http://localhost:8080/class";
 
   deleteClassService(classDomain :  ClassDomain) :Observable<GenericResponse> {
-    return this.http.post<GenericResponse>(this.API + "/class_delete", classDomain)
+    return this.http.delete<GenericResponse>(this.API + "/class_delete" + classDomain)
   }
 }
