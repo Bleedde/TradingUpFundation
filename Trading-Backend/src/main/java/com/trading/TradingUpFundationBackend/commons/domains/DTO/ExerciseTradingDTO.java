@@ -16,8 +16,10 @@ import java.io.Serializable;//Package to use this class like a byte sequence
 
 public class ExerciseTradingDTO implements Serializable {
     private Integer id;
-    private String subtitle;
+    private String title;
     private String description;
-    private String dataEnd;
     private String dataStart;
+    private String dataEnd;
+    private Integer level;
+    private String urlHomework;
 }

@@ -40,6 +40,7 @@ public interface IBookTradingController {
      */
     @PutMapping//Annotation that represent the header of an HTTP query that updates a book with a PUT query
     ResponseEntity<ObjectResponse> updateBookTrading(@RequestBody BookTradingDTO bookTradingDTO);
-    @PostMapping//Annotation that represent the header of an HTTP query that deletes a book with a DELETE query
-    ResponseEntity<ObjectResponse> deleteBookTrading(@RequestBody BookTradingDTO bookTradingDTO);//Method that deletes a book
+
+    @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a book with a DELETE query
+    ResponseEntity<ObjectResponse> deleteBookTrading(@PathVariable Integer id);//Method that deletes a book
 }

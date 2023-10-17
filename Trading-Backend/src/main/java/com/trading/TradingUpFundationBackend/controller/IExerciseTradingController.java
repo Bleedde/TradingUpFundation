@@ -47,5 +47,5 @@ public interface IExerciseTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes an exercise with a DELETE query
-    ResponseEntity<ObjectResponse> deleteExerciseTrading(@PathVariable ExerciseTradingDTO exerciseTradingDTO);
+    ResponseEntity<ObjectResponse> deleteExerciseTrading(@PathVariable Integer id);
 }

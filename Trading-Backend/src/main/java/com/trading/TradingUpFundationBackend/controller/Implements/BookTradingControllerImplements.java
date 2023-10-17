@@ -1,23 +1,15 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.IBookTradingEndPoints;//Package which gives the urls for the entity BookTrading
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that gives responses to possible situations
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;//Package that allows to use the serializable version of the entity BookTradingEntity; BookTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like a object
 import com.trading.TradingUpFundationBackend.controller.IBookTradingController;//Package which implements the interface IBookTradingController
 import com.trading.TradingUpFundationBackend.service.Implements.BookTradingServiceImplements;//Package which bring the service of the entity BookTrading
 
-import io.swagger.v3.oas.annotations.Operation;//Package which give the annotation @Operation from the swagger documentation
-import io.swagger.v3.oas.annotations.media.Content;//Package which give the annotation @Content from the swagger documentation
-import io.swagger.v3.oas.annotations.media.Schema;//Package which give the annotation @Schema from the swagger documentation
-import io.swagger.v3.oas.annotations.responses.ApiResponse;//Package which give the annotation @ApiResponse from the swagger documentation
-import io.swagger.v3.oas.annotations.responses.ApiResponses;//Package which give the annotation @ApiResponses from the swagger documentation
-import io.swagger.v3.oas.annotations.tags.Tag;//Package which give the annotation @Tag from the swagger documentation
 import org.springframework.http.ResponseEntity;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
 @RestController//Annotation that represents this class like  a controller in the spring context
-@Tag(name = "Book database manage system", description = "Create. read one, rad all, update and delete a book")//Annotation that documents this controller
 @RequestMapping(IBookTradingEndPoints.URL_BOOK)//Annotation which represent this controller with a specific url
 
 /**
@@ -42,20 +34,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "createBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @Operation(summary = "Create a new book")//Annotation used to describe a specific action that the method is going to do
-    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
     @PostMapping(IBookTradingEndPoints.URL_BOOK_CREATE)
-    public ResponseEntity<ObjectResponse> createBookTrading(BookTradingDTO bookTradingDTO) {
+    public ResponseEntity<ObjectResponse> createBookTrading(@RequestBody BookTradingDTO bookTradingDTO) {
         return this.service.createBookTrading(bookTradingDTO);
     }
 
@@ -65,20 +45,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "readBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @Operation(summary = "Read a book")
-    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
     @GetMapping(IBookTradingEndPoints.URL_BOOK_READ)
-    public ResponseEntity<ObjectResponse> readBookTrading(BookTradingDTO bookTradingDTO) {
+    public ResponseEntity<ObjectResponse> readBookTrading(@RequestBody BookTradingDTO bookTradingDTO) {
         return this.service.readABookTrading(bookTradingDTO);
     }
 
@@ -87,18 +55,6 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "readBooksTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @Operation(summary = "Read all the books")
-    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
     @GetMapping(IBookTradingEndPoints.URL_BOOKS_READ)
     public ResponseEntity<ObjectResponse> readBooksTrading() {
         return this.service.readBooksTrading();
@@ -110,20 +66,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "updatedBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @Operation(summary = "Update a book")
-    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
     @GetMapping(IBookTradingEndPoints.URL_BOOK_UPDATE)
-    public ResponseEntity<ObjectResponse> updateBookTrading(BookTradingDTO bookTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateBookTrading(@RequestBody BookTradingDTO bookTradingDTO) {
         return this.service.updateBookTrading(bookTradingDTO);
     }
 
@@ -133,20 +77,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      * @return The method "deleteBookTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @Operation(summary = "Delete a book")
-    @ApiResponses(value = {//Annotation that gives specific information of some HTTP response with swagger documentation
-            @ApiResponse(responseCode  = "200", description = Responses.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ObjectResponse.class))}),
-            @ApiResponse(responseCode  = "400", description = Responses.CREATE_FAIL,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = Responses.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = Responses.INTERNAL_SERVER_ERROR,
-                    content = {@Content(mediaType = "application/json")})})
-    @PostMapping(IBookTradingEndPoints.URL_BOOK_DELETE)
-    public ResponseEntity<ObjectResponse> deleteBookTrading(BookTradingDTO bookTradingDTO) {
-        return this.service.deleteBookTrading(bookTradingDTO);
+    @DeleteMapping(IBookTradingEndPoints.URL_BOOK_DELETE)
+    public ResponseEntity<ObjectResponse> deleteBookTrading(@PathVariable Integer id) {
+        return this.service.deleteBookTrading(id);
     }
 }

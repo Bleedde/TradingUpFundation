@@ -74,7 +74,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
     public ResponseEntity<ObjectResponse> readABookTrading(BookTradingDTO bookTradingDTO) {
         try {
             Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
-            if(!bookTradingExist.isPresent()){
+            if(bookTradingExist.isPresent()){
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(bookTradingExist)
@@ -83,7 +83,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
             }else{
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL)
-                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .objectResponse(IBookTradingResponse.BOOK_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
@@ -172,9 +172,9 @@ public class BookTradingServiceImplements implements IBookTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteBookTrading(BookTradingDTO bookTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteBookTrading(Integer id) {
         try{
-            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
+            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(id);
             if(bookTradingExist.isPresent()){
                 this.repository.deleteById(bookTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()

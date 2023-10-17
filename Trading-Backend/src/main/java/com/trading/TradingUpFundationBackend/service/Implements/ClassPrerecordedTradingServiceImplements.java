@@ -155,9 +155,9 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
     }
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(Integer id) {
             try {
-                Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
+                Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(id);
                 if (classPrerecordedTradingExist.isPresent()) {
                     this.repository.deleteById(classPrerecordedTradingExist.get().getId());
                     return ResponseEntity.ok(ObjectResponse.builder()

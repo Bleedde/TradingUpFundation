@@ -41,5 +41,5 @@ public interface IBookTradingService {
      * @param bookTradingDTO The book to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> deleteBookTrading(BookTradingDTO bookTradingDTO);
+    ResponseEntity<ObjectResponse> deleteBookTrading(Integer id);
 }

@@ -171,9 +171,9 @@ public class ClassTradingServiceImplements implements IClassTradingService {
      */
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> deleteClassTrading(ClassTradingDTO classTradingDTO) {
+    public ResponseEntity<ObjectResponse> deleteClassTrading(Integer id) {
         try {
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
+            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(id);
             if(classTradingExist.isPresent()){
                 this.repository.deleteById(classTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()

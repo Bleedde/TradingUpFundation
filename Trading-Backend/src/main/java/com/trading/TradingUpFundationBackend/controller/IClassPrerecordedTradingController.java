@@ -46,6 +46,6 @@ public interface IClassPrerecordedTradingController {
      * @param classPrerecordedTradingDTO The class prerecorded to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
-    @PostMapping//Annotation that represent the header of an HTTP query that deletes a class with a DELETE query
-    ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(@RequestBody ClassPrerecordedTradingDTO classPrerecordedTradingDTO);
+    @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a class with a DELETE query
+    ResponseEntity<ObjectResponse> deleteClassPrerecordedTrading(@PathVariable Integer id);
 }
