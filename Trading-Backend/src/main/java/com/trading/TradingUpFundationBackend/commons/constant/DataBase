@@ -17,8 +17,17 @@ CREATE TABLE exercise_trading(
     exercise_description VARCHAR(255) NOT NULL,
     exercise_data_start VARCHAR(255) NOT NULL,
     exercise_data_end VARCHAR(255) NOT NULL,
-    exercise_subtitle VARCHAR(255) NOT NULL,
-    exercise_level INTEGER NOT NULL
+    exercise_level INTEGER NOT NULL,
+    exercise_url_homework VARCHAR(255) NOT NULL
+);
+CREATE TABLE solution_exercise_trading(
+    solution_exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    solution_exercise_comment VARCHAR(255) NOT NULL,
+    solution_exercise_url_solution VARCHAR(255) NOT NULL,
+    user_id  INTEGER,
+    exercise_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES user_trading(user_id),
+    FOREIGN KEY (exercise_id) REFERENCES exercise_trading(exercise_id)
 );
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,

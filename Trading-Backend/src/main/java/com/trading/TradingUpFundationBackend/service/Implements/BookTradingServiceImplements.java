@@ -74,7 +74,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
     public ResponseEntity<ObjectResponse> readABookTrading(BookTradingDTO bookTradingDTO) {
         try {
             Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
-            if(!bookTradingExist.isPresent()){
+            if(bookTradingExist.isPresent()){
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(bookTradingExist)
@@ -83,7 +83,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
             }else{
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL)
-                        .objectResponse(IBookTradingResponse.BOOK_REGISTRATION_FAILED)
+                        .objectResponse(IBookTradingResponse.BOOK_SEARCHED_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
             }

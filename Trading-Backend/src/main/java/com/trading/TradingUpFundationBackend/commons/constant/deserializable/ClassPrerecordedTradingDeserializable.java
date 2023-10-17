@@ -22,7 +22,7 @@ public class ClassPrerecordedTradingDeserializable {
     public ClassPrerecordedTradingEntity convertClassPrerecordedTradingDTOToClassPrerecordedTradingEntity(ClassPrerecordedTradingDTO classPrerecordedTradingDTO){
         ClassPrerecordedTradingEntity classPrerecordedTradingEntity = new ClassPrerecordedTradingEntity();
         try{
-            classPrerecordedTradingEntity = Mapper.modelMapper().map(classPrerecordedTradingEntity, ClassPrerecordedTradingEntity.class);
+            classPrerecordedTradingEntity = Mapper.modelMapper().map(classPrerecordedTradingDTO, ClassPrerecordedTradingEntity.class);
         } catch (Exception e){
             log.error(Responses.INTERNAL_SERVER_ERROR + e);
         }
