@@ -27,31 +27,28 @@ a{
 
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:768px) {
     .mt_5{
-        margin-top: calc(10vh);
-        margin-bottom: calc(10vh);
+        margin-top: calc(12vh);
+        margin-bottom: calc(12vh);
     }
 }
 
-
-
-
-@media screen and (max-width:1999px) {
+@media screen and (max-width:1980px) {
     .mt_5{
-        margin-top: calc(10vh);
-        margin-bottom: calc(10vh);
+        margin-top: calc(14vh);
+        margin-bottom: calc(14vh);
     }
 }
 
-@media screen and (max-width:2000px) {
+@media screen and (max-width:1366px) {
     .mt_5{
-        margin-top: calc(15vh);
-        margin-bottom: calc(15vh);
+        margin-top: calc(8vh);
+        margin-bottom: calc(8vh);
     }
 }
 
-@media screen and (max-width:1400px) {
+@media screen and (max-width:1440px) {
     .mt_5{
         margin-top: calc(10vh);
         margin-bottom: calc(10vh);
@@ -60,13 +57,27 @@ a{
 
 button{
     background-color: #552486!important;
-    border-color: #9956dd;
+    border-color: #9956dd!important;
+    transition: all 0.5s;
+}
 
+button:hover{
+    background-color: #9956dd !important;
+    box-shadow: 0 0 10px 0px #ba74ff;
+}
+
+button:activate{
+    background-color: #6727a7;
 }
 
 input{
     border-color: rgb(73, 72, 72);
     border-width: 1px;
+}
+
+
+input::placeholder{
+    color: #4C288A;;
 }
 
 /* CSS personalizado */

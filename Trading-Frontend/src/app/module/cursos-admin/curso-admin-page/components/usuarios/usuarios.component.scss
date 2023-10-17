@@ -17,8 +17,7 @@
      border-color: rgb(46, 9, 68); /* Agrega un borde sombreado de color rojo al hacer foco */
  }
 
- .form-select:focus{
-    
+.form-select:focus{
     box-shadow: 0 0 10px 0px #ba74ff;
     border-color: rgb(46, 9, 68); 
  }
