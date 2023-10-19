@@ -4,6 +4,6 @@ export interface ClassPrerecordedDomain{
     id: number;
     title: string;
     description: string;
-    classPrerecordedLevel: number;
     urlVideo:  SafeResourceUrl;
+    classPrerecordedLevel: number;
 }

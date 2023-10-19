@@ -13,7 +13,7 @@ export class DeletePrerecordedServiceService {
 
     API: string = "http://localhost:8080/class_prerecorded";
 
-  deleteClassPrerecordedService(classPrerecordedDomain: ClassPrerecordedDomain) :Observable<GenericResponse> {
-    return this.http.post<GenericResponse>(this.API + "/class_prerecorded_delete", classPrerecordedDomain)
+  deleteClassPrerecordedService(id: number) :Observable<GenericResponse> {
+    return this.http.delete<GenericResponse>(this.API + "/class_prerecorded_delete" + id)
   }
 }

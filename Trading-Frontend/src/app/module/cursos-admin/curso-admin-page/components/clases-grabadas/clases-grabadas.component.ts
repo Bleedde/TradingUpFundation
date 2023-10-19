@@ -96,7 +96,7 @@ export class ClasesGrabadasComponent implements OnInit{
     }
   }
 
-  readClassesService() {
+ readClassesService() {
     this.readClassesServiceService.readClassesService().subscribe(
       (res: GenericResponse) => {
         for (let classItem of res.objectResponse) {
@@ -108,9 +108,6 @@ export class ClasesGrabadasComponent implements OnInit{
         }
       }
     )
-
-
-
   }
 
   editClass(i: number) {

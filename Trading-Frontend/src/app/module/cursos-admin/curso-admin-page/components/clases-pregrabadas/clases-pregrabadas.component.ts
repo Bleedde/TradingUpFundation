@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CreatePrerecordedServiceService } from '../../service/prerecordedClassServices/create-prerecorded-service.service';
 import { DeletePrerecordedServiceService } from '../../service/prerecordedClassServices/delete-prerecorded-service.service';
-import { ReadPrerecordedServiceService } from '../../service/prerecordedClassServices/read-prerecorded-service.service';
+import { ReadPrerecordedsServiceService } from '../../service/prerecordedClassServices/read-prerecordeds-service.service';
 import { UpdatePrerecordedServiceService } from '../../service/prerecordedClassServices/update-prerecorded-service.service';
 import { GenericResponse } from '../../service/response/GenericResponse';
 import { ClassPrerecordedDomain } from './domains/ClassPrerecordedDomain';
@@ -36,7 +36,7 @@ export class ClasesPregrabadasComponent implements OnInit{
 
   classPrerecorded!: ClassPrerecordedDomain;
 
-  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService, private readPrerecordedServiceService: ReadPrerecordedServiceService, private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer){
+  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer){
     this.classPrerecordedForm = formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -97,7 +97,7 @@ export class ClasesPregrabadasComponent implements OnInit{
   }
 
   readClassesPrerecordedService() {
-    this.readPrerecordedServiceService.readClassPrerecordedService().subscribe(
+    this.readPrerecordedsServiceService.readClassesPrerecordedService().subscribe(
       (res: GenericResponse) => {
         for (let classPrerecordedItem of res.objectResponse) {
           let url = classPrerecordedItem.urlVideo;
@@ -139,8 +139,7 @@ export class ClasesPregrabadasComponent implements OnInit{
         : this.listClassPrerecordedDomain[this.id].classPrerecordedLevel,
       urlVideo: this.classPrerecordedForm.controls['urlVideo'].value != ''
         ? this.classPrerecordedForm.controls['urlVideo'].value
-        : this.listClassPrerecordedDomain[this.id].urlVideo,
-
+        : this.listClassPrerecordedDomain[this.id].urlVideo
     }
 
     this.updatePrerecordedServiceService.updateClassPrerecordedService(this.classPrerecorded).subscribe(
@@ -155,7 +154,7 @@ export class ClasesPregrabadasComponent implements OnInit{
   }
 
   deleteClassPrerecorded(i: number) {
-    this.deletePrerecordedServiceService.deleteClassPrerecordedService(this.listClassPrerecordedDomain[i]).subscribe(
+    this.deletePrerecordedServiceService.deleteClassPrerecordedService(this.listClassPrerecordedDomain[i].id).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
 
