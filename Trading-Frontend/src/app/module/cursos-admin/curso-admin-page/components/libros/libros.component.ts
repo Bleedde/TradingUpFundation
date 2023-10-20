@@ -50,7 +50,7 @@ export class LibrosComponent implements OnInit{
       description: ['',[Validators.required]],
       image: ['',[Validators.required]],
       file: ['',[Validators.required]],
-      bookLevel: [0,[Validators.required]]
+      bookLevel: [this.nivelSeleccionado]
     });
 
     // Guarda los valores iniciales del formulario
@@ -113,7 +113,7 @@ export class LibrosComponent implements OnInit{
     });
   }
 
-  updateClass() {
+  updateBook() {
     this.book = {
       id: this.listBookDomain[this.id].id,
       name: this.bookForm.controls['name'].value != ''
@@ -144,7 +144,7 @@ export class LibrosComponent implements OnInit{
     )
   }
 
-  deleteClass(i: number) {
+  deleteBook(i: number) {
     this.DeleteBookServiceService.deleteBookService(this.listBookDomain[i].id).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
@@ -163,10 +163,6 @@ export class LibrosComponent implements OnInit{
     // Restablecer el formulario a los valores iniciales guardados
     this.bookForm.setValue(this.valoresInicialesFormulario);
   }
-  
-  
-  
-  
   
   /*
   book1 = BOOK1;
