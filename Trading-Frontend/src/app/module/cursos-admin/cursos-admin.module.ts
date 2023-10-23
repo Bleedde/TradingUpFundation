@@ -11,11 +11,12 @@ import { ClasesGrabadasComponent } from './curso-admin-page/components/clases-gr
 import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases-pregrabadas/clases-pregrabadas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateUserServiceService } from './curso-admin-page/service/userServices/create-user-service.service';
-import { ReadUsersServiceService } from './curso-admin-page/service/userServices/read-users-service.service';
-import { UpdateUsersServiceService } from './curso-admin-page/service/userServices/update-users-service.service';
-import { DeleteUserServiceService } from './curso-admin-page/service/userServices/delete-user-service.service';
+
 import { CompartidoModule } from '../compartido/compartido.module';
+import { CreateUserServiceService } from '../service/userServices/create-user-service.service';
+import { ReadUsersServiceService } from '../service/userServices/read-users-service.service';
+import { UpdateUsersServiceService } from '../service/userServices/update-users-service.service';
+import { DeleteUserServiceService } from '../service/userServices/delete-user-service.service';
 
 @NgModule({
   declarations: [

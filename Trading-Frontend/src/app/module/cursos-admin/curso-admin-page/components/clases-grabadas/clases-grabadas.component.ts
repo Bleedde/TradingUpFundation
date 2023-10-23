@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CreateClassServiceService } from '../../service/classServices/create-class-service.service';
-import { DeleteClassServiceService } from '../../service/classServices/delete-class-service.service';
-import { ReadClassesServiceService } from '../../service/classServices/read-classes-service.service';
-import { UpdateClassServiceService } from '../../service/classServices/update-class-service.service';
-import { GenericResponse } from '../../service/response/GenericResponse';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { CreateClassServiceService } from '../../../../service/classServices/create-class-service.service';
+import { DeleteClassServiceService } from '../../../../service/classServices/delete-class-service.service';
+import { ReadClassesServiceService } from '../../../../service/classServices/read-classes-service.service';
+import { UpdateClassServiceService } from '../../../../service/classServices/update-class-service.service';
+
 import { ClassDomain } from './domains/ClassDomain';
 
 @Component({

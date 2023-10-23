@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CreatePrerecordedServiceService } from '../../service/prerecordedClassServices/create-prerecorded-service.service';
-import { DeletePrerecordedServiceService } from '../../service/prerecordedClassServices/delete-prerecorded-service.service';
-import { ReadPrerecordedsServiceService } from '../../service/prerecordedClassServices/read-prerecordeds-service.service';
-import { UpdatePrerecordedServiceService } from '../../service/prerecordedClassServices/update-prerecorded-service.service';
-import { GenericResponse } from '../../service/response/GenericResponse';
+import { CreatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/create-prerecorded-service.service';
+import { DeletePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/delete-prerecorded-service.service';
+import { ReadPrerecordedsServiceService } from 'src/app/module/service/prerecordedClassServices/read-prerecordeds-service.service';
+import { UpdatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/update-prerecorded-service.service';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+
+
 import { ClassPrerecordedDomain } from './domains/ClassPrerecordedDomain';
 
 @Component({

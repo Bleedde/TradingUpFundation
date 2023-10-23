@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClassPrerecordedDomain} from '../../components/clases-pregrabadas/domains/ClassPrerecordedDomain';
-import { GenericResponse } from '../response/GenericResponse';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { ClassPrerecordedDomain } from '../../cursos-admin/curso-admin-page/components/clases-pregrabadas/domains/ClassPrerecordedDomain';
+
 
 @Injectable({
   providedIn: 'root'

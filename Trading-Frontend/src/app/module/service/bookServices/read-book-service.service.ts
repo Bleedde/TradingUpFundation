@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenericResponse } from '../response/GenericResponse';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeleteBookServiceService {
+export class ReadBookServiceService {
 
   constructor(private http: HttpClient) { }
 
   API: string = "http://localhost:8080/book";
 
-  deleteBookService(id: number) :Observable<GenericResponse> {
-    return this.http.delete<GenericResponse>(this.API + "/book_delete" + id)
+  readBookService() :Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(this.API + "/book_read")
   }
 }

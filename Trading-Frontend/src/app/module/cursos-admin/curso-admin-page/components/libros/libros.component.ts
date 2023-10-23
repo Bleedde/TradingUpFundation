@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateBookServiceService } from 'src/app/module/service/bookServices/create-book-service.service';
+import { DeleteBookServiceService } from 'src/app/module/service/bookServices/delete-book-service.service';
+import { ReadBooksServiceService } from 'src/app/module/service/bookServices/read-books-service.service';
+import { UpdateBookServiceService } from 'src/app/module/service/bookServices/update-book-service.service';
 import { BOOK1, BOOK2 } from 'src/app/shared/constants';
-import { CreateBookServiceService } from '../../service/bookServices/create-book-service.service';
-import { DeleteBookServiceService } from '../../service/bookServices/delete-book-service.service';
-import { ReadBooksServiceService } from '../../service/bookServices/read-books-service.service';
-import { UpdateBookServiceService } from '../../service/bookServices/update-book-service.service';
-import { GenericResponse } from '../../service/response/GenericResponse';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+
+
 import { BookDomain } from './domains/BookDomain';
 
 @Component({
