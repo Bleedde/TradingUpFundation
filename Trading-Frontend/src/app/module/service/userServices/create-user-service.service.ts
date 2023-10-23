@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-import { UserDomain } from '../../cursos-admin/curso-admin-page/components/usuarios/domains/UserDomain';
+import { UserDomain } from '../../../shared/domains/UserDomain';
 
 
 

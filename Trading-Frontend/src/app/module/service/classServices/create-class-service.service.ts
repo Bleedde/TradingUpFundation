@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-import { ClassDomain } from '../../cursos-admin/curso-admin-page/components/clases-grabadas/domains/ClassDomain';
+import { ClassDomain } from '../../../shared/domains/ClassDomain';
 
 
 @Injectable({

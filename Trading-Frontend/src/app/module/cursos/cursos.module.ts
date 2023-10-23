@@ -10,11 +10,10 @@ import { EditUserComponent } from './cursos-page/components/edit-user/edit-user.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     CursosPageComponent,
-    EditUserComponent
+    EditUserComponent,
   ],
   imports: [
     CommonModule,

@@ -87,21 +87,15 @@
 <div class="card cards mb-5" *ngFor="let classPrerecordedItem of listClassPrerecordedDomain; let i = index">
     <div class="card-body cards d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex flex-column flex-md-row col-12">
-            
             <iframe class="col-12 col-md-8 rounded" [src]="classPrerecordedItem.urlVideo" frameborder="0" allowfullscreen></iframe>
-
-
             <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
                 <h4>{{classPrerecordedItem.title}}</h4>
-                
                 <p class="text-center px-2">{{classPrerecordedItem.description}}</p>
                 <div>
                     <a (click)="editClassPrerecorded(i)" class="btn boton btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                     &nbsp;
                     <a (click)="deleteClassPrerecorded(i)" class="btn boton btn-danger"><i class="fa-solid fa-trash"></i></a>
                 </div>
-                
-                
             </div>
         </div>
         

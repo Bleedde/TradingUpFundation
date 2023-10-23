@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-import { ExerciseDomain } from '../../cursos-admin/curso-admin-page/components/ejercicios-clase/domains/ExerciseDomain';
+import { ExerciseDomain } from '../../../shared/domains/ExerciseDomain';
 
 @Injectable({
   providedIn: 'root'

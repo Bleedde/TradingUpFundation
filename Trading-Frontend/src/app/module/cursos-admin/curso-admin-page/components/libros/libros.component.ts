@@ -8,7 +8,7 @@ import { BOOK1, BOOK2 } from 'src/app/shared/constants';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
 
-import { BookDomain } from './domains/BookDomain';
+import { BookDomain } from '../../../../../shared/domains/BookDomain';
 
 @Component({
   selector: 'app-libros',
@@ -104,7 +104,7 @@ export class LibrosComponent implements OnInit{
     this.editBookDomain = true;
     this.id = i;
     this.book = this.listBookDomain[this.id];
-    
+
     console.log(this.book);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
     this.nivelSeleccionado = this.book.bookLevel.toString();

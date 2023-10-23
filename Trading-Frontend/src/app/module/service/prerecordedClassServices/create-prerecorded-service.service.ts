@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-import { ClassPrerecordedDomain } from '../../cursos-admin/curso-admin-page/components/clases-pregrabadas/domains/ClassPrerecordedDomain';
+import { ClassPrerecordedDomain } from '../../../shared/domains/ClassPrerecordedDomain';
 
 
 @Injectable({

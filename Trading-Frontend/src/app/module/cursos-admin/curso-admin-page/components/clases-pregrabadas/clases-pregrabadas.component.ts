@@ -8,7 +8,7 @@ import { UpdatePrerecordedServiceService } from 'src/app/module/service/prerecor
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
 
-import { ClassPrerecordedDomain } from './domains/ClassPrerecordedDomain';
+import { ClassPrerecordedDomain } from '../../../../../shared/domains/ClassPrerecordedDomain';
 
 @Component({
   selector: 'app-clases-pregrabadas',

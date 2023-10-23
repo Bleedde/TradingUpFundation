@@ -41,7 +41,7 @@ public class LoginTradingServiceImplements implements ILoginTradingService {
                 if(userTradingExist.get().isStatus()) {
                     return ResponseEntity.ok(ObjectResponse.builder()
                             .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
-                            .objectResponse(userTradingExist)
+                            .objectResponse(userTradingExist.get())
                             .httpResponse(HttpStatus.OK.value())
                             .build());
                 } else {

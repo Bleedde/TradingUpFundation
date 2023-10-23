@@ -7,7 +7,7 @@ import { DeleteClassServiceService } from '../../../../service/classServices/del
 import { ReadClassesServiceService } from '../../../../service/classServices/read-classes-service.service';
 import { UpdateClassServiceService } from '../../../../service/classServices/update-class-service.service';
 
-import { ClassDomain } from './domains/ClassDomain';
+import { ClassDomain } from '../../../../../shared/domains/ClassDomain';
 
 @Component({
   selector: 'app-clases-grabadas',
