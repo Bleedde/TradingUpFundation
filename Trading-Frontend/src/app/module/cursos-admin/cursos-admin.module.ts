@@ -7,8 +7,6 @@ import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuari
 import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
 import { LibrosComponent } from './curso-admin-page/components/libros/libros.component';
 import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
-import { ClasesGrabadasComponent } from './curso-admin-page/components/clases-grabadas/clases-grabadas.component';
-import { ClasesPregrabadasComponent } from './curso-admin-page/components/clases-pregrabadas/clases-pregrabadas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,8 +23,6 @@ import { DeleteUserServiceService } from '../service/userServices/delete-user-se
     ContenidoCursoComponent,
     LibrosComponent,
     EjerciciosClaseComponent,
-    ClasesGrabadasComponent,
-    ClasesPregrabadasComponent
   ],
   imports: [
     CommonModule,
@@ -43,8 +39,7 @@ import { DeleteUserServiceService } from '../service/userServices/delete-user-se
     DeleteUserServiceService
   ],
   exports:[
-    UsuariosComponent,
-    ClasesGrabadasComponent
+
   ]
 })
 export class CursosAdminModule { }

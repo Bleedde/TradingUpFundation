@@ -1,4 +1,4 @@
-<div class="container pb-5">
+<div class="container pb-5" *ngIf="!clasesPregrabadas">
     <div class="card cardF">
         <div class="card-header py-3 text-center text-white fs-5">
             Registro de clases pregrabadas
@@ -91,7 +91,7 @@
             <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
                 <h4>{{classPrerecordedItem.title}}</h4>
                 <p class="text-center px-2">{{classPrerecordedItem.description}}</p>
-                <div>
+                <div *ngIf="!clasesPregrabadas">
                     <a (click)="editClassPrerecorded(i)" class="btn boton btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                     &nbsp;
                     <a (click)="deleteClassPrerecorded(i)" class="btn boton btn-danger"><i class="fa-solid fa-trash"></i></a>
@@ -129,6 +129,7 @@
         
     </div>
 </div>-->
+
 
 
 
