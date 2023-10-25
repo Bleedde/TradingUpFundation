@@ -41,12 +41,6 @@ public class ExerciseTradingEntity {
     @Column(name = "exercise_url_homework", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String urlHomework;
 
-    @Column(name = "exercise_comment", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
-    private String comment;
-
-    @Column(name = "exercise_url_solution", length = 255, nullable = true)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255
-    private String urlSolution;
-
     @OneToMany(mappedBy = "exerciseTradingEntity")
     @JsonManagedReference
     @JsonIgnore

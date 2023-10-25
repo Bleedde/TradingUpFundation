@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to repre
 import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;//Package that allows to use the annotation @Component to represent this class like a spring component
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
@@ -25,8 +26,14 @@ import java.util.Optional;
  */
 public class LoginTradingServiceImplements implements ILoginTradingService {
 
-    @Autowired//Annotation that injects the dependencies from de repository related with the entity "UserTrading"
-    private IUserTradingRepository repository;
+    private final IUserTradingRepository repository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public LoginTradingServiceImplements(IUserTradingRepository repository, BCryptPasswordEncoder passwordEncoder){
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     /**
      * Method that log-in a user
@@ -36,27 +43,38 @@ public class LoginTradingServiceImplements implements ILoginTradingService {
     @Override
     public ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO) {
         try {
+            String rawPassword = userTradingDTO.getPassword();
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
-            if (userTradingExist.isPresent() && userTradingExist.get().getPassword().equals(userTradingDTO.getPassword()) ) {
-                if(userTradingExist.get().isStatus()) {
-                    return ResponseEntity.ok(ObjectResponse.builder()
-                            .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
-                            .objectResponse(userTradingExist)
-                            .httpResponse(HttpStatus.OK.value())
-                            .build());
+            if(userTradingExist.isPresent()){
+                String encodePassword = userTradingExist.get().getPassword();
+                if (passwordEncoder.matches(rawPassword, encodePassword)) {
+                    if(userTradingExist.get().isStatus()) {
+                        return ResponseEntity.ok(ObjectResponse.builder()
+                                .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
+                                .objectResponse(userTradingExist)
+                                .httpResponse(HttpStatus.OK.value())
+                                .build());
+                    } else {
+                        return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                                .message(Responses.OPERATION_FAIL)
+                                .httpResponse(HttpStatus.BAD_REQUEST.value())
+                                .objectResponse(IUserTradingResponse.USER_LOGIN_STATUS_FALSE)
+                                .build());
+                    }
                 } else {
                     return ResponseEntity.badRequest().body(ObjectResponse.builder()
                             .message(Responses.OPERATION_FAIL)
+                            .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
                             .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .objectResponse(IUserTradingResponse.USER_LOGIN_STATUS_FALSE)
                             .build());
                 }
-            } else {
-                return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                        .message(Responses.OPERATION_FAIL)
-                        .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
-                        .httpResponse(HttpStatus.BAD_REQUEST.value())
-                        .build());
+            }else{
+                log.error(IUserTradingResponse.USER_LOGIN_PASSWORD_ERROR);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ObjectResponse.builder()
+                    .message(Responses.INTERNAL_SERVER_ERROR)
+                    .objectResponse(null)
+                    .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .build());
             }
         } catch (Exception e) {
             log.error(Responses.INTERNAL_SERVER_ERROR, e);
