@@ -45,6 +45,7 @@ public class LoginTradingServiceImplements implements ILoginTradingService {
         try {
             String rawPassword = userTradingDTO.getPassword();
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
+<<<<<<< HEAD
             if(userTradingExist.isPresent()){
                 String encodePassword = userTradingExist.get().getPassword();
                 if (passwordEncoder.matches(rawPassword, encodePassword)) {
@@ -61,6 +62,15 @@ public class LoginTradingServiceImplements implements ILoginTradingService {
                                 .objectResponse(IUserTradingResponse.USER_LOGIN_STATUS_FALSE)
                                 .build());
                     }
+=======
+            if (userTradingExist.isPresent() && userTradingExist.get().getPassword().equals(userTradingDTO.getPassword()) ) {
+                if(userTradingExist.get().isStatus()) {
+                    return ResponseEntity.ok(ObjectResponse.builder()
+                            .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
+                            .objectResponse(userTradingExist.get())
+                            .httpResponse(HttpStatus.OK.value())
+                            .build());
+>>>>>>> f22a554da229e4748819701167b6c38c01f6ba4c
                 } else {
                     return ResponseEntity.badRequest().body(ObjectResponse.builder()
                             .message(Responses.OPERATION_FAIL)

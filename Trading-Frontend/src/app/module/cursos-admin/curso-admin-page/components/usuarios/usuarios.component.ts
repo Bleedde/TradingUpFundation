@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { GenericResponse } from '../../service/response/GenericResponse';
-import { CreateUserServiceService } from '../../service/userServices/create-user-service.service';
-import { DeleteUserServiceService } from '../../service/userServices/delete-user-service.service';
-import { ReadUsersServiceService } from '../../service/userServices/read-users-service.service';
-import { UpdateUsersServiceService } from '../../service/userServices/update-users-service.service';
-import { UserDomain } from './domains/UserDomain';
+
+
+import { UserDomain } from '../../../../../shared/domains/UserDomain';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { ReadUsersServiceService } from 'src/app/module/service/userServices/read-users-service.service';
+import { CreateUserServiceService } from 'src/app/module/service/userServices/create-user-service.service';
+import { DeleteUserServiceService } from 'src/app/module/service/userServices/delete-user-service.service';
+import { UpdateUsersServiceService } from 'src/app/module/service/userServices/update-users-service.service';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
 
 @Component({

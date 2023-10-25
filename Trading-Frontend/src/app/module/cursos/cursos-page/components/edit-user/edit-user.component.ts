@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDomain } from 'src/app/module/cursos-admin/curso-admin-page/components/usuarios/domains/UserDomain';
-import { GenericResponse } from 'src/app/module/cursos-admin/curso-admin-page/service/response/GenericResponse';
-import { ReadUserServiceService } from 'src/app/module/cursos-admin/curso-admin-page/service/userServices/read-user-service.service';
-import { UpdateUsersServiceService } from 'src/app/module/cursos-admin/curso-admin-page/service/userServices/update-users-service.service';
+import { UserDomain } from 'src/app/shared/domains/UserDomain';
+
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
+import { ReadUserServiceService } from 'src/app/module/service/userServices/read-user-service.service';
+import { UpdateUsersServiceService } from 'src/app/module/service/userServices/update-users-service.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -21,7 +22,7 @@ export class EditUserComponent implements OnInit {
 
   constructor(public formulary: FormBuilder,
     private readUserServiceService: ReadUserServiceService, private updateUserService: UpdateUsersServiceService, 
-    private compartidoServiceService: CompartidoServiceService ){
+    private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService ){
     this.userForm = formulary.group({
       name : ['', [Validators.required]],
       email : ['', [Validators.required, Validators.email]],
@@ -40,6 +41,10 @@ export class EditUserComponent implements OnInit {
 
   readDataUser(){
     this.user = this.compartidoServiceService.getData();
+  }
+
+  datosUser(){
+    
   }
 
   updateUser(){

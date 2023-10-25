@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CreateClassServiceService } from '../../service/classServices/create-class-service.service';
-import { DeleteClassServiceService } from '../../service/classServices/delete-class-service.service';
-import { ReadClassesServiceService } from '../../service/classServices/read-classes-service.service';
-import { UpdateClassServiceService } from '../../service/classServices/update-class-service.service';
-import { GenericResponse } from '../../service/response/GenericResponse';
-import { ClassDomain } from './domains/ClassDomain';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { CreateClassServiceService } from '../../../../service/classServices/create-class-service.service';
+import { DeleteClassServiceService } from '../../../../service/classServices/delete-class-service.service';
+import { ReadClassesServiceService } from '../../../../service/classServices/read-classes-service.service';
+import { UpdateClassServiceService } from '../../../../service/classServices/update-class-service.service';
+
+import { ClassDomain } from '../../../../../shared/domains/ClassDomain';
 
 @Component({
   selector: 'app-clases-grabadas',
@@ -64,7 +65,6 @@ export class ClasesGrabadasComponent implements OnInit{
   }
 
   createClass() {
-
     if (!this.classForm.valid) {
       return this.classForm.markAllAsTouched()
     }
@@ -84,7 +84,7 @@ export class ClasesGrabadasComponent implements OnInit{
         urlVideo: this.classForm.controls['urlVideo'].value
       }
 
-      console.log("prueba de class" + this.classDomain)
+      console.log("prueba de class" + this.classDomain.classLevel)
 
       this.createClassServiceService.createClassService(this.classDomain).subscribe(
         (res: GenericResponse) => {
@@ -97,7 +97,7 @@ export class ClasesGrabadasComponent implements OnInit{
     }
   }
 
-  readClassesService() {
+ readClassesService() {
     this.readClassesServiceService.readClassesService().subscribe(
       (res: GenericResponse) => {
         for (let classItem of res.objectResponse) {
@@ -109,9 +109,6 @@ export class ClasesGrabadasComponent implements OnInit{
         }
       }
     )
-
-
-
   }
 
   editClass(i: number) {
@@ -159,7 +156,7 @@ export class ClasesGrabadasComponent implements OnInit{
   }
 
   deleteClass(i: number) {
-    this.deleteClassServiceService.deleteClassService(this.listClassDomain[i]).subscribe(
+    this.deleteClassServiceService.deleteClassService(this.listClassDomain[i].id).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
 

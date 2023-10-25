@@ -36,7 +36,9 @@ public class ClassTradingServiceImplements implements IClassTradingService {
      */
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO classTradingDTO) {
+        System.out.println(classTradingDTO);
         try{
+            System.out.println("prueba dentro try catch");
             Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
             if(!classTradingExist.isPresent()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);

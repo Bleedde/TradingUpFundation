@@ -4,7 +4,7 @@
             Registro de clases pregrabadas
         </div>
         <div class="card-body p-5">
-            <form action="">
+            <form *ngIf="!editClassPrerecordedDomain" (submit)="createClassPrerecorded()" [formGroup]="classPrerecordedForm">
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
@@ -20,52 +20,90 @@
                 <div class="row mb-3">
                     <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
                     <div class="col-sm-10">
-                        <select name="" id="" class="form-select" formControlName="level">
-                            <option selected>Nivel 1</option>
-                            <option>Nivel 2</option>
-                            <option>Nivel 3</option>
-                            <option>Nivel 4</option>
+                        <select class="form-select" formControlName="classPrerecordedLevel">
+                            <option *ngFor="let nivel of niveles" [value]="nivel.value"
+                                [selected]="nivel.value === nivelSeleccionado">
+                                {{nivel.label}}
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="text" class="col-sm-2 col-form-label">Video:</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" formControlName="file">
+                    <input type="text" class="form-control" formControlName="urlVideo">
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <button type="submit" class="btn text-white px-5 buttonF">Agregar</button>
                 </div>
             </form>
+
+            <!--Editar una clase Pregrabada-->
+
+            <form *ngIf="editClassPrerecordedDomain" (submit)="updateClassPrerecorded()" [formGroup]="classPrerecordedForm">
+                <div class="row mb-3">
+                    <label for="title" class="col-sm-2 col-form-label">Título:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="title" placeholder="{{classPrerecorded.title}}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
+                    <div class="col-sm-10">
+                    <input type="email" class="form-control" formControlName="description" placeholder="{{classPrerecorded.description}}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" formControlName="classPrerecordedLevel">
+                            <option *ngFor="let nivel of niveles" [value]="nivel.value">
+                                {{nivel.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="text" class="col-sm-2 col-form-label">Video:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="urlVideo" placeholder="Ingresa el nuevo video">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn text-white px-5 buttonF me-md-2 me-0 mb-3 mb-md-0">Actualizar</button>
+                    <a class="btn text-white px-5 buttonF" (click)="cancelarEdicion()">Cancelar</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="card cards mb-5">
+<!--Editar classPrerecorded-->
+
+
+
+
+<div class="card cards mb-5" *ngFor="let classPrerecordedItem of listClassPrerecordedDomain; let i = index">
     <div class="card-body cards d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex flex-column flex-md-row col-12">
-            
-            <iframe class="col-12 col-md-8 rounded" src="https://www.youtube.com/embed/pqiWYU5yNv0" frameborder="0" allowfullscreen></iframe>
-
-
+            <iframe class="col-12 col-md-8 rounded" [src]="classPrerecordedItem.urlVideo" frameborder="0" allowfullscreen></iframe>
             <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
-                <h4>Patrones de Velas</h4>
-                
-                <p class="text-center px-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae blanditiis suscipit incidunt esse rem nisi, totam quidem ea possimus, aliquam odit quas laborum deleniti autem aliquid eum doloribus eaque atque nemo consequatur. Dolor vel quia quae quibusdam. Dicta, suscipit.</p>
+                <h4>{{classPrerecordedItem.title}}</h4>
+                <p class="text-center px-2">{{classPrerecordedItem.description}}</p>
                 <div>
-                    <a href="#" class="btn boton btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a (click)="editClassPrerecorded(i)" class="btn boton btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                     &nbsp;
-                    <a href="#" class="btn boton btn-danger"><i class="fa-solid fa-trash"></i></a>
+                    <a (click)="deleteClassPrerecorded(i)" class="btn boton btn-danger"><i class="fa-solid fa-trash"></i></a>
                 </div>
-                
-                
             </div>
         </div>
         
     </div>
 </div>
 
+
+<!--
 <div class="card cards mb-5">
     <div class="card-body cards d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex flex-column flex-md-row col-12">
@@ -90,7 +128,7 @@
         </div>
         
     </div>
-</div>
+</div>-->
 
 
 

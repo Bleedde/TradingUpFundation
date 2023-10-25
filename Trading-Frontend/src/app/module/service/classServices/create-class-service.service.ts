@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClassDomain } from '../../components/clases-grabadas/domains/ClassDomain';
-import { GenericResponse } from '../response/GenericResponse';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { ClassDomain } from '../../../shared/domains/ClassDomain';
+
 
 @Injectable({
   providedIn: 'root'

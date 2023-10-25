@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CompartidoServiceService } from '../../service/compartido-service.service';
-import { UserDomain } from './components/usuarios/domains/UserDomain';
+import { UserDomain } from '../../../shared/domains/UserDomain';
 
 
 @Component({

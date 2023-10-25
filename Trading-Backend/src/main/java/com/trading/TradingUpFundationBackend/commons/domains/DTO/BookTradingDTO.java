@@ -20,5 +20,5 @@ public class BookTradingDTO implements Serializable {
     private String description;
     private String image;
     private String file;
-    private Integer level;
+    private Integer bookLevel;
 }

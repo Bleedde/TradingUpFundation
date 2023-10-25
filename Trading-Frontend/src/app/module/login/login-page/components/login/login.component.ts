@@ -3,13 +3,15 @@ import { IMAGEN_LOGO, LOGIN } from 'src/app/shared/constants';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginServiceService } from '../../service/login-service.service';
-import { GeneralResponse } from 'src/app/shared/response/GeneralResponse';
+
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service'
-import { UserDomain } from 'src/app/module/cursos-admin/curso-admin-page/components/usuarios/domains/UserDomain';
+import { UserDomain } from 'src/app/shared/domains/UserDomain';
 import { GuardianValidateService } from 'src/app/guardian/guardian-validate.service';
 import { GuardianValidateCursosService } from 'src/app/guardian/cursosGuardian/guardian-validate-cursos.service';
 import { RoutGuardianService } from 'src/app/guardian/rout-guardian.service';
 import { RoutCursosGuardianService } from 'src/app/guardian/cursosGuardian/rout-cursos-guardian.service';
+import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class LoginComponent {
   logo = IMAGEN_LOGO;
   userForm !: FormGroup;
 
-  constructor(private router: Router, private formulary:FormBuilder, private loginService:LoginServiceService, private compartidoServiceService: CompartidoServiceService, private routGuardianService: RoutGuardianService, private RoutCursosGuardianService: RoutCursosGuardianService) {
+  constructor(private router: Router, private formulary:FormBuilder, private loginService:LoginServiceService, private compartidoServiceService: CompartidoServiceService, private routGuardianService: RoutGuardianService, private RoutCursosGuardianService: RoutCursosGuardianService, private datosUserServiceService: DatosUserServiceService) {
     this.userForm = this.formulary.group({
       email : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required, Validators.nullValidator]],
@@ -45,15 +47,18 @@ export class LoginComponent {
       }
       
       this.loginService.loginService(params).subscribe(
-        (res: GeneralResponse) => {
+        (res: GenericResponse) => {
           console.log("respuesta " + res.message)
           if(res.objectResponse.userRole == "admin"){
+
 
             this.routGuardianService.generalTokenSave("access succesfuly")
             this.router.navigate(['cursosAdmin-page']);
             this.compartidoServiceService.setData(res.objectResponse)
           }
           if(res.objectResponse.userRole == "user"){
+
+            this.datosUserServiceService.setUser(res.objectResponse.id)
 
             this.RoutCursosGuardianService.cursosTokenSave("access succesfuly")
             this.router.navigate(['cursos-page']);

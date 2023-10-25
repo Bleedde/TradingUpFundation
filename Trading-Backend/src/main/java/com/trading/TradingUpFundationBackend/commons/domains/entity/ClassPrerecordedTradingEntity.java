@@ -25,5 +25,5 @@ public class ClassPrerecordedTradingEntity {
     private String urlVideo;
 
     @Column(name = "class_prerecorded_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
-    private Integer level;
+    private Integer classPrerecordedLevel;
 }
