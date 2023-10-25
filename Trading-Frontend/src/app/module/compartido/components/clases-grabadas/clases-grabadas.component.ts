@@ -25,6 +25,7 @@ export class ClasesGrabadasComponent implements OnInit{
   id!: number;
 
   clasesGrabadas!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -41,6 +42,7 @@ export class ClasesGrabadasComponent implements OnInit{
   constructor(public formulary: FormBuilder, private createClassServiceService: CreateClassServiceService, private readClassesServiceService: ReadClassesServiceService, private updateClassServiceService: UpdateClassServiceService, private deleteClassServiceService: DeleteClassServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
 
     this.clasesGrabadas = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
 
     this.classForm = formulary.group({
       title: ['', [Validators.required]],

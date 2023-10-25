@@ -105,7 +105,7 @@
 <div class="container col-10 mb-5" *ngFor="let exerciseItem of listExerciseDomain; let i = index">
     <div class="card cardF">
         <div class="card-header py-2 text-center text-white d-flex justify-content-between">
-            {{exercise.title}}
+            {{exerciseItem.title}}
             <div class="d-flex justify-content-center align-items-center">
             <i class="fa-solid fa-pen-to-square me-2"></i>
             <i class="fa-solid fa-trash"></i>
@@ -115,19 +115,16 @@
             <div class="row col-12">
                 <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
                     <div class="">
-                        <p>{{exerciseItem.description}}</p>
+                        <p>Descripcción: {{exerciseItem.description}}</p>
                     </div>
                     <div class="">
-                        <p>{{exerciseItem.dataStart}}</p>
+                        <p>Fecha de Inicio: {{exerciseItem.dataStart}}</p>
                     </div>
                     <div class="">
-                        <p>{{exerciseItem.dataEnd}}</p>
+                        <p>Fecha de Entrega: {{exerciseItem.dataEnd}}</p>
                     </div>
                     <div class="">
-                        <p>{{exerciseItem.level}}</p>
-                    </div>
-                    <div class=" mb-4">
-                        <p>{{exerciseItem.urlHomework}}</p>
+                        <p>Nivel: {{exerciseItem.level}}</p>
                     </div>
                 </div>
                 <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
