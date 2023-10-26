@@ -7,6 +7,8 @@ import { ClasesGrabadasComponent } from './components/clases-grabadas/clases-gra
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClasesPregrabadasComponent } from './components/clases-pregrabadas/clases-pregrabadas.component';
+import { LibrosComponent } from './components/libros/libros.component';
+
 
 
 
@@ -16,7 +18,8 @@ import { ClasesPregrabadasComponent } from './components/clases-pregrabadas/clas
     SlideVarComponent,
     StartAComponent,
     ClasesGrabadasComponent,
-    ClasesPregrabadasComponent
+    ClasesPregrabadasComponent,
+    LibrosComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { ClasesPregrabadasComponent } from './components/clases-pregrabadas/clas
     SlideVarComponent,
     StartAComponent,
     ClasesGrabadasComponent,
-    ClasesPregrabadasComponent
+    ClasesPregrabadasComponent,
+    LibrosComponent
   ]
 })
 export class CompartidoModule { }

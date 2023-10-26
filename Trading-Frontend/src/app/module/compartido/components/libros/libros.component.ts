@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateBookServiceService } from 'src/app/module/service/bookServices/create-book-service.service';
 import { DeleteBookServiceService } from 'src/app/module/service/bookServices/delete-book-service.service';
 import { ReadBooksServiceService } from 'src/app/module/service/bookServices/read-books-service.service';
 import { UpdateBookServiceService } from 'src/app/module/service/bookServices/update-book-service.service';
-import { BOOK1, BOOK2 } from 'src/app/shared/constants';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { BookDomain } from 'src/app/shared/domains/BookDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-
-
-import { BookDomain } from '../../../../../shared/domains/BookDomain';
 
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
   styleUrls: ['./libros.component.scss']
 })
-export class LibrosComponent implements OnInit{
-  
+export class LibrosComponent {
   bookForm!: FormGroup;
   bookDomain!: BookDomain;
   listBookDomain: BookDomain [] = [];
   editBookDomain!: boolean;
   id!: number;
+
+  libros!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -35,7 +35,11 @@ export class LibrosComponent implements OnInit{
 
   book!: BookDomain;
 
-  constructor(public formulary: FormBuilder, private createBookServiceService: CreateBookServiceService, private readBooksServiceService: ReadBooksServiceService, private UpdateBookServiceService: UpdateBookServiceService, private DeleteBookServiceService: DeleteBookServiceService){
+  constructor(public formulary: FormBuilder, private createBookServiceService: CreateBookServiceService, private readBooksServiceService: ReadBooksServiceService, private updateBookServiceService: UpdateBookServiceService, private deleteBookServiceService: DeleteBookServiceService,private compartidoServiceService: CompartidoServiceService){
+
+    this.libros = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
+
     this.bookForm = formulary.group({
       name: ['',[Validators.required]],
       description: ['',[Validators.required]],
@@ -135,7 +139,7 @@ export class LibrosComponent implements OnInit{
         : this.listBookDomain[this.id].bookLevel,
     }
 
-    this.UpdateBookServiceService.updateBookService(this.book).subscribe(
+    this.updateBookServiceService.updateBookService(this.book).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
         console.log(res.httpResponse)
@@ -147,7 +151,7 @@ export class LibrosComponent implements OnInit{
   }
 
   deleteBook(i: number) {
-    this.DeleteBookServiceService.deleteBookService(this.listBookDomain[i].id).subscribe(
+    this.deleteBookServiceService.deleteBookService(this.listBookDomain[i].id).subscribe(
       (res: GenericResponse) => {
         console.log("Esta es la Respuesta: " + res.message)
 
@@ -183,5 +187,3 @@ export class LibrosComponent implements OnInit{
       ];
   }*/
 }
-
-  
