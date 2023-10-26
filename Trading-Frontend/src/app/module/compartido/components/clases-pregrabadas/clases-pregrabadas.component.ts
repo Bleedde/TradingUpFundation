@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { CreatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/create-prerecorded-service.service';
 import { DeletePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/delete-prerecorded-service.service';
 import { ReadPrerecordedsServiceService } from 'src/app/module/service/prerecordedClassServices/read-prerecordeds-service.service';
 import { UpdatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/update-prerecorded-service.service';
+import { ClassPrerecordedDomain } from 'src/app/shared/domains/ClassPrerecordedDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-
-
-import { ClassPrerecordedDomain } from '../../../../../shared/domains/ClassPrerecordedDomain';
 
 @Component({
   selector: 'app-clases-pregrabadas',
   templateUrl: './clases-pregrabadas.component.html',
   styleUrls: ['./clases-pregrabadas.component.scss']
 })
-export class ClasesPregrabadasComponent implements OnInit{
-
+export class ClasesPregrabadasComponent {
   youtubeVideo: String = 'https://www.youtube.com/embed/';
 
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
@@ -25,6 +23,9 @@ export class ClasesPregrabadasComponent implements OnInit{
   listClassPrerecordedDomain: ClassPrerecordedDomain [] = [];
   editClassPrerecordedDomain!: boolean;
   id!: number;
+
+  clasesPregrabadas!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -38,7 +39,11 @@ export class ClasesPregrabadasComponent implements OnInit{
 
   classPrerecorded!: ClassPrerecordedDomain;
 
-  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer){
+  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
+
+    this.clasesPregrabadas = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
+
     this.classPrerecordedForm = formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -174,7 +179,4 @@ export class ClasesPregrabadasComponent implements OnInit{
     // Restablecer el formulario a los valores iniciales guardados
     this.classPrerecordedForm.setValue(this.valoresInicialesFormulario);
   }
-
-  
-
 }

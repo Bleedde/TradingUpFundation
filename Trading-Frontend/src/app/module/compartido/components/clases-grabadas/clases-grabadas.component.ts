@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CreateClassServiceService } from 'src/app/module/service/classServices/create-class-service.service';
+import { DeleteClassServiceService } from 'src/app/module/service/classServices/delete-class-service.service';
+import { ReadClassesServiceService } from 'src/app/module/service/classServices/read-classes-service.service';
+import { UpdateClassServiceService } from 'src/app/module/service/classServices/update-class-service.service';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { ClassDomain } from 'src/app/shared/domains/ClassDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
-import { CreateClassServiceService } from '../../../../service/classServices/create-class-service.service';
-import { DeleteClassServiceService } from '../../../../service/classServices/delete-class-service.service';
-import { ReadClassesServiceService } from '../../../../service/classServices/read-classes-service.service';
-import { UpdateClassServiceService } from '../../../../service/classServices/update-class-service.service';
-
-import { ClassDomain } from '../../../../../shared/domains/ClassDomain';
 
 @Component({
   selector: 'app-clases-grabadas',
@@ -15,7 +15,6 @@ import { ClassDomain } from '../../../../../shared/domains/ClassDomain';
   styleUrls: ['./clases-grabadas.component.scss']
 })
 export class ClasesGrabadasComponent implements OnInit{
-
   youtubeVideo: String = 'https://www.youtube.com/embed/';
 
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
@@ -24,6 +23,9 @@ export class ClasesGrabadasComponent implements OnInit{
   listClassDomain: ClassDomain [] = [];
   editClassDomain!: boolean;
   id!: number;
+
+  clasesGrabadas!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -37,7 +39,11 @@ export class ClasesGrabadasComponent implements OnInit{
 
   class!: ClassDomain;
 
-  constructor(public formulary: FormBuilder, private createClassServiceService: CreateClassServiceService, private readClassesServiceService: ReadClassesServiceService, private updateClassServiceService: UpdateClassServiceService, private deleteClassServiceService: DeleteClassServiceService, private sanitizer: DomSanitizer){
+  constructor(public formulary: FormBuilder, private createClassServiceService: CreateClassServiceService, private readClassesServiceService: ReadClassesServiceService, private updateClassServiceService: UpdateClassServiceService, private deleteClassServiceService: DeleteClassServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
+
+    this.clasesGrabadas = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
+
     this.classForm = formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -45,7 +51,6 @@ export class ClasesGrabadasComponent implements OnInit{
       urlVideo: ['', [Validators.required]],
     });
     // Marcar una URL como segura antes de usarla en tu plantilla
-    
   }
 
   ngOnInit(): void {
@@ -174,6 +179,4 @@ export class ClasesGrabadasComponent implements OnInit{
     // Restablecer el formulario a los valores iniciales guardados
     this.classForm.setValue(this.valoresInicialesFormulario);
   }
-
-
 }
