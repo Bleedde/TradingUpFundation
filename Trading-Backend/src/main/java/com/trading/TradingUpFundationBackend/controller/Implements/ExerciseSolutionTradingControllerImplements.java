@@ -1,9 +1,7 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.IExerciseSolutionTradingEndPoints;
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IExerciseTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutionTradingDTO;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.IExerciseSolutionTradingController;
 import com.trading.TradingUpFundationBackend.service.Implements.ExerciseSolutionTradingServiceImplements;
