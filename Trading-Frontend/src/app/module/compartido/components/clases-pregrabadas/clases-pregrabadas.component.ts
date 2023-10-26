@@ -25,6 +25,7 @@ export class ClasesPregrabadasComponent {
   id!: number;
 
   clasesPregrabadas!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -41,6 +42,7 @@ export class ClasesPregrabadasComponent {
   constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
 
     this.clasesPregrabadas = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
 
     this.classPrerecordedForm = formulary.group({
       title: ['', [Validators.required]],
