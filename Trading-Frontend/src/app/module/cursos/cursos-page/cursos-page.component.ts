@@ -32,6 +32,7 @@ export class CursosPageComponent{
     this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
     console.log("Prueba del user: " + !datos)
 
   }
@@ -44,6 +45,7 @@ export class CursosPageComponent{
     this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   modalActivateBook(datos:boolean){
@@ -54,6 +56,7 @@ export class CursosPageComponent{
     this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
     
   }
 
@@ -64,6 +67,7 @@ export class CursosPageComponent{
     this.sectionClass = false;
     this.sectionPrerecorded = false;
     this.startA = false;
+    this.sectionEditUser = false;
     this.sectionExercises = datos;
   }
 
@@ -75,6 +79,7 @@ export class CursosPageComponent{
     this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   modalActivatePrerecordeds(datos:boolean){
@@ -85,6 +90,7 @@ export class CursosPageComponent{
     this.sectionPrerecorded = datos;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   slideActivate(datos:boolean){
@@ -99,6 +105,12 @@ export class CursosPageComponent{
 
   modalActivateEditUser(datos:boolean){
     this.startA = false;
+    this.sectionUser = false;
+    this.sectionBook = false;
+    this.sectionContent = false;
+    this.sectionClass = false;
+    this.sectionExercises = false;
+    this.sectionPrerecorded = false;
     this.sectionEditUser = datos;
   }
 

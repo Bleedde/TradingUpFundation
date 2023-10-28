@@ -1,9 +1,9 @@
 <section class="min-vh-100 bg_color col-12">
-    <app-header (activateSlideVar)="slideActivate($event)" (activateSectionEditUser)="modalActivateEditUser($event)" class="h_13 col-12 fixed-top"></app-header>
+    <app-header (activateSlideVar)="slideActivate($event)" (activateSectionEditUser)="modalActivateEditUser($event)" (activateSectionEditUser)="modalActivateEditUser($event)" [datosEditUser1]="sectionEditUser" class="h_13 col-12 fixed-top"></app-header>
     <div class="d-flex col-12">
         <div class="col-6 col-sm-4 col-md-2 h_87 d-md-flex " *ngIf="slideDatos">
             <app-slide-var  (activateSectionUsers)="modalActivateUser($event)" (activateSectionContents)="modalActivateContent($event)" (activateSectionBooks)="modalActivateBook($event)" (activateSectionExercises)="modalActivateExercises($event)" (activaSectionClasses)="modalActivateClasses($event)" (activaSectionPrerecordeds)="modalActivatePrerecordeds($event)"
-            class="" [datosUser1]="sectionUser" [datosContent1]="sectionContent" [datosBooks1]="sectionBook" [datosExercises1]="sectionExercises" [datosClass1]="sectionClass" [datosPrerecorded1]="sectionPrerecorded" class="col-12"></app-slide-var>
+            class="" [datosUser1]="sectionUser" [datosContent1]="sectionContent" [datosBooks1]="sectionBook" [datosExercises1]="sectionExercises" [datosClass1]="sectionClass" [datosPrerecorded1]="sectionPrerecorded"  class="col-12"></app-slide-var>
         </div>
         <div [ngClass]="{'col-12': datosPrueba, 'col-10' : !datosPrueba}" class="d-flex flex-column p-5 h_88 bg-white">
             <div class="col-12" *ngIf="startA">
