@@ -8,7 +8,6 @@ import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingE
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.service.ILoginTradingService;//Package that allows the use of the interface "ILoginTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
-import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,7 +28,6 @@ public class LoginTradingServiceImplements implements ILoginTradingService {
     private final IUserTradingRepository repository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
     public LoginTradingServiceImplements(IUserTradingRepository repository, BCryptPasswordEncoder passwordEncoder){
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
