@@ -10,7 +10,14 @@ import { IMAGEN_LOGO } from 'src/app/shared/constants';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnChanges {
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("cambio efectuado " + changes['datosEditUser1'])
+    this.datosEditUser = this.datosEditUser1;
+  }
+
+  @Input() datosEditUser1!: boolean;
 
   @Output() activateSlideVar = new EventEmitter<boolean>();
   @Output() activateSectionEditUser = new EventEmitter<boolean>();

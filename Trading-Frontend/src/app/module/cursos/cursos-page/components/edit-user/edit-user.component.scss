@@ -8,7 +8,7 @@
 
 .card{
     border-color: #4C288A;
-    border-width: 2px;
+    border-width: 1px;
 }
 
 .form-control:focus {
@@ -39,3 +39,24 @@
 .error-placeholder::placeholder {
     color: #4C288A;
   }
+
+.bg_purple{
+    background-color: #0E0129;
+}
+
+.bi-pencil-square{
+    font-size: calc(3vh);
+}
+
+.texts{
+    font-size: calc(3vh);
+}
+
+.grabadas{
+    background-color: #3B216F!important;
+}
+
+.border-warning{
+    border-color: #9965dd!important;
+    border-width: 1px!important;
+}
