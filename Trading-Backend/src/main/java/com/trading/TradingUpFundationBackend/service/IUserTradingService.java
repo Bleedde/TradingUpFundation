@@ -21,7 +21,7 @@ public interface IUserTradingService {
      * @param userTradingDTO The user to be read
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO);
+    ResponseEntity<ObjectResponse> readUserTrading(Integer id);
 
     /**
      * Method without body which reads all the users

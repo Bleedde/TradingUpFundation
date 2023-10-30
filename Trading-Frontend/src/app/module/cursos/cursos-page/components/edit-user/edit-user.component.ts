@@ -6,8 +6,8 @@ import { CompartidoServiceService } from 'src/app/module/service/compartido-serv
 import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 import { ReadUserServiceService } from 'src/app/module/service/userServices/read-user-service.service';
 import { UpdateUsersServiceService } from 'src/app/module/service/userServices/update-users-service.service';
-import { ReadUserEmailService } from 'src/app/module/service/userServices/read-user-email.service';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -23,7 +23,7 @@ export class EditUserComponent implements OnInit {
 
   user!: UserDomain;
 
-  constructor(public formulary: FormBuilder, private updateUserService: UpdateUsersServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserEmailService: ReadUserEmailService ){
+  constructor(public formulary: FormBuilder, private updateUserService: UpdateUsersServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService ){
     this.userForm = formulary.group({
       name : ['', [Validators.required]],
       email : ['', [Validators.required, Validators.email]],
@@ -36,24 +36,22 @@ export class EditUserComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    const userEmail = this.datosUserServiceService.getUserEmail(); // Recupera el email del localStorage
+    const userId = this.datosUserServiceService.getUserId(); // Recupera el email del localStorage
 
-  if (userEmail) {
-    this.readUserEmailService.readUserEmail(userEmail).subscribe(
+  if (userId) {
+    this.readUserIdService.readUserId(userId).subscribe(
       (response: GenericResponse) => {
         if (response) {
           if (response.httpResponse === 200) {
             const userToEdit = response.objectResponse;
-
             // Llena el formulario con los datos del usuario recuperados
             this.userForm.patchValue({
               name: userToEdit.name,
               email: userToEdit.email,
-              password: userToEdit.password,
               level: userToEdit.userLevel,
               status: userToEdit.status,
               backtesting: userToEdit.backtesting,
-              auditedAccount: userToEdit.auditedAccount
+              auditedAccount: userToEdit.auditedAccount,
             });
           } else {
             console.error("El servidor respondió con un error:", response.message);

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReadUserEmailService } from './read-user-email.service';
+import { ReadUserIdService } from './read-user-id.service';
 
 describe('ReadUserEmailService', () => {
-  let service: ReadUserEmailService;
+  let service: ReadUserIdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReadUserEmailService);
+    service = TestBed.inject(ReadUserIdService);
   });
 
   it('should be created', () => {
