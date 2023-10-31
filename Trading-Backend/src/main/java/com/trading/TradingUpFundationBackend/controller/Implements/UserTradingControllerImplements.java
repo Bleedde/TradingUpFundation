@@ -42,13 +42,13 @@ public class UserTradingControllerImplements implements IUserTradingController {
 
     /**
      * Method which reads a user using the service LoginTradingServiceImplements
-     * @param userTradingDTO The be read
+     * @param id The be read
      * @return The method "readUserTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IUserTradingEndPoints.URL_USER_READ)//Annotation which represent this method with a specific endPoint
-    public ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO usertradingDTO) {
-        return this.service.readUserTrading(usertradingDTO);
+    public ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id) {
+        return this.service.readUserTrading(id);
     }
 
     /**
