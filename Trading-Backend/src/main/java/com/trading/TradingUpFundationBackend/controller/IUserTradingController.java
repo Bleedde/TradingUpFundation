@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;//Package that gives the annota
  */
 public interface IUserTradingController {
 
+    @PostMapping
+    ResponseEntity<ObjectResponse> login(@RequestBody UserTradingDTO userTradingDTO);
+
     /**
      * Method without body which log-in a user with the service UserTradingServiceImplements
      * @param userTradingDTO The user to be created
