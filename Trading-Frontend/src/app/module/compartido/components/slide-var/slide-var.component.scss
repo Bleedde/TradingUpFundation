@@ -27,6 +27,12 @@ li i{
     font-size: 8px;
 }
 
+@media screen and (max-width: 767px) {
+    li i{
+        font-size: 20px;
+    }
+}
+
 .fixed{
     position: fixed;
 }
