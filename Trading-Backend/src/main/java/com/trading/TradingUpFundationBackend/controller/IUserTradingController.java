@@ -23,11 +23,11 @@ public interface IUserTradingController {
 
     /**
      * Method without body which read a user with the service UserTradingServiceImplements
-     * @param userTradingDTO The user to be read
+     * @param id The user to be read
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping//Annotation that represent the header of an HTTP query that reads a user with a GET query
-    ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO userTradingDTO);
+    ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id);
 
     /**
      * Method without body which reads all the users with the service UserTradingServiceImplements

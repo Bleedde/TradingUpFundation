@@ -58,7 +58,7 @@ export class LoginComponent {
           }
           if (res.objectResponse.userRole == "user") {
 
-            this.datosUserServiceService.setUserEmail(res.objectResponse.email)
+            this.datosUserServiceService.setUserId(res.objectResponse.id)
 
             this.RoutCursosGuardianService.cursosTokenSave("access succesfuly")
             this.router.navigate(['cursos-page']);
