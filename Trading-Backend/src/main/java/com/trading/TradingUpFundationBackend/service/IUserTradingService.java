@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;//Package who allows the manage a
  */
 public interface IUserTradingService {
 
+    ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO);
+
     /**
      * Method without body which creates a user
      * @param userTradingDTO The user to be created
