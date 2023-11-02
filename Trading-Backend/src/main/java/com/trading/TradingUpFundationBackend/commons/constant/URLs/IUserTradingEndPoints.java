@@ -9,4 +9,5 @@ public interface IUserTradingEndPoints {
     String URL_USER_UPDATE = "/user_update";//Update a user area
     String URL_USER_READ = "/user_read{id}";//Search a user area
     String URL_USERS_READ = "/users_read";//Search all the users area
+    String URL_USER_LOGIN = "/login";
 }

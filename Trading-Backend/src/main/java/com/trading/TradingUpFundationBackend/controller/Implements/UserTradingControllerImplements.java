@@ -6,6 +6,8 @@ import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Pa
 import com.trading.TradingUpFundationBackend.controller.IUserTradingController;//Importtation of the interface with empty methods IUserController
 import com.trading.TradingUpFundationBackend.service.Implements.UserTradingServiceImplements;//Importation of the service LoginTradingServiceImplements
 
+import org.apache.catalina.User;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;//Package that allows the use a response to send data and the information of the actions to the front
 import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
@@ -26,6 +28,12 @@ public class UserTradingControllerImplements implements IUserTradingController {
      */
     public UserTradingControllerImplements(UserTradingServiceImplements service){
         this.service = service;
+    }
+
+    @Override
+    @PostMapping(IUserTradingEndPoints.URL_USER_LOGIN)
+    public ResponseEntity<ObjectResponse> login(@RequestBody UserTradingDTO userTradingDTO){
+        return service.login(userTradingDTO);
     }
 
     /**
