@@ -16,7 +16,7 @@
         </div>
     </div> 
 
-    <div class="pt-2 px-4">
+    <div [ngClass]="user ? 'pt-3 px-4' : 'pt-2 px-4'"> 
         <h4 class="text-white" type="submit" (click)="dropDown2()">
             <span class="d-none d-md-inline me-2">Clases</span>
             <i class="fa-solid fa-caret-down d-none d-md-inline"></i>

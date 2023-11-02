@@ -157,6 +157,16 @@
     </div>
 </div>
 
+<h5 class="container border  border-2 border-color border-start-0 border-end-0 col-10 text-center py-2 d-flex justify-content-center align-items-center rounded">Selecciona el contenido que deseas ver</h5>
+<div class="btn-toolbar mb-4 mt-3 d-flex justify-content-center align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+      <button type="button" class="btn btn-outline-secondary fw-bold" value="1" [(ngModel)]="buttonValue">Nivel 1</button>
+      <button type="button" class="btn btn-outline-secondary fw-bold" value="2" (click)="readByLevel()">Nivel 2</button>
+      <button type="button" class="btn btn-outline-secondary fw-bold" value="3" >Nivel 3</button>
+      <button type="button" class="btn btn-outline-secondary fw-bold" value="4">Nivel 4</button>
+    </div>
+</div>
+
 <div class="card cards mb-5" *ngFor="let classItem of listClassDomain; let i = index">
     <div class="card-body cards d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex flex-column flex-md-row col-12">
