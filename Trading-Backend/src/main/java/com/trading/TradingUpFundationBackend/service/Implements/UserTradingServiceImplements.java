@@ -208,7 +208,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
             if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
                 entity.setId(userTradingExist.get().getId());
-                String passwordEncoded = entity.getPassword();
+                String passwordEncoded = userTradingExist.get().getPassword();
                 String passwordRaw = encryption.decryptAES(passwordEncoded, secretKey);
                 if(!userTradingDTO.getPassword().equals(passwordRaw)){
                     entity.setPassword(encryption.encryptAES(userTradingDTO.getPassword(), secretKey));

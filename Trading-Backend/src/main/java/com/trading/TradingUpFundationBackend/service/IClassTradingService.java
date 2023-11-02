@@ -27,7 +27,7 @@ public interface IClassTradingService {
      * Method without body which reads all the classes
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readClassesTrading();
+    ResponseEntity<ObjectResponse> readClassesTrading(Integer level);
 
     /**
      * Method without body which updates a class

@@ -57,8 +57,8 @@ public class ClassTradingControllerImplements implements IClassTradingController
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IClassTradingEndPoints.URL_CLASSES_READ)
-    public ResponseEntity<ObjectResponse> readClassesTrading() {
-        return this.service.readClassesTrading();
+    public ResponseEntity<ObjectResponse> readClassesTrading(@PathVariable Integer level) {
+        return this.service.readClassesTrading(level);
     }
 
     /**
