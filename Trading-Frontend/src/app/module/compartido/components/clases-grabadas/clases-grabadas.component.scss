@@ -64,3 +64,20 @@ iframe{
     border-color: #9965dd!important;
     border-width: 1px!important;
 }
+
+.btn-outline-secondary{
+    background-color: rgba(255, 255, 255, 0.867);
+    color: #3B216F;
+    border-color: #3B216F;
+    border-width: 1px;
+}
+
+.btn-outline-secondary:hover{
+    background-color: #6037a9;
+    color: white;
+    border-color: white;
+}
+
+.border-color{
+    border-color: #9965dd!important;
+}
