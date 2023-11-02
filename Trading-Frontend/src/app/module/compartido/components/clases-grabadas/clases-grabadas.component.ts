@@ -26,6 +26,16 @@ export class ClasesGrabadasComponent implements OnInit {
   editClassDomain!: boolean;
   id!: number;
   buttonValue!: number
+  userToEdit: { userLevel: number } = { userLevel: 0 };
+  availableLevels = [1, 2, 3, 4]; 
+  selectedLevel: number | undefined;
+
+  buttonClicked(level: number) {
+    this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
+    this.readClassesService(this.selectedLevel);
+  }
+  
+  
 
   clasesGrabadas!: boolean;
   mensaje!: boolean;
@@ -69,7 +79,7 @@ export class ClasesGrabadasComponent implements OnInit {
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.classForm.value;
 
-    this.readClassesService();
+    this.readUserLevel();
   }
 
   createClass() {
@@ -105,20 +115,21 @@ export class ClasesGrabadasComponent implements OnInit {
     }
   }
 
-  readByLevel() {
+  readUserLevel() {
     const userId = this.datosUserServiceService.getUserId();
     this.readUserIdService.readUserId(userId!).subscribe(
       (res: GenericResponse) => {
         if (res.httpResponse === 200) {
-        const userToEdit = res.objectResponse;
-        console.log(userToEdit.userLevel)
+          this.userToEdit = res.objectResponse;
+          console.log(this.userToEdit.userLevel);
         }
       }
-    )
+    );
   }
 
-  readClassesService() {
-    this.readClassesServiceService.readClassesService().subscribe(
+  readClassesService(level: number) {
+    this.listClassDomain = [] 
+    this.readClassesServiceService.readClassesforLevelService(level).subscribe(
       (res: GenericResponse) => {
         for (let classItem of res.objectResponse) {
           let url = classItem.urlVideo;
