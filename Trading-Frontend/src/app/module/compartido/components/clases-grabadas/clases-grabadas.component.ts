@@ -35,8 +35,6 @@ export class ClasesGrabadasComponent implements OnInit {
     this.readClassesService(this.selectedLevel);
   }
   
-  
-
   clasesGrabadas!: boolean;
   mensaje!: boolean;
 
