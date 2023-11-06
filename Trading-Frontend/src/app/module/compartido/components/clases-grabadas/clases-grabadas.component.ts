@@ -6,6 +6,8 @@ import { DeleteClassServiceService } from 'src/app/module/service/classServices/
 import { ReadClassesServiceService } from 'src/app/module/service/classServices/read-classes-service.service';
 import { UpdateClassServiceService } from 'src/app/module/service/classServices/update-class-service.service';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
+import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 import { ClassDomain } from 'src/app/shared/domains/ClassDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -14,15 +16,26 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   templateUrl: './clases-grabadas.component.html',
   styleUrls: ['./clases-grabadas.component.scss']
 })
-export class ClasesGrabadasComponent implements OnInit{
+export class ClasesGrabadasComponent implements OnInit {
   youtubeVideo: String = 'https://www.youtube.com/embed/';
 
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
   classForm!: FormGroup;
   classDomain!: ClassDomain;
-  listClassDomain: ClassDomain [] = [];
+  listClassDomain: ClassDomain[] = [];
   editClassDomain!: boolean;
   id!: number;
+  buttonValue!: number
+  userToEdit: { userLevel: number } = { userLevel: 0 };
+  availableLevels = [1, 2, 3, 4]; 
+  selectedLevel: number | undefined;
+
+  buttonClicked(level: number) {
+    this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
+    this.readClassesService(this.selectedLevel);
+  }
+  
+  
 
   clasesGrabadas!: boolean;
   mensaje!: boolean;
@@ -39,7 +52,7 @@ export class ClasesGrabadasComponent implements OnInit{
 
   class!: ClassDomain;
 
-  constructor(public formulary: FormBuilder, private createClassServiceService: CreateClassServiceService, private readClassesServiceService: ReadClassesServiceService, private updateClassServiceService: UpdateClassServiceService, private deleteClassServiceService: DeleteClassServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
+  constructor(public formulary: FormBuilder, private createClassServiceService: CreateClassServiceService, private readClassesServiceService: ReadClassesServiceService, private updateClassServiceService: UpdateClassServiceService, private deleteClassServiceService: DeleteClassServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService) {
 
     this.clasesGrabadas = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -66,7 +79,7 @@ export class ClasesGrabadasComponent implements OnInit{
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.classForm.value;
 
-    this.readClassesService();
+    this.readUserLevel();
   }
 
   createClass() {
@@ -102,8 +115,21 @@ export class ClasesGrabadasComponent implements OnInit{
     }
   }
 
- readClassesService() {
-    this.readClassesServiceService.readClassesService().subscribe(
+  readUserLevel() {
+    const userId = this.datosUserServiceService.getUserId();
+    this.readUserIdService.readUserId(userId!).subscribe(
+      (res: GenericResponse) => {
+        if (res.httpResponse === 200) {
+          this.userToEdit = res.objectResponse;
+          console.log(this.userToEdit.userLevel);
+        }
+      }
+    );
+  }
+
+  readClassesService(level: number) {
+    this.listClassDomain = [] 
+    this.readClassesServiceService.readClassesforLevelService(level).subscribe(
       (res: GenericResponse) => {
         for (let classItem of res.objectResponse) {
           let url = classItem.urlVideo;
@@ -120,7 +146,7 @@ export class ClasesGrabadasComponent implements OnInit{
     this.editClassDomain = true;
     this.id = i;
     this.class = this.listClassDomain[this.id];
-    
+
     console.log(this.class);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
     this.nivelSeleccionado = this.class.classLevel.toString();

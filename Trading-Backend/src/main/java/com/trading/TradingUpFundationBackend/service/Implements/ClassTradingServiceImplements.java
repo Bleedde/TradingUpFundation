@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;//Package that allows the use of Http
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
+import java.util.ArrayList;
 import java.util.List;//Package that allows the use of dynamic list
 import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
@@ -104,13 +105,19 @@ public class ClassTradingServiceImplements implements IClassTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readClassesTrading() {
+    public ResponseEntity<ObjectResponse> readClassesTrading(Integer level) {
         try {
             List<ClassTradingEntity> classTradingList = this.repository.findAll();
             if(!classTradingList.isEmpty()){
+                List<ClassTradingEntity> listForLevel = new ArrayList<>();
+                for (ClassTradingEntity item: classTradingList){
+                    if (item.getClassLevel() == level){
+                        listForLevel.add(item);
+                    }
+                }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
-                        .objectResponse(classTradingList)
+                        .objectResponse(listForLevel)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             }else{
