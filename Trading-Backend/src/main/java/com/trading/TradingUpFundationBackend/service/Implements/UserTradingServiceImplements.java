@@ -15,10 +15,6 @@ import org.springframework.http.HttpStatus;//Package that allows the use of Http
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Component;//Package that allows to use the annotation @Component to represent this class like a spring component
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;//Package that allows the use of dynamic list
 import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
@@ -26,15 +22,15 @@ import java.util.Optional;//Package that allows the use of the datatype "Optiona
 @Service//Annotation who represent this class like a component with type "Service" in the spring context
 @Log4j2//Annotation who allows the use of specifics responses
 
-/**
- * Class that represents all the services of the entity "UserTrading"
+/*
+  Class that represents all the services of the entity "UserTrading"
  */
 public class UserTradingServiceImplements implements IUserTradingService {
 
     private final IUserTradingRepository repository;
     private final UserTradingDeserializable converter;
-
     private final Encryption encryption;
+
 
     @Autowired
     public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter, Encryption encryption) {
@@ -43,26 +39,12 @@ public class UserTradingServiceImplements implements IUserTradingService {
         this.encryption = encryption;
     }
 
-    public static SecretKey generateAESKey() {
-        KeyGenerator keyGen = null;
-        try {
-            keyGen = KeyGenerator.getInstance("AES");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        keyGen.init(128);
-        return keyGen.generateKey();
-    }
-
-    SecretKey secretKey = generateAESKey();
-
     @Override
     public ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO) {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if(userTradingExist.isPresent()){
-                String encodedPassword = userTradingExist.get().getPassword();
-                String rawPassword = encryption.decryptAES(encodedPassword, secretKey);
+                String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
                 if(userTradingExist.get().isStatus() && rawPassword.equals(userTradingDTO.getPassword())) {
                     return ResponseEntity.ok(ObjectResponse.builder()
                             .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
@@ -73,7 +55,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
                     return ResponseEntity.badRequest().body(ObjectResponse.builder()
                             .message(Responses.OPERATION_FAIL)
                             .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .objectResponse(IUserTradingResponse.USER_LOGIN_STATUS_FALSE)
+                            .objectResponse(IUserTradingResponse.USER_LOGIN_FALSE)
                             .build());
                 }
             } else {
@@ -102,10 +84,10 @@ public class UserTradingServiceImplements implements IUserTradingService {
     public ResponseEntity<ObjectResponse> createUserTrading(UserTradingDTO userTradingDTO) {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
-            if (!userTradingExist.isPresent()) {
-                String passwordEncrypted = encryption.encryptAES(userTradingDTO.getPassword(), secretKey);
+            if (userTradingExist.isEmpty()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
-                entity.setPassword(passwordEncrypted);
+                String passwordEncoded = encryption.encrypt(userTradingDTO.getPassword());
+                entity.setPassword(passwordEncoded);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -136,12 +118,13 @@ public class UserTradingServiceImplements implements IUserTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readUserTrading(Integer id) {
+    public ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findById(id);
+            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
                     UserTradingEntity entity = userTradingExist.get();
-                    entity.setPassword(encryption.decryptAES(userTradingExist.get().getPassword(), secretKey));
+                    String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
+                    entity.setPassword(rawPassword);
                     return ResponseEntity.ok(ObjectResponse.builder()
                                 .message(Responses.OPERATION_SUCCESS)
                                 .objectResponse(entity)
@@ -208,10 +191,12 @@ public class UserTradingServiceImplements implements IUserTradingService {
             if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
                 entity.setId(userTradingExist.get().getId());
-                String passwordEncoded = userTradingExist.get().getPassword();
-                String passwordRaw = encryption.decryptAES(passwordEncoded, secretKey);
-                if(!userTradingDTO.getPassword().equals(passwordRaw)){
-                    entity.setPassword(encryption.encryptAES(userTradingDTO.getPassword(), secretKey));
+                String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
+                if(userTradingDTO.getPassword().equals(rawPassword)){
+                    entity.setPassword(userTradingExist.get().getPassword());
+                }else{
+                    String newEncryptedPassword = encryption.encrypt(userTradingDTO.getPassword());
+                    entity.setPassword(newEncryptedPassword);
                 }
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()

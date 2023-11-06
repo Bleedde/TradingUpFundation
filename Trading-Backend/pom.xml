@@ -68,19 +68,16 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>s3</artifactId>
-			<version>2.19.31</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-    		<groupId>org.springframework.security</groupId>
-    		<artifactId>spring-security-crypto</artifactId>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.3</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

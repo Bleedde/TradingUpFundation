@@ -2,6 +2,7 @@ package com.trading.TradingUpFundationBackend.controller;
 
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use an object with the type of data DTO from the entity UserTrading
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a generic response with a DTO type
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;//Package that allows to use a generic response with a DTO type
 import org.springframework.web.bind.annotation.*;//Package that gives the annotations to represent a specific query
 
@@ -27,7 +28,7 @@ public interface IUserTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping//Annotation that represent the header of an HTTP query that reads a user with a GET query
-    ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id);
+    ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO userTradingDTO);
 
     /**
      * Method without body which reads all the users with the service UserTradingServiceImplements
