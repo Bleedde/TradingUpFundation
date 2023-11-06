@@ -6,8 +6,6 @@ import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Pa
 import com.trading.TradingUpFundationBackend.controller.IUserTradingController;//Importtation of the interface with empty methods IUserController
 import com.trading.TradingUpFundationBackend.service.Implements.UserTradingServiceImplements;//Importation of the service LoginTradingServiceImplements
 
-import org.apache.catalina.User;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;//Package that allows the use a response to send data and the information of the actions to the front
 import org.springframework.web.bind.annotation.*;//Package that gives the possible methods of an HTTP query
 
@@ -55,8 +53,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IUserTradingEndPoints.URL_USER_READ)//Annotation which represent this method with a specific endPoint
-    public ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id) {
-        return this.service.readUserTrading(id);
+    public ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
+        return this.service.readUserTrading(userTradingDTO);
     }
 
     /**
