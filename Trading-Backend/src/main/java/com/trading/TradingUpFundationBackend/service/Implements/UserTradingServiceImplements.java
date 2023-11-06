@@ -156,6 +156,10 @@ public class UserTradingServiceImplements implements IUserTradingService {
         try {
             List<UserTradingEntity> userTradingEntityList = this.repository.findAll();
             if (!userTradingEntityList.isEmpty()) {
+                for(UserTradingEntity userEntity : userTradingEntityList){
+                    String rawPassword = encryption.decrypt(userEntity.getPassword());
+                    userEntity.setPassword(rawPassword);
+                }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(userTradingEntityList)
