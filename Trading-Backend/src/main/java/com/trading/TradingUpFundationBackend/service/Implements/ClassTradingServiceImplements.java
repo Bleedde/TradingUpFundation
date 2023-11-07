@@ -110,9 +110,9 @@ public class ClassTradingServiceImplements implements IClassTradingService {
             List<ClassTradingEntity> classTradingList = this.repository.findAll();
             if(!classTradingList.isEmpty()){
                 List<ClassTradingEntity> listForLevel = new ArrayList<>();
-                for (ClassTradingEntity item: classTradingList){
-                    if (item.getClassLevel() == level){
-                        listForLevel.add(item);
+                for (ClassTradingEntity classTrading: classTradingList){
+                    if (classTrading.getLevel() == level){
+                        listForLevel.add(classTrading);
                     }
                 }
                 return ResponseEntity.ok(ObjectResponse.builder()
@@ -175,7 +175,7 @@ public class ClassTradingServiceImplements implements IClassTradingService {
 
     /**
      * Method that deletes an admin
-     * @param classTradingDTO The class to be deleted
+     * @param id The id of the class to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
 

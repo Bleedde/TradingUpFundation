@@ -56,8 +56,8 @@ public class ClassPrerecordedTradingControllerImplements implements IClassPrerec
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IClassPrerecordedTradingEndPoints.URL_CLASSES_PRERECORDED_READ)
-    public ResponseEntity<ObjectResponse> readClassesPrerecordedTrading() {
-        return this.service.readAllClassesPrerecordedTrading();
+    public ResponseEntity<ObjectResponse> readClassesPrerecordedTrading(@PathVariable Integer level) {
+        return this.service.readAllClassesPrerecordedTrading(level);
     }
 
     /**
@@ -73,7 +73,7 @@ public class ClassPrerecordedTradingControllerImplements implements IClassPrerec
 
     /**
      * Method which deletes a class prerecorded using the service BookTradingServiceImplements
-     * @param classPrerecordedTradingDTO The class prerecorded to be deleted
+     * @param id The id of the class prerecorded to be deleted
      * @return The method "deleteClassPrerecordedTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface

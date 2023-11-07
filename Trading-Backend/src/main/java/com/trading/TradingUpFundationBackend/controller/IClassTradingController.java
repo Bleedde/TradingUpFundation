@@ -32,7 +32,7 @@ public interface IClassTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the classes with a GET query
-    ResponseEntity<ObjectResponse> readClassesTrading(Integer level);
+    ResponseEntity<ObjectResponse> readClassesTrading(@PathVariable Integer level);
 
     /**
      * Method without body which updates a class with the service ClassTradingServiceImplements

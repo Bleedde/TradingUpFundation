@@ -27,7 +27,7 @@ public interface IExerciseTradingService {
      * Method without body which reads all the exercises
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readExercisesTrading();
+    ResponseEntity<ObjectResponse> readExercisesTrading(Integer level);
 
     /**
      * Method without body which updates an exercise
@@ -38,7 +38,7 @@ public interface IExerciseTradingService {
 
     /**
      * Method without body which deletes an exercise
-     * @param exerciseTradingDTO The exercise to be deleted
+     * @param id The id of the exercise to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer id);

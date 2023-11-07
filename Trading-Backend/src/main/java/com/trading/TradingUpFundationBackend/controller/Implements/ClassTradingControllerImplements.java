@@ -74,7 +74,7 @@ public class ClassTradingControllerImplements implements IClassTradingController
 
     /**
      * Method which deletes a class prerecorded using the service ClassTradingServiceImplements
-     * @param classTradingDTO The class to be deleted
+     * @param id The id of the class to be deleted
      * @return The method "deleteClassTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface

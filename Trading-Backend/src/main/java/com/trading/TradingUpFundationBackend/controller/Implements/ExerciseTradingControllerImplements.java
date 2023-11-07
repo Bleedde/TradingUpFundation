@@ -56,8 +56,8 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IExerciseTradingEndPoints.URL_EXERCISES_READ)
-    public ResponseEntity<ObjectResponse> readExercisesTrading() {
-        return this.service.readExercisesTrading();
+    public ResponseEntity<ObjectResponse> readExercisesTrading(@PathVariable Integer level) {
+        return this.service.readExercisesTrading(level);
     }
 
     /**
@@ -73,7 +73,7 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
 
     /**
      * Method which deletes an exercise using the service ExerciseTradingServiceImplements
-     * @param exerciseTradingDTO The exercise to be deleted
+     * @param id The id of the exercise to be deleted
      * @return The method "deleteExerciseTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface

@@ -19,5 +19,5 @@ public class ClassPrerecordedTradingDTO implements Serializable {
     private String title;
     private String description;
     private String urlVideo;
-    private Integer classPrerecordedLevel;
+    private Integer level;
 }

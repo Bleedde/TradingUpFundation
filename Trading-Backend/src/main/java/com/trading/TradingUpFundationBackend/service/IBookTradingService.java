@@ -27,7 +27,7 @@ public interface IBookTradingService {
      * Method without body which reads all the books
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readBooksTrading();
+    ResponseEntity<ObjectResponse> readBooksTrading(Integer level);
 
     /**
      * Method without body which updates a book

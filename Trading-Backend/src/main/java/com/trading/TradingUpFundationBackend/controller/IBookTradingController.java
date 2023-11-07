@@ -31,7 +31,7 @@ public interface IBookTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the books with a GET query
-    ResponseEntity<ObjectResponse> readBooksTrading();
+    ResponseEntity<ObjectResponse> readBooksTrading(Integer level);
 
     /**
      * Method without body which updates a book with the service BookTradingServiceImplements

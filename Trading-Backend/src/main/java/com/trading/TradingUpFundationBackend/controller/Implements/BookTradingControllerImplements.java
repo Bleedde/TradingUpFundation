@@ -56,8 +56,8 @@ public class BookTradingControllerImplements implements IBookTradingController {
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IBookTradingEndPoints.URL_BOOKS_READ)
-    public ResponseEntity<ObjectResponse> readBooksTrading() {
-        return this.service.readBooksTrading();
+    public ResponseEntity<ObjectResponse> readBooksTrading(@PathVariable Integer level) {
+        return this.service.readBooksTrading(level);
     }
 
     /**
