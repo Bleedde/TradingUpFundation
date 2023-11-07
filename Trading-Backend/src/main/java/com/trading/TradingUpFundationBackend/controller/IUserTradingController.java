@@ -27,7 +27,7 @@ public interface IUserTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping//Annotation that represent the header of an HTTP query that reads a user with a GET query
-    ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO userTradingDTO);
+    ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id);
 
     /**
      * Method without body which reads all the users with the service UserTradingServiceImplements
