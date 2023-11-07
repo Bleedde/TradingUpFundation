@@ -43,15 +43,15 @@ export class EditUserComponent implements OnInit {
       (response: GenericResponse) => {
         if (response) {
           if (response.httpResponse === 200) {
-            const userToEdit = response.objectResponse;
+            this.user = response.objectResponse;
             // Llena el formulario con los datos del usuario recuperados
             this.userForm.patchValue({
-              name: userToEdit.name,
-              email: userToEdit.email,
-              level: userToEdit.userLevel,
-              status: userToEdit.status,
-              backtesting: userToEdit.backtesting,
-              auditedAccount: userToEdit.auditedAccount,
+              name: this.user.name,
+              email: this.user.email,
+              level: this.user.userLevel,
+              status: this.user.status,
+              backtesting: this.user.backtesting,
+              auditedAccount: this.user.auditedAccount,
             });
           } else {
             console.error("El servidor respondió con un error:", response.message);
@@ -77,11 +77,38 @@ export class EditUserComponent implements OnInit {
     this.user = this.compartidoServiceService.getData();
   }
 
-  datosUser(){
-    
-  }
-
   updateUser(){
-    
-  }
+    // Obtén los valores del formulario
+  const updatedUser: UserDomain = {
+    id: this.id,
+    name: this.userForm.get('name')?.value || this.user.name, // Utiliza el valor del formulario si se proporciona, de lo contrario, usa el valor actual
+    email: this.user.email, // Mantén el correo electrónico sin cambios
+    password: this.userForm.get('password')?.value || this.user.password, // Utiliza el valor del formulario si se proporciona, de lo contrario, usa el valor actual
+    userLevel: this.user.userLevel, // Mantén el nivel del usuario sin cambios
+    status: this.userForm.get('status')?.value || this.user.status, // Utiliza el valor del formulario si se proporciona, de lo contrario, usa el valor actual
+    backtesting: this.userForm.get('backtesting')?.value || this.user.backtesting, // Utiliza el valor del formulario si se proporciona, de lo contrario, usa el valor actual
+    auditedAccount: this.userForm.get('auditedAccount')?.value || this.user.auditedAccount, // Utiliza el valor del formulario si se proporciona, de lo contrario, usa el valor actual
+    userRole: this.user.userRole, // Mantén el rol de usuario sin cambios
+  };
+
+  // Envía la solicitud de actualización al servidor
+  this.updateUserService.updateUserService(updatedUser).subscribe(
+    (response: GenericResponse) => {
+      if (response) {
+        if (response.httpResponse === 200) {
+          console.log("Usuario actualizado con éxito");
+          window.location.reload()
+          // Puedes realizar otras acciones, como redirigir a la página de detalles del usuario, mostrar un mensaje de éxito, etc.
+        } else {
+          console.error("El servidor respondió con un error:", response.message);
+        }
+      } else {
+        console.error("Respuesta del servidor vacía o no válida");
+      }
+    },
+    (error) => {
+      console.error("Error al actualizar el usuario:", error);
+    }
+  );
+}
 }
