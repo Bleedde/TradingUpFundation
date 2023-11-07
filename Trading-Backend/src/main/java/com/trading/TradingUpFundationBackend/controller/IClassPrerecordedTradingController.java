@@ -31,7 +31,7 @@ public interface IClassPrerecordedTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the classes with a GET query
-    ResponseEntity<ObjectResponse> readClassesPrerecordedTrading();
+    ResponseEntity<ObjectResponse> readClassesPrerecordedTrading(@PathVariable Integer level);
 
     /**
      * Method without body which updates a class prerecorded with the service ClassPrerecordedTradingServiceImplements

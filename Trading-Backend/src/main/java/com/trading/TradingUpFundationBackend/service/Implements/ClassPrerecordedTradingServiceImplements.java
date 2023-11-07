@@ -16,6 +16,7 @@ import com.trading.TradingUpFundationBackend.service.IClassPrerecordedTradingSer
 
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
 
+import java.util.ArrayList;
 import java.util.List;//Package that allows the use of dynamic list
 import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
@@ -97,13 +98,19 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
     }
 
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readAllClassesPrerecordedTrading() {
+    public ResponseEntity<ObjectResponse> readAllClassesPrerecordedTrading(Integer level) {
         try{
             List<ClassPrerecordedTradingEntity> classPrerecordedTradingList = this.repository.findAll();
             if(!classPrerecordedTradingList.isEmpty()){
+                List<ClassPrerecordedTradingEntity> listForLevel = new ArrayList<>();
+                for(ClassPrerecordedTradingEntity classPrerecordedTrading : classPrerecordedTradingList){
+                    if(classPrerecordedTrading.getLevel() == level){
+                        listForLevel.add(classPrerecordedTrading);
+                    }
+                }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
-                        .objectResponse(classPrerecordedTradingList)
+                        .objectResponse(listForLevel)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else{

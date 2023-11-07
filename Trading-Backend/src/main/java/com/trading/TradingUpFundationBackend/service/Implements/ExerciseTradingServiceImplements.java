@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;//Package that allows the use of Http
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,13 +105,19 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readExercisesTrading() {
+    public ResponseEntity<ObjectResponse> readExercisesTrading(Integer level) {
         try {
             List<ExerciseTradingEntity> exerciseTradingEntityList = this.repository.findAll();
             if (!exerciseTradingEntityList.isEmpty()) {
+                List<ExerciseTradingEntity> listForLevel = new ArrayList<>();
+                for(ExerciseTradingEntity exerciseTrading : exerciseTradingEntityList){
+                    if(exerciseTrading.getLevel() == level){
+                        listForLevel.add(exerciseTrading);
+                    }
+                }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
-                        .objectResponse(exerciseTradingEntityList)
+                        .objectResponse(listForLevel)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {

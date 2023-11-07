@@ -28,7 +28,7 @@ public interface IClassPrerecordedTradingService {
      * Method without body which reads all the classes prerecorded
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readAllClassesPrerecordedTrading();
+    ResponseEntity<ObjectResponse> readAllClassesPrerecordedTrading(Integer level);
 
     /**
      * Method without body which updates a class prerecorded

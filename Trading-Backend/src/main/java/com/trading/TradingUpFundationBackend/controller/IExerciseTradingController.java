@@ -31,7 +31,7 @@ public interface IExerciseTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
-    ResponseEntity<ObjectResponse> readExercisesTrading();
+    ResponseEntity<ObjectResponse> readExercisesTrading(@PathVariable Integer level);
 
     /**
      * Method without body which updates a exercise with the service ExerciseTradingServiceImplements
@@ -43,7 +43,7 @@ public interface IExerciseTradingController {
 
     /**
      * Method without body which deletes a class with the service ExerciseTradingServiceImplements
-     * @param exerciseTradingDTO The class prerecorded to be deleted
+     * @param id The id of the class prerecorded to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes an exercise with a DELETE query
