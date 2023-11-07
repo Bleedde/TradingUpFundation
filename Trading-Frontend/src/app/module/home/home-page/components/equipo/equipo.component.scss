@@ -1,41 +1,50 @@
-.team{
+.team {
     background-color: white;
 }
 
-h1{
+h2 {
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    color: black;
+    color: white;
 }
 
-h1::after{
-    content: '';
-    background-color: black;
-    display: block;
-    height: 3px;
-    width: 270px;
-    margin: 10px auto;
+.cards {
+    border: 2px solid #9965dd;
+    background-color: #9965dd;
+    padding: 5px;
+    width: 100%; 
+    max-width: 774px;
+    height: 80px;
+    display: flex;
+    margin: 0 auto; 
 }
 
-.profile{
-    margin-top: 2px;
+h5 {
+    text-align: center;
+    letter-spacing: 0.9px;
 }
 
-.profile .img-box{
-    opacity: 1;
-    display: block;
-    position: relative;
+/* Estilos para las imágenes SVG */
+.imagesequipo svg {
+    width: 100%; 
+    height: auto; 
+    max-width: 100%; 
+    max-height: 100%; 
 }
 
-.profile h2
-{
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 15px;
+@media screen and (min-width: 769px) {
+    .imagesequipo {
+        width: 70%; 
+        max-width: 581px; 
+        margin: 0 auto; 
+    }
 }
 
-img{
-    width: 45%;
+@media screen and (max-width: 768px) {
+    .imagesequipo {
+        width: 90%; 
+        max-width: 581px; 
+        margin: 0 auto; 
+    }
 }
-
