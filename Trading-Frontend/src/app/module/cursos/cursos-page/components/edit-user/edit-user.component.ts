@@ -47,6 +47,7 @@ export class EditUserComponent implements OnInit {
             // Llena el formulario con los datos del usuario recuperados
             this.userForm.patchValue({
               name: this.user.name,
+              password: this.user.password,
               email: this.user.email,
               level: this.user.userLevel,
               status: this.user.status,
