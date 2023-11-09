@@ -7,17 +7,25 @@ h2 {
     font-weight: bold;
     letter-spacing: 2px;
     color: white;
+    
 }
 
 .cards {
     border: 2px solid #9965dd;
     background-color: #9965dd;
-    padding: 5px;
-    width: 100%; 
-    max-width: 774px;
-    height: 80px;
+    padding: 10px;
+    height: calc(7vh);
+    width: calc(45vw);
     display: flex;
     margin: 0 auto; 
+}
+
+@media screen and (max-width: 768px) {
+    .cards {
+        height: calc(10vh);
+        width: calc(80vw);
+        margin: 0 auto; 
+    }
 }
 
 h5 {
@@ -35,16 +43,16 @@ h5 {
 
 @media screen and (min-width: 769px) {
     .imagesequipo {
-        width: 70%; 
-        max-width: 581px; 
+        width: calc(65vh);  
         margin: 0 auto; 
     }
 }
 
 @media screen and (max-width: 768px) {
     .imagesequipo {
-        width: 90%; 
-        max-width: 581px; 
+        width: calc(85vw); 
         margin: 0 auto; 
     }
 }
+
+

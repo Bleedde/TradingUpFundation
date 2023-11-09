@@ -18,7 +18,7 @@
 .titleVS{
         background-color: #cdbae9;
         border-radius: 14px;
-        width: 40%;
+        width: calc(20vh);
         padding: 3px;
 
 }
@@ -27,8 +27,14 @@
     .mt_5{
         margin-top: calc(3vh);
     }
+    p{
+        word-break: break-all;
+        word-wrap: break-word;
+    }
     
 }
+
+
 
 
   
