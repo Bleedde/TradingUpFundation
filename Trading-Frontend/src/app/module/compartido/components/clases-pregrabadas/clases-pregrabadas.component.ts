@@ -6,6 +6,8 @@ import { CreatePrerecordedServiceService } from 'src/app/module/service/prerecor
 import { DeletePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/delete-prerecorded-service.service';
 import { ReadPrerecordedsServiceService } from 'src/app/module/service/prerecordedClassServices/read-prerecordeds-service.service';
 import { UpdatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/update-prerecorded-service.service';
+import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
+import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 import { ClassPrerecordedDomain } from 'src/app/shared/domains/ClassPrerecordedDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -24,6 +26,16 @@ export class ClasesPregrabadasComponent {
   editClassPrerecordedDomain!: boolean;
   id!: number;
 
+  buttonValue!: number
+  userToEdit: { userLevel: number } = { userLevel: 0 };
+  availableLevels = [1, 2, 3, 4]; 
+  selectedLevel: number | undefined;
+
+  buttonClicked(level: number) {
+    this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
+    this.readClassesPrerecordedService(this.selectedLevel);
+  }
+
   clasesPregrabadas!: boolean;
   mensaje!: boolean;
 
@@ -39,7 +51,7 @@ export class ClasesPregrabadasComponent {
 
   classPrerecorded!: ClassPrerecordedDomain;
 
-  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService){
+  constructor(public formulary: FormBuilder, private createPrerecordedServiceService: CreatePrerecordedServiceService,private readPrerecordedsServiceService: ReadPrerecordedsServiceService ,private updatePrerecordedServiceService: UpdatePrerecordedServiceService, private deletePrerecordedServiceService: DeletePrerecordedServiceService, private sanitizer: DomSanitizer, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService){
 
     this.clasesPregrabadas = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -47,7 +59,7 @@ export class ClasesPregrabadasComponent {
     this.classPrerecordedForm = formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      classPrerecordedLevel: [0, [Validators.required]],
+      level: [0, [Validators.required]],
       urlVideo: ['', [Validators.required]],
     })
   }
@@ -58,7 +70,7 @@ export class ClasesPregrabadasComponent {
     this.classPrerecordedForm = this.formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      classPrerecordedLevel: [this.nivelSeleccionado],
+      level: [this.nivelSeleccionado],
       urlVideo: ['', [Validators.required]],
     });
 
@@ -66,7 +78,7 @@ export class ClasesPregrabadasComponent {
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.classPrerecordedForm.value;
 
-    this.readClassesPrerecordedService();
+    this.readUserLevel();
   }
 
   createClassPrerecorded() {
@@ -84,8 +96,8 @@ export class ClasesPregrabadasComponent {
         id: 0,
         title: this.classPrerecordedForm.controls['title'].value,
         description: this.classPrerecordedForm.controls['description'].value,
-        classPrerecordedLevel: this.classPrerecordedForm.controls['classPrerecordedLevel'].value != 0
-          ? this.classPrerecordedForm.controls['classPrerecordedLevel'].value
+        level: this.classPrerecordedForm.controls['level'].value != 0
+          ? this.classPrerecordedForm.controls['level'].value
           : 1,
         urlVideo: this.classPrerecordedForm.controls['urlVideo'].value
       }
@@ -103,8 +115,21 @@ export class ClasesPregrabadasComponent {
     }
   }
 
-  readClassesPrerecordedService() {
-    this.readPrerecordedsServiceService.readClassesPrerecordedService().subscribe(
+  readUserLevel() {
+    const userId = this.datosUserServiceService.getUserId();
+    this.readUserIdService.readUserId(userId!).subscribe(
+      (res: GenericResponse) => {
+        if (res.httpResponse === 200) {
+          this.userToEdit = res.objectResponse;
+          console.log(this.userToEdit.userLevel);
+        }
+      }
+    );
+  }
+
+  readClassesPrerecordedService(level: number) {
+    this.listClassPrerecordedDomain = [];
+    this.readPrerecordedsServiceService.readClassesPrerecordedService(level).subscribe(
       (res: GenericResponse) => {
         for (let classPrerecordedItem of res.objectResponse) {
           let url = classPrerecordedItem.urlVideo;
@@ -124,11 +149,11 @@ export class ClasesPregrabadasComponent {
     
     console.log(this.classPrerecorded);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
-    this.nivelSeleccionado = this.classPrerecorded.classPrerecordedLevel.toString();
+    this.nivelSeleccionado = this.classPrerecorded.level.toString();
 
     /*Actualiza el FormGroup con los valores iniciales*/
     this.classPrerecordedForm.patchValue({
-      classPrerecordedLevel: this.nivelSeleccionado
+      level: this.nivelSeleccionado
     });
   }
 
@@ -141,9 +166,9 @@ export class ClasesPregrabadasComponent {
       description: this.classPrerecordedForm.controls['description'].value != ''
         ? this.classPrerecordedForm.controls['description'].value
         : this.listClassPrerecordedDomain[this.id].description,
-      classPrerecordedLevel: this.classPrerecordedForm.controls['classPrerecordedLevel'].value != null
-        ? this.classPrerecordedForm.controls['classPrerecordedLevel'].value
-        : this.listClassPrerecordedDomain[this.id].classPrerecordedLevel,
+      level: this.classPrerecordedForm.controls['level'].value != null
+        ? this.classPrerecordedForm.controls['level'].value
+        : this.listClassPrerecordedDomain[this.id].level,
       urlVideo: this.classPrerecordedForm.controls['urlVideo'].value != ''
         ? this.classPrerecordedForm.controls['urlVideo'].value
         : this.listClassPrerecordedDomain[this.id].urlVideo

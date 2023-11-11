@@ -13,7 +13,7 @@ export class ReadPrerecordedsServiceService {
 
   API: string = "http://localhost:8080/class_prerecorded";
 
-  readClassesPrerecordedService() :Observable<GenericResponse> {
-    return this.http.get<GenericResponse>(this.API + "/classes_prerecorded_read")
+  readClassesPrerecordedService(level: number) :Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(this.API + "/classes_prerecorded_read" + level)
   }
 }
