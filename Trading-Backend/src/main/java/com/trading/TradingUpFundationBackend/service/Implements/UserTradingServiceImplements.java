@@ -118,9 +118,9 @@ public class UserTradingServiceImplements implements IUserTradingService {
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readUserTrading(UserTradingDTO userTradingDTO) {
+    public ResponseEntity<ObjectResponse> readUserTrading(Integer id) {
         try {
-            Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
+            Optional<UserTradingEntity> userTradingExist = this.repository.findById(id);
             if (userTradingExist.isPresent()) {
                     UserTradingEntity entity = userTradingExist.get();
                     String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());

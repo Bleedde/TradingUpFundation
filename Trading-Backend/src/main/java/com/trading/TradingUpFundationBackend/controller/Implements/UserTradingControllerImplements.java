@@ -53,8 +53,8 @@ public class UserTradingControllerImplements implements IUserTradingController {
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IUserTradingEndPoints.URL_USER_READ)//Annotation which represent this method with a specific endPoint
-    public ResponseEntity<ObjectResponse> readUserTrading(@RequestBody UserTradingDTO userTradingDTO) {
-        return this.service.readUserTrading(userTradingDTO);
+    public ResponseEntity<ObjectResponse> readUserTrading(@PathVariable Integer id) {
+        return this.service.readUserTrading(id);
     }
 
     /**

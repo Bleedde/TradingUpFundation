@@ -1,41 +1,58 @@
-.team{
+.team {
     background-color: white;
 }
 
-h1{
+h2 {
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    color: black;
+    color: white;
+    
 }
 
-h1::after{
-    content: '';
-    background-color: black;
-    display: block;
-    height: 3px;
-    width: 270px;
-    margin: 10px auto;
+.cards {
+    border: 2px solid #9965dd;
+    background-color: #9965dd;
+    padding: 10px;
+    height: calc(7vh);
+    width: calc(45vw);
+    display: flex;
+    margin: 0 auto; 
 }
 
-.profile{
-    margin-top: 2px;
+@media screen and (max-width: 768px) {
+    .cards {
+        height: calc(10vh);
+        width: calc(80vw);
+        margin: 0 auto; 
+    }
 }
 
-.profile .img-box{
-    opacity: 1;
-    display: block;
-    position: relative;
+h5 {
+    text-align: center;
+    letter-spacing: 0.9px;
 }
 
-.profile h2
-{
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 15px;
+/* Estilos para las imágenes SVG */
+.imagesequipo svg {
+    width: 100%; 
+    height: auto; 
+    max-width: 100%; 
+    max-height: 100%; 
 }
 
-img{
-    width: 45%;
+@media screen and (min-width: 769px) {
+    .imagesequipo {
+        width: calc(65vh);  
+        margin: 0 auto; 
+    }
 }
+
+@media screen and (max-width: 768px) {
+    .imagesequipo {
+        width: calc(85vw); 
+        margin: 0 auto; 
+    }
+}
+
 

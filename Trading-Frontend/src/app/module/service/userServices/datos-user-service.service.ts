@@ -28,4 +28,8 @@ export class DatosUserServiceService{
     const userEmail = localStorage.getItem(this.key);
     return userEmail || null;
   }
+
+  userIdAccessTokenRemove(): void {
+    localStorage.removeItem('user-login')
+  }
 }

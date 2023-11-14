@@ -50,16 +50,13 @@ export class LoginComponent {
         (res: GenericResponse) => {
           console.log("respuesta " + res.message)
           if (res.objectResponse.userRole == "admin") {
-
-
+            this.datosUserServiceService.setUserId(res.objectResponse.id)
             this.routGuardianService.generalTokenSave("access succesfuly")
             this.router.navigate(['cursosAdmin-page']);
             this.compartidoServiceService.setData(res.objectResponse)
           }
           if (res.objectResponse.userRole == "user") {
-
             this.datosUserServiceService.setUserId(res.objectResponse.id)
-
             this.RoutCursosGuardianService.cursosTokenSave("access succesfuly")
             this.router.navigate(['cursos-page']);
             let userModel: UserDomain;
@@ -75,12 +72,6 @@ export class LoginComponent {
 
 
   }
-
-  /*console.log("correo desde el padre a:" +
-              res.objectResponse.email + " "
-              + res.objectResponse.status + " "
-              + res.objectResponse.userLevel);*/
-
 
   scrollToComponent(): void {
     console.log("he entrado al metodo scrolltoCOomponent")

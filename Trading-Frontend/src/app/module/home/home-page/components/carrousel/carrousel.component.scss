@@ -14,4 +14,21 @@
     background-color: rgb(0, 0, 0)! important;
     border-color: white;
     border-width: 1px;
+    color: white;
 }
+
+.btn:hover{
+    background-color: rgb(255, 255, 255)!important;
+    border-color: rgb(130, 54, 160);
+    color: rgb(130, 54, 160);
+}
+
+
+@media screen and (max-width:767){
+    p{
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+    
+}
+

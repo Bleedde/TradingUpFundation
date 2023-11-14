@@ -6,7 +6,19 @@
 .titleAbout{
     background-color: #cdbae9;
     border-radius: 14px;
-    width: 40%;
+    width: calc(20vh);
+}
+
+@media screen and (min-width:993px){
+    .titleAbout{
+       width: calc(50vh);
+    }
+    
+}
+
+p{
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .pepe{
