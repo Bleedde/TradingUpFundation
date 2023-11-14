@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ExerciseSolutionTradingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_solution_id")
+    @Column(name = "solution_exercise_id")
     private Integer id;
 
     @Column(name = "solution_exercise_comment")
@@ -23,13 +23,9 @@ public class ExerciseSolutionTradingEntity {
     @Column(name = "solution_exercise_url_solution")
     private String urlSolution;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private UserTradingEntity userTradingEntity;
+    @Column(name = "solution_exercise_user_name")
+    private String userName;
 
-    @ManyToOne
-    @JoinColumn(name = "exercise_id")
-    @JsonBackReference
-    private ExerciseTradingEntity exerciseTradingEntity;
+    @Column(name = "solution_exercise_exercise_id")
+    private Integer idExercise;
 }

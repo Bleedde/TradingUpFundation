@@ -35,19 +35,19 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
      */
     @Override//Annotation that represent an override for a method in another interface
     @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_CREATE)//Annotation which represent this method with a specific endPoint
-    public ResponseEntity<ObjectResponse> createExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> createExerciseTrading(@ModelAttribute ExerciseTradingDTO exerciseTradingDTO) {
         return this.service.createExerciseTrading(exerciseTradingDTO);
     }
 
     /**
      * Method which reads an exercise using the service ExerciseServiceImplements
-     * @param exerciseTradingDTO The exercise to be read
+     * @param id The id of the exercise to be read
      * @return The method "readExerciseTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IExerciseTradingEndPoints.URL_EXERCISE_READ)
-    public ResponseEntity<ObjectResponse> readExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO) {
-        return this.service.readExerciseTrading(exerciseTradingDTO);
+    public ResponseEntity<ObjectResponse> readExerciseTrading(@PathVariable Integer id) {
+        return this.service.readExerciseTrading(id);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
      */
     @Override//Annotation that represent an override for a method in another interface
     @PutMapping(IExerciseTradingEndPoints.URL_EXERCISE_UPDATE)
-    public ResponseEntity<ObjectResponse> updateExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO) {
+    public ResponseEntity<ObjectResponse> updateExerciseTrading(@ModelAttribute ExerciseTradingDTO exerciseTradingDTO) {
         return this.service.updateExerciseTrading(exerciseTradingDTO);
     }
 
@@ -77,9 +77,14 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
      * @return The method "deleteExerciseTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
-    @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_DELETE)
+    @DeleteMapping(IExerciseTradingEndPoints.URL_EXERCISE_DELETE)
     public ResponseEntity<ObjectResponse> deleteExerciseTrading(@PathVariable Integer id) {
         return this.service.deleteExerciseTrading(id);
     }
-}
 
+    @Override
+    @GetMapping(IExerciseTradingEndPoints.URL_EXERCISE_FILE)
+    public ResponseEntity<byte[]> getFile(@PathVariable Integer id){
+        return this.service.getFile(id);
+    }
+}

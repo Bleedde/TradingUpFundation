@@ -6,7 +6,11 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.entittyRe
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutionTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseTradingEntity;
+import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
 import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
+import com.trading.TradingUpFundationBackend.repository.IExerciseTradingRepository;
+import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.IExerciseSolutionTradingService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -22,9 +26,13 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
 
     private final IExerciseSolutionTradingRepository repository;
     private final ExerciseSolutionTradingDeserializable converter;
-    public ExerciseSolutionTradingServiceImplements(IExerciseSolutionTradingRepository repository, ExerciseSolutionTradingDeserializable converter) {
+    private final IExerciseTradingRepository exerciseRepository;
+    private final IUserTradingRepository userRepository;
+    public ExerciseSolutionTradingServiceImplements(IExerciseSolutionTradingRepository repository, ExerciseSolutionTradingDeserializable converter, IExerciseTradingRepository exerciseRepository, IUserTradingRepository userRepository) {
         this.repository = repository;
         this.converter = converter;
+        this.exerciseRepository = exerciseRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -36,7 +44,9 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     public ResponseEntity<ObjectResponse> createExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
         try {
             Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
-            if (exerciseSolutionTradingExist.isEmpty()) {
+            Optional<UserTradingEntity> userDatabase = userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
+            Optional<ExerciseTradingEntity> exerciseDatabase = exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
+            if (exerciseSolutionTradingExist.isEmpty() && userDatabase.isPresent() && exerciseDatabase.isPresent()) {
                 ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
@@ -71,7 +81,9 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     public ResponseEntity<ObjectResponse> readExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
         try {
             Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
-            if (exerciseSolutionTradingExist.isPresent()) {
+            Optional<UserTradingEntity> userDatabase = userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
+            Optional<ExerciseTradingEntity> exerciseDatabase = exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
+            if (exerciseSolutionTradingExist.isPresent() && userDatabase.isPresent() && exerciseDatabase.isPresent()) {
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(exerciseSolutionTradingExist)

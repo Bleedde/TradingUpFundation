@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;//Package to bring the element 
  * Interface which represents a connection between the Springboot application and the database
  * Connection between the entity ExerciseTradingEntity and the table exercise_trading
  */
-public interface IExerciseTradingRepository extends JpaRepository<ExerciseTradingEntity, Integer> {
-}
+public interface IExerciseTradingRepository extends JpaRepository<ExerciseTradingEntity, Integer> {}
