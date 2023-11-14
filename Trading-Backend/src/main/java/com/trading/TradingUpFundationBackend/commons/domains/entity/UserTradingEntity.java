@@ -44,8 +44,10 @@ public class UserTradingEntity {
     @Column(name = "user_role", length = 255, nullable = false)//Anottation to represent this attribute like a column with a name in the table, the lenght has to be 255 or less
     private String userRole;
 
+    /*
     @OneToMany(mappedBy = "userTradingEntity")
     @JsonManagedReference
     @JsonIgnore
     private List<ExerciseSolutionTradingEntity> listExerciseSolutionTrading;
+     */
 }

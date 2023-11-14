@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;//Import to use all the arguments that a constr
 import lombok.Builder;//Import to create objects easier
 import lombok.Data;//Import to add the normal methods that an object has
 import lombok.NoArgsConstructor;//Import who allow to create an object without args in the constructor
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;//Package to use this class like a byte sequence
 @Data//Annotation to represent normal methods of a normal class
 @Builder//Annotation who allows to build an object in an easier way
@@ -21,5 +23,5 @@ public class ExerciseTradingDTO implements Serializable {
     private String dataStart;
     private String dataEnd;
     private Integer level;
-    private String urlHomework;
+    private MultipartFile file;
 }

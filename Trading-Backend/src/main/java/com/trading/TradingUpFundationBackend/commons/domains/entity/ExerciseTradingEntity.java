@@ -38,11 +38,6 @@ public class ExerciseTradingEntity {
     @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 
-    @Column(name = "exercise_url_homework", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
-    private String urlHomework;
-
-    @OneToMany(mappedBy = "exerciseTradingEntity")
-    @JsonManagedReference
-    @JsonIgnore
-    private List<ExerciseSolutionTradingEntity> listExerciseSolutionTrading;
+    @Column(name = "exercise_file", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    private String file;
 }

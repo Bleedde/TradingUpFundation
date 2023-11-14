@@ -13,6 +13,6 @@ public class ExerciseSolutionTradingDTO implements Serializable {
     private Integer id;
     private String comment;
     private String urlVideo;
-    private Integer userId;
+    private String userEmail;
     private Integer exerciseId;
 }

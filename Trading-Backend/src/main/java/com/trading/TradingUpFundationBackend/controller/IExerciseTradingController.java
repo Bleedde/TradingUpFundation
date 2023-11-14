@@ -20,11 +20,11 @@ public interface IExerciseTradingController {
 
     /**
      * Method without body which reads an exercise with the service ExerciseTradingServiceImplements
-     * @param exerciseTradingDTO The exercise to be read
+     * @param id The id of the exercise to be read
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that reads an exercise with a GET query
-    ResponseEntity<ObjectResponse> readExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO);
+    ResponseEntity<ObjectResponse> readExerciseTrading(@PathVariable Integer id);
 
     /**
      * Method without body which reads all the exercises with the service ExerciseTradingServiceImplements
@@ -48,4 +48,12 @@ public interface IExerciseTradingController {
      */
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes an exercise with a DELETE query
     ResponseEntity<ObjectResponse> deleteExerciseTrading(@PathVariable Integer id);
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    @GetMapping//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
+    ResponseEntity<byte[]> getFile(@PathVariable Integer id);
 }

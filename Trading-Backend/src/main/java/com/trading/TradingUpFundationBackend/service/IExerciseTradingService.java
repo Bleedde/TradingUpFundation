@@ -18,10 +18,10 @@ public interface IExerciseTradingService {
 
     /**
      * Method without body which reads an exercise
-     * @param exerciseTradingDTO The exercise to be readed
+     * @param id The id of the exercise to be readed
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readExerciseTrading(ExerciseTradingDTO exerciseTradingDTO);
+    ResponseEntity<ObjectResponse> readExerciseTrading(Integer id);
 
     /**
      * Method without body which reads all the exercises
@@ -42,4 +42,11 @@ public interface IExerciseTradingService {
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer id);
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the exercise who is related with the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<byte[]> getFile(Integer id);
 }
