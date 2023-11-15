@@ -76,7 +76,7 @@ export class EjerciciosClaseComponent {
       const formData = new FormData();
   
       // Agregar id con valor predeterminado de 0
-      formData.append('id', '24');
+      formData.append('id', '0');
       formData.append('title', this.exerciseForm.get('title')?.value || '');
       formData.append('description', this.exerciseForm.get('description')?.value || '');
       formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
@@ -112,6 +112,56 @@ export class EjerciciosClaseComponent {
       );
     }
   }
+
+  
+  /*  FILEEEEEEEE
+  createExercise() {
+    if (!this.exerciseForm.valid) {
+      return this.exerciseForm.markAllAsTouched();
+    } else {
+      const formData = new FormData();
+  
+      // Agregar id con valor predeterminado de 0
+      formData.append('id', '0');
+      formData.append('title', this.exerciseForm.get('title')?.value || '');
+      formData.append('description', this.exerciseForm.get('description')?.value || '');
+      formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
+      formData.append('dataEnd', this.exerciseForm.get('dataEnd')?.value || '');
+  
+      const selectedLevel = this.exerciseForm.get('level')?.value || '1';
+      formData.append('level', selectedLevel);
+  
+      const fileInput = this.exerciseForm.get('file');
+      if (fileInput instanceof FormControl) {
+        // Obtén el archivo directamente del campo del formulario
+        const file: File | null = fileInput.value;
+        if (file) {
+          // Crea un Blob a partir del archivo y agrégalo al FormData
+          formData.append('file', file);
+        }
+      }
+  
+      // Agregar console.log para imprimir los datos antes de la llamada al servicio
+      console.log('Datos a enviar:');
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+  
+      this.CreateExerciseServiceService.createExerciseService(formData).subscribe(
+        (res: GenericResponse) => {
+          console.log("Esta es la Respuesta: " + res.message);
+          if (res.httpResponse == 200) {
+            // Manejar la respuesta exitosa
+          }
+        },
+        (error) => {
+          console.error("Error en la llamada al servicio", error);
+          // Puedes manejar el error de acuerdo a tus necesidades
+        }
+      );
+    }
+  }*/
+  
   
 
 
