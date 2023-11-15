@@ -25,7 +25,8 @@ CREATE TABLE exercise_solution_trading(
     solution_exercise_comment VARCHAR(255) NOT NULL,
     solution_exercise_url_solution VARCHAR(255) NOT NULL,
     solution_exercise_user_name INTEGER NOT NULL,
-    solution_exercise_exercise_id INTEGER NOT NULL
+    solution_exercise_exercise_id INTEGER NOT NULL,
+    solution_exercise_file_path VARCHAR(255) NOT NULL
 );
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,

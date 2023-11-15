@@ -11,7 +11,6 @@ import com.trading.TradingUpFundationBackend.service.IExerciseTradingService;//P
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
@@ -38,12 +37,10 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
     private final IExerciseTradingRepository repository;
     private final ExcerciseTradingDeserializable converter;
     private final Environment env;
-    private final ResourceLoader resourceLoader;
-    public ExerciseTradingServiceImplements(IExerciseTradingRepository repository, ExcerciseTradingDeserializable converter, Environment env, ResourceLoader resourceLoader) {
+    public ExerciseTradingServiceImplements(IExerciseTradingRepository repository, ExcerciseTradingDeserializable converter, Environment env) {
         this.repository = repository;
         this.converter = converter;
         this.env = env;
-        this.resourceLoader = resourceLoader;
     }
 
     /**

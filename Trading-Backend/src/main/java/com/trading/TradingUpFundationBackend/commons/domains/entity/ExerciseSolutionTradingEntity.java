@@ -28,4 +28,7 @@ public class ExerciseSolutionTradingEntity {
 
     @Column(name = "solution_exercise_exercise_id")
     private Integer idExercise;
+
+    @Column(name = "solution_exercise_file_path")
+    private String file;
 }

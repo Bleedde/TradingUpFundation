@@ -28,19 +28,19 @@ public class ExerciseSolutionTradingControllerImplements implements IExerciseSol
      */
     @Override//Annotation that represent an override for a method in another interface
     @PostMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTION_CREATE)//Annotation which represent this method with a specific endPoint
-    public ResponseEntity<ObjectResponse> createExerciseSolutionTrading(@RequestBody ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
+    public ResponseEntity<ObjectResponse> createExerciseSolutionTrading(@ModelAttribute ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
         return this.service.createExerciseSolutionTrading(exerciseSolutionTradingDTO);
     }
 
     /**
      * Method which reads an exercise using the service ExerciseSolutionServiceImplements
-     * @param exerciseSolutionTradingDTO The exercise solution to be read
+     * @param id The id of the exercise solution to be read
      * @return The method "readExerciseSolutionTrading" from the service
      */
     @Override//Annotation that represent an override for a method in another interface
     @GetMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTION_READ)
-    public ResponseEntity<ObjectResponse> readExerciseSolutionTrading(@RequestBody ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
-        return this.service.readExerciseSolutionTrading(exerciseSolutionTradingDTO);
+    public ResponseEntity<ObjectResponse> readExerciseSolutionTrading(@PathVariable Integer id) {
+        return this.service.readExerciseSolutionTrading(id);
     }
 
     /**

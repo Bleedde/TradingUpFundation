@@ -3,6 +3,7 @@ package com.trading.TradingUpFundationBackend.commons.domains.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
@@ -15,4 +16,5 @@ public class ExerciseSolutionTradingDTO implements Serializable {
     private String urlVideo;
     private String userEmail;
     private Integer exerciseId;
+    private MultipartFile file;
 }

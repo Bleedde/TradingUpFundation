@@ -16,7 +16,7 @@ public interface IExerciseTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @PostMapping()//Annotation that represent the header of an HTTP query that creates an exercise with a POST query
-    ResponseEntity<ObjectResponse> createExerciseTrading(@RequestBody ExerciseTradingDTO exerciseTradingDTO);
+    ResponseEntity<ObjectResponse> createExerciseTrading(@ModelAttribute ExerciseTradingDTO exerciseTradingDTO);
 
     /**
      * Method without body which reads an exercise with the service ExerciseTradingServiceImplements

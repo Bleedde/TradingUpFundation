@@ -14,14 +14,20 @@ public interface IExerciseSolutionTradingService {
 
     /**
      * Method without body which reads an exercise solution
-     * @param exerciseSolutionTradingDTO The exercise solution to be read
+     * @param id The id of the exercise solution to be read
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+    ResponseEntity<ObjectResponse> readExerciseSolutionTrading(Integer id);
 
     /**
      * Method without body which reads all the exercise solutions
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readExercisesSolutionsTrading();
+
+    /**
+     * Method without body which updates an exercise solution
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
 }
