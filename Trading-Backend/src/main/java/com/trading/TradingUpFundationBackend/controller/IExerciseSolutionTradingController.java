@@ -28,4 +28,20 @@ public interface IExerciseSolutionTradingController {
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
     ResponseEntity<ObjectResponse> readExerciseSolutionsTrading();
+
+    /**
+     * Method without body which updates an exercise solution with the service ExerciseSolutionTradingServiceImplements
+     * @param exerciseSolutionTradingDTO The exercise solution to be updated
+     * @return An ObjectResponse with answers depending on the result
+     */
+    @PutMapping()//Annotation that represent the header of an HTTP query that creates an exercise with a POST query
+    ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(@ModelAttribute ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    @GetMapping()//Annotation that represent the header of an HTTP query that creates an exercise with a POST query
+    ResponseEntity<byte[]> getFile(@PathVariable Integer id);
 }

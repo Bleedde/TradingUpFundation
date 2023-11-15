@@ -53,5 +53,25 @@ public class ExerciseSolutionTradingControllerImplements implements IExerciseSol
         return this.service.readExercisesSolutionsTrading();
     }
 
+    /**
+     * Method which creates an updates solution using the service ExerciseSolutionTradingServiceImplements
+     * @param exerciseSolutionTradingDTO The exercise solution to be updated
+     * @return The method "updateExerciseSolutionTrading" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
+    @PutMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTION_UPDATE)//Annotation which represent this method with a specific endPoint
+    public ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(@ModelAttribute ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
+        return this.service.updateExerciseSolutionTrading(exerciseSolutionTradingDTO);
+    }
 
+    /**
+     * Method which returns a file
+     * @param id The id of the file
+     * @return The method "getFile" from the service
+     */
+    @Override//Annotation that represent an override for a method in another interface
+    @GetMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTION_FILE)//Annotation which represent this method with a specific endPoint
+    public ResponseEntity<byte[]> getFile(@PathVariable Integer id) {
+        return this.service.getFile(id);
+    }
 }

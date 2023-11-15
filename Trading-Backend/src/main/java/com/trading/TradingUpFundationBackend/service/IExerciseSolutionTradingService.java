@@ -30,4 +30,10 @@ public interface IExerciseSolutionTradingService {
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+
+    /**
+     * Method without body which return a file
+     * @return An byte[] of the content of the file
+     */
+    ResponseEntity<byte[]> getFile(Integer id);
 }

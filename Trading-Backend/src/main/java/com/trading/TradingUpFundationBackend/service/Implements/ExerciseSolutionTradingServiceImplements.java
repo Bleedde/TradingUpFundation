@@ -15,8 +15,11 @@ import com.trading.TradingUpFundationBackend.repository.IExerciseTradingReposito
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.IExerciseSolutionTradingService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.coyote.Response;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -70,6 +73,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                         Path uploadPath = Paths.get(uploadDirection, fileName);
                         Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
                         entity.setUserName(userDatabase.get().getName());
+                        entity.setFile(uploadPath.toString());
                         this.repository.save(entity);
                         return ResponseEntity.ok(ObjectResponse.builder()
                                 .message(Responses.OPERATION_SUCCESS)
@@ -230,6 +234,29 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                             .objectResponse(null)
                             .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
                             .build());
+        }
+    }
+
+    @Override
+    public ResponseEntity<byte[]> getFile(Integer id){
+        try{
+            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingExist = this.repository.findById(id);
+            if(exerciseSolutionTradingExist.isPresent()){
+                ExerciseSolutionTradingEntity entity = exerciseSolutionTradingExist.get();
+                String filePath = entity.getFile();
+                var path = Paths.get(filePath);
+                byte[] fileContent = Files.readAllBytes(path);
+                String fileName = path.getFileName().toString();
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.setContentDispositionFormData("attachment", fileName);
+                return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
+            } else {
+                return ResponseEntity.badRequest().body(null);
+            }
+        } catch (Exception e) {
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
