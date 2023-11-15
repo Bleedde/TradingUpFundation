@@ -10,7 +10,6 @@ import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;/
 import com.trading.TradingUpFundationBackend.security.Encryption;
 import com.trading.TradingUpFundationBackend.service.IUserTradingService;//Package that allows the use of the interface "IUserTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Component;//Package that allows to use the annotation @Component to represent this class like a spring component
@@ -32,7 +31,6 @@ public class UserTradingServiceImplements implements IUserTradingService {
     private final Encryption encryption;
 
 
-    @Autowired
     public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter, Encryption encryption) {
         this.converter = converter;
         this.repository = repository;

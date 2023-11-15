@@ -9,7 +9,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.entity.BookTradingE
 import com.trading.TradingUpFundationBackend.repository.IBookTradingRepository;//Package that allows to use the repository IBookTradingRepository
 import com.trading.TradingUpFundationBackend.service.IBookTradingService;//Package that allows the use of the interface "IBookTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
-import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
+//import org.springframework.beans.factory.annotation.Autowired;//Package that allows the use of the annotation @Autowired to represent the injection of dependencies in the spring context
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
@@ -28,10 +28,9 @@ public class BookTradingServiceImplements implements IBookTradingService {
 
     private final Environment env;
     private IBookTradingRepository repository;
-
     private final BookTradingDeserializable converter;
 
-    @Autowired//Annotation that injects the dependencies from the converter related with the entity "BookTrading"
+    //@Autowired//Annotation that injects the dependencies from the converter related with the entity "BookTrading"
     public BookTradingServiceImplements(BookTradingDeserializable converter, IBookTradingRepository repository, Environment env){
         this.repository = repository;
         this.converter = converter;

@@ -2,9 +2,7 @@ package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ExerciseSolutionTradingDeserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IClassTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExerciseSolutionTradingResponse;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExerciseTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutionTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
@@ -15,7 +13,6 @@ import com.trading.TradingUpFundationBackend.repository.IExerciseTradingReposito
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.IExerciseSolutionTradingService;
 import lombok.extern.log4j.Log4j2;
-import org.apache.coyote.Response;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
