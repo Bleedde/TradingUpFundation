@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { CreateExerciseServiceService } from 'src/app/module/service/exercises/create-exercise-service.service';
 import { DeleteExerciseServiceService } from 'src/app/module/service/exercises/delete-exercise-service.service';
 import { ReadExercisesServiceService } from 'src/app/module/service/exercises/read-exercises-service.service';
@@ -18,9 +19,12 @@ export class EjerciciosClaseComponent {
 
   exerciseForm!: FormGroup;
   exerciseDomain!: ExerciseDomain;
-  listExerciseDomain: ExerciseDomain [] = [];
+  listExerciseDomain: ExerciseDomain[] = [];
   editExerciseDomain!: boolean;
   id!: number;
+
+  ejerciciosClase!: boolean;
+  mensaje!: boolean;
 
   niveles: { value: string; label: string }[] = [
     { value: '1', label: 'Nivel 1' },
@@ -34,14 +38,18 @@ export class EjerciciosClaseComponent {
 
   exercise!: ExerciseDomain;
 
-  constructor(public formulary: FormBuilder, private CreateExerciseServiceService: CreateExerciseServiceService, private ReadExercisesServiceService: ReadExercisesServiceService, private UpdateExerciseServiceService: UpdateExerciseServiceService, private DeleteExerciseServiceService: DeleteExerciseServiceService){
+  constructor(public formulary: FormBuilder, private CreateExerciseServiceService: CreateExerciseServiceService, private ReadExercisesServiceService: ReadExercisesServiceService, private UpdateExerciseServiceService: UpdateExerciseServiceService, private DeleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService) {
+
+    this.ejerciciosClase = this.compartidoServiceService.getData();
+    this.mensaje = this.compartidoServiceService.getData();
+
     this.exerciseForm = formulary.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       dataStart: ['', [Validators.required]],
       dataEnd: ['', [Validators.required]],
       level: [0, [Validators.required]],
-      urlHomework: ['', [Validators.required]]
+      file: [null, [Validators.required]]
     })
   }
 
@@ -54,16 +62,60 @@ export class EjerciciosClaseComponent {
       dataStart: ['', [Validators.required]],
       dataEnd: ['', [Validators.required]],
       level: [this.nivelSeleccionado],
-      urlHomework: ['', [Validators.required]]
+      file: ['', [Validators.required]]
     });
 
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.exerciseForm.value;
-
-    this.readExercisesService();
   }
 
   createExercise() {
+    if (!this.exerciseForm.valid) {
+      return this.exerciseForm.markAllAsTouched();
+    } else {
+      const formData = new FormData();
+  
+      // Agregar id con valor predeterminado de 0
+      formData.append('id', '24');
+      formData.append('title', this.exerciseForm.get('title')?.value || '');
+      formData.append('description', this.exerciseForm.get('description')?.value || '');
+      formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
+      formData.append('dataEnd', this.exerciseForm.get('dataEnd')?.value || '');
+  
+      const selectedLevel = this.exerciseForm.get('level')?.value || '1';
+      formData.append('level', selectedLevel);
+  
+      const fileInput = this.exerciseForm.get('file');
+      if (fileInput instanceof FormControl) {
+        // Obtén el archivo directamente del campo del formulario
+        const file: File | null = fileInput.value;
+        if (file) {
+          // Asegúrate de que el tercer parámetro sea el nombre del archivo
+          const blob = new Blob([file], { type: file.type });
+          // Usa la instancia de formData ya creada
+          formData.append('file', blob, file.name);
+        }
+      }
+  
+      // Agregar console.log para imprimir los datos antes de la llamada al servicio
+      console.log('Datos a enviar:');
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+  
+      this.CreateExerciseServiceService.createExerciseService(formData).subscribe(
+        (res: GenericResponse) => {
+          console.log("Esta es la Respuesta: " + res.message);
+          if (res.httpResponse == 200) {
+          }
+        }
+      );
+    }
+  }
+  
+
+
+  /*createExercise() {
 
     if (!this.exerciseForm.valid) {
       return this.exerciseForm.markAllAsTouched()
@@ -78,10 +130,10 @@ export class EjerciciosClaseComponent {
         level: this.exerciseForm.controls['level'].value != 0
           ? this.exerciseForm.controls['level'].value
           : 1,
-        urlHomework: this.exerciseForm.controls['urlHomework'].value
+        file: this.exerciseForm.controls['file'].value
       }
 
-      console.log("prueba de class" + this.exerciseDomain.urlHomework)
+      console.log("prueba de class" + this.exerciseDomain.file)
 
       this.CreateExerciseServiceService.createExerciseService(this.exerciseDomain).subscribe(
         (res: GenericResponse) => {
@@ -92,7 +144,7 @@ export class EjerciciosClaseComponent {
         }
       )
     }
-  }
+  }*/
 
   readExercisesService() {
     this.ReadExercisesServiceService.readClassesService().subscribe(
@@ -108,7 +160,7 @@ export class EjerciciosClaseComponent {
     this.editExerciseDomain = true;
     this.id = i;
     this.exercise = this.listExerciseDomain[this.id];
-    
+
     console.log(this.exercise);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
     this.nivelSeleccionado = this.exercise.level.toString();
@@ -137,9 +189,9 @@ export class EjerciciosClaseComponent {
       level: this.exerciseForm.controls['level'].value != null
         ? this.exerciseForm.controls['level'].value
         : this.listExerciseDomain[this.id].level,
-      urlHomework: this.exerciseForm.controls['urlHomework'].value != ''
-        ? this.exerciseForm.controls['urlHomework'].value
-        : this.listExerciseDomain[this.id].urlHomework
+      file: this.exerciseForm.controls['file'].value != ''
+        ? this.exerciseForm.controls['file'].value
+        : this.listExerciseDomain[this.id].file
     }
 
     this.UpdateExerciseServiceService.updateClassService(this.exercise).subscribe(
@@ -173,3 +225,4 @@ export class EjerciciosClaseComponent {
   }
 
 }
+

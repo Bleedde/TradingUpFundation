@@ -1,0 +1,62 @@
+.form-control:focus {
+    /* Elimina el resaltado predeterminado */
+     box-shadow: 0 0 10px 0px #ba74ff;
+     border-color: rgb(46, 9, 68); /* Agrega un borde sombreado de color rojo al hacer foco */
+ }
+
+.form-select:focus{
+    
+    box-shadow: 0 0 10px 0px #ba74ff;
+    border-color: rgb(46, 9, 68); 
+ }
+
+ .card-header{
+    background-color: #6037a9;
+}
+
+.buttonF{
+    background-color: #6037a9!important;
+}
+
+.cardF{
+    border-color: #4C288A;
+    border-width: 2px;
+}
+
+.bg_purple{
+    background-color: #0E0129;
+}
+
+.bi-cloud-upload-fill{
+    font-size: calc(3vh);
+}
+
+.texts{
+    font-size: calc(3vh);
+}
+
+.grabadas{
+    background-color: #3B216F!important;
+}
+
+.border-warning{
+    border-color: #9965dd!important;
+    border-width: 1px!important;
+}
+
+.btn-outline-secondary{
+    background-color: rgba(255, 255, 255, 0.867);
+    color: #3B216F;
+    border-color: #3B216F;
+    border-width: 1px;
+}
+
+.btn-outline-secondary:hover{
+    background-color: #6037a9;
+    color: white;
+    border-color: white;
+}
+
+.border-color{
+    border-color: #9965dd!important;
+}

@@ -5,5 +5,5 @@ export interface ExerciseDomain{
     dataStart: string;
     dataEnd: string;
     level: number;
-    urlHomework: string;
+    file: File;
 }

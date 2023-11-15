@@ -13,8 +13,8 @@ export class CreateExerciseServiceService {
 
   API: string = "http://localhost:8080/exercise";
 
-  createExerciseService(exerciseDomain: ExerciseDomain): Observable<GenericResponse> {
+  createExerciseService(formData: FormData): Observable<GenericResponse> {
     return this.http
-    .post<GenericResponse>(this.API + "/exercise_create", exerciseDomain )
+    .post<GenericResponse>(this.API + "/exercise_create", formData )
   }
 }
