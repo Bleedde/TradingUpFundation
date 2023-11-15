@@ -22,5 +22,4 @@ public class BookTradingDTO implements Serializable {
     private Integer level;
     private MultipartFile image;
     private MultipartFile file;
-
 }
