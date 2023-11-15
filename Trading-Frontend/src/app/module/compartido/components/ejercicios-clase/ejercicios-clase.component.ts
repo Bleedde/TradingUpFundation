@@ -16,7 +16,9 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 })
 export class EjerciciosClaseComponent {
   graficExercise = GRAFICEXERCISE;
-
+  fileNameVariable!: string;
+  fileType!: string;
+  fileToUpload: File | null = null;
   exerciseForm!: FormGroup;
   exerciseDomain!: ExerciseDomain;
   listExerciseDomain: ExerciseDomain[] = [];
@@ -49,7 +51,7 @@ export class EjerciciosClaseComponent {
       dataStart: ['', [Validators.required]],
       dataEnd: ['', [Validators.required]],
       level: [0, [Validators.required]],
-      file: [null, [Validators.required]]
+      file: [[Validators.required]]
     })
   }
 
@@ -69,60 +71,80 @@ export class EjerciciosClaseComponent {
     this.valoresInicialesFormulario = this.exerciseForm.value;
   }
 
+
+  
+  handleInputEvent(event: any) {
+    const fileInput = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
+    if (fileInput) {
+      this.fileNameVariable = fileInput.name;
+      this.fileType = fileInput.type; // Guarda el nombre real del archivo en la variable
+      this.fileToUpload = fileInput;
+      const formData = new FormData();
+      formData.append('file', fileInput); // Agrega el archivo al objeto FormData
+      // Puedes hacer más acciones con el archivo aquí si es necesario
+      console.log(`Archivo seleccionado: ${this.fileNameVariable}`);
+      console.log(`Tipo de archivo: ${this.fileType}`);
+      console.log(`Archivo a subir: ${this.fileToUpload}`);
+    } else {
+      console.log('Ningún archivo seleccionado.');
+    }
+  }
+  
+  
+
   createExercise() {
     if (!this.exerciseForm.valid) {
       return this.exerciseForm.markAllAsTouched();
     } else {
       const formData = new FormData();
-  
-      // Agregar id con valor predeterminado de 0
-      formData.append('id', '0');
+      // Agrega los demás campos de formulario
+      formData.append('id', '1');
       formData.append('title', this.exerciseForm.get('title')?.value || '');
       formData.append('description', this.exerciseForm.get('description')?.value || '');
       formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
       formData.append('dataEnd', this.exerciseForm.get('dataEnd')?.value || '');
-  
       const selectedLevel = this.exerciseForm.get('level')?.value || '1';
       formData.append('level', selectedLevel);
-  
       const fileInput = this.exerciseForm.get('file');
       if (fileInput instanceof FormControl) {
-        // Obtén el archivo directamente del campo del formulario
         const file: File | null = fileInput.value;
         if (file) {
-          // Asegúrate de que el tercer parámetro sea el nombre del archivo
-          const blob = new Blob([file], { type: file.type });
-          // Usa la instancia de formData ya creada
-          formData.append('file', blob, file.name);
+          const blob = new Blob([this.fileToUpload!], { type: this.fileType });
+          formData.append('file', this.fileToUpload!, this.fileNameVariable); // Usa el nombre real del archivo
         }
       }
-  
-      // Agregar console.log para imprimir los datos antes de la llamada al servicio
+      // Imprime los datos antes de la llamada al servicio
       console.log('Datos a enviar:');
       formData.forEach((value, key) => {
         console.log(`${key}: ${value}`);
       });
-  
+      // Llama al servicio para enviar los datos al backend
       this.CreateExerciseServiceService.createExerciseService(formData).subscribe(
         (res: GenericResponse) => {
-          console.log("Esta es la Respuesta: " + res.message);
-          if (res.httpResponse == 200) {
+          console.log('Respuesta del servidor: ' + res.message);
+          if (res.httpResponse === 200) {
+            window.location.reload();
+            // Realiza acciones adicionales si es necesario
           }
+        },
+        (error) => {
+          console.error('Error al enviar el formulario:', error);
         }
       );
     }
   }
+  
 
   
-  /*  FILEEEEEEEE
-  createExercise() {
+  
+  /*createExercise() {
     if (!this.exerciseForm.valid) {
       return this.exerciseForm.markAllAsTouched();
     } else {
       const formData = new FormData();
   
       // Agregar id con valor predeterminado de 0
-      formData.append('id', '0');
+      formData.append('id', '14');
       formData.append('title', this.exerciseForm.get('title')?.value || '');
       formData.append('description', this.exerciseForm.get('description')?.value || '');
       formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
