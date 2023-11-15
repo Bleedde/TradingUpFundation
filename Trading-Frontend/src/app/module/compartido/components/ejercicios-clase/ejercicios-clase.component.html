@@ -1,0 +1,248 @@
+<div class="col-12 pb-5 rounded" *ngIf="mensaje">
+    <div class="card shadow">
+        <div class="card-header grabadas py-3 d-flex align-items-center justify-content-center">
+            <i class="bi bi-cloud-upload-fill me-3 text-white"></i>
+            <span class="texts text-white">Ejercicios de Practica</span>
+        </div>
+        <div class="card-body bg_purple rounded-bottom">
+            <div class="row col-12 ">
+                <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
+                    <p class="text-center fs-5 text-black p-5 text-white">¡Bienvenido a nuestra seccion de  
+                        ejercicios de práctica!
+                        Estamos emocionados de tenerte aquí para ayudarte en tu aprendizaje. En esta sección, podrás subir tus archivos y realizar ejercicios prácticos para reforzar tus conocimientos. </p>
+                </div>
+                <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 359 309" fill="none">
+                        <g clip-path="url(#clip0_1285_493)">
+                        <path d="M303.997 0.246826H0.185547V179.377H303.997V0.246826Z" fill="#E6E6E6"/>
+                        <path d="M303.812 0H0V18.5138H303.812V0Z" fill="#C69DF5"/>
+                        <path d="M296.689 24.2004H7.00586V170.464H296.689V24.2004Z" fill="white"/>
+                        <path d="M28.7896 12.2722C30.4791 12.2722 31.8487 10.9011 31.8487 9.20966C31.8487 7.51825 30.4791 6.14709 28.7896 6.14709C27.1001 6.14709 25.7305 7.51825 25.7305 9.20966C25.7305 10.9011 27.1001 12.2722 28.7896 12.2722Z" fill="white"/>
+                        <path d="M40.4019 12.2722C42.0914 12.2722 43.461 10.9011 43.461 9.20966C43.461 7.51825 42.0914 6.14709 40.4019 6.14709C38.7124 6.14709 37.3428 7.51825 37.3428 9.20966C37.3428 10.9011 38.7124 12.2722 40.4019 12.2722Z" fill="white"/>
+                        <path d="M17.147 12.2722C18.8365 12.2722 20.2062 10.9011 20.2062 9.20966C20.2062 7.51825 18.8365 6.14709 17.147 6.14709C15.4575 6.14709 14.0879 7.51825 14.0879 9.20966C14.0879 10.9011 15.4575 12.2722 17.147 12.2722Z" fill="white"/>
+                        <path d="M262.904 49.4584H40.792V55.2661H262.904V49.4584Z" fill="#E6E6E6"/>
+                        <path d="M191.444 63.9775H112.251V69.7853H191.444V63.9775Z" fill="#E6E6E6"/>
+                        <path d="M191.444 93.429H112.251V99.2367H191.444V93.429Z" fill="#E6E6E6"/>
+                        <path d="M191.444 108.514H112.251V114.322H191.444V108.514Z" fill="#E6E6E6"/>
+                        <path d="M230.732 78.4968H72.9639V84.3046H230.732V78.4968Z" fill="#E6E6E6"/>
+                        <path d="M262.903 134.893H221.235V145.206H262.903V134.893Z" fill="#C69DF5"/>
+                        <path d="M303.222 302.495L296.225 302.494L292.896 275.473L303.224 275.473L303.222 302.495Z" fill="#9F616A"/>
+                        <path d="M291.226 300.493H304.721V308.999H282.729C282.729 306.743 283.624 304.58 285.217 302.984C286.811 301.389 288.972 300.493 291.226 300.493Z" fill="#2F2E41"/>
+                        <path d="M329.478 302.495L322.481 302.494L319.151 275.473L329.48 275.473L329.478 302.495Z" fill="#9F616A"/>
+                        <path d="M317.483 300.493H330.978V308.999H308.985C308.985 307.882 309.205 306.776 309.632 305.744C310.059 304.712 310.685 303.774 311.474 302.984C312.263 302.194 313.2 301.568 314.231 301.14C315.262 300.713 316.367 300.493 317.483 300.493Z" fill="#2F2E41"/>
+                        <path d="M328.624 222.015C327.87 221.53 327.231 220.885 326.753 220.126C326.275 219.366 325.97 218.511 325.857 217.621C325.745 216.731 325.829 215.826 326.104 214.972C326.378 214.118 326.837 213.334 327.447 212.676L322.839 147.215L336.112 148.503L336.476 212.61C337.512 213.709 338.109 215.15 338.155 216.66C338.2 218.171 337.691 219.645 336.723 220.804C335.755 221.964 334.396 222.727 332.903 222.951C331.41 223.174 329.888 222.841 328.624 222.015Z" fill="#9F616A"/>
+                        <path d="M302.892 288.882L295.188 288.514C294.532 288.483 293.913 288.201 293.458 287.727C293.002 287.252 292.746 286.621 292.742 285.964L292.204 207.931C292.202 207.561 292.279 207.194 292.431 206.856C292.583 206.519 292.806 206.218 293.085 205.975C293.364 205.731 293.692 205.551 294.047 205.446C294.402 205.342 294.776 205.315 295.142 205.368L325.961 209.847C326.57 209.932 327.128 210.235 327.532 210.699C327.936 211.163 328.159 211.757 328.16 212.373L332.124 284.678C332.127 285.017 332.062 285.354 331.934 285.668C331.806 285.982 331.617 286.268 331.379 286.509C331.14 286.75 330.856 286.941 330.543 287.071C330.23 287.202 329.895 287.269 329.556 287.269H321.251C320.638 287.271 320.045 287.054 319.579 286.655C319.113 286.256 318.806 285.703 318.713 285.097C318.713 285.097 312.44 230.861 311.579 230.893C310.713 230.909 305.564 286.619 305.564 286.619C305.488 287.243 305.186 287.817 304.717 288.234C304.247 288.652 303.642 288.883 303.014 288.885C302.973 288.885 302.933 288.884 302.892 288.882Z" fill="#2F2E41"/>
+                        <path d="M325.843 169.211C325.532 168.987 325.276 168.696 325.092 168.36C324.908 168.024 324.802 167.65 324.782 167.268L323.81 149.624C323.713 147.876 324.267 146.154 325.364 144.791C326.46 143.427 328.023 142.518 329.749 142.24C331.475 141.961 333.244 142.332 334.713 143.281C336.182 144.23 337.249 145.69 337.706 147.38L341.978 163.154C342.156 163.813 342.065 164.514 341.727 165.106C341.388 165.697 340.829 166.13 340.171 166.309L328.019 169.608C327.65 169.709 327.263 169.726 326.886 169.657C326.509 169.588 326.153 169.436 325.843 169.211Z" fill="#3F3D56"/>
+                        <path d="M314.492 127.279C322.234 127.279 328.511 120.995 328.511 113.244C328.511 105.493 322.234 99.2089 314.492 99.2089C306.749 99.2089 300.473 105.493 300.473 113.244C300.473 120.995 306.749 127.279 314.492 127.279Z" fill="#9F616A"/>
+                        <path d="M263.689 140.818C263.759 141.126 263.804 141.44 263.825 141.755L288.345 155.916L294.305 152.482L300.658 160.809L287.909 169.906L259.935 147.813C258.794 148.236 257.552 148.301 256.373 147.999C255.195 147.698 254.136 147.044 253.337 146.125C252.538 145.207 252.038 144.066 251.903 142.856C251.767 141.646 252.003 140.423 252.579 139.35C253.154 138.277 254.042 137.405 255.125 136.85C256.208 136.295 257.434 136.083 258.64 136.242C259.846 136.401 260.975 136.925 261.877 137.742C262.779 138.559 263.411 139.632 263.689 140.818Z" fill="#9F616A"/>
+                        <path d="M289.221 154.712C289.18 154.331 289.225 153.946 289.353 153.584C289.48 153.223 289.688 152.895 289.959 152.624L302.438 140.128C303.675 138.89 305.325 138.154 307.071 138.062C308.818 137.971 310.536 138.529 311.895 139.631C313.255 140.732 314.158 142.299 314.432 144.028C314.706 145.757 314.331 147.526 313.379 148.995L304.492 162.704C304.121 163.276 303.538 163.677 302.872 163.819C302.206 163.96 301.511 163.832 300.939 163.462L290.377 156.6C290.056 156.392 289.785 156.114 289.585 155.787C289.384 155.461 289.26 155.093 289.221 154.712Z" fill="#3F3D56"/>
+                        <path d="M324.413 124.348C321.797 127.137 316.94 125.639 316.599 121.829C316.573 121.533 316.575 121.236 316.605 120.94C316.781 119.252 317.755 117.72 317.522 115.938C317.469 115.495 317.304 115.072 317.042 114.71C314.958 111.916 310.066 115.96 308.099 113.431C306.893 111.88 308.311 109.438 307.385 107.705C306.164 105.417 302.545 106.545 300.277 105.293C297.752 103.899 297.903 100.021 299.565 97.6624C301.591 94.786 305.145 93.2512 308.654 93.03C312.163 92.8088 315.648 93.7584 318.924 95.0366C322.646 96.4888 326.337 98.4957 328.627 101.772C331.413 105.757 331.681 111.114 330.288 115.773C329.44 118.608 326.548 122.07 324.413 124.348Z" fill="#2F2E41"/>
+                        <path d="M358.429 308.893H248.266C248.115 308.893 247.97 308.833 247.863 308.726C247.755 308.619 247.695 308.473 247.695 308.322C247.695 308.17 247.755 308.025 247.863 307.918C247.97 307.811 248.115 307.75 248.266 307.75H358.429C358.58 307.75 358.725 307.811 358.832 307.918C358.939 308.025 359 308.17 359 308.322C359 308.473 358.939 308.619 358.832 308.726C358.725 308.833 358.58 308.893 358.429 308.893Z" fill="#3F3D56"/>
+                        <path d="M328.485 136.654C328.241 136.478 327.993 136.306 327.74 136.137C326.394 135.241 324.936 134.526 323.404 134.009V130.322H312.559V133.743C308.964 134.736 305.74 136.765 303.288 139.578C300.836 142.391 299.263 145.863 298.767 149.564L291.383 204.45C291.335 204.793 291.358 205.142 291.449 205.476C291.54 205.811 291.698 206.123 291.914 206.394C292.125 206.663 292.388 206.886 292.687 207.051C292.987 207.215 293.317 207.317 293.657 207.35C296.216 207.605 301.522 208.598 308.315 212.376C311.581 214.187 315.258 215.127 318.992 215.104C321.956 215.093 324.896 214.569 327.682 213.555C328.155 213.381 328.565 213.07 328.861 212.663C329.158 212.256 329.327 211.77 329.348 211.267C329.614 205.36 331.169 174.956 335.698 156.41C336.578 152.772 336.363 148.954 335.079 145.438C333.795 141.923 331.501 138.866 328.485 136.654Z" fill="#3F3D56"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_1285_493">
+                        <rect width="359" height="309" fill="white"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5" *ngIf="!ejerciciosClase">
+    <div class="card cardF">
+        <div class="card-header py-3 text-center text-white fs-5">
+            Registro de Ejercicios Prácticos
+        </div>
+        <div class="card-body p-5">
+            <form *ngIf="!exerciseDomain" (submit)="createExercise()" [formGroup]="exerciseForm" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <label for="title" class="col-sm-2 col-form-label">Título:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="title">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="description">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="startDate" class="col-sm-2 col-form-label">Fecha de Inicio:</label>
+                    <div class="col-sm-10">
+                    <input type="date" class="form-control" formControlName="dataStart">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="finalDate" class="col-sm-2 col-form-label">Fecha de Entrega:</label>
+                    <div class="col-sm-10">
+                    <input type="date" class="form-control" formControlName="dataEnd">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" formControlName="level">
+                            <option *ngFor="let nivel of niveles" [value]="nivel.value">
+                                {{nivel.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="file" class="col-sm-2 col-form-label">Archivo:</label>
+                    <div class="col-sm-10">
+                    <input type="file" class="form-control" name="file" formControlName="file">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn text-white px-5 buttonF">Agregar</button>
+                </div>
+            </form>
+
+            <!-- Editar un ejercicio -->
+
+            <form *ngIf="exerciseDomain" (submit)="updateExercise()" [formGroup]="exerciseForm">
+                <div class="row mb-3">
+                    <label for="title" class="col-sm-2 col-form-label">Título:</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="title" placeholder="exercise.title">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
+                    <div class="col-sm-10">
+                    <input type="email" class="form-control" formControlName="description" placeholder="exercise.description">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="startDate" class="col-sm-2 col-form-label">Fecha de Inicio:</label>
+                    <div class="col-sm-10">
+                    <input type="date" class="form-control" formControlName="dataStart" placeholder="exercise.dataStart">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="finalDate" class="col-sm-2 col-form-label">Fecha de Entrega:</label>
+                    <div class="col-sm-10">
+                    <input type="date" class="form-control" formControlName="dataEnd" placeholder="exercise.dataEnd">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" formControlName="level">
+                            <option *ngFor="let nivel of niveles" [value]="nivel.value">
+                                {{nivel.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="file" class="col-sm-2 col-form-label">Archivo:</label>
+                    <div class="col-sm-10">
+                    <input type="file" class="form-control" formControlName="file" placeholder="file">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn text-white px-5 buttonF me-md-2 me-0 mb-3 mb-md-0">Actualizar</button>
+                    <a class="btn text-white px-5 buttonF" (click)="cancelarEdicion()">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container col-10 mb-5" *ngFor="let exerciseItem of listExerciseDomain; let i = index">
+    <div class="card cardF">
+        <div class="card-header py-2 text-center text-white d-flex justify-content-between">
+            {{exerciseItem.title}}
+            <div class="d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-pen-to-square me-2"></i>
+            <i class="fa-solid fa-trash"></i>
+            </div>
+        </div>
+        <div class="card-body px-4 col-12 container">
+            <div class="row col-12">
+                <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
+                    <div class="">
+                        <p>Descripcción: {{exerciseItem.description}}</p>
+                    </div>
+                    <div class="">
+                        <p>Fecha de Inicio: {{exerciseItem.dataStart}}</p>
+                    </div>
+                    <div class="">
+                        <p>Fecha de Entrega: {{exerciseItem.dataEnd}}</p>
+                    </div>
+                    <div class="">
+                        <p>Nivel: {{exerciseItem.level}}</p>
+                    </div>
+                </div>
+                <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
+                    <img [src]="graficExercise" alt="" width="120px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="container col-10 mb-5">
+    <div class="card cardF">
+        <div class="card-header py-2 text-center text-white d-flex justify-content-between">
+            Ejercicio Final
+            <div class="d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-pen-to-square me-2"></i>
+            <i class="fa-solid fa-trash"></i>
+            </div>
+            
+        </div>
+
+        <div class="card-body px-4 col-12 container">
+            <div class="row col-12">
+                <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
+                    <div class="">
+                        <p>Descripción: Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, dolor.</p>
+                    </div>
+                    <div class="">
+                        <p>Fecha de inicio: 29/08/2023</p>
+                    </div>
+                    <div class="">
+                        <p>Fecha de entrega: 15/09/2023</p>
+                    </div>
+                    <div class="">
+                        <p>Nivel 1</p>
+                    </div>
+                    <div class=" mb-4">
+                        <p>Chartismo.odt</p>
+                    </div>
+                </div>
+                <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
+                    <img [src]="graficExercise" alt="" width="120px">
+                </div>
+            </div>
+            <div class="border-top col-12 border-black">
+                <div class="mt-3">
+                    <p class="fw-bold text-center">Agrega tú respuesta</p>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Comentario</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" id="inputGroupFile02">
+                          </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                        <button type="submit" class="btn text-white px-4 buttonF">Enviar</button>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+</div>-->
+
+

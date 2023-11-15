@@ -5,7 +5,6 @@ import { CursoAdminPageComponent } from './curso-admin-page/curso-admin-page.com
 
 import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
 import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
-import { EjerciciosClaseComponent } from './curso-admin-page/components/ejercicios-clase/ejercicios-clase.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,8 +18,7 @@ import { DeleteUserServiceService } from '../service/userServices/delete-user-se
   declarations: [
     CursoAdminPageComponent,
     UsuariosComponent,
-    ContenidoCursoComponent,
-    EjerciciosClaseComponent,
+    ContenidoCursoComponent
   ],
   imports: [
     CommonModule,
