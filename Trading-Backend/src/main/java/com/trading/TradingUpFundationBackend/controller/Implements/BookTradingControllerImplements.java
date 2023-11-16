@@ -1,7 +1,6 @@
 package com.trading.TradingUpFundationBackend.controller.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.URLs.IBookTradingEndPoints;//Package which gives the urls for the entity BookTrading
-import com.trading.TradingUpFundationBackend.commons.constant.URLs.IExerciseTradingEndPoints;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.BookTradingDTO;//Package that allows to use the serializable version of the entity BookTradingEntity; BookTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that creates a response like an object
 import com.trading.TradingUpFundationBackend.controller.IBookTradingController;//Package which implements the interface IBookTradingController
