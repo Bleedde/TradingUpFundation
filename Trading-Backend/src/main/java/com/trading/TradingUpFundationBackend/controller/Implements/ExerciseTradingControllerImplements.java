@@ -83,6 +83,11 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
         return this.service.deleteExerciseTrading(id);
     }
 
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
     @Override
     @GetMapping(IExerciseTradingEndPoints.URL_EXERCISE_FILE)
     public ResponseEntity<byte[]> getFile(@PathVariable Integer id){

@@ -1,13 +1,10 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;//Package to turn into Json data some attributes
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
 
 import java.sql.Date;//Import the type of data "Date" to represent a specific Date
-import java.util.List;
 
 @Entity//Annotation to represent this class like an entity of a database for spring
 @Table(name = "exercise_trading")//Annotation to represent this entity like a table in a database represented with a name

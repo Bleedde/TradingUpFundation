@@ -16,15 +16,15 @@ public interface IBookTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @PostMapping()//Annotation that represent the header of an HTTP query that creates a book with a POST query
-    ResponseEntity<ObjectResponse> createBookTrading(@RequestBody BookTradingDTO bookTradingDTO);
+    ResponseEntity<ObjectResponse> createBookTrading(@ModelAttribute BookTradingDTO bookTradingDTO);
 
     /**
      * Method without body which reads a book with the service BookTradingServiceImplements
-     * @param bookTradingDTO The book to be read
+     * @param id The id of the book to be read
      * @return An ObjectResponse with answers depending on the result
      */
     @GetMapping()//Annotation that represent the header of an HTTP query that reads a book with a GET query
-    ResponseEntity<ObjectResponse> readBookTrading(@RequestBody BookTradingDTO bookTradingDTO);
+    ResponseEntity<ObjectResponse> readBookTrading(@PathVariable Integer id);
 
     /**
      * Method without body which reads all the books with the service BookTradingServiceImplements
@@ -39,8 +39,29 @@ public interface IBookTradingController {
      * @return An ObjectResponse with answers depending on the result
      */
     @PutMapping//Annotation that represent the header of an HTTP query that updates a book with a PUT query
-    ResponseEntity<ObjectResponse> updateBookTrading(@RequestBody BookTradingDTO bookTradingDTO);
+    ResponseEntity<ObjectResponse> updateBookTrading(@ModelAttribute BookTradingDTO bookTradingDTO);
 
+    /**
+     * Method without body which updates a book with the service BookTradingServiceImplements
+     * @param id The id of the book to be read
+     * @return An ObjectResponse with answers depending on the result
+     */
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a book with a DELETE query
     ResponseEntity<ObjectResponse> deleteBookTrading(@PathVariable Integer id);//Method that deletes a book
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    @GetMapping//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
+    ResponseEntity<byte[]> getFile(@PathVariable Integer id);
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    @GetMapping//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
+    ResponseEntity<byte[]> getImage(@PathVariable Integer id);
 }

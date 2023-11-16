@@ -5,16 +5,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;//Package 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;//Interface that allows to customize and config some important aspects of the spring MVC
 
 @Configuration//This annotation marks a class like a source of definitions of spring bean's and the configuration of the components in the application
-
-/**
- *  Class that configs the access policy of cross resources to allow the access of resources of domains different of the server domain of the application
- *  Implements the interface WebMvcConfigurer to config the CORS policy
- */
 public class Allows implements WebMvcConfigurer {
-    @Override//Annotation that brings a method since a interface implemented
-    /**
-     * Class that allows the config and customize the CORS of a domain
-     */
+    @Override//Annotation that brings a method since an interface implemented
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")

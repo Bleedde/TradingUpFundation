@@ -1,6 +1,5 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +27,7 @@ public class ExerciseSolutionTradingEntity {
 
     @Column(name = "solution_exercise_exercise_id")
     private Integer idExercise;
+
+    @Column(name = "solution_exercise_file_path")
+    private String file;
 }

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Component;//Package to represent this clas
 
 @Component//Annotation to represent this class like a "Bean" or a "Component" in java context
 @Log4j2//Annotation to log some messages depending on the context
-/**
- * Class to represent the converter between the object "ExerciseTradingEntity" and "ExerciseTradingDTO"
- */
-public class ExcerciseTradingDeserializable {
+public class ExerciseTradingDeserializable {
 
     /**
      * Method to turn an object with a type "ExerciseTradingDTO" to an object with type "ExerciseTradingEntity"

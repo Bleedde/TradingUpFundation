@@ -1,11 +1,7 @@
 package com.trading.TradingUpFundationBackend.commons.domains.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
-
-import java.util.List;
 
 @Entity//Annotation to represent this class like an entity of a database for spring
 @Table(name = "user_trading")//Annotation to represent this entity like a table in a database represented with a name
@@ -43,11 +39,4 @@ public class UserTradingEntity {
 
     @Column(name = "user_role", length = 255, nullable = false)//Anottation to represent this attribute like a column with a name in the table, the lenght has to be 255 or less
     private String userRole;
-
-    /*
-    @OneToMany(mappedBy = "userTradingEntity")
-    @JsonManagedReference
-    @JsonIgnore
-    private List<ExerciseSolutionTradingEntity> listExerciseSolutionTrading;
-     */
 }

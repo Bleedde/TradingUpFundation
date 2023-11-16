@@ -25,15 +25,17 @@ CREATE TABLE exercise_solution_trading(
     solution_exercise_comment VARCHAR(255) NOT NULL,
     solution_exercise_url_solution VARCHAR(255) NOT NULL,
     solution_exercise_user_name INTEGER NOT NULL,
-    solution_exercise_exercise_id INTEGER NOT NULL
+    solution_exercise_exercise_id INTEGER NOT NULL,
+    solution_exercise_file_path VARCHAR(255) NOT NULL
 );
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     book_name VARCHAR(255) NOT NULL,
     book_description VARCHAR(255) NOT NULL,
-    book_image VARCHAR(255) NOT NULL,
-    book_file VARCHAR(255) NOT NULL,
-    book_level INTEGER NOT NULL
+     book_level INTEGER NOT NULL,
+    book_image_path VARCHAR(255) NOT NULL,
+    book_file_path VARCHAR(255) NOT NULL
+
 );
 CREATE TABLE class_trading(
     class_id INTEGER AUTO_INCREMENT PRIMARY KEY,

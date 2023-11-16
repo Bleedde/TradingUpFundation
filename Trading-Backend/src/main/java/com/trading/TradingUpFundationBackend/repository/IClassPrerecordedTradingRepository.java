@@ -5,8 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;//Package to use th
 import org.springframework.stereotype.Repository;//Package to bring the element from spring "Repository"
 
 @Repository//Annotation to represent this interface like a repository to connect with the database
-/**
- * Interface which represents a connection between the Springboot application and the database
- * Connection between the entity ClassPrerecordedTradingEntity and the table class_prerecorded_trading
- */
 public interface IClassPrerecordedTradingRepository extends JpaRepository<ClassPrerecordedTradingEntity, Integer> {}
