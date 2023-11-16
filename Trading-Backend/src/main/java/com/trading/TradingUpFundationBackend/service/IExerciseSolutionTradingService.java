@@ -23,17 +23,11 @@ public interface IExerciseSolutionTradingService {
      * Method without body which reads all the exercise solutions
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readExercisesSolutionsTrading();
-
-    /**
-     * Method without body which updates an exercise solution
-     * @return An ObjectResponse with answers depending on the result
-     */
-    ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+    ResponseEntity<ObjectResponse> readExercisesSolutionsTrading(Integer idExercise);
 
     /**
      * Method without body which return a file
-     * @return An byte[] of the content of the file
+     * @return A byte[] of the content of the file
      */
     ResponseEntity<byte[]> getFile(Integer id);
 }

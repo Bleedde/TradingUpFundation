@@ -1,6 +1,6 @@
 package com.trading.TradingUpFundationBackend.commons.constant.URLs;
 /**
- * Interface who contains the endpoints of each controller of the entity ExcerciseTrading
+ * Interface who contains the endpoints of each controller of the entity ExerciseTrading
  */
 public interface IExerciseTradingEndPoints {
     String URL_EXERCISE = "/exercise";//Go to de exercise area

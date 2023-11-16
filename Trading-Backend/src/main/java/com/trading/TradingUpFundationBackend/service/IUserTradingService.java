@@ -20,7 +20,7 @@ public interface IUserTradingService {
 
     /**
      * Method without body which reads a user
-     * @param userTradingDTO The user to be read
+     * @param id The id of the user to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readUserTrading(Integer id);
@@ -32,14 +32,14 @@ public interface IUserTradingService {
     ResponseEntity<ObjectResponse> readUsersTrading();
 
     /**
-     * Method without body which updates an user
+     * Method without body which updates a user
      * @param userTradingDTO The user to be updated
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> updateUserTrading(UserTradingDTO userTradingDTO);
 
     /**
-     * Method without body which deletes an user
+     * Method without body which deletes a user
      * @param userTradingDTO The user to be deleted
      * @return An ObjectResponse with answers depending on the result
      */

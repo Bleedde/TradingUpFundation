@@ -18,10 +18,10 @@ public interface IBookTradingService {
 
     /**
      * Method without body which reads a book
-     * @param bookTradingDTO The book to be read
+     * @param id The id of the book to be read
      * @return An ObjectResponse with answers depending on the result
      */
-    ResponseEntity<ObjectResponse> readABookTrading(BookTradingDTO bookTradingDTO);
+    ResponseEntity<ObjectResponse> readABookTrading(Integer id);
 
     /**
      * Method without body which reads all the books
@@ -38,8 +38,22 @@ public interface IBookTradingService {
 
     /**
      * Method without body which deletes a book
-     * @param bookTradingDTO The book to be deleted
+     * @param id The id of the book to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteBookTrading(Integer id);
+
+    /**
+     * Method without body which return an image
+     * @param id The id of the image
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<byte[]> getImage(Integer id);
+
+    /**
+     * Method without body which return a file
+     * @param id The id of the file
+     * @return An ObjectResponse with answers depending on the result
+     */
+    ResponseEntity<byte[]> getFile(Integer id);
 }

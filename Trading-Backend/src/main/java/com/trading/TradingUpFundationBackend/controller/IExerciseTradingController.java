@@ -34,7 +34,7 @@ public interface IExerciseTradingController {
     ResponseEntity<ObjectResponse> readExercisesTrading(@PathVariable Integer level);
 
     /**
-     * Method without body which updates a exercise with the service ExerciseTradingServiceImplements
+     * Method without body which updates an exercise with the service ExerciseTradingServiceImplements
      * @param exerciseTradingDTO The class prerecorded to be updated
      * @return An ObjectResponse with answers depending on the result
      */

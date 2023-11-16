@@ -10,10 +10,6 @@ import java.io.Serializable;//Package to use this class like a byte sequence
 @Builder//Annotation who allows to build an object in an easier way
 @AllArgsConstructor//Annotation who creates a constructor with all the arguments passed like parameters
 @NoArgsConstructor//Annotation who creates an empty constructor
-/**
- * Class that creates an object with a type DTO to the entity "ClassPrerecordedTrading"
- * Implements de interface Serializable
- */
 public class ClassPrerecordedTradingDTO implements Serializable {
     private Integer id;
     private String title;

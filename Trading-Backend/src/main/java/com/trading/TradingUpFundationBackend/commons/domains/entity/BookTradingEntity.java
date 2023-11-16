@@ -6,9 +6,6 @@ import lombok.Data;//Package of lombok to add the normal methods that an entity 
 @Entity//Annotation to represent this class like an entity of a database for spring
 @Data//Annotation to represent normal methods of a normal class
 @Table(name = "book_trading")//Annotation to represent this entity like a table in a database represented with a name
-/**
- * Class to represent the entity "book_trading" of the modeling "TradingUpFoundation"
- */
 public class BookTradingEntity {
     @Id//Annotation to represent this attribute like an ID who represent this Entity
     @GeneratedValue(strategy = GenerationType.IDENTITY)//Annotation who represent the way of how the id is going to work in each registration

@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;//Package to bring the element 
 import java.util.Optional;//Package which allows the use of the dataType "Optional"
 
 @Repository//Annotation to represent this interface like a repository to connect with the database
-/**
- * Interface which represents a connection between the Springboot application and the database
- * Connection between the entity UserTradingEntity and the table user_trading
- */
 public interface IUserTradingRepository extends JpaRepository<UserTradingEntity, Integer> {
 
     /**
@@ -19,10 +15,4 @@ public interface IUserTradingRepository extends JpaRepository<UserTradingEntity,
      * @return An object empty or not, depends on if it found the email or not
      */
     Optional<UserTradingEntity> findByEmail(String email);
-
-    /**
-     * Class without body which delete a user for his email
-     * @param email The email of the user to be deleted
-     */
-    void deleteByEmail(String email);
 }

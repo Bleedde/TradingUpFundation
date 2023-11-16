@@ -112,7 +112,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
 
     /**
      * Method that reads a user
-     * @param userTradingDTO The user to be readed
+     * @param id The id of the user to be read
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface

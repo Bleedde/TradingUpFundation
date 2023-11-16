@@ -3,15 +3,12 @@ package com.trading.TradingUpFundationBackend.commons.constant.deserializable;
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package to use a general response created in another package
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassPrerecordedTradingDTO;//Package to import the DTO object "Class"
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassPrerecordedTradingEntity;//Package that allows the use of the entity ClassPrerecordedTrading
-import com.trading.TradingUpFundationBackend.commons.mapper.Mapper;//Package to import yhe object "HelpeperMapper"
+import com.trading.TradingUpFundationBackend.commons.mapper.Mapper;//Package to import yhe object "HelperMapper"
 import lombok.extern.log4j.Log4j2;//Package who allows log better responses
 import org.springframework.stereotype.Component;//Package to represent this class like a component in the spring context
 
 @Component//Annotation to represent this class like a "Bean" or a "Component" in java context
 @Log4j2//Annotation to log some messages depending on the context
-/**
- * Class to represent the converter between the object "ClassTradingEntity" and "ClassTradingDTO"
- */
 public class ClassPrerecordedTradingDeserializable {
 
     /**

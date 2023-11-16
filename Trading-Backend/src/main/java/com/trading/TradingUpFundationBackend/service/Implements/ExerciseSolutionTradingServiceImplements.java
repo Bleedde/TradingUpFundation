@@ -8,6 +8,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
+import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IExerciseTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
@@ -20,13 +21,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,13 +41,16 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     private final IExerciseTradingRepository exerciseRepository;
     private final IUserTradingRepository userRepository;
     private final Environment env;
+    private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
     public ExerciseSolutionTradingServiceImplements(IExerciseSolutionTradingRepository repository, ExerciseSolutionTradingDeserializable converter,
-                                                    IExerciseTradingRepository exerciseRepository, IUserTradingRepository userRepository, Environment env) {
+                                                    IExerciseTradingRepository exerciseRepository, IUserTradingRepository userRepository, Environment env,
+                                                    NewIdEntitiesWithFiles newIdEntitiesWithFiles) {
         this.repository = repository;
         this.converter = converter;
         this.exerciseRepository = exerciseRepository;
         this.userRepository = userRepository;
         this.env = env;
+        this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
     }
 
     /**
@@ -56,16 +60,25 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
      */
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
+        int idFile;
         try {
-            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
+            List<ExerciseSolutionTradingEntity> entityList = this.repository.findAll();
+            List<Integer> idEntities = new ArrayList<>();
+            if (!entityList.isEmpty()) {
+                for(ExerciseSolutionTradingEntity entity : entityList){
+                    idEntities.add(entity.getId());
+                }
+            }
+            idFile = this.newIdEntitiesWithFiles.getHigherNumber(idEntities) + 1;
+            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingExist = this.repository.findById(idFile);
             Optional<UserTradingEntity> userDatabase = this.userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
             Optional<ExerciseTradingEntity> exerciseDatabase = this.exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
-            if (exerciseSolutionTradingExist.isEmpty()){
-                if(userDatabase.isPresent()){
-                    if(exerciseDatabase.isPresent()){
+            if (exerciseSolutionTradingExist.isEmpty()) {
+                if (userDatabase.isPresent()) {
+                    if (exerciseDatabase.isPresent()) {
                         ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
                         String fileName = StringUtils.cleanPath(Objects.requireNonNull(exerciseSolutionTradingDTO.getFile().getOriginalFilename()));
-                        String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + entity.getId();
+                        String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + idFile;
                         Files.createDirectories(Paths.get(uploadDirection));
                         Path uploadPath = Paths.get(uploadDirection, fileName);
                         Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
@@ -84,13 +97,13 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                                 .httpResponse(HttpStatus.BAD_REQUEST.value())
                                 .build());
                     }
-                } else {
-                    return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                            .message(Responses.OPERATION_FAIL + ", the user doesnt exist")
-                            .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
-                            .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .build());
-                }
+                }else{
+                        return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                                .message(Responses.OPERATION_FAIL + ", the user doesnt exist")
+                                .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
+                                .httpResponse(HttpStatus.BAD_REQUEST.value())
+                                .build());
+                    }
             } else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL + ", the id of the register already exist")
@@ -108,6 +121,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                             .build());
         }
     }
+
 
     /**
      * Method that reads an exercise solution
@@ -146,13 +160,19 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface
-    public ResponseEntity<ObjectResponse> readExercisesSolutionsTrading() {
+    public ResponseEntity<ObjectResponse> readExercisesSolutionsTrading(Integer exerciseId) {
         try {
             List<ExerciseSolutionTradingEntity> exerciseSolutionsTradingEntityList = this.repository.findAll();
+            List<ExerciseSolutionTradingEntity> exerciseSolutionForIdExercise = new ArrayList<>();
             if (!exerciseSolutionsTradingEntityList.isEmpty()) {
+                for(ExerciseSolutionTradingEntity entity : exerciseSolutionsTradingEntityList){
+                    if(Objects.equals(entity.getIdExercise(), exerciseId)){
+                        exerciseSolutionForIdExercise.add(entity);
+                    }
+                }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
-                        .objectResponse(exerciseSolutionsTradingEntityList)
+                        .objectResponse(exerciseSolutionForIdExercise)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
@@ -163,67 +183,6 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                         .build());
             }
         } catch (Exception e) {
-            log.error(Responses.INTERNAL_SERVER_ERROR, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ObjectResponse.builder()
-                            .message(Responses.INTERNAL_SERVER_ERROR)
-                            .objectResponse(null)
-                            .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                            .build());
-        }
-    }
-
-    @Override
-    public ResponseEntity<ObjectResponse> updateExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO){
-        try {
-            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingEntityExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
-            Optional<UserTradingEntity> userDatabase = this.userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
-            Optional<ExerciseTradingEntity> exerciseDatabase = this.exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
-            if(exerciseSolutionTradingEntityExist.isPresent()){
-                if (userDatabase.isPresent()){
-                    if (exerciseDatabase.isPresent()){
-                        ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
-                        String existingFilePath = exerciseSolutionTradingEntityExist.get().getFile();
-                        MultipartFile newFile = exerciseSolutionTradingDTO.getFile();
-                        if(existingFilePath != null && !existingFilePath.isEmpty()){
-                            Files.delete(Paths.get(existingFilePath));
-                        }
-                        if (newFile != null && !newFile.isEmpty()) {
-                            String fileName = StringUtils.cleanPath(Objects.requireNonNull(newFile.getOriginalFilename()));
-                            String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + exerciseSolutionTradingDTO.getId();
-                            Files.createDirectories(Paths.get(uploadDirection));
-                            Path uploadPath = Paths.get(uploadDirection, fileName);
-                            Files.copy(newFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-                            entity.setFile(uploadPath.toString());
-                        }
-                        this.repository.save(entity);
-                        return ResponseEntity.ok(ObjectResponse.builder()
-                                .message(Responses.OPERATION_SUCCESS)
-                                .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_SUCCESS)
-                                .httpResponse(HttpStatus.OK.value())
-                                .build());
-                    } else {
-                        return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                                .message(Responses.OPERATION_FAIL + ", the exercise doesnt exist")
-                                .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
-                                .httpResponse(HttpStatus.BAD_REQUEST.value())
-                                .build());
-                    }
-                } else {
-                    return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                            .message(Responses.OPERATION_FAIL + ", the user doesnt exist")
-                            .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
-                            .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .build());
-                }
-            } else {
-                return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                        .message(Responses.OPERATION_FAIL + ", the exercise solution doesnt exist")
-                        .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
-                        .httpResponse(HttpStatus.BAD_REQUEST.value())
-                        .build());
-            }
-        } catch (Exception e){
             log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ObjectResponse.builder()
