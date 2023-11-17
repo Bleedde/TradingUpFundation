@@ -1,5 +1,6 @@
 package com.trading.TradingUpFundationBackend.service.Implements;
 
+import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import org.springframework.http.HttpStatus;//Package that allows the use of Http codes
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
@@ -26,18 +27,30 @@ public class ClassPrerecordedTradingServiceImplements implements IClassPrerecord
 
     private final IClassPrerecordedTradingRepository repository;
     private final ClassPrerecordedTradingDeserializable converter;
+    private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
 
-    public ClassPrerecordedTradingServiceImplements(IClassPrerecordedTradingRepository repository, ClassPrerecordedTradingDeserializable converter){
+    public ClassPrerecordedTradingServiceImplements(IClassPrerecordedTradingRepository repository, ClassPrerecordedTradingDeserializable converter, NewIdEntitiesWithFiles newIdEntitiesWithFiles){
         this.repository = repository;
         this.converter = converter;
+        this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
     }
 
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createClassPrerecordedTrading(ClassPrerecordedTradingDTO classPrerecordedTradingDTO) {
         try{
-            Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(classPrerecordedTradingDTO.getId());
+            int idNew;
+            List<ClassPrerecordedTradingEntity> classPrerecordedList = this.repository.findAll();
+            List<Integer> idEntities = new ArrayList<>();
+            if (!classPrerecordedList.isEmpty()) {
+                for(ClassPrerecordedTradingEntity entity : classPrerecordedList){
+                    idEntities.add(entity.getId());
+                }
+            }
+            idNew = this.newIdEntitiesWithFiles.getHigherNumber(idEntities) + 1;
+            Optional<ClassPrerecordedTradingEntity> classPrerecordedTradingExist = this.repository.findById(idNew);
             if(classPrerecordedTradingExist.isEmpty()){
                 ClassPrerecordedTradingEntity entity = this.converter.convertClassPrerecordedTradingDTOToClassPrerecordedTradingEntity(classPrerecordedTradingDTO);
+                entity.setId(idNew);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)

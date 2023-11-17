@@ -1,8 +1,8 @@
 package com.trading.TradingUpFundationBackend.commons.constant.deserializable;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
-import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutionTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
+import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutionTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.mapper.Mapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;

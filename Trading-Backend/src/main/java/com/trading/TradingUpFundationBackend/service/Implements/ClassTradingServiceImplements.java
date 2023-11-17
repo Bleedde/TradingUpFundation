@@ -5,7 +5,9 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.entittyRe
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.ClassTradingDeserializable;//Package that allows use the object ClassTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;//Package that allows to use the serializable version of the entity ClassTradingEntity; ClassTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassPrerecordedTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;//Package that allows to use the Entity ClassTradingEntity
+import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IClassTradingRepository;//Package that allows to use the repository IClassTradingRepository
 import com.trading.TradingUpFundationBackend.service.IClassTradingService;//Package that allows the use of the interface "IClassTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -24,8 +26,9 @@ public class ClassTradingServiceImplements implements IClassTradingService {
 
     private final IClassTradingRepository repository;
     private final ClassTradingDeserializable converter;
-
-    public ClassTradingServiceImplements(IClassTradingRepository repository, ClassTradingDeserializable converter){
+    private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
+    public ClassTradingServiceImplements(IClassTradingRepository repository, ClassTradingDeserializable converter, NewIdEntitiesWithFiles newIdEntitiesWithFiles){
+        this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
         this.repository = repository;
         this.converter = converter;
     }
@@ -37,11 +40,19 @@ public class ClassTradingServiceImplements implements IClassTradingService {
      */
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createClassTrading(ClassTradingDTO classTradingDTO) {
-        System.out.println(classTradingDTO);
         try{
-            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(classTradingDTO.getId());
+            int idNew;
+            List<ClassTradingEntity> classList = this.repository.findAll();
+            List<Integer> idEntities = new ArrayList<>();
+            if (!classList.isEmpty()) {
+                for(ClassTradingEntity entity : classList){
+                    idEntities.add(entity.getId());
+                }
+            } idNew = this.newIdEntitiesWithFiles.getHigherNumber(idEntities) + 1;
+            Optional<ClassTradingEntity> classTradingExist = this.repository.findById(idNew);
             if(classTradingExist.isEmpty()){
                 ClassTradingEntity entity = this.converter.convertClassTradingDTOToClassTradingEntity(classTradingDTO);
+                entity.setId(idNew);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)

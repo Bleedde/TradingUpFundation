@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "exercise_solution_trading")
 public class ExerciseSolutionTradingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "solution_exercise_id")
     private Integer id;
 

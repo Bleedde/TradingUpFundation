@@ -5,7 +5,9 @@ import com.trading.TradingUpFundationBackend.commons.constant.deserializable.Use
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;//Package that allows use the object UserTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use the serializable version of the entity UserTradingEntity; RegistrationTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
+import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.security.Encryption;
 import com.trading.TradingUpFundationBackend.service.IUserTradingService;//Package that allows the use of the interface "IUserTradingService"
@@ -14,6 +16,8 @@ import org.springframework.http.HttpStatus;//Package that allows the use of Http
 import org.springframework.http.ResponseEntity;//Package that allows the creations and use of an Entity's response
 import org.springframework.stereotype.Component;//Package that allows to use the annotation @Component to represent this class like a spring component
 import org.springframework.stereotype.Service;//Package that allows the use the annotation @Service to represent this class like a service in the spring context
+
+import java.util.ArrayList;
 import java.util.List;//Package that allows the use of dynamic list
 import java.util.Optional;//Package that allows the use of the datatype "Optional"
 
@@ -29,12 +33,13 @@ public class UserTradingServiceImplements implements IUserTradingService {
     private final IUserTradingRepository repository;
     private final UserTradingDeserializable converter;
     private final Encryption encryption;
+    private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
 
-
-    public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter, Encryption encryption) {
+    public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter, Encryption encryption, NewIdEntitiesWithFiles newIdEntitiesWithFiles) {
         this.converter = converter;
         this.repository = repository;
         this.encryption = encryption;
+        this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
     }
 
     @Override
@@ -81,11 +86,21 @@ public class UserTradingServiceImplements implements IUserTradingService {
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createUserTrading(UserTradingDTO userTradingDTO) {
         try {
+            int idNew;
+            List<UserTradingEntity> userList = this.repository.findAll();
+            List<Integer> idEntities = new ArrayList<>();
+            if (!userList.isEmpty()) {
+                for(UserTradingEntity entity : userList){
+                    idEntities.add(entity.getId());
+                }
+            }
+            idNew = this.newIdEntitiesWithFiles.getHigherNumber(idEntities) + 1;
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isEmpty()) {
                 UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
                 String passwordEncoded = encryption.encrypt(userTradingDTO.getPassword());
                 entity.setPassword(passwordEncoded);
+                entity.setId(idNew);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)

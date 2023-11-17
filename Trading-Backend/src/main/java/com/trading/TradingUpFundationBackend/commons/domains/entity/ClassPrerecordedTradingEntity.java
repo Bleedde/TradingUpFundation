@@ -11,7 +11,6 @@ import lombok.Data;//Package of lombok to add the normal methods that an entity 
  */
 public class ClassPrerecordedTradingEntity {
     @Id//Annotation to represent this attribute like an ID who represent this Entity
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//Annotation who represent the way of how the id is going to work in each registration
     @Column(name = "class_prerecorded_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
