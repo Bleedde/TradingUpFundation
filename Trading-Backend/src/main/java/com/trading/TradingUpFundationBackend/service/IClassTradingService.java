@@ -38,7 +38,7 @@ public interface IClassTradingService {
 
     /**
      * Method without body which deletes a class
-     * @param classTradingDTO The class to be deleted
+     * @param id The id of the class to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> deleteClassTrading(Integer id);

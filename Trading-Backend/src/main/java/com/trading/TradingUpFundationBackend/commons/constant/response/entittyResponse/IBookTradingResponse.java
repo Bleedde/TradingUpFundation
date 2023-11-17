@@ -10,5 +10,5 @@ public interface IBookTradingResponse {
     String BOOK_DELETED_FAILED = "Failed book eliminated";//If the book could not be deleted
     String BOOK_UPDATED_SUCCESS = "Successfully book updated";//If the book could be updated
     String BOOK_UPDATE_FAILED = "Failed book updated";//If the book could not be updated
-    String BOOK_SEARCHED_FAILED = "Failed book searched";//If the book could not be find
+    String BOOK_SEARCHED_FAILED = "Failed book searched";//If the book could not be found
 }

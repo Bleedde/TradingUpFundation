@@ -43,7 +43,7 @@ public interface IClassPrerecordedTradingController {
 
     /**
      * Method without body which deletes a class prerecorded with the service ClassPrerecordedTradingServiceImplements
-     * @param classPrerecordedTradingDTO The class prerecorded to be deleted
+     * @param id The id of the class prerecorded to be deleted
      * @return An ObjectResponse with answers depending on the result
      */
     @DeleteMapping//Annotation that represent the header of an HTTP query that deletes a class with a DELETE query

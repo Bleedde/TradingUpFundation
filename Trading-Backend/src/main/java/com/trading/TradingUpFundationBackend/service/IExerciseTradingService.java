@@ -18,7 +18,7 @@ public interface IExerciseTradingService {
 
     /**
      * Method without body which reads an exercise
-     * @param id The id of the exercise to be readed
+     * @param id The id of the exercise to be read
      * @return An ObjectResponse with answers depending on the result
      */
     ResponseEntity<ObjectResponse> readExerciseTrading(Integer id);
