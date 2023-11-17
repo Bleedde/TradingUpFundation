@@ -6,13 +6,13 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 @Injectable({
   providedIn: 'root'
 })
-export class ReadUserIdService {
+export class ReadFileExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  API: string = "http://localhost:8080/user";
+  API: string = "http://localhost:8080/exercise";
 
-  readUserId(id: number) :Observable<GenericResponse> {
-    return this.http.get<GenericResponse>(this.API + "/user_read" + id);
+  readFileService(id: number) :Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(this.API + "/exercise_file" + id)
   }
 }

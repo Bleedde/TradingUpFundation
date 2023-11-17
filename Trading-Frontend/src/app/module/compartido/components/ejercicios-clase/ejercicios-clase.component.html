@@ -156,6 +156,16 @@
     </div>
 </div>
 
+<h5 class="container border  border-2 border-color border-start-0 border-end-0 col-10 text-center py-2 d-flex justify-content-center align-items-center rounded">Selecciona el contenido que deseas ver</h5>
+<div class="btn-toolbar mb-4 mt-3 d-flex justify-content-center align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        <ng-container *ngFor="let level of availableLevels">
+          <button *ngIf="level <= userToEdit.userLevel" type="button" class="btn btn-outline-secondary fw-bold"
+            [value]="level" (click)="buttonClicked(level)">Nivel {{level}}</button>
+        </ng-container>
+    </div>
+</div>
+
 <div class="container col-10 mb-5" *ngFor="let exerciseItem of listExerciseDomain; let i = index">
     <div class="card cardF">
         <div class="card-header py-2 text-center text-white d-flex justify-content-between">
@@ -179,6 +189,9 @@
                     </div>
                     <div class="">
                         <p>Nivel: {{exerciseItem.level}}</p>
+                    </div>
+                    <div class="">
+                        <p>Archivo: {{exerciseItem.file}}</p>
                     </div>
                 </div>
                 <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
