@@ -14,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor//Annotation who creates a constructor with all the arguments passed like parameters
 @NoArgsConstructor//Annotation who creates an empty constructor
 public class BookTradingDTO implements Serializable {
-    private Optional<Integer> id;
+    private Integer id;
     private String name;
     private String description;
     private Integer level;

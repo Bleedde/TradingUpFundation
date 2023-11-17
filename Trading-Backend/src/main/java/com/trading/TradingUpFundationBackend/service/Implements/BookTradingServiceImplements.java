@@ -24,10 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;//Package that allows the use of dynamic list
-import java.util.Objects;
-import java.util.Optional;//Package that allows the use of the datatype "Optional"
+import java.util.*;
 
 @Service//Annotation who represents this class like a component with type "Service" in the spring context
 @Log4j2//Annotation who allows the use of specifics responses
@@ -57,9 +54,9 @@ public class BookTradingServiceImplements implements IBookTradingService {
             int idNew;
             List<BookTradingEntity> bookTradingEntityList = this.repository.findAll();
             List<Integer> idList = new ArrayList<>();
-            if(!bookTradingEntityList.isEmpty()){
-                for(BookTradingEntity entity : bookTradingEntityList){
-                    idList.add(entity.getId());
+            if(!bookTradingEntityList.isEmpty()) {
+                for (BookTradingEntity bookTrading : bookTradingEntityList) {
+                    idList.add (bookTrading.getId());
                 }
             }
             idNew = this.newIdEntitiesWithFiles.getHigherNumber(idList) + 1;
@@ -78,6 +75,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
                 Files.copy(bookTradingDTO.getImage().getInputStream(), uploadPathImage, StandardCopyOption.REPLACE_EXISTING);
                 entity.setFile(uploadPathFile.toString());
                 entity.setImage(uploadPathImage.toString());
+                entity.setId(idNew);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -182,36 +180,32 @@ public class BookTradingServiceImplements implements IBookTradingService {
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> updateBookTrading(BookTradingDTO bookTradingDTO) {
         try {
-            Optional<Integer> optionalId = bookTradingDTO.getId();
-            if(optionalId.isPresent()) {
-                Integer id = optionalId.get();
-                Optional<BookTradingEntity> bookTradingExist = this.repository.findById(id);
-                if (bookTradingExist.isPresent()) {
-                    BookTradingEntity entity = this.converter.convertBookTradingDTOToBookTradingEntity(bookTradingDTO);
-                    String existingFilePathImage = bookTradingExist.get().getImage();
-                    String existingFilePathFile = bookTradingExist.get().getFile();
-                    MultipartFile newFile = bookTradingDTO.getFile();
-                    MultipartFile newImage = bookTradingDTO.getImage();
-                    if(existingFilePathFile != null && !existingFilePathFile.isEmpty()){
-                        Files.delete(Paths.get(existingFilePathFile));
-                    }
-                    if(existingFilePathImage != null && !existingFilePathImage.isEmpty()){
-                        Files.delete(Paths.get(existingFilePathImage));
-                    }
-                    if(newFile != null && newImage != null && !newFile.isEmpty() && !newImage.isEmpty()){
-                        String fileName = StringUtils.cleanPath(Objects.requireNonNull(newFile.getOriginalFilename()));
-                        String imageName = StringUtils.cleanPath(Objects.requireNonNull(newImage.getOriginalFilename()));
-                        String uploadDirectionFile = env.getProperty("book.file.upload.path") + File.separator + bookTradingDTO.getId();
-                        String uploadDirectionImage = env.getProperty("book.image.upload.path") + File.separator + bookTradingDTO.getId();
-                        Files.createDirectories(Paths.get(uploadDirectionFile));
-                        Files.createDirectories(Paths.get(uploadDirectionImage));
-                        Path uploadPathFile = Paths.get(uploadDirectionFile, fileName);
-                        Path uploadPathImage = Paths.get(uploadDirectionImage, imageName);
-                        Files.copy(newFile.getInputStream(), uploadPathFile, StandardCopyOption.REPLACE_EXISTING);
-                        Files.copy(newImage.getInputStream(), uploadPathImage, StandardCopyOption.REPLACE_EXISTING);
-                        entity.setFile(uploadPathFile.toString());
-                        entity.setImage(uploadPathImage.toString());
-                    }
+            Optional<BookTradingEntity> bookTradingExist = this.repository.findById(bookTradingDTO.getId());
+            if (bookTradingExist.isPresent()) {
+                BookTradingEntity entity = this.converter.convertBookTradingDTOToBookTradingEntity(bookTradingDTO);
+                String existingFilePathImage = bookTradingExist.get().getImage();
+                String existingFilePathFile = bookTradingExist.get().getFile();
+                MultipartFile newFile = bookTradingDTO.getFile();
+                MultipartFile newImage = bookTradingDTO.getImage();
+                if(existingFilePathFile != null && !existingFilePathFile.isEmpty()){
+                    Files.delete(Paths.get(existingFilePathFile));
+                }
+                if(existingFilePathImage != null && !existingFilePathImage.isEmpty()){
+                    Files.delete(Paths.get(existingFilePathImage));
+                }
+                if(newFile != null && newImage != null && !newFile.isEmpty() && !newImage.isEmpty()){
+                    String fileName = StringUtils.cleanPath(Objects.requireNonNull(newFile.getOriginalFilename()));
+                    String imageName = StringUtils.cleanPath(Objects.requireNonNull(newImage.getOriginalFilename()));
+                    String uploadDirectionFile = env.getProperty("book.file.upload.path") + File.separator + bookTradingDTO.getId();
+                    String uploadDirectionImage = env.getProperty("book.image.upload.path") + File.separator + bookTradingDTO.getId();
+                    Files.createDirectories(Paths.get(uploadDirectionFile));
+                    Files.createDirectories(Paths.get(uploadDirectionImage));
+                    Path uploadPathFile = Paths.get(uploadDirectionFile, fileName);
+                    Path uploadPathImage = Paths.get(uploadDirectionImage, imageName);
+                    Files.copy(newFile.getInputStream(), uploadPathFile, StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(newImage.getInputStream(), uploadPathImage, StandardCopyOption.REPLACE_EXISTING);
+                    entity.setFile(uploadPathFile.toString());
+                    entity.setImage(uploadPathImage.toString());
                     this.repository.save(entity);
                     return ResponseEntity.ok(ObjectResponse.builder()
                             .message(Responses.OPERATION_SUCCESS)
@@ -253,6 +247,20 @@ public class BookTradingServiceImplements implements IBookTradingService {
         try{
             Optional<BookTradingEntity> bookTradingExist = this.repository.findById(id);
             if(bookTradingExist.isPresent()){
+                String folderPathFile = env.getProperty("book.file.upload.path") + File.separator + id;
+                String folderPathImage = env.getProperty("book.image.upload.path") + File.separator + id;
+                if(!folderPathFile.isEmpty()){
+                    Files.walk(Paths.get(folderPathFile))
+                            .sorted(Comparator.reverseOrder())
+                            .map(Path::toFile)
+                            .forEach(File::delete);
+                }
+                if(!folderPathImage.isEmpty()){
+                    Files.walk(Paths.get(folderPathImage))
+                            .sorted(Comparator.reverseOrder())
+                            .map(Path::toFile)
+                            .forEach(File::delete);
+                }
                 this.repository.deleteById(bookTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)

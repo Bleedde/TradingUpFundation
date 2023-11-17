@@ -84,6 +84,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                         Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
                         entity.setUserName(userDatabase.get().getName());
                         entity.setFile(uploadPath.toString());
+                        entity.setId(idFile);
                         this.repository.save(entity);
                         return ResponseEntity.ok(ObjectResponse.builder()
                                 .message(Responses.OPERATION_SUCCESS)

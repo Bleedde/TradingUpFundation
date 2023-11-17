@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;//Import who allow to create an object without a
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;//Package to use this class like a byte sequence
-import java.util.Optional;
 
 @Data//Annotation to represent normal methods of a normal class
 @Builder//Annotation who allows to build an object in an easier way
@@ -15,7 +14,7 @@ import java.util.Optional;
 @NoArgsConstructor//Annotation who creates an empty constructor
 
 public class ExerciseTradingDTO implements Serializable {
-    private Optional<Integer> id;
+    private Integer id;
     private String title;
     private String description;
     private String dataStart;

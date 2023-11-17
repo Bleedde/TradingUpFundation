@@ -1,8 +1,8 @@
 package com.trading.TradingUpFundationBackend.commons.constant.deserializable;
 
-import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package to use a general response created in another package
+import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ClassTradingDTO;//Package to import the DTO object "Class"
-import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;//Package to import the entity "Class"
 import com.trading.TradingUpFundationBackend.commons.mapper.Mapper;//Package to import yhe object "HelperMapper"
 import lombok.extern.log4j.Log4j2;//Package who allows log better responses
 import org.springframework.stereotype.Component;//Package to represent this class like a component in the spring context

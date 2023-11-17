@@ -56,7 +56,7 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
             List<Integer> idList = new ArrayList<>();
             if(!exerciseTradingEntityList.isEmpty()) {
                 for (ExerciseTradingEntity exerciseTrading : exerciseTradingEntityList) {
-                    idList.add(exerciseTrading.getId());
+                    idList.add (exerciseTrading.getId());
                 }
             }
             idNew = this.newIdEntitiesWithFiles.getHigherNumber(idList) + 1;
@@ -69,6 +69,7 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                 Path uploadPath = Paths.get(uploadDirection, fileName);
                 Files.copy(exerciseTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
                 entity.setFile(uploadPath.toString());
+                entity.setId(idNew);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -172,45 +173,36 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
     @Override
     public ResponseEntity<ObjectResponse> updateExerciseTrading(ExerciseTradingDTO exerciseTradingDTO) {
         try {
-            Optional<Integer> optionalId = exerciseTradingDTO.getId();
-            if (optionalId.isPresent()) {
-                Integer id = optionalId.get();
-                Optional<ExerciseTradingEntity> exerciseTradingExist = this.repository.findById(id);
-                if (exerciseTradingExist.isPresent()) {
-                    ExerciseTradingEntity entity = this.converter.convertExerciseTradingDTOToExerciseTradingEntity(exerciseTradingDTO);
-                    String existingFilePath = exerciseTradingExist.get().getFile();
-                    MultipartFile newFile = exerciseTradingDTO.getFile();
-                    if (existingFilePath != null && !existingFilePath.isEmpty()) {
-                        Files.delete(Paths.get(existingFilePath));
-                    }
-                    if (newFile != null && !newFile.isEmpty()) {
-                        String fileName = StringUtils.cleanPath(Objects.requireNonNull(newFile.getOriginalFilename()));
-                        String uploadDirection = env.getProperty("exercise.upload.path") + File.separator + exerciseTradingDTO.getId();
-                        Files.createDirectories(Paths.get(uploadDirection));
-                        Path uploadPath = Paths.get(uploadDirection, fileName);
-                        Files.copy(newFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-                        entity.setFile(uploadPath.toString());
-                    }
-                    this.repository.save(entity);
-                    return ResponseEntity.ok(ObjectResponse.builder()
-                            .message(Responses.OPERATION_SUCCESS)
-                            .objectResponse(IExerciseTradingResponse.EXERCISE_UPDATE_SUCCESS)
-                            .httpResponse(HttpStatus.OK.value())
-                            .build());
-                } else {
-                    return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                            .message(Responses.OPERATION_FAIL)
-                            .objectResponse(IExerciseTradingResponse.EXERCISE_UPDATE_FAILED)
-                            .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .build());
+            Optional<ExerciseTradingEntity> exerciseTradingExist = this.repository.findById(exerciseTradingDTO.getId());
+            if (exerciseTradingExist.isPresent()) {
+                ExerciseTradingEntity entity = this.converter.convertExerciseTradingDTOToExerciseTradingEntity(exerciseTradingDTO);
+                String existingFilePath = exerciseTradingExist.get().getFile();
+                MultipartFile newFile = exerciseTradingDTO.getFile();
+                if (existingFilePath != null && !existingFilePath.isEmpty()) {
+                    Files.delete(Paths.get(existingFilePath));
                 }
+                if (newFile != null && !newFile.isEmpty()) {
+                    String fileName = StringUtils.cleanPath(Objects.requireNonNull(newFile.getOriginalFilename()));
+                    String uploadDirection = env.getProperty("exercise.upload.path") + File.separator + exerciseTradingDTO.getId();
+                    Files.createDirectories(Paths.get(uploadDirection));
+                    Path uploadPath = Paths.get(uploadDirection, fileName);
+                    Files.copy(newFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+                    entity.setFile(uploadPath.toString());
+                }
+                this.repository.save(entity);
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
+                        .objectResponse(IExerciseTradingResponse.EXERCISE_UPDATE_SUCCESS)
+                        .httpResponse(HttpStatus.OK.value())
+                        .build());
             } else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                        .message(Responses.OPERATION_FAIL + ", ExerciseTrading ID is missing")
+                        .message(Responses.OPERATION_FAIL)
                         .objectResponse(IExerciseTradingResponse.EXERCISE_UPDATE_FAILED)
                         .httpResponse(HttpStatus.BAD_REQUEST.value())
                         .build());
-            }
+                }
+
         } catch (Exception e) {
             log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

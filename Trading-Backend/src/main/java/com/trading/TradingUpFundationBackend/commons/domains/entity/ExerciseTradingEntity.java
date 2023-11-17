@@ -14,7 +14,6 @@ import java.sql.Date;//Import the type of data "Date" to represent a specific Da
  */
 public class ExerciseTradingEntity {
     @Id//Annotation to represent this attribute like an ID who represent this Entity
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//Annotation who represent the way of how the id is going to work in each registration
     @Column(name = "exercise_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
@@ -25,12 +24,10 @@ public class ExerciseTradingEntity {
     private String description;
 
     @Column(name = "exercise_data_start", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dataStart;
+    private String dataStart;
 
     @Column(name = "exercise_data_end", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date dataEnd;
+    private String dataEnd;
 
     @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
