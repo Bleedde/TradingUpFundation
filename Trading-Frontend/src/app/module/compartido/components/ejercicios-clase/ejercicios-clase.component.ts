@@ -19,6 +19,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 })
 export class EjerciciosClaseComponent implements OnInit{
   graficExercise = GRAFICEXERCISE;
+  userRole!: string;
   fileNameVariable!: string;
   fileType!: string;
   fileToUpload: File | null = null;
@@ -34,6 +35,7 @@ export class EjerciciosClaseComponent implements OnInit{
   userToEdit: { userLevel: number } = { userLevel: 0 };
   availableLevels = [1, 2, 3, 4]; 
   selectedLevel: number | undefined;
+  showBoxResponse: boolean = false;
 
   buttonClicked(level: number) {
     this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
@@ -165,14 +167,7 @@ export class EjerciciosClaseComponent implements OnInit{
   }
 
   readFileExercise(id: number) {
-    this.readFileExerciseService.readFileService(id).subscribe(
-      (res: GenericResponse) => {
-        console.log(res.objectResponse.file); // Puedes ajustar esto según la respuesta del servicio
-      },
-      (error) => {
-        console.error('Error al leer el ejercicio:', error);
-      }
-    );
+    return `http://localhost:8080/exercise/exercise_file${id}`;
   }
   
 
@@ -259,6 +254,10 @@ export class EjerciciosClaseComponent implements OnInit{
     this.editExerciseDomain = false;
     // Restablecer el formulario a los valores iniciales guardados
     this.exerciseForm.setValue(this.valoresInicialesFormulario);
+  }
+
+  validatePermision() {
+    return this.compartidoServiceService.getData();
   }
 
 }
