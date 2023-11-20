@@ -203,6 +203,10 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                     Files.copy(newFile.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
                     entity.setFile(uploadPath.toString());
                 }
+                LocalDate startDate = this.dates.transformStringToLocalDate(exerciseTradingDTO.getDataStart());
+                LocalDate endDate = this.dates.transformStringToLocalDate(exerciseTradingDTO.getDataEnd());
+                entity.setDataStart(startDate);
+                entity.setDataEnd(endDate);
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
