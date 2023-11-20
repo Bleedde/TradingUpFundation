@@ -14,15 +14,15 @@ public class ClassPrerecordedTradingEntity {
     @Column(name = "class_prerecorded_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
-    @Column(name = "class_prerecorded_title", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "class_prerecorded_title")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String title;
 
-    @Column(name = "class_prerecorded_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "class_prerecorded_description")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String description;
 
-    @Column(name = "class_prerecorded_url_video", length = 255, nullable = false)
+    @Column(name = "class_prerecorded_url_video")
     private String urlVideo;
 
-    @Column(name = "class_prerecorded_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
+    @Column(name = "class_prerecorded_level")//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 }
