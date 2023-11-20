@@ -12,7 +12,7 @@ export class ReadExercisesServiceService {
 
   API: string = "http://localhost:8080/exercise";
 
-  readClassesService() :Observable<GenericResponse> {
-    return this.http.get<GenericResponse>(this.API + "/exercises_read")
+  readExercisesService(level: number) :Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(this.API + "/exercises_read" + level)
   }
 }
