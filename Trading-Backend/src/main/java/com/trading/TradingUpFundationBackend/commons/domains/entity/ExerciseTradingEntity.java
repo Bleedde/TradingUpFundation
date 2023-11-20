@@ -5,6 +5,7 @@ import jakarta.persistence.*;//Package to add the persistence to this entity
 import lombok.Data;//Package of lombok to add the normal methods that an entity has
 
 import java.sql.Date;//Import the type of data "Date" to represent a specific Date
+import java.time.LocalDate;
 
 @Entity//Annotation to represent this class like an entity of a database for spring
 @Table(name = "exercise_trading")//Annotation to represent this entity like a table in a database represented with a name
@@ -24,10 +25,10 @@ public class ExerciseTradingEntity {
     private String description;
 
     @Column(name = "exercise_data_start", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
-    private String dataStart;
+    private LocalDate dataStart;
 
     @Column(name = "exercise_data_end", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
-    private String dataEnd;
+    private LocalDate dataEnd;
 
     @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;

@@ -12,9 +12,8 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExerciseSolutionTradingDTO implements Serializable {
-    Optional<Integer> id;
+    private Integer id;
     private String comment;
-    private String urlVideo;
     private String userEmail;
     private Integer exerciseId;
     private MultipartFile file;
