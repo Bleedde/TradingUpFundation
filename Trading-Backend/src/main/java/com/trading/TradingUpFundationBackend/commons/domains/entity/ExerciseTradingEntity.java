@@ -18,21 +18,21 @@ public class ExerciseTradingEntity {
     @Column(name = "exercise_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
-    @Column(name = "exercise_title", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "exercise_title")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String title;
 
-    @Column(name = "exercise_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "exercise_description")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String description;
 
-    @Column(name = "exercise_data_start", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
+    @Column(name = "exercise_data_start")//Annotation to represent this attribute like a column with a name in the table, cant be null
     private LocalDate dataStart;
 
-    @Column(name = "exercise_data_end", nullable = false)//Annotation to represent this attribute like a column with a name in the table, cant be null
+    @Column(name = "exercise_data_end")//Annotation to represent this attribute like a column with a name in the table, cant be null
     private LocalDate dataEnd;
 
-    @Column(name = "exercise_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
+    @Column(name = "exercise_level")//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 
-    @Column(name = "exercise_file", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "exercise_file")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String file;
 }

@@ -11,18 +11,18 @@ public class BookTradingEntity {
     @Column(name = "book_id")//Annotation to represent this attribute like a column with a name in the table
     private Integer id;
 
-    @Column(name = "book_name", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "book_name")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String name;
 
-    @Column(name = "book_description", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "book_description")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String description;
 
-    @Column(name = "book_level", nullable = false)//Annotation to represent this attribute like a column with a name in the table, it cant be null
+    @Column(name = "book_level")//Annotation to represent this attribute like a column with a name in the table, it cant be null
     private Integer level;
 
-    @Column(name = "book_image_path", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "book_image_path")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String image;
 
-    @Column(name = "book_file_path", length = 255, nullable = false)//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
+    @Column(name = "book_file_path")//Annotation to represent this attribute like a column with a name in the table, the length has to be 255 and it cant be null
     private String file;
 }
