@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -18,11 +20,14 @@ public class ExerciseSolutionTradingEntity {
     @Column(name = "solution_exercise_comment")
     private String comment;
 
-    @Column(name = "solution_exercise_url_solution")
-    private String urlSolution;
+    @Column(name = "solution_exercise_date")
+    private LocalDate date;
 
     @Column(name = "solution_exercise_user_name")
     private String userName;
+
+    @Column(name = "solution_exercise_user_id")
+    private Integer userId;
 
     @Column(name = "solution_exercise_exercise_id")
     private Integer idExercise;

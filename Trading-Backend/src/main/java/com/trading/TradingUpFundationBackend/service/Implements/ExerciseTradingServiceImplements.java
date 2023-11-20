@@ -5,8 +5,11 @@ import com.trading.TradingUpFundationBackend.commons.constant.response.Responses
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExerciseTradingResponse;//Package that allows the use of the response of the entity ExerciseTrading
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseTradingDTO;//Package that allows to use the serializable version of the entity ExerciseTradingEntity; ExerciseTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseTradingEntity;
+import com.trading.TradingUpFundationBackend.components.Dates;
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
+import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IExerciseTradingRepository;//Package that allows to use the repository IExerciseTradingRepository
 import com.trading.TradingUpFundationBackend.service.IExerciseTradingService;//Package that allows the use of the interface "IExerciseTradingService"
 import lombok.extern.log4j.Log4j2;//Package that allows the use of logs to represent a specific message
@@ -20,10 +23,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service//Annotation who represent this class like a component with type "Service" in the spring context
@@ -36,11 +41,16 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
     private final ExerciseTradingDeserializable converter;
     private final Environment env;
     private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
-    public ExerciseTradingServiceImplements(IExerciseTradingRepository repository, ExerciseTradingDeserializable converter, Environment env, NewIdEntitiesWithFiles newIdEntitiesWithFiles) {
+    private final Dates dates;
+    private final IExerciseSolutionTradingRepository exerciseSolutionTradingRepository;
+    public ExerciseTradingServiceImplements(IExerciseTradingRepository repository, ExerciseTradingDeserializable converter, Environment env,
+                                            NewIdEntitiesWithFiles newIdEntitiesWithFiles, Dates dates, IExerciseSolutionTradingRepository exerciseSolutionTradingRepository) {
         this.repository = repository;
         this.converter = converter;
         this.env = env;
         this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
+        this.dates = dates;
+        this.exerciseSolutionTradingRepository = exerciseSolutionTradingRepository;
     }
 
     /**
@@ -68,6 +78,10 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                 Files.createDirectories(Paths.get(uploadDirection));
                 Path uploadPath = Paths.get(uploadDirection, fileName);
                 Files.copy(exerciseTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+                LocalDate startDate = this.dates.transformStringToLocalDate(exerciseTradingDTO.getDataStart());
+                LocalDate finalDate = this.dates.transformStringToLocalDate(exerciseTradingDTO.getDataEnd());
+                entity.setDataStart(startDate);
+                entity.setDataEnd(finalDate);
                 entity.setFile(uploadPath.toString());
                 entity.setId(idNew);
                 this.repository.save(entity);
@@ -220,18 +234,20 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
      * @param id The id of the exercise to be deleted
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
-    @Override//Annotation that represent an override for a method in another interface
+    @Override
     public ResponseEntity<ObjectResponse> deleteExerciseTrading(Integer id) {
         try {
             Optional<ExerciseTradingEntity> exerciseTradingExist = this.repository.findById(id);
             if (exerciseTradingExist.isPresent()) {
-                String folderPath = env.getProperty("exercise.upload.path") + File.separator + id;
-                if(!folderPath.isEmpty()){
-                    Files.walk(Paths.get(folderPath))
-                            .sorted(Comparator.reverseOrder())
-                            .map(Path::toFile)
-                            .forEach(File::delete);
+                List<ExerciseSolutionTradingEntity> exerciseSolutionList = this.exerciseSolutionTradingRepository.findAll();
+                if (!exerciseSolutionList.isEmpty()) {
+                    for (ExerciseSolutionTradingEntity exerciseSolutionEntity : exerciseSolutionList) {
+                        if (exerciseSolutionEntity.getId().equals(id)) {
+                            this.exerciseSolutionTradingRepository.delete(exerciseSolutionEntity);
+                        }
+                    }
                 }
+                deleteExerciseFiles(id);
                 this.repository.deleteById(exerciseTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -255,6 +271,17 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                             .build());
         }
     }
+
+    private void deleteExerciseFiles(Integer id) throws IOException {
+        String folderPath = env.getProperty("exercise.upload.path") + File.separator + id;
+        if (!folderPath.isEmpty()) {
+            Files.walk(Paths.get(folderPath))
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        }
+    }
+
 
     @Override
     public ResponseEntity<byte[]> getFile(Integer id) {

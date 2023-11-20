@@ -8,6 +8,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;
+import com.trading.TradingUpFundationBackend.components.Dates;
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IExerciseTradingRepository;
@@ -27,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -42,15 +44,17 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     private final IUserTradingRepository userRepository;
     private final Environment env;
     private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
+    private final Dates dates;
     public ExerciseSolutionTradingServiceImplements(IExerciseSolutionTradingRepository repository, ExerciseSolutionTradingDeserializable converter,
                                                     IExerciseTradingRepository exerciseRepository, IUserTradingRepository userRepository, Environment env,
-                                                    NewIdEntitiesWithFiles newIdEntitiesWithFiles) {
+                                                    NewIdEntitiesWithFiles newIdEntitiesWithFiles, Dates dates) {
         this.repository = repository;
         this.converter = converter;
         this.exerciseRepository = exerciseRepository;
         this.userRepository = userRepository;
         this.env = env;
         this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
+        this.dates = dates;
     }
 
     /**
@@ -77,20 +81,30 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                 if (userDatabase.isPresent()) {
                     if (exerciseDatabase.isPresent()) {
                         ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
-                        String fileName = StringUtils.cleanPath(Objects.requireNonNull(exerciseSolutionTradingDTO.getFile().getOriginalFilename()));
-                        String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + idFile;
-                        Files.createDirectories(Paths.get(uploadDirection));
-                        Path uploadPath = Paths.get(uploadDirection, fileName);
-                        Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-                        entity.setUserName(userDatabase.get().getName());
-                        entity.setFile(uploadPath.toString());
-                        entity.setId(idFile);
-                        this.repository.save(entity);
-                        return ResponseEntity.ok(ObjectResponse.builder()
-                                .message(Responses.OPERATION_SUCCESS)
-                                .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_SUCCESS)
-                                .httpResponse(HttpStatus.OK.value())
-                                .build());
+                        LocalDate solutionDate = LocalDate.now();
+                        if(this.dates.compareDates(exerciseDatabase.get().getDataStart(), exerciseDatabase.get().getDataEnd(), solutionDate) && userDatabase.get().getUserLevel() == exerciseDatabase.get().getLevel()) {
+                            String fileName = StringUtils.cleanPath(Objects.requireNonNull(exerciseSolutionTradingDTO.getFile().getOriginalFilename()));
+                            String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + idFile;
+                            Files.createDirectories(Paths.get(uploadDirection));
+                            Path uploadPath = Paths.get(uploadDirection, fileName);
+                            Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+                            entity.setDate(solutionDate);
+                            entity.setUserName(userDatabase.get().getName());
+                            entity.setFile(uploadPath.toString());
+                            entity.setId(idFile);
+                            this.repository.save(entity);
+                            return ResponseEntity.ok(ObjectResponse.builder()
+                                    .message(Responses.OPERATION_SUCCESS)
+                                    .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_SUCCESS)
+                                    .httpResponse(HttpStatus.OK.value())
+                                    .build());
+                        } else {
+                            return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                                    .message(Responses.OPERATION_FAIL + ", its too late to response the exercise or the level of the user and the level of the exercise are not the same")
+                                    .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
+                                    .httpResponse(HttpStatus.BAD_REQUEST.value())
+                                    .build());
+                        }
                     } else {
                         return ResponseEntity.badRequest().body(ObjectResponse.builder()
                                 .message(Responses.OPERATION_FAIL + ", the exercise doesnt exist")
@@ -157,7 +171,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     }
 
     /**
-     * Method that reads all the exercise solutions
+     * Method that reads all the exercise solutions for 1 exercise given by a parameter
      * @return A ResponseEntity who creates a specific response (objectResponse, httpResponse and a message) of each possible situation
      */
     @Override//Annotation that represent an override for a method in another interface

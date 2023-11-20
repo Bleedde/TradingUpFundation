@@ -2,51 +2,52 @@ CREATE DATABASE trading_up_foundation;
 USE trading_up_foundation;
 CREATE TABLE user_trading(
     user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
-    user_email VARCHAR(255) NOT NULL,
+    user_name VARCHAR(50) NOT NULL,
+    user_email VARCHAR(30) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
     user_current_level INTEGER,
     user_status BOOLEAN NOT NULL,
-    user_backtesting_link VARCHAR(255),
-    user_audited_account VARCHAR(255),
-    user_role VARCHAR(255) NOT NULL
+    user_backtesting_link VARCHAR(200),
+    user_audited_account VARCHAR(200),
+    user_role VARCHAR(5) NOT NULL
 );
 CREATE TABLE exercise_trading(
     exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    exercise_title VARCHAR(255) NOT NULL,
+    exercise_title VARCHAR(50) NOT NULL,
     exercise_description VARCHAR(255) NOT NULL,
-    exercise_data_start VARCHAR(255) NOT NULL,
-    exercise_data_end VARCHAR(255) NOT NULL,
+    exercise_data_start VARCHAR(10) NOT NULL,
+    exercise_data_end VARCHAR(10) NOT NULL,
     exercise_level INTEGER NOT NULL,
     exercise_file VARCHAR(255) NOT NULL
 );
 CREATE TABLE exercise_solution_trading(
     solution_exercise_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     solution_exercise_comment VARCHAR(255) NOT NULL,
-    solution_exercise_url_solution VARCHAR(255) NOT NULL,
-    solution_exercise_user_name INTEGER NOT NULL,
+    solution_exercise_date VARCHAR(10) NOT NULL,
+    solution_exercise_user_name VARCHAR(50) NOT NULL,
+    solution_exercise_user_id INTEGER NOT NULL,
     solution_exercise_exercise_id INTEGER NOT NULL,
     solution_exercise_file_path VARCHAR(255) NOT NULL
 );
 CREATE TABLE book_trading(
     book_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    book_name VARCHAR(255) NOT NULL,
+    book_name VARCHAR(50) NOT NULL,
     book_description VARCHAR(255) NOT NULL,
-     book_level INTEGER NOT NULL,
+    book_level INTEGER NOT NULL,
     book_image_path VARCHAR(255) NOT NULL,
     book_file_path VARCHAR(255) NOT NULL
 
 );
 CREATE TABLE class_trading(
     class_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    class_title VARCHAR(255) NOT NULL,
+    class_title VARCHAR(50) NOT NULL,
     class_description VARCHAR(255) NOT NULL,
     class_url_video VARCHAR(255) NOT NULL,
     class_level INTEGER NOT NULL
 );
 CREATE TABLE class_prerecorded_trading(
     class_prerecorded_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    class_prerecorded_title VARCHAR(255) NOT NULL,
+    class_prerecorded_title VARCHAR(50) NOT NULL,
     class_prerecorded_description VARCHAR(255) NOT NULL,
     class_prerecorded_url_video VARCHAR(255) NOT NULL,
     class_prerecorded_level INTEGER NOT NULL

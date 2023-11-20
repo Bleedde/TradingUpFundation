@@ -2,12 +2,15 @@ package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.UserTradingDeserializable;
+import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExerciseSolutionTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;//Package that allows use the object UserTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use the serializable version of the entity UserTradingEntity; RegistrationTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;
+import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
+import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
 import com.trading.TradingUpFundationBackend.security.Encryption;
 import com.trading.TradingUpFundationBackend.service.IUserTradingService;//Package that allows the use of the interface "IUserTradingService"
@@ -34,12 +37,16 @@ public class UserTradingServiceImplements implements IUserTradingService {
     private final UserTradingDeserializable converter;
     private final Encryption encryption;
     private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
+    private final IExerciseSolutionTradingRepository exerciseSolutionTradingRepository;
 
-    public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter, Encryption encryption, NewIdEntitiesWithFiles newIdEntitiesWithFiles) {
+    public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter,
+                                        Encryption encryption, NewIdEntitiesWithFiles newIdEntitiesWithFiles,
+                                        IExerciseSolutionTradingRepository exerciseSolutionTradingRepository) {
         this.converter = converter;
         this.repository = repository;
         this.encryption = encryption;
         this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
+        this.exerciseSolutionTradingRepository = exerciseSolutionTradingRepository;
     }
 
     @Override
@@ -249,6 +256,21 @@ public class UserTradingServiceImplements implements IUserTradingService {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
+                List<ExerciseSolutionTradingEntity> exerciseSolutionList = this.exerciseSolutionTradingRepository.findAll();
+                if(!exerciseSolutionList.isEmpty()) {
+                    for (ExerciseSolutionTradingEntity exerciseSolutionEntity : exerciseSolutionList) {
+                        if (userTradingExist.get().getId() == exerciseSolutionEntity.getUserId()) {
+                            this.exerciseSolutionTradingRepository.delete(exerciseSolutionEntity);
+                        }
+                    }
+                } else {
+                    this.repository.deleteById(userTradingExist.get().getId());
+                    return ResponseEntity.ok(ObjectResponse.builder()
+                            .message(Responses.OPERATION_SUCCESS + ", There were no solutions made by this user to delete")
+                            .objectResponse(IUserTradingResponse.USER_DELETED_SUCCESS)
+                            .httpResponse(HttpStatus.OK.value())
+                            .build());
+                }
                 this.repository.deleteById(userTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
