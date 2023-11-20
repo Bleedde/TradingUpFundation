@@ -25,16 +25,15 @@ export class CursosPageComponent{
   datosPrueba!: boolean;
 
   modalActivateUser(datos: boolean) {
-    this.sectionContent = false;
-    this.sectionUser = datos;
-    this.sectionBook = false;
-    this.sectionClass = false;
-    this.sectionPrerecorded = false;
-    this,this.startA = false;
-    this.sectionExercises = false;
-    this.sectionEditUser = false;
-    console.log("Prueba del user: " + !datos)
-
+      this.sectionContent = false;
+      this.sectionUser = datos;
+      this.sectionBook = false;
+      this.sectionClass = false;
+      this.sectionPrerecorded = false;
+      this,this.startA = false;
+      this.sectionExercises = false;
+      this.sectionEditUser = false;
+      console.log("Prueba del user: " + !datos)
   }
 
   modalActivateContent(datos:boolean){

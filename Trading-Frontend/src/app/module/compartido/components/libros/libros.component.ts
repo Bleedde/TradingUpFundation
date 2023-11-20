@@ -5,6 +5,8 @@ import { DeleteBookServiceService } from 'src/app/module/service/bookServices/de
 import { ReadBooksServiceService } from 'src/app/module/service/bookServices/read-books-service.service';
 import { UpdateBookServiceService } from 'src/app/module/service/bookServices/update-book-service.service';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
+import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 import { BookDomain } from 'src/app/shared/domains/BookDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -19,6 +21,16 @@ export class LibrosComponent {
   listBookDomain: BookDomain [] = [];
   editBookDomain!: boolean;
   id!: number;
+
+  buttonValue!: number
+  userToEdit: { userLevel: number } = { userLevel: 0 };
+  availableLevels = [1, 2, 3, 4]; 
+  selectedLevel: number | undefined;
+  showBoxResponse: boolean = false;
+
+  buttonClicked(level: number) {
+    this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
+  }
 
   libros!: boolean;
   mensaje!: boolean;
@@ -35,7 +47,7 @@ export class LibrosComponent {
 
   book!: BookDomain;
 
-  constructor(public formulary: FormBuilder, private createBookServiceService: CreateBookServiceService, private readBooksServiceService: ReadBooksServiceService, private updateBookServiceService: UpdateBookServiceService, private deleteBookServiceService: DeleteBookServiceService,private compartidoServiceService: CompartidoServiceService){
+  constructor(public formulary: FormBuilder, private createBookServiceService: CreateBookServiceService, private readBooksServiceService: ReadBooksServiceService, private updateBookServiceService: UpdateBookServiceService, private deleteBookServiceService: DeleteBookServiceService ,private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService){
 
     this.libros = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -63,6 +75,7 @@ export class LibrosComponent {
     this.valoresInicialesFormulario = this.bookForm.value;
 
     this.readBooksService();
+    this.readUserLevel();
   }
 
   createBook() {
@@ -92,6 +105,18 @@ export class LibrosComponent {
         }
       )
     }
+  }
+
+  readUserLevel() {
+    const userId = this.datosUserServiceService.getUserId();
+    this.readUserIdService.readUserId(userId!).subscribe(
+      (res: GenericResponse) => {
+        if (res.httpResponse === 200) {
+          this.userToEdit = res.objectResponse;
+          console.log('nivel del usuario ' + this.userToEdit.userLevel);
+        }
+      }
+    );
   }
 
   readBooksService() {

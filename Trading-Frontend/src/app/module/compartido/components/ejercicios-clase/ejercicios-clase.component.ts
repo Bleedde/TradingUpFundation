@@ -167,7 +167,7 @@ export class EjerciciosClaseComponent implements OnInit{
   }
 
   readFileExercise(id: number) {
-    return `http://localhost:8080/exercise/exercise_file${id}`;
+    return `http://localhost:8080/exercise/exercise_file${id}`; 
   }
   
 
@@ -199,43 +199,54 @@ export class EjerciciosClaseComponent implements OnInit{
 
     /*Actualiza el FormGroup con los valores iniciales*/
     this.exerciseForm.patchValue({
-      classPrerecordedLevel: this.nivelSeleccionado
+      level: this.nivelSeleccionado
     });
   }
 
   updateExercise() {
-    this.exercise = {
-      id: this.listExerciseDomain[this.id].id,
-      title: this.exerciseForm.controls['title'].value != ''
-        ? this.exerciseForm.controls['title'].value
-        : this.listExerciseDomain[this.id].title,
-      description: this.exerciseForm.controls['description'].value != ''
-        ? this.exerciseForm.controls['description'].value
-        : this.listExerciseDomain[this.id].description,
-      dataStart: this.exerciseForm.controls['dataStart'].value != ''
-        ? this.exerciseForm.controls['dataStart'].value
-        : this.listExerciseDomain[this.id].dataStart,
-      dataEnd: this.exerciseForm.controls['dataEnd'].value != ''
-        ? this.exerciseForm.controls['dataEnd'].value
-        : this.listExerciseDomain[this.id].dataEnd,
-      level: this.exerciseForm.controls['level'].value != null
-        ? this.exerciseForm.controls['level'].value
-        : this.listExerciseDomain[this.id].level,
-      file: this.exerciseForm.controls['file'].value != ''
-        ? this.exerciseForm.controls['file'].value
-        : this.listExerciseDomain[this.id].file
-    }
-
-    this.updateExerciseServiceService.updateClassService(this.exercise).subscribe(
-      (res: GenericResponse) => {
-        console.log("Esta es la Respuesta: " + res.message)
-        console.log(res.httpResponse)
-        if (res.httpResponse == 200) {
-          window.location.reload()
+    if (!this.exerciseForm.valid) {
+      return this.exerciseForm.markAllAsTouched();
+    } else {
+      const formData = new FormData();
+      // Agrega los demás campos de formulario
+      formData.append('id', this.listExerciseDomain[this.id].id.toString()); // Suponiendo que tengas una variable que almacena el ID del ejercicio a actualizar
+      formData.append('title', this.exerciseForm.get('title')?.value || '');
+      formData.append('description', this.exerciseForm.get('description')?.value || '');
+      formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
+      formData.append('dataEnd', this.exerciseForm.get('dataEnd')?.value || '');
+      const selectedLevel = this.exerciseForm.get('level')?.value || '1';
+      formData.append('level', selectedLevel);
+      const fileInput = this.exerciseForm.get('file');
+      
+      if (fileInput instanceof FormControl) {
+        const file: File | null = fileInput.value;
+        if (file) {
+          const blob = new Blob([this.fileToUpload!], { type: this.fileType });
+          formData.append('file', this.fileToUpload!, this.fileNameVariable);
         }
       }
-    )
+      
+      // Imprime los datos antes de la llamada al servicio
+      console.log('Datos a enviar:');
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      
+      // Llama al servicio para enviar los datos al backend
+      this.updateExerciseServiceService.updateExerciseService(formData).subscribe(
+        (res: GenericResponse) => {
+          console.log('Respuesta del servidor: ' + res.message);
+          if (res.httpResponse === 200) {
+            // Realiza acciones adicionales si es necesario después de la actualización
+          }
+        },
+        (error) => {
+          console.error('Error al enviar el formulario:', error);
+        }
+      );
+    }
   }
+  
 
   deleteExercise(i: number) {
     this.deleteExerciseServiceService.deleteExerciseService(this.listExerciseDomain[i].id).subscribe(

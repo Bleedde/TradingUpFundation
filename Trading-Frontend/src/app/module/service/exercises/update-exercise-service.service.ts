@@ -13,7 +13,7 @@ export class UpdateExerciseServiceService {
 
   API: string = "http://localhost:8080/exercise";
 
-  updateClassService(exerciseDomain : ExerciseDomain) :Observable<GenericResponse> {
-    return this.http.put<GenericResponse>(this.API + "/exercise_update", exerciseDomain)
+  updateExerciseService(formData : FormData) :Observable<GenericResponse> {
+    return this.http.put<GenericResponse>(this.API + "/exercise_update", formData)
   }
 }

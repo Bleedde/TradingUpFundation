@@ -4,10 +4,10 @@
             <i class="bi bi-cloud-upload-fill me-3 text-white"></i>
             <span class="texts text-white">Ejercicios de Practica</span>
         </div>
-        <div class="card-body bg_purple rounded-bottom">
+        <div class="card-body bg_purple rounded-bottom d-flex justify-content-center align-items-center">
             <div class="row col-12 ">
                 <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
-                    <p class="text-center fs-5 text-black p-5 text-white">¡Bienvenido a nuestra seccion de  
+                    <p class="text-center fs-5 text-black p-0 p-md-5 text-white">¡Bienvenido a nuestra seccion de  
                         ejercicios de práctica!
                         Estamos emocionados de tenerte aquí para ayudarte en tu aprendizaje. En esta sección, podrás subir tus archivos y realizar ejercicios prácticos para reforzar tus conocimientos. </p>
                 </div>
@@ -58,7 +58,7 @@
             Registro de Ejercicios Prácticos
         </div>
         <div class="card-body p-5">
-            <form *ngIf="!exerciseDomain" (ngSubmit)="createExercise()" [formGroup]="exerciseForm" enctype="multipart/form-data">
+            <form *ngIf="!editExerciseDomain" (ngSubmit)="createExercise()" [formGroup]="exerciseForm" enctype="multipart/form-data">
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
@@ -106,29 +106,29 @@
 
             <!-- Editar un ejercicio -->
 
-            <form *ngIf="exerciseDomain" (submit)="updateExercise()" [formGroup]="exerciseForm">
+            <form *ngIf="editExerciseDomain" (submit)="updateExercise()" [formGroup]="exerciseForm">
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" formControlName="title" placeholder="exercise.title">
+                    <input type="text" class="form-control" formControlName="title" placeholder={{exercise.title}}>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
                     <div class="col-sm-10">
-                    <input type="email" class="form-control" formControlName="description" placeholder="exercise.description">
+                    <input type="email" class="form-control" formControlName="description" placeholder={{exercise.description}}>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="startDate" class="col-sm-2 col-form-label">Fecha de Inicio:</label>
                     <div class="col-sm-10">
-                    <input type="date" class="form-control" formControlName="dataStart" placeholder="exercise.dataStart">
+                    <input type="date" class="form-control" formControlName="dataStart" placeholder={{exercise.dataStart}}>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="finalDate" class="col-sm-2 col-form-label">Fecha de Entrega:</label>
                     <div class="col-sm-10">
-                    <input type="date" class="form-control" formControlName="dataEnd" placeholder="exercise.dataEnd">
+                    <input type="date" class="form-control" formControlName="dataEnd" placeholder={{exercise.dataEnd}}>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -144,7 +144,7 @@
                 <div class="row mb-3">
                     <label for="file" class="col-sm-2 col-form-label">Archivo:</label>
                     <div class="col-sm-10">
-                    <input type="file" class="form-control" formControlName="file" placeholder="file">
+                    <input type="file" class="form-control" (change)="handleInputEvent($event)" formControlName="file" placeholder={{exercise.file}}>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
@@ -166,13 +166,13 @@
     </div>
 </div>
 
-<div class="container col-10 mb-5" *ngFor="let exerciseItem of listExerciseDomain; let i = index">
+<div class="container col-12 col-md-6 mb-5" *ngFor="let exerciseItem of listExerciseDomain; let i = index">
     <div class="card cardF">
         <div class="card-header py-2 text-center text-white d-flex justify-content-between">
             {{exerciseItem.title}}
-            <div class="d-flex justify-content-center align-items-center">
-            <i class="fa-solid fa-pen-to-square me-2"></i>
-            <i class="fa-solid fa-trash"></i>
+            <div class="d-flex justify-content-center align-items-center" *ngIf="!mensaje">
+                <a type="button" (click)="editExercise(i)"><i class="fa-solid fa-pen-to-square me-2"></i></a>
+                <a type="button" (click)="deleteExercise(i)"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>
         <div class="card-body px-4 col-12 container">
@@ -198,7 +198,7 @@
                     <img [src]="graficExercise" alt="" width="120px">
                 </div>
                 <div *ngIf="validatePermision()" class="mb-3">
-                    <button (click)="showBoxResponse = !showBoxResponse">{{ !showBoxResponse ? 'Responder' : 'Cancelar' }}</button>
+                    <button class="btn btn-outline-secondary fw-bold" (click)="showBoxResponse = !showBoxResponse">{{ !showBoxResponse ? 'Responder' : 'Cancelar' }}</button>
                 </div>
             </div>
 
