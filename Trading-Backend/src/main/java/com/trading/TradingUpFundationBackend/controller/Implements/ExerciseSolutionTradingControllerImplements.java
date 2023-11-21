@@ -5,6 +5,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.DTO.ExerciseSolutio
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.controller.IExerciseSolutionTradingController;
 import com.trading.TradingUpFundationBackend.service.Implements.ExerciseSolutionTradingServiceImplements;
+import org.hibernate.sql.ast.tree.expression.Over;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,12 @@ public class ExerciseSolutionTradingControllerImplements implements IExerciseSol
     @GetMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTIONS_READ)
     public ResponseEntity<ObjectResponse> readExerciseSolutionsTrading(@PathVariable Integer exerciseId) {
         return this.service.readExercisesSolutionsTrading(exerciseId);
+    }
+
+    @Override
+    @PostMapping(IExerciseSolutionTradingEndPoints.URL_EXERCISE_SOLUTION_SOLUTIONS_FOR_USER)
+    public ResponseEntity<ObjectResponse> getSolutionsOfAExerciseForAUser(@RequestBody ExerciseSolutionTradingDTO exerciseSolutionTradingDTO){
+        return this.service.getSolutionsOfAExerciseForAUser(exerciseSolutionTradingDTO);
     }
 
 
