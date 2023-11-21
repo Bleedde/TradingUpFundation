@@ -83,7 +83,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                     if (exerciseDatabase.isPresent()) {
                         ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
                         LocalDate solutionDate = LocalDate.now();
-                        if(this.dates.compareDates(exerciseDatabase.get().getDataStart(), exerciseDatabase.get().getDataEnd(), solutionDate) && userDatabase.get().getUserLevel() == exerciseDatabase.get().getLevel()) {
+                        if(this.dates.compareDates(exerciseDatabase.get().getDataStart(), exerciseDatabase.get().getDataEnd(), solutionDate) && userDatabase.get().getUserLevel() <= exerciseDatabase.get().getLevel()) {
                             String fileName = StringUtils.cleanPath(Objects.requireNonNull(exerciseSolutionTradingDTO.getFile().getOriginalFilename()));
                             String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + idFile;
                             Files.createDirectories(Paths.get(uploadDirection));
@@ -91,6 +91,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                             Files.copy(exerciseSolutionTradingDTO.getFile().getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
                             entity.setDate(solutionDate);
                             entity.setUserName(userDatabase.get().getName());
+                            entity.setUserId(userDatabase.get().getId());
                             entity.setFile(uploadPath.toString());
                             entity.setId(idFile);
                             this.repository.save(entity);
@@ -101,7 +102,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                                     .build());
                         } else {
                             return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                                    .message(Responses.OPERATION_FAIL + ", its too late to response the exercise or the level of the user and the level of the exercise are not the same")
+                                    .message(Responses.OPERATION_FAIL + ", its too late to response the exercise or the level of the user is higher than the level of the exercise")
                                     .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_REGISTRATION_FAILED)
                                     .httpResponse(HttpStatus.BAD_REQUEST.value())
                                     .build());
@@ -212,35 +213,26 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
     @Override
     public ResponseEntity<ObjectResponse> getSolutionsOfAExerciseForAUser(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO){
         try {
-            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingEntityExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
             Optional<UserTradingEntity> userTradingEntityExist = this.userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
             Optional<ExerciseTradingEntity> exerciseTradingEntityExist = this.exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
             List<ExerciseSolutionTradingEntity> exerciseSolutionTradingEntityList = this.repository.findAll();
             List<ExerciseSolutionTradingEntity> solutionsOfAnExerciseByAUser = new ArrayList<>();
-            if(exerciseSolutionTradingEntityExist.isPresent()){
-                if(userTradingEntityExist.isPresent()) {
-                    if(exerciseTradingEntityExist.isPresent()) {
-                        if (!exerciseSolutionTradingEntityList.isEmpty()) {
-                            for (ExerciseSolutionTradingEntity entity : exerciseSolutionTradingEntityList) {
-                                if (entity.getUserId() == userTradingEntityExist.get().getId() && entity.getIdExercise() == exerciseTradingEntityExist.get().getId()) {
+            if(userTradingEntityExist.isPresent()) {
+                if(exerciseTradingEntityExist.isPresent()) {
+                    if (!exerciseSolutionTradingEntityList.isEmpty()) {
+                        for (ExerciseSolutionTradingEntity entity : exerciseSolutionTradingEntityList) {
+                            if (entity.getUserId() == userTradingEntityExist.get().getId() && entity.getIdExercise() == exerciseTradingEntityExist.get().getId()) {
                                     solutionsOfAnExerciseByAUser.add(entity);
-                                }
                             }
                         }
                     }
                 }
-                return ResponseEntity.ok(ObjectResponse.builder()
+            }
+            return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
                         .objectResponse(solutionsOfAnExerciseByAUser)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
-            } else {
-                return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                        .message(Responses.OPERATION_FAIL)
-                        .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_SEARCH_FAILED + ", the user doesnt exist")
-                        .httpResponse(HttpStatus.BAD_REQUEST.value())
-                        .build());
-            }
         } catch (Exception e){
             log.error(Responses.INTERNAL_SERVER_ERROR, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
