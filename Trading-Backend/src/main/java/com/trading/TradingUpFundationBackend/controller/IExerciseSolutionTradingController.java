@@ -29,6 +29,9 @@ public interface IExerciseSolutionTradingController {
     @GetMapping()//Annotation that represent the header of an HTTP query that read all the exercises with a GET query
     ResponseEntity<ObjectResponse> readExerciseSolutionsTrading(@PathVariable Integer idExercise);
 
+    @PostMapping()
+    ResponseEntity<ObjectResponse> getSolutionsOfAExerciseForAUser(@RequestBody ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+
     /**
      * Method without body which return a file
      * @param id The id of the file
