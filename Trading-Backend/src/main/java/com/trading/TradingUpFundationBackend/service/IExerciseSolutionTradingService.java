@@ -25,6 +25,8 @@ public interface IExerciseSolutionTradingService {
      */
     ResponseEntity<ObjectResponse> readExercisesSolutionsTrading(Integer idExercise);
 
+    ResponseEntity<ObjectResponse> getSolutionsOfAExerciseForAUser(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO);
+
     /**
      * Method without body which return a file
      * @return A byte[] of the content of the file
