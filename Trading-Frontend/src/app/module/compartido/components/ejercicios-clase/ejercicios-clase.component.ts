@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { CreateExerciseSolutionServiceService } from 'src/app/module/service/exerciseSolution/create-exercise-solution-service.service';
+import { ReadExercisesSolutionServiceService } from 'src/app/module/service/exerciseSolution/read-exercises-solution-service.service';
 import { CreateExerciseServiceService } from 'src/app/module/service/exercises/create-exercise-service.service';
 import { DeleteExerciseServiceService } from 'src/app/module/service/exercises/delete-exercise-service.service';
 import { ReadExercisesServiceService } from 'src/app/module/service/exercises/read-exercises-service.service';
@@ -11,6 +12,7 @@ import { DatosUserServiceService } from 'src/app/module/service/userServices/dat
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 import { BOOK1, GRAFICEXERCISE } from 'src/app/shared/constants';
 import { ExerciseDomain } from 'src/app/shared/domains/ExerciseDomain';
+import { ExerciseSolution } from 'src/app/shared/domains/ExerciseSolution';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
 @Component({
@@ -35,6 +37,7 @@ export class EjerciciosClaseComponent implements OnInit{
   exerciseSolutionForm!: FormGroup;
   exerciseDomain!: ExerciseDomain;
   listExerciseDomain: ExerciseDomain[] = [];
+  listExerciseSolution: ExerciseSolution[] = [];
   exerciseIds: ExerciseDomain[] = [];
   editExerciseDomain!: boolean;
   id!: number;
@@ -45,7 +48,7 @@ export class EjerciciosClaseComponent implements OnInit{
   availableLevels = [1, 2, 3, 4]; 
   selectedLevel: number | undefined;
   showBoxResponse: boolean = false;
-  showSolutions: boolean = false;
+  showSolutions: boolean[] = [];
 
   buttonClicked(level: number) {
     this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
@@ -68,7 +71,7 @@ export class EjerciciosClaseComponent implements OnInit{
 
   exercise!: ExerciseDomain;
 
-  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private createExerciseSolutionServiceService: CreateExerciseSolutionServiceService) {
+  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private createExerciseSolutionServiceService: CreateExerciseSolutionServiceService, private readExercisesSolutionServiceService: ReadExercisesSolutionServiceService) {
 
     this.ejerciciosClase = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -92,7 +95,9 @@ export class EjerciciosClaseComponent implements OnInit{
     )
     
   }
-
+  initializeComponentData() {
+    this.showSolutions = new Array(this.listExerciseDomain.length).fill(false);
+  }
 
   ngOnInit(): void {
 
@@ -109,8 +114,6 @@ export class EjerciciosClaseComponent implements OnInit{
     this.valoresInicialesFormulario = this.exerciseForm.value;
     this.readUserLevel();
   }
-
-
   
   handleInputEvent(event: any) {
     const fileInput = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
@@ -247,7 +250,35 @@ export class EjerciciosClaseComponent implements OnInit{
   readFileExercise(id: number) {
     return `http://localhost:8080/exercise/exercise_file${id}`; 
   }
+
+  readFileSolution(id:number){
+    return `http://localhost:8080/exercise_solution/exercise_solution_file${id}`;
+  }
+
+  readExerciseSolutionsService(i: number) {
+    this.showSolutions[i] = !this.showSolutions[i];
+    this.id = i;
+    this.exercise = this.listExerciseDomain[this.id];
+    console.log("este es" + this.exercise.id);
+    i = this.exercise.id;
+    console.log("este es i: " + i);
+    this.listExerciseSolution = [];
   
+    this.readExercisesSolutionServiceService.readExerciseSolutionsService(i).subscribe(
+      (res: GenericResponse) => {
+        if(res.httpResponse === 200 && res.objectResponse.length > 0){
+          for(let exerciseSolutionItem of res.objectResponse){
+            this.listExerciseSolution.push(exerciseSolutionItem);
+            this.readFileSolution(exerciseSolutionItem.id);
+            console.log("holaa")
+          }
+        }
+        else{
+          alert("no hay ejercicios resueltos")
+        }
+      }
+    )
+  }
 
   readExercisesService(level: number) {
     this.listExerciseDomain = [];
@@ -260,7 +291,7 @@ export class EjerciciosClaseComponent implements OnInit{
             this.listExerciseDomain.push(exerciseItem);
             this.exerciseIds.push(exerciseItem.id);
             this.readFileExercise(exerciseItem.id); // Store the exercise ID
-            console.log(exerciseItem.id)
+            console.log("id de los ejercicios: " + exerciseItem.id)
           }
         }
         else{

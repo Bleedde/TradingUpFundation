@@ -3,5 +3,7 @@ export interface ExerciseSolution{
     comment: string,
     userEmail: string,
     exerciseId: number,
-    file: File
+    file: File,
+    userName: string,
+    date: string
 }

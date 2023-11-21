@@ -90,7 +90,7 @@
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label">Imagen:</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" (change)="handleInputEventImage($event)" formControlName="image">
+              <input type="file" class="form-control" (change)="handleInputEventImage($event)" formControlName="image" accept=".jpg, .png">
             </div>
           </div>
           <div class="row mb-3">
@@ -152,7 +152,7 @@
           <div class="row mb-3">
             <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
             <div class="col-sm-10">
-              <select class="form-select" formControlName="bookLevel">
+              <select class="form-select" formControlName="level">
                 <option *ngFor="let nivel of niveles" [value]="nivel.value"
                   [selected]="nivel.value === nivelSeleccionado">
                   {{nivel.label}}

@@ -243,18 +243,19 @@
                         !showBoxResponse ? 'Responder' : 'Cancelar' }}</button>
                 </div>
                 <div *ngIf="!validatePermision()" class="mb-3">
-                    <button class="btn btn-outline-secondary fw-bold" (click)="showSolutions = !showSolutions">{{
-                        !showSolutions ? 'Ver Respuestas' : 'Cancelar' }}</button>
+                    <button class="btn btn-outline-secondary fw-bold" (click)="readExerciseSolutionsService(i)">{{ !showSolutions[i] ? 'Ver Respuestas' : 'Cancelar' }}</button>
                 </div>
             </div>
-            <div class="col-12 col-md-10 container border-top border-black" *ngIf="showSolutions">
-                <div class="card border-color col-12 my-3 shadow">
-                    <div class="card-header text-white shadow">
-                        Laura@gmail.com
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">Comentario: </p>
-                        <p>Archivo: <a>Descargar</a></p>
+            <div  *ngIf="showSolutions[i]">
+                <div class="col-12 col-md-10 container">
+                    <div class="card border-color col-12 my-3 shadow" *ngFor="let exerciseSolutionItem of listExerciseSolution; let i = index">
+                        <div class="card-header text-white shadow">
+                            {{exerciseSolutionItem.userName}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title">Comentario: {{exerciseSolutionItem.comment}}</p>
+                            <p>Archivo: <a [href]="readFileSolution(exerciseSolutionItem.id)">Descargar</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
