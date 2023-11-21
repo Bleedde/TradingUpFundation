@@ -52,16 +52,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
-                String rawPassword = "";
-                if (userTradingExist.get().getPassword().equals("password") && userTradingDTO.getPassword().equals("password")) {
-                    return ResponseEntity.ok(ObjectResponse.builder()
-                            .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
-                            .objectResponse(userTradingExist)
-                            .httpResponse(HttpStatus.OK.value())
-                            .build());
-
-                } else {
-                    rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
+                    String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
                     if (userTradingExist.get().isStatus() && rawPassword.equals(userTradingDTO.getPassword())) {
                         return ResponseEntity.ok(ObjectResponse.builder()
                                 .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
@@ -75,7 +66,6 @@ public class UserTradingServiceImplements implements IUserTradingService {
                                 .httpResponse(HttpStatus.BAD_REQUEST.value())
                                 .build());
                     }
-                }
             } else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
                         .message(Responses.OPERATION_FAIL)
@@ -183,14 +173,15 @@ public class UserTradingServiceImplements implements IUserTradingService {
     public ResponseEntity<ObjectResponse> readUsersTrading() {
         try {
             List<UserTradingEntity> userTradingEntityList = this.repository.findAll();
+            List<UserTradingEntity> usersListRawPassword = new ArrayList<>();
             if (!userTradingEntityList.isEmpty()) {
                 for(UserTradingEntity userEntity : userTradingEntityList){
-                    String rawPassword = encryption.decrypt(userEntity.getPassword());
-                    userEntity.setPassword(rawPassword);
+                    userEntity.setPassword(this.encryption.decrypt(userEntity.getPassword()));
+                    usersListRawPassword.add(userEntity);
                 }
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
-                        .objectResponse(userTradingEntityList)
+                        .objectResponse(usersListRawPassword)
                         .httpResponse(HttpStatus.OK.value())
                         .build());
             } else {
@@ -223,16 +214,9 @@ public class UserTradingServiceImplements implements IUserTradingService {
             if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = userTradingExist.get();
                 entity.setId(userTradingExist.get().getId());
-                if(entity.getPassword().equals("password")){
+                String rawPassword = this.encryption.decrypt(entity.getPassword());
+                if(!rawPassword.equals(userTradingDTO.getPassword())){
                     entity.setPassword(this.encryption.encrypt(userTradingDTO.getPassword()));
-                } else {
-                    String rawPassword = this.encryption.decrypt(entity.getPassword());
-                    if (userTradingDTO.getPassword().equals(rawPassword)) {
-                        entity.setPassword(userTradingExist.get().getPassword());
-                    } else {
-                        String newEncryptedPassword = this.encryption.encrypt(userTradingDTO.getPassword());
-                        entity.setPassword(newEncryptedPassword);
-                    }
                 }
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
