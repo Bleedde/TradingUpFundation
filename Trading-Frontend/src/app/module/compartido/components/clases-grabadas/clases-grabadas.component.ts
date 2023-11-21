@@ -131,13 +131,20 @@ export class ClasesGrabadasComponent implements OnInit {
     this.listClassDomain = [] 
     this.readClassesServiceService.readClassesforLevelService(level).subscribe(
       (res: GenericResponse) => {
-        for (let classItem of res.objectResponse) {
-          let url = classItem.urlVideo;
-          classItem.urlVideo = this.youtubeVideo + url;
-          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classItem.urlVideo);
-          classItem.urlVideo = this.safeUrl;
-          this.listClassDomain.push(classItem);
+        if (res.httpResponse === 200 && res.objectResponse.length > 0){
+          for (let classItem of res.objectResponse) {
+            let url = classItem.urlVideo;
+            classItem.urlVideo = this.youtubeVideo + url;
+            this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classItem.urlVideo);
+            classItem.urlVideo = this.safeUrl;
+            this.listClassDomain.push(classItem);
+          }
+        }else{
+          alert('No hay clases grabadas');
         }
+      },
+      (error) => {
+        console.error('Error al enviar el formulario:', error);
       }
     )
   }

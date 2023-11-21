@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreateBookServiceService } from 'src/app/module/service/bookServices/create-book-service.service';
 import { DeleteBookServiceService } from 'src/app/module/service/bookServices/delete-book-service.service';
 import { ReadBooksServiceService } from 'src/app/module/service/bookServices/read-books-service.service';
@@ -16,11 +16,22 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./libros.component.scss']
 })
 export class LibrosComponent {
+  fileNameVariable!: string;
+  imageFileNameVariable!: string
+  fileType!: string;
+  imageFileType!: string;
+  fileToUpload: File | null = null;
+  imageFileToUpload: File | null = null;
+  
+
+
   bookForm!: FormGroup;
   bookDomain!: BookDomain;
   listBookDomain: BookDomain [] = [];
+  bookIds: BookDomain [] = [];
   editBookDomain!: boolean;
   id!: number;
+  bookId!: number;
 
   buttonValue!: number
   userToEdit: { userLevel: number } = { userLevel: 0 };
@@ -30,6 +41,7 @@ export class LibrosComponent {
 
   buttonClicked(level: number) {
     this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
+    this.readBooksService(this.selectedLevel);
   }
 
   libros!: boolean;
@@ -57,7 +69,7 @@ export class LibrosComponent {
       description: ['',[Validators.required]],
       image: ['',[Validators.required]],
       file: ['',[Validators.required]],
-      bookLevel: [0,[Validators.required]]
+      level: [0,[Validators.required]]
     })
   }
 
@@ -68,14 +80,46 @@ export class LibrosComponent {
       description: ['',[Validators.required]],
       image: ['',[Validators.required]],
       file: ['',[Validators.required]],
-      bookLevel: [this.nivelSeleccionado]
+      level: [this.nivelSeleccionado]
     });
 
     // Guarda los valores iniciales del formulario
     this.valoresInicialesFormulario = this.bookForm.value;
-
-    this.readBooksService();
     this.readUserLevel();
+  }
+
+  handleInputEvent(event: any) {
+    const fileInput = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
+    if (fileInput) {
+      this.fileNameVariable = fileInput.name;
+      this.fileType = fileInput.type; // Guarda el nombre real del archivo en la variable
+      this.fileToUpload = fileInput;
+      const formData = new FormData();
+      formData.append('file', fileInput); // Agrega el archivo al objeto FormData
+      // Puedes hacer más acciones con el archivo aquí si es necesario
+      console.log(`Archivo seleccionado: ${this.fileNameVariable}`);
+      console.log(`Tipo de archivo: ${this.fileType}`);
+      console.log(`Archivo a subir: ${this.fileToUpload}`);
+    } else {
+      console.log('Ningún archivo seleccionado.');
+    }
+  }
+
+  handleInputEventImage(event: any) {
+    const fileInputImage = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
+    if (fileInputImage) {
+      this.imageFileNameVariable = fileInputImage.name;
+      this.imageFileType = fileInputImage.type; // Guarda el nombre real del archivo en la variable
+      this.imageFileToUpload = fileInputImage;
+      const formData = new FormData();
+      formData.append('image', fileInputImage); // Agrega el archivo al objeto FormData
+      // Puedes hacer más acciones con el archivo aquí si es necesario
+      console.log(`Archivo seleccionado: ${this.imageFileNameVariable}`);
+      console.log(`Tipo de archivo: ${this.imageFileType}`);
+      console.log(`Archivo a subir: ${this.imageFileToUpload}`);
+    } else {
+      console.log('Ningún archivo seleccionado.');
+    }
   }
 
   createBook() {
@@ -83,27 +127,48 @@ export class LibrosComponent {
       return this.bookForm.markAllAsTouched()
     }
     else {
-      this.bookDomain = {
-        id: 0,
-        name: this.bookForm.controls['name'].value,
-        description: this.bookForm.controls['description'].value,
-        file: this.bookForm.controls['file'].value,
-        image: this.bookForm.controls['image'].value,
-        bookLevel: this.bookForm.controls['bookLevel'].value != 0
-          ? this.bookForm.controls['bookLevel'].value
-          : 1,
+      const formData = new FormData();
+
+      formData.append('id', "0");
+      formData.append('name', this.bookForm.get('name')?.value || '')
+      formData.append('description', this.bookForm.get('description')?.value || '')
+      const selectedLevel = this.bookForm.get('level')?.value || '1';
+      formData.append('level', selectedLevel);
+      const fileInputImage = this.bookForm.get('image');
+      if (fileInputImage instanceof FormControl) {
+        const image: File | null = fileInputImage.value;
+        if (image) {
+          const blob = new Blob([this.imageFileToUpload!], { type: this.imageFileType });
+          formData.append('image', this.imageFileToUpload!, this.imageFileNameVariable); // Usa el nombre real del archivo
+        }
+      }
+      const fileInput = this.bookForm.get('file');
+      if (fileInput instanceof FormControl) {
+        const file: File | null = fileInput.value;
+        if (file) {
+          const blob = new Blob([this.fileToUpload!], { type: this.fileType });
+          formData.append('file', this.fileToUpload!, this.fileNameVariable); // Usa el nombre real del archivo
+        }
       }
 
-      console.log("prueba de class" + this.bookDomain.bookLevel)
+     // Imprime los datos antes de la llamada al servicio
+     console.log('Datos a enviar:');
+     formData.forEach((value, key) => {
+       console.log(`${key}: ${value}`);
+     });
 
-      this.createBookServiceService.createBookService(this.bookDomain).subscribe(
+      this.createBookServiceService.createBookService(formData).subscribe(
         (res: GenericResponse) => {
-          console.log("Esta es la Respuesta: " + res.message)
-          if (res.httpResponse == 200) {
-            window.location.reload()
+          console.log('Respuesta del servidor: ' + res.message);
+          if (res.httpResponse === 200) {
+            window.location.reload();
+            // Realiza acciones adicionales si es necesario
           }
+        },
+        (error) => {
+          console.error('Error al enviar el formulario:', error);
         }
-      )
+      );
     }
   }
 
@@ -119,12 +184,32 @@ export class LibrosComponent {
     );
   }
 
-  readBooksService() {
-    this.readBooksServiceService.readBooksService().subscribe(
+  readFileBook(id: number) {
+    return `http://localhost:8080/book/book_file${id}`; 
+  }
+
+  readImageBook(id: number){
+    return `http://localhost:8080/book/book_image${id}`;
+  }
+
+  readBooksService(level: number) {
+    this.listBookDomain = [];
+    this.bookIds = [];
+    
+    this.readBooksServiceService.readBooksService(level).subscribe(
       (res: GenericResponse) => {
-        for (let bookItem of res.objectResponse) {
-          this.listBookDomain.push(bookItem);
+        if (res.httpResponse === 200 && res.objectResponse.length > 0){
+          for (let bookItem of res.objectResponse) {
+            this.listBookDomain.push(bookItem);
+            this.bookIds.push(bookItem.id);
+            this.readFileBook(bookItem.id);
+            this.readImageBook(bookItem.id) // Store the exercise ID
+            console.log(bookItem.id)
+          }
+        }else{
+          alert('no hay libros')
         }
+        
       }
     )
   }
@@ -136,11 +221,11 @@ export class LibrosComponent {
 
     console.log(this.book);
     // Configura el valor inicial de nivelSeleccionado y estadoSeleccionado
-    this.nivelSeleccionado = this.book.bookLevel.toString();
+    this.nivelSeleccionado = this.book.level.toString();
 
     /*Actualiza el FormGroup con los valores iniciales*/
     this.bookForm.patchValue({
-      bookLevel: this.nivelSeleccionado
+      level: this.nivelSeleccionado
     });
   }
 
@@ -159,9 +244,9 @@ export class LibrosComponent {
       image: this.bookForm.controls['image'].value != ''
         ? this.bookForm.controls['image'].value
         : this.listBookDomain[this.id].image,
-      bookLevel: this.bookForm.controls['bookLevel'].value != null
-        ? this.bookForm.controls['bookLevel'].value
-        : this.listBookDomain[this.id].bookLevel,
+      level: this.bookForm.controls['level'].value != null
+        ? this.bookForm.controls['level'].value
+        : this.listBookDomain[this.id].level,
     }
 
     this.updateBookServiceService.updateBookService(this.book).subscribe(

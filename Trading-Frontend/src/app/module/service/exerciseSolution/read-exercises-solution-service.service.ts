@@ -3,17 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class ReadBooksServiceService {
+export class ReadExercisesSolutionServiceService {
 
   constructor(private http: HttpClient) { }
 
-  API: string = "http://localhost:8080/book";
+  API: string = "http://localhost:8080/exercise_solution";
 
-  readBooksService(level: number) :Observable<GenericResponse> {
-    return this.http.get<GenericResponse>(this.API + "/books_read" + level)
+  readExercisesService() :Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(this.API + "/exercise_solutions_read")
   }
 }

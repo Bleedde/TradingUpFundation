@@ -131,13 +131,20 @@ export class ClasesPregrabadasComponent {
     this.listClassPrerecordedDomain = [];
     this.readPrerecordedsServiceService.readClassesPrerecordedService(level).subscribe(
       (res: GenericResponse) => {
-        for (let classPrerecordedItem of res.objectResponse) {
-          let url = classPrerecordedItem.urlVideo;
-          classPrerecordedItem.urlVideo = this.youtubeVideo + url;
-          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classPrerecordedItem.urlVideo);
-          classPrerecordedItem.urlVideo = this.safeUrl;
-          this.listClassPrerecordedDomain.push(classPrerecordedItem);
+        if (res.httpResponse === 200 && res.objectResponse.length > 0){
+          for (let classPrerecordedItem of res.objectResponse) {
+            let url = classPrerecordedItem.urlVideo;
+            classPrerecordedItem.urlVideo = this.youtubeVideo + url;
+            this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classPrerecordedItem.urlVideo);
+            classPrerecordedItem.urlVideo = this.safeUrl;
+            this.listClassPrerecordedDomain.push(classPrerecordedItem);
+          }
+        }else{
+          alert('No hay clases pregrabadas');
         }
+      },
+      (error) => {
+        console.error('Error al enviar el formulario:', error);
       }
     )
   }
