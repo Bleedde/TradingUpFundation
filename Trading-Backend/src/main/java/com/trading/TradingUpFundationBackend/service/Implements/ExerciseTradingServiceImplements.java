@@ -246,7 +246,7 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                 List<ExerciseSolutionTradingEntity> exerciseSolutionList = this.exerciseSolutionTradingRepository.findAll();
                 if (!exerciseSolutionList.isEmpty()) {
                     for (ExerciseSolutionTradingEntity exerciseSolutionEntity : exerciseSolutionList) {
-                        if (exerciseSolutionEntity.getId().equals(id)) {
+                        if (exerciseSolutionEntity.getIdExercise() == id) {
                             this.exerciseSolutionTradingRepository.delete(exerciseSolutionEntity);
                         }
                     }

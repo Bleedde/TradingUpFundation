@@ -213,14 +213,22 @@ public class UserTradingServiceImplements implements IUserTradingService {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
-                UserTradingEntity entity = this.converter.convertUserTradingDTOToUserTradingEntity(userTradingDTO);
+                UserTradingEntity entity = userTradingExist.get();
                 entity.setId(userTradingExist.get().getId());
-                String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
-                if(userTradingDTO.getPassword().equals(rawPassword)){
-                    entity.setPassword(userTradingExist.get().getPassword());
-                }else{
-                    String newEncryptedPassword = encryption.encrypt(userTradingDTO.getPassword());
-                    entity.setPassword(newEncryptedPassword);
+                System.out.println("antes de la condicion");
+                System.out.println(entity);
+                if(entity.getPassword().equals("password")){
+                    entity.setPassword(this.encryption.encrypt(userTradingDTO.getPassword()));
+                    System.out.println("entrada a la primera condicion");
+                } else {
+                    String rawPassword = this.encryption.decrypt(entity.getPassword());
+                    if (userTradingDTO.getPassword().equals(rawPassword)) {
+                        System.out.println("entrada a segunda condicion");
+                        entity.setPassword(userTradingExist.get().getPassword());
+                    } else {
+                        String newEncryptedPassword = this.encryption.encrypt(userTradingDTO.getPassword());
+                        entity.setPassword(newEncryptedPassword);
+                    }
                 }
                 this.repository.save(entity);
                 return ResponseEntity.ok(ObjectResponse.builder()
@@ -266,7 +274,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
                 } else {
                     this.repository.deleteById(userTradingExist.get().getId());
                     return ResponseEntity.ok(ObjectResponse.builder()
-                            .message(Responses.OPERATION_SUCCESS + ", There were no solutions made by this user to delete")
+                            .message(Responses.OPERATION_SUCCESS + ", There no solutions made by this user to delete")
                             .objectResponse(IUserTradingResponse.USER_DELETED_SUCCESS)
                             .httpResponse(HttpStatus.OK.value())
                             .build());
