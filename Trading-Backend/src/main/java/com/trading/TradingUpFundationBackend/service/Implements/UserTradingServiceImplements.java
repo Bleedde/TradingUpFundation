@@ -2,11 +2,9 @@ package com.trading.TradingUpFundationBackend.service.Implements;
 
 import com.trading.TradingUpFundationBackend.commons.constant.response.Responses;//Package that allows the use of a Responses
 import com.trading.TradingUpFundationBackend.commons.constant.deserializable.UserTradingDeserializable;
-import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IExerciseSolutionTradingResponse;
 import com.trading.TradingUpFundationBackend.commons.constant.response.entittyResponse.IUserTradingResponse;//Package that allows use the object UserTradingDeserializable
 import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;//Package that allows to use the serializable version of the entity UserTradingEntity; RegistrationTradingDTO
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
-import com.trading.TradingUpFundationBackend.commons.domains.entity.ClassTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
@@ -53,20 +51,30 @@ public class UserTradingServiceImplements implements IUserTradingService {
     public ResponseEntity<ObjectResponse> login(UserTradingDTO userTradingDTO) {
         try {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
-            if(userTradingExist.isPresent()){
-                String rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
-                if(userTradingExist.get().isStatus() && rawPassword.equals(userTradingDTO.getPassword())) {
+            if (userTradingExist.isPresent()) {
+                String rawPassword = "";
+                if (userTradingExist.get().getPassword().equals("password") && userTradingDTO.getPassword().equals("password")) {
                     return ResponseEntity.ok(ObjectResponse.builder()
                             .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
                             .objectResponse(userTradingExist)
                             .httpResponse(HttpStatus.OK.value())
                             .build());
+
                 } else {
-                    return ResponseEntity.badRequest().body(ObjectResponse.builder()
-                            .message(Responses.OPERATION_FAIL)
-                            .httpResponse(HttpStatus.BAD_REQUEST.value())
-                            .objectResponse(IUserTradingResponse.USER_LOGIN_FALSE)
-                            .build());
+                    rawPassword = encryption.decrypt(userTradingExist.get().getPassword());
+                    if (userTradingExist.get().isStatus() && rawPassword.equals(userTradingDTO.getPassword())) {
+                        return ResponseEntity.ok(ObjectResponse.builder()
+                                .message(Responses.OPERATION_SUCCESS + " I am " + userTradingExist.get().getUserRole())
+                                .objectResponse(userTradingExist)
+                                .httpResponse(HttpStatus.OK.value())
+                                .build());
+                    } else {
+                        return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                                .message(Responses.OPERATION_FAIL)
+                                .objectResponse(IUserTradingResponse.USER_SEARCHED_FAILED)
+                                .httpResponse(HttpStatus.BAD_REQUEST.value())
+                                .build());
+                    }
                 }
             } else {
                 return ResponseEntity.badRequest().body(ObjectResponse.builder()
@@ -215,15 +223,11 @@ public class UserTradingServiceImplements implements IUserTradingService {
             if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = userTradingExist.get();
                 entity.setId(userTradingExist.get().getId());
-                System.out.println("antes de la condicion");
-                System.out.println(entity);
                 if(entity.getPassword().equals("password")){
                     entity.setPassword(this.encryption.encrypt(userTradingDTO.getPassword()));
-                    System.out.println("entrada a la primera condicion");
                 } else {
                     String rawPassword = this.encryption.decrypt(entity.getPassword());
                     if (userTradingDTO.getPassword().equals(rawPassword)) {
-                        System.out.println("entrada a segunda condicion");
                         entity.setPassword(userTradingExist.get().getPassword());
                     } else {
                         String newEncryptedPassword = this.encryption.encrypt(userTradingDTO.getPassword());
