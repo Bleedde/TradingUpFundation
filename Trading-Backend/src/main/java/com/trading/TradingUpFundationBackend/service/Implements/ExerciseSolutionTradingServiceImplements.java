@@ -15,6 +15,7 @@ import com.trading.TradingUpFundationBackend.repository.IExerciseTradingReposito
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;
 import com.trading.TradingUpFundationBackend.service.IExerciseSolutionTradingService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.catalina.User;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -210,6 +211,48 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
         }
     }
 
+    @Override
+    public ResponseEntity<ObjectResponse> getSolutionsOfAExerciseForAUser(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO){
+        try {
+            Optional<ExerciseSolutionTradingEntity> exerciseSolutionTradingEntityExist = this.repository.findById(exerciseSolutionTradingDTO.getId());
+            Optional<UserTradingEntity> userTradingEntityExist = this.userRepository.findByEmail(exerciseSolutionTradingDTO.getUserEmail());
+            Optional<ExerciseTradingEntity> exerciseTradingEntityExist = this.exerciseRepository.findById(exerciseSolutionTradingDTO.getExerciseId());
+            List<ExerciseSolutionTradingEntity> exerciseSolutionTradingEntityList = this.repository.findAll();
+            List<ExerciseSolutionTradingEntity> solutionsOfAnExerciseByAUser = new ArrayList<>();
+            if(exerciseSolutionTradingEntityExist.isPresent()){
+                if(userTradingEntityExist.isPresent()) {
+                    if(exerciseTradingEntityExist.isPresent()) {
+                        if (!exerciseSolutionTradingEntityList.isEmpty()) {
+                            for (ExerciseSolutionTradingEntity entity : exerciseSolutionTradingEntityList) {
+                                if (entity.getUserId() == userTradingEntityExist.get().getId() && entity.getIdExercise() == exerciseTradingEntityExist.get().getId()) {
+                                    solutionsOfAnExerciseByAUser.add(entity);
+                                }
+                            }
+                        }
+                    }
+                }
+                return ResponseEntity.ok(ObjectResponse.builder()
+                        .message(Responses.OPERATION_SUCCESS)
+                        .objectResponse(solutionsOfAnExerciseByAUser)
+                        .httpResponse(HttpStatus.OK.value())
+                        .build());
+            } else {
+                return ResponseEntity.badRequest().body(ObjectResponse.builder()
+                        .message(Responses.OPERATION_FAIL)
+                        .objectResponse(IExerciseSolutionTradingResponse.EXERCISE_SOLUTION_SEARCH_FAILED + ", the user doesnt exist")
+                        .httpResponse(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+        } catch (Exception e){
+            log.error(Responses.INTERNAL_SERVER_ERROR, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ObjectResponse.builder()
+                            .message(Responses.INTERNAL_SERVER_ERROR)
+                            .objectResponse(null)
+                            .httpResponse(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
+    }
     @Override
     public ResponseEntity<byte[]> getFile(Integer id){
         try{
