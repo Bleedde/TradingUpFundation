@@ -213,7 +213,13 @@ public class UserTradingServiceImplements implements IUserTradingService {
             Optional<UserTradingEntity> userTradingExist = this.repository.findByEmail(userTradingDTO.getEmail());
             if (userTradingExist.isPresent()) {
                 UserTradingEntity entity = userTradingExist.get();
-                entity.setId(userTradingExist.get().getId());
+                entity.setName(userTradingDTO.getName());
+                entity.setId(userTradingDTO.getId());
+                entity.setUserLevel(userTradingDTO.getUserLevel());
+                entity.setAuditedAccount(userTradingDTO.getAuditedAccount());
+                entity.setBacktesting(userTradingDTO.getBacktesting());
+                entity.setUserLevel(userTradingDTO.getUserLevel());
+                entity.setUserRole(userTradingDTO.getUserRole());
                 String rawPassword = this.encryption.decrypt(entity.getPassword());
                 if(!rawPassword.equals(userTradingDTO.getPassword())){
                     entity.setPassword(this.encryption.encrypt(userTradingDTO.getPassword()));
