@@ -88,9 +88,9 @@
       <div class="card-body p-5">
         <form *ngIf="!editBookDomain" (submit)="createBook()" [formGroup]="bookForm">
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Imagen:</label>
+            <label class="col-sm-2 col-form-label">Imagen:</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" formControlName="image">
+              <input type="file" class="form-control" (change)="handleInputEventImage($event)" formControlName="image" accept=".jpg, .png">
             </div>
           </div>
           <div class="row mb-3">
@@ -108,7 +108,7 @@
           <div class="row mb-3">
             <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
             <div class="col-sm-10">
-              <select class="form-select" formControlName="bookLevel">
+              <select class="form-select" formControlName="level">
                 <option *ngFor="let nivel of niveles" [value]="nivel.value"
                   [selected]="nivel.value === nivelSeleccionado">
                   {{nivel.label}}
@@ -119,7 +119,7 @@
           <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Archivo:</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" formControlName="file">
+              <input type="file" class="form-control" (change)="handleInputEvent($event)" formControlName="file">
             </div>
           </div>
           <div class="d-flex align-items-center justify-content-center">
@@ -152,7 +152,7 @@
           <div class="row mb-3">
             <label for="level" class="col-sm-2 col-form-label only">Nivel:</label>
             <div class="col-sm-10">
-              <select class="form-select" formControlName="bookLevel">
+              <select class="form-select" formControlName="level">
                 <option *ngFor="let nivel of niveles" [value]="nivel.value"
                   [selected]="nivel.value === nivelSeleccionado">
                   {{nivel.label}}
@@ -186,46 +186,45 @@
       </div>
   </div>
   
+  <!--
   <div class="container d-flex col-12 justify-content-evenly py-3">
     <div class="row">
-      <ng-container *ngFor="let bookItem of listBookDomain; let i = index">
+      <div *ngFor="let bookItem of listBookDomain; let i = index">
         <div class="col-md-3 mb-5 d-flex align-items-center justify-content-center">
           <div class="card cards">
-            <img [src]="bookItem.image" class="card-img-top" alt="..." height="250px">
+            <img [src]="readImageBook(bookId)" class="card-img-top" alt="..." height="250px">
             <div class="card-body">
               <h5 class="card-title text-center">{{bookItem.name}}</h5>
               <p class="card-text text-center">{{bookItem.description}}</p>
               <hr>
               <div class="d-flex justify-content-evenly">
-                <a class="btn boton btn-warning"><i class="bi bi-cloud-arrow-down-fill"></i></a>
+                <a class="btn boton btn-warning" [href]="readFileBook(bookId)"><i class="bi bi-cloud-arrow-down-fill"></i></a>
                 <a class="btn boton btn-success" (click)="editBook(i)"><i class="fa-solid fa-pen-to-square"></i></a>
                 <a class="btn boton btn-danger" (click)="deleteBook(i)"><i class="fa-solid fa-trash"></i></a>
               </div>
             </div>
           </div>
         </div>
-        <!-- Cierra la fila y abre una nueva si es el cuarto elemento en la fila actual -->
-        <div class="" *ngIf="(i + 1) % 4 === 0"></div>
-      </ng-container>
+      </div>
     </div>
-  </div>
+  </div>-->
   
-  <!--
+
   <div class="container d-flex col-12 justify-content-evenly py-3">
     <div class="card cards"  *ngFor="let bookItem of listBookDomain; let i = index">
-      <img [src]="bookItem.image" class="card-img-top" alt="..." height="250px">
+      <img [src]="readImageBook(bookItem.id)" class="card-img-top" alt="..." height="250px">
       <div class="card-body">
         <h5 class="card-title text-center">{{bookItem.name}}</h5>
         <p class="card-text text-center">{{bookItem.description}}</p>
         <hr>
         <div class="d-flex justify-content-evenly">
-          <a class="btn boton btn-warning"><i class="fa-solid fa-eye"></i></a>
-          <a class="btn boton btn-success" (click)="editBook(i)" ><i class="fa-solid fa-pen-to-square"></i></a>
-          <a class="btn boton btn-danger" (click)="deleteBook(i)"><i class="fa-solid fa-trash"></i></a>
+          <a class="btn boton btn-warning" [href]="readFileBook(bookItem.id)"><i class="bi bi-cloud-arrow-down-fill"></i></a>
+          <a class="btn boton btn-success" (click)="editBook(i)" *ngIf="!libros"><i class="fa-solid fa-pen-to-square"></i></a>
+          <a class="btn boton btn-danger" (click)="deleteBook(i)" *ngIf="!libros"><i class="fa-solid fa-trash"></i></a>
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
   
   
   <!--

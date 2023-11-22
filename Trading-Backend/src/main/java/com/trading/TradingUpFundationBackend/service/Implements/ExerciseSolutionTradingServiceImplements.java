@@ -65,6 +65,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
      */
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createExerciseSolutionTrading(ExerciseSolutionTradingDTO exerciseSolutionTradingDTO) {
+        System.out.println(exerciseSolutionTradingDTO);
         int idFile;
         try {
             List<ExerciseSolutionTradingEntity> entityList = this.repository.findAll();
