@@ -239,8 +239,8 @@
                     <img [src]="graficExercise" alt="" width="120px">
                 </div>
                 <div *ngIf="validatePermision()" class="mb-3">
-                    <button class="btn btn-outline-secondary fw-bold" (click)="showBoxResponse = !showBoxResponse">{{
-                        !showBoxResponse ? 'Responder' : 'Cancelar' }}</button>
+                    <button class="btn btn-outline-secondary fw-bold" (click)="readExerciseSolutionService(i)">{{
+                        !showBoxResponse[i] ? 'Responder o ver tus respuestas' : 'Cancelar' }}</button>
                 </div>
                 <div *ngIf="!validatePermision()" class="mb-3">
                     <button class="btn btn-outline-secondary fw-bold" (click)="readExerciseSolutionsService(i)">{{ !showSolutions[i] ? 'Ver Respuestas' : 'Cancelar' }}</button>
@@ -260,7 +260,7 @@
                 </div>
             </div>
             <form (ngSubmit)="createExerciseSolution(i)" [formGroup]="exerciseSolutionForm">
-                <div *ngIf="showBoxResponse" class="border-top col-12 border-black">
+                <div *ngIf="showBoxResponse[i]" class="border-top col-12 border-black">
 
                     <div class="mt-3">
                         <p class="fw-bold text-center">Agrega tú respuesta</p>
@@ -279,10 +279,24 @@
                             <button type="submit" class="btn text-white px-4 buttonF">Enviar</button>
                         </div>
                     </div>
+
+                    <div class="col-12 col-md-10 container border-top border-black mt-4" *ngFor="let exerciseSolutionItem of listExerciseSolution; let i = index">
+                        <div class="card border-color col-12 my-3 shadow">
+                            <div class="card-header text-white shadow">
+                                {{exerciseSolutionItem.userName}}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-title">Comentario: {{exerciseSolutionItem.comment}}</p>
+                                <p>Archivo: <a [href]="readFileSolution(exerciseSolutionItem.id)">Descargar</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
 
 

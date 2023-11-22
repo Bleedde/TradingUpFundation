@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { CreateExerciseSolutionServiceService } from 'src/app/module/service/exerciseSolution/create-exercise-solution-service.service';
+import { ReadExerciseSolutionServiceService } from 'src/app/module/service/exerciseSolution/read-exercise-solution-service.service';
 import { ReadExercisesSolutionServiceService } from 'src/app/module/service/exerciseSolution/read-exercises-solution-service.service';
 import { CreateExerciseServiceService } from 'src/app/module/service/exercises/create-exercise-service.service';
 import { DeleteExerciseServiceService } from 'src/app/module/service/exercises/delete-exercise-service.service';
@@ -47,7 +48,7 @@ export class EjerciciosClaseComponent implements OnInit{
   userToEdit: { userLevel: number, email: string } = { userLevel: 0, email: ''};
   availableLevels = [1, 2, 3, 4]; 
   selectedLevel: number | undefined;
-  showBoxResponse: boolean = false;
+  showBoxResponse: boolean[] = [];
   showSolutions: boolean[] = [];
 
   buttonClicked(level: number) {
@@ -71,7 +72,7 @@ export class EjerciciosClaseComponent implements OnInit{
 
   exercise!: ExerciseDomain;
 
-  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private createExerciseSolutionServiceService: CreateExerciseSolutionServiceService, private readExercisesSolutionServiceService: ReadExercisesSolutionServiceService) {
+  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private createExerciseSolutionServiceService: CreateExerciseSolutionServiceService, private readExercisesSolutionServiceService: ReadExercisesSolutionServiceService, private readExerciseSolutionServiceService: ReadExerciseSolutionServiceService) {
 
     this.ejerciciosClase = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -280,6 +281,33 @@ export class EjerciciosClaseComponent implements OnInit{
     )
   }
 
+
+  readExerciseSolutionService(i: number){
+    this.showBoxResponse[i] = !this.showBoxResponse[i];
+    this.id = i;
+    this.exercise = this.listExerciseDomain[this.id];
+    console.log("este es" + this.exercise.id);
+    i = this.exercise.id;
+    console.log("este es i: " + i);
+    this.listExerciseSolution = [];
+    const params = {
+      userEmail : this.userToEdit.email,
+      exerciseId : i
+    }
+
+    this.readExerciseSolutionServiceService.readExerciseSolutionService(params).subscribe(
+      (res: GenericResponse) => {
+        if(res.httpResponse === 200 && res.objectResponse.length > 0){
+          for(let exerciseSolutionItem of res.objectResponse){
+            this.listExerciseSolution.push(exerciseSolutionItem);
+            this.readFileSolution(exerciseSolutionItem.id);
+            console.log("holaa")
+          }
+        }
+      }
+    )
+  }
+
   readExercisesService(level: number) {
     this.listExerciseDomain = [];
     this.exerciseIds = [];  // Create an array to store exercise IDs
@@ -354,7 +382,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            // Realiza acciones adicionales si es necesario después de la actualización
+            window.location.reload();
           }
         },
         (error) => {

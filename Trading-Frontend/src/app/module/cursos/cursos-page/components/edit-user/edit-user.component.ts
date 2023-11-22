@@ -97,9 +97,8 @@ export class EditUserComponent implements OnInit {
     (response: GenericResponse) => {
       if (response) {
         if (response.httpResponse === 200) {
-          console.log("Usuario actualizado con éxito");
-          window.location.reload()
-          // Puedes realizar otras acciones, como redirigir a la página de detalles del usuario, mostrar un mensaje de éxito, etc.
+          console.log("Usuario actualizado con éxito" + response.httpResponse)
+          window.location.reload();
         } else {
           console.error("El servidor respondió con un error:", response.message);
         }
