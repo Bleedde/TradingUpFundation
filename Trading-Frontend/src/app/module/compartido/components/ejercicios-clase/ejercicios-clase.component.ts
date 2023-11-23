@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
+import { CreateExerciseSolutionServiceService } from 'src/app/module/service/exerciseSolution/create-exercise-solution-service.service';
+import { ReadExerciseSolutionServiceService } from 'src/app/module/service/exerciseSolution/read-exercise-solution-service.service';
+import { ReadExercisesSolutionServiceService } from 'src/app/module/service/exerciseSolution/read-exercises-solution-service.service';
 import { CreateExerciseServiceService } from 'src/app/module/service/exercises/create-exercise-service.service';
 import { DeleteExerciseServiceService } from 'src/app/module/service/exercises/delete-exercise-service.service';
 import { ReadExercisesServiceService } from 'src/app/module/service/exercises/read-exercises-service.service';
@@ -10,6 +13,7 @@ import { DatosUserServiceService } from 'src/app/module/service/userServices/dat
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
 import { BOOK1, GRAFICEXERCISE } from 'src/app/shared/constants';
 import { ExerciseDomain } from 'src/app/shared/domains/ExerciseDomain';
+import { ExerciseSolution } from 'src/app/shared/domains/ExerciseSolution';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
 @Component({
@@ -20,22 +24,32 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 export class EjerciciosClaseComponent implements OnInit{
   graficExercise = GRAFICEXERCISE;
   userRole!: string;
+  userName!: string;
+
   fileNameVariable!: string;
+  solutionFileNameVariable!: string
   fileType!: string;
+  solutionFileType!: string;
   fileToUpload: File | null = null;
+  solutionFileToUpload: File | null = null;
+
+
   exerciseForm!: FormGroup;
+  exerciseSolutionForm!: FormGroup;
   exerciseDomain!: ExerciseDomain;
   listExerciseDomain: ExerciseDomain[] = [];
+  listExerciseSolution: ExerciseSolution[] = [];
   exerciseIds: ExerciseDomain[] = [];
   editExerciseDomain!: boolean;
   id!: number;
-  exerciseId!: number;
+  idExercise!: number;
 
   buttonValue!: number
-  userToEdit: { userLevel: number } = { userLevel: 0 };
+  userToEdit: { userLevel: number, email: string } = { userLevel: 0, email: ''};
   availableLevels = [1, 2, 3, 4]; 
   selectedLevel: number | undefined;
-  showBoxResponse: boolean = false;
+  showBoxResponse: boolean[] = [];
+  showSolutions: boolean[] = [];
 
   buttonClicked(level: number) {
     this.selectedLevel = level; // Almacena el valor de level en la variable selectedLevel
@@ -58,7 +72,7 @@ export class EjerciciosClaseComponent implements OnInit{
 
   exercise!: ExerciseDomain;
 
-  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private readFileExerciseService: ReadFileExerciseService) {
+  constructor(public formulary: FormBuilder, private createExerciseServiceService: CreateExerciseServiceService, private readExercisesServiceService: ReadExercisesServiceService, private updateExerciseServiceService: UpdateExerciseServiceService, private deleteExerciseServiceService: DeleteExerciseServiceService, private compartidoServiceService: CompartidoServiceService, private datosUserServiceService: DatosUserServiceService, private readUserIdService: ReadUserIdService, private createExerciseSolutionServiceService: CreateExerciseSolutionServiceService, private readExercisesSolutionServiceService: ReadExercisesSolutionServiceService, private readExerciseSolutionServiceService: ReadExerciseSolutionServiceService) {
 
     this.ejerciciosClase = this.compartidoServiceService.getData();
     this.mensaje = this.compartidoServiceService.getData();
@@ -71,9 +85,20 @@ export class EjerciciosClaseComponent implements OnInit{
       level: [0, [Validators.required]],
       file: [[Validators.required]]
     })
+
+    this.exerciseSolutionForm = formulary.group(
+      {
+        comment: ['', [Validators.required]],
+        userEmail: ['', [Validators.required]],
+        exerciseId: ['', [Validators.required]],
+        file: ['', [Validators.required]]
+      }
+    )
     
   }
-
+  initializeComponentData() {
+    this.showSolutions = new Array(this.listExerciseDomain.length).fill(false);
+  }
 
   ngOnInit(): void {
 
@@ -90,8 +115,6 @@ export class EjerciciosClaseComponent implements OnInit{
     this.valoresInicialesFormulario = this.exerciseForm.value;
     this.readUserLevel();
   }
-
-
   
   handleInputEvent(event: any) {
     const fileInput = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
@@ -109,6 +132,8 @@ export class EjerciciosClaseComponent implements OnInit{
       console.log('Ningún archivo seleccionado.');
     }
   }
+
+  
   
   
 
@@ -118,7 +143,7 @@ export class EjerciciosClaseComponent implements OnInit{
     } else {
       const formData = new FormData();
       // Agrega los demás campos de formulario
-      formData.append('id', '6');
+      formData.append('id', '1');
       formData.append('title', this.exerciseForm.get('title')?.value || '');
       formData.append('description', this.exerciseForm.get('description')?.value || '');
       formData.append('dataStart', this.exerciseForm.get('dataStart')?.value || '');
@@ -154,6 +179,60 @@ export class EjerciciosClaseComponent implements OnInit{
     }
   }
 
+  handleInputEventSolution(event: any) {
+    const fileInputSolution = event.target.files[0]; // Obtén el archivo seleccionado por el usuario
+    if (fileInputSolution) {
+      this.solutionFileNameVariable = fileInputSolution.name;
+      this.solutionFileType = fileInputSolution.type; // Guarda el nombre real del archivo en la variable
+      this.solutionFileToUpload = fileInputSolution;
+      const formData = new FormData();
+      formData.append('fileSolution', fileInputSolution); // Agrega el archivo al objeto FormData
+      // Puedes hacer más acciones con el archivo aquí si es necesario
+      console.log(`Archivo seleccionado: ${this.solutionFileNameVariable}`);
+      console.log(`Tipo de archivo: ${this.solutionFileType}`);
+      console.log(`Archivo a subir: ${this.solutionFileToUpload}`);
+    } else {
+      console.log('Ningún archivo seleccionado.');
+    }
+  }
+
+  createExerciseSolution(i:number){
+    this.id = i;
+    this.exercise = this.listExerciseDomain[this.id];
+    console.log('create exercise se esta llamando')
+      const formData = new FormData();
+      // Agrega los demás campos de formulario
+      formData.append('id', '1');
+      formData.append('comment', this.exerciseSolutionForm.get('comment')?.value || '');
+      formData.append('userEmail', this.userToEdit.email);
+      formData.append('exerciseId', this.exercise.id.toString());
+      const fileInputSolution = this.exerciseSolutionForm.get('file');
+      if (fileInputSolution instanceof FormControl) {
+        const file: File | null = fileInputSolution.value;
+        if (file) {
+          const blob = new Blob([this.solutionFileToUpload!], { type: this.solutionFileType });
+          formData.append('file', this.solutionFileToUpload!, this.solutionFileNameVariable); // Usa el nombre real del archivo
+        }
+      }
+      // Imprime los datos antes de la llamada al servicio
+      console.log('Datos a enviar:');
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      // Llama al servicio para enviar los datos al backend
+      this.createExerciseSolutionServiceService.createExerciseSolutionService(formData).subscribe(
+        (res: GenericResponse) => {
+          console.log('Respuesta del servidor: ' + res.message);
+          if (res.httpResponse === 200) {
+            window.location.reload();
+          }
+        },
+        (error) => {
+          console.error('Error al enviar el formulario:', error);
+        }
+      );
+  }
+
   readUserLevel() {
     const userId = this.datosUserServiceService.getUserId();
     this.readUserIdService.readUserId(userId!).subscribe(
@@ -161,6 +240,9 @@ export class EjerciciosClaseComponent implements OnInit{
         if (res.httpResponse === 200) {
           this.userToEdit = res.objectResponse;
           console.log('nivel del usuario ' + this.userToEdit.userLevel);
+          console.log('email del usuario ' + this.userToEdit.email);
+          this.userName = res.objectResponse.name
+          console.log('nombre: ', this.userName)
         }
       }
     );
@@ -169,7 +251,62 @@ export class EjerciciosClaseComponent implements OnInit{
   readFileExercise(id: number) {
     return `http://localhost:8080/exercise/exercise_file${id}`; 
   }
+
+  readFileSolution(id:number){
+    return `http://localhost:8080/exercise_solution/exercise_solution_file${id}`;
+  }
+
+  readExerciseSolutionsService(i: number) {
+    this.showSolutions[i] = !this.showSolutions[i];
+    this.id = i;
+    this.exercise = this.listExerciseDomain[this.id];
+    console.log("este es" + this.exercise.id);
+    i = this.exercise.id;
+    console.log("este es i: " + i);
+    this.listExerciseSolution = [];
   
+    this.readExercisesSolutionServiceService.readExerciseSolutionsService(i).subscribe(
+      (res: GenericResponse) => {
+        if(res.httpResponse === 200 && res.objectResponse.length > 0){
+          for(let exerciseSolutionItem of res.objectResponse){
+            this.listExerciseSolution.push(exerciseSolutionItem);
+            this.readFileSolution(exerciseSolutionItem.id);
+            console.log("holaa")
+          }
+        }
+        else{
+          alert("no hay ejercicios resueltos")
+        }
+      }
+    )
+  }
+
+
+  readExerciseSolutionService(i: number){
+    this.showBoxResponse[i] = !this.showBoxResponse[i];
+    this.id = i;
+    this.exercise = this.listExerciseDomain[this.id];
+    console.log("este es" + this.exercise.id);
+    i = this.exercise.id;
+    console.log("este es i: " + i);
+    this.listExerciseSolution = [];
+    const params = {
+      userEmail : this.userToEdit.email,
+      exerciseId : i
+    }
+
+    this.readExerciseSolutionServiceService.readExerciseSolutionService(params).subscribe(
+      (res: GenericResponse) => {
+        if(res.httpResponse === 200 && res.objectResponse.length > 0){
+          for(let exerciseSolutionItem of res.objectResponse){
+            this.listExerciseSolution.push(exerciseSolutionItem);
+            this.readFileSolution(exerciseSolutionItem.id);
+            console.log("holaa")
+          }
+        }
+      }
+    )
+  }
 
   readExercisesService(level: number) {
     this.listExerciseDomain = [];
@@ -177,14 +314,22 @@ export class EjerciciosClaseComponent implements OnInit{
   
     this.readExercisesServiceService.readExercisesService(level).subscribe(
       (res: GenericResponse) => {
-        for (let exerciseItem of res.objectResponse) {
-          this.listExerciseDomain.push(exerciseItem);
-          this.exerciseIds.push(exerciseItem.id);
-          this.exerciseId = exerciseItem.id 
-          this.readFileExercise(this.exerciseId); // Store the exercise ID
-          console.log(exerciseItem.id)
+        if (res.httpResponse === 200 && res.objectResponse.length > 0){
+          for (let exerciseItem of res.objectResponse) {
+            this.listExerciseDomain.push(exerciseItem);
+            this.exerciseIds.push(exerciseItem.id);
+            this.readFileExercise(exerciseItem.id); // Store the exercise ID
+            console.log("id de los ejercicios: " + exerciseItem.id)
+          }
         }
+        else{
+          alert("no hay ejercicios")
+        }
+      },
+      (error) => {
+        console.error('Error al enviar el formulario:', error);
       }
+      
     );
   }
 
@@ -217,7 +362,7 @@ export class EjerciciosClaseComponent implements OnInit{
       const selectedLevel = this.exerciseForm.get('level')?.value || '1';
       formData.append('level', selectedLevel);
       const fileInput = this.exerciseForm.get('file');
-      
+
       if (fileInput instanceof FormControl) {
         const file: File | null = fileInput.value;
         if (file) {
@@ -237,7 +382,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            // Realiza acciones adicionales si es necesario después de la actualización
+            window.location.reload();
           }
         },
         (error) => {
