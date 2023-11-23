@@ -1,5 +1,5 @@
 <section class="min-vh-100 bg_color col-12">
-    <app-header (activateSlideVar)="slideActivate($event)" class="h_13 col-12 fixed-top"></app-header>
+    <app-header (activateSlideVar)="slideActivate($event)" (activateSectionEditUser)="modalActivateEditUser($event)" (activateSectionEditUser)="modalActivateEditUser($event)" [datosEditUser1]="sectionEditUser" class="h_13 col-12 fixed-top"></app-header>
     <div class="d-flex col-12">
         <div class="col-2 h_87 d-flex " *ngIf="slideDatos">
             <app-slide-var  (activateSectionUsers)="modalActivateUser($event)" (activateSectionContents)="modalActivateContent($event)" (activateSectionBooks)="modalActivateBook($event)" (activateSectionExercises)="modalActivateExercises($event)" (activaSectionClasses)="modalActivateClasses($event)" (activaSectionPrerecordeds)="modalActivatePrerecordeds($event)"
@@ -8,6 +8,9 @@
         <div [ngClass]="{'col-12': datosPrueba, 'col-10' : !datosPrueba}" class="d-flex flex-column p-5 h_88 bg-white">
             <div class="col-12" *ngIf="startA">
                 <app-start-a></app-start-a>
+            </div>
+            <div class="col-12" *ngIf="sectionEditUser">
+                <app-edit-user></app-edit-user>
             </div>
             <div class="col-12"  >
                 <app-usuarios *ngIf="sectionUser"></app-usuarios>

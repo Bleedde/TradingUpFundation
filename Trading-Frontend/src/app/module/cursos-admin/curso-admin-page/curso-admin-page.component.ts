@@ -31,10 +31,22 @@ export class CursoAdminPageComponent {
   sectionExercises!: boolean;
   sectionClass!: boolean;
   sectionPrerecorded!: boolean;
+  sectionEditUser!: boolean;
 
   slideDatos: boolean = true;
   startA = true;
   datosPrueba!: boolean;
+
+  modalActivateEditUser(datos:boolean){
+    this.startA = false;
+    this.sectionUser = false;
+    this.sectionBook = false;
+    this.sectionContent = false;
+    this.sectionClass = false;
+    this.sectionExercises = false;
+    this.sectionPrerecorded = false;
+    this.sectionEditUser = datos;
+  }
 
   modalActivateUser(datos: boolean) {
     this.sectionContent = false;
@@ -44,6 +56,7 @@ export class CursoAdminPageComponent {
     this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
     console.log("Prueba del user: " + !datos)
 
   }
@@ -56,6 +69,7 @@ export class CursoAdminPageComponent {
     this.sectionPrerecorded = false;
     this,this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   modalActivateBook(datos:boolean){
@@ -66,6 +80,7 @@ export class CursoAdminPageComponent {
     this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
     
   }
 
@@ -76,6 +91,7 @@ export class CursoAdminPageComponent {
     this.sectionClass = false;
     this.sectionPrerecorded = false;
     this.startA = false;
+    this.sectionEditUser = false;
     this.sectionExercises = datos;
   }
 
@@ -87,6 +103,7 @@ export class CursoAdminPageComponent {
     this.sectionPrerecorded = false;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   modalActivatePrerecordeds(datos:boolean){
@@ -97,6 +114,7 @@ export class CursoAdminPageComponent {
     this.sectionPrerecorded = datos;
     this.startA = false;
     this.sectionExercises = false;
+    this.sectionEditUser = false;
   }
 
   slideActivate(datos:boolean){

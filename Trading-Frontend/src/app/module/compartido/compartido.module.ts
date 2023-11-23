@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClasesPregrabadasComponent } from './components/clases-pregrabadas/clases-pregrabadas.component';
 import { LibrosComponent } from './components/libros/libros.component';
 import { EjerciciosClaseComponent } from './components/ejercicios-clase/ejercicios-clase.component';
+import { EditUserComponent } from './components/edit-user/edit-user/edit-user.component';
 
 
 
@@ -22,6 +23,7 @@ import { EjerciciosClaseComponent } from './components/ejercicios-clase/ejercici
     ClasesPregrabadasComponent,
     LibrosComponent,
     EjerciciosClaseComponent,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { EjerciciosClaseComponent } from './components/ejercicios-clase/ejercici
     ClasesGrabadasComponent,
     ClasesPregrabadasComponent,
     LibrosComponent,
-    EjerciciosClaseComponent
+    EjerciciosClaseComponent,
+    EditUserComponent
   ]
 })
 export class CompartidoModule { }
