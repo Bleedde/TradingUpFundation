@@ -8,6 +8,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseTradingEntity;
 import com.trading.TradingUpFundationBackend.components.Dates;
+import com.trading.TradingUpFundationBackend.components.DeleteFilesTablesRelated;
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IExerciseTradingRepository;//Package that allows to use the repository IExerciseTradingRepository
@@ -23,7 +24,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,14 +43,18 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
     private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
     private final Dates dates;
     private final IExerciseSolutionTradingRepository exerciseSolutionTradingRepository;
+    private final DeleteFilesTablesRelated deleteFilesTablesRelated;
     public ExerciseTradingServiceImplements(IExerciseTradingRepository repository, ExerciseTradingDeserializable converter, Environment env,
-                                            NewIdEntitiesWithFiles newIdEntitiesWithFiles, Dates dates, IExerciseSolutionTradingRepository exerciseSolutionTradingRepository) {
+                                            NewIdEntitiesWithFiles newIdEntitiesWithFiles, Dates dates,
+                                            IExerciseSolutionTradingRepository exerciseSolutionTradingRepository,
+                                            DeleteFilesTablesRelated deleteFilesTablesRelated) {
         this.repository = repository;
         this.converter = converter;
         this.env = env;
         this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
         this.dates = dates;
         this.exerciseSolutionTradingRepository = exerciseSolutionTradingRepository;
+        this.deleteFilesTablesRelated = deleteFilesTablesRelated;
     }
 
     /**
@@ -248,10 +252,11 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                     for (ExerciseSolutionTradingEntity exerciseSolutionEntity : exerciseSolutionList) {
                         if (exerciseSolutionEntity.getIdExercise() == id) {
                             this.exerciseSolutionTradingRepository.delete(exerciseSolutionEntity);
+                            this.deleteFilesTablesRelated.deleteExerciseSolutionFiles(exerciseSolutionEntity.getId());
                         }
                     }
                 }
-                deleteExerciseFiles(id);
+                this.deleteFilesTablesRelated.deleteExerciseFiles(id);
                 this.repository.deleteById(exerciseTradingExist.get().getId());
                 return ResponseEntity.ok(ObjectResponse.builder()
                         .message(Responses.OPERATION_SUCCESS)
@@ -275,18 +280,6 @@ public class ExerciseTradingServiceImplements implements IExerciseTradingService
                             .build());
         }
     }
-
-    private void deleteExerciseFiles(Integer id) throws IOException {
-        String folderPath = env.getProperty("exercise.upload.path") + File.separator + id;
-        if (!folderPath.isEmpty()) {
-            Files.walk(Paths.get(folderPath))
-                    .sorted(Comparator.reverseOrder())
-                    .map(Path::toFile)
-                    .forEach(File::delete);
-        }
-    }
-
-
     @Override
     public ResponseEntity<byte[]> getFile(Integer id) {
         try {
