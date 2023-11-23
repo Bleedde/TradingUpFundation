@@ -83,7 +83,7 @@ public class ExerciseSolutionTradingServiceImplements implements IExerciseSoluti
                     if (exerciseDatabase.isPresent()) {
                         ExerciseSolutionTradingEntity entity = this.converter.convertExerciseSolutionTradingDTOToExerciseSolutionTradingEntity(exerciseSolutionTradingDTO);
                         LocalDate solutionDate = LocalDate.now();
-                        if(this.dates.compareDates(exerciseDatabase.get().getDataStart(), exerciseDatabase.get().getDataEnd(), solutionDate) && userDatabase.get().getUserLevel() <= exerciseDatabase.get().getLevel()) {
+                        if(this.dates.compareDates(exerciseDatabase.get().getDataStart(), exerciseDatabase.get().getDataEnd(), solutionDate) && userDatabase.get().getUserLevel() >= exerciseDatabase.get().getLevel()) {
                             String fileName = StringUtils.cleanPath(Objects.requireNonNull(exerciseSolutionTradingDTO.getFile().getOriginalFilename()));
                             String uploadDirection = env.getProperty("exerciseSolution.upload.path") + File.separator + idFile;
                             Files.createDirectories(Paths.get(uploadDirection));

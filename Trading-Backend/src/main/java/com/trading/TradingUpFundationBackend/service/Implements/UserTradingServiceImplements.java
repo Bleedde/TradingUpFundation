@@ -7,6 +7,7 @@ import com.trading.TradingUpFundationBackend.commons.domains.DTO.UserTradingDTO;
 import com.trading.TradingUpFundationBackend.commons.domains.ObjectResponse;//Package that allows to use a response with type ObjectResponse
 import com.trading.TradingUpFundationBackend.commons.domains.entity.ExerciseSolutionTradingEntity;
 import com.trading.TradingUpFundationBackend.commons.domains.entity.UserTradingEntity;//Package that allows to use the Entity UserTradingEntity
+import com.trading.TradingUpFundationBackend.components.DeleteFilesTablesRelated;
 import com.trading.TradingUpFundationBackend.components.NewIdEntitiesWithFiles;
 import com.trading.TradingUpFundationBackend.repository.IExerciseSolutionTradingRepository;
 import com.trading.TradingUpFundationBackend.repository.IUserTradingRepository;//Package that allows to use the repository ILevelTradingRepository
@@ -36,15 +37,18 @@ public class UserTradingServiceImplements implements IUserTradingService {
     private final Encryption encryption;
     private final NewIdEntitiesWithFiles newIdEntitiesWithFiles;
     private final IExerciseSolutionTradingRepository exerciseSolutionTradingRepository;
+    private final DeleteFilesTablesRelated deleteFilesTablesRelated;
 
     public UserTradingServiceImplements(IUserTradingRepository repository, UserTradingDeserializable converter,
                                         Encryption encryption, NewIdEntitiesWithFiles newIdEntitiesWithFiles,
-                                        IExerciseSolutionTradingRepository exerciseSolutionTradingRepository) {
+                                        IExerciseSolutionTradingRepository exerciseSolutionTradingRepository,
+                                        DeleteFilesTablesRelated deleteFilesTablesRelated) {
         this.converter = converter;
         this.repository = repository;
         this.encryption = encryption;
         this.newIdEntitiesWithFiles = newIdEntitiesWithFiles;
         this.exerciseSolutionTradingRepository = exerciseSolutionTradingRepository;
+        this.deleteFilesTablesRelated = deleteFilesTablesRelated;
     }
 
     @Override
@@ -263,6 +267,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
                     for (ExerciseSolutionTradingEntity exerciseSolutionEntity : exerciseSolutionList) {
                         if (userTradingExist.get().getId() == exerciseSolutionEntity.getUserId()) {
                             this.exerciseSolutionTradingRepository.delete(exerciseSolutionEntity);
+                            this.deleteFilesTablesRelated.deleteExerciseSolutionFiles(exerciseSolutionEntity.getId());
                         }
                     }
                 } else {
