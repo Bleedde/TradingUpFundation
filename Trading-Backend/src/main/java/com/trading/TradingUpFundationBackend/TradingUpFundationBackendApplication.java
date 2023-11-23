@@ -49,8 +49,6 @@ public class TradingUpFundationBackendApplication {
 			admin.setAuditedAccount("cuenta auditada");
 			admin.setUserLevel(4);
 			this.repository.save(admin);
-		} else if(thereAreAdmins()){
-			System.out.println("Ya hay administradores");
 		}
 	}
 

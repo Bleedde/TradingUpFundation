@@ -36,7 +36,6 @@ public class ExerciseTradingControllerImplements implements IExerciseTradingCont
     @Override//Annotation that represent an override for a method in another interface
     @PostMapping(IExerciseTradingEndPoints.URL_EXERCISE_CREATE)//Annotation which represent this method with a specific endPoint
     public ResponseEntity<ObjectResponse> createExerciseTrading(@ModelAttribute ExerciseTradingDTO exerciseTradingDTO) {
-        System.out.println(exerciseTradingDTO);
         return this.service.createExerciseTrading(exerciseTradingDTO);
     }
 
