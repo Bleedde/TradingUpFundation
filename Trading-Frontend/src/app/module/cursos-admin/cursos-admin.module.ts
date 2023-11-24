@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CursosAdminRoutingModule } from './cursos-admin-routing.module';
 import { CursoAdminPageComponent } from './curso-admin-page/curso-admin-page.component';
-
 import { UsuariosComponent } from './curso-admin-page/components/usuarios/usuarios.component';
-import { ContenidoCursoComponent } from './curso-admin-page/components/contenido-curso/contenido-curso.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { CompartidoModule } from '../compartido/compartido.module';
 import { CreateUserServiceService } from '../service/userServices/create-user-service.service';
 import { ReadUsersServiceService } from '../service/userServices/read-users-service.service';
@@ -17,8 +14,7 @@ import { DeleteUserServiceService } from '../service/userServices/delete-user-se
 @NgModule({
   declarations: [
     CursoAdminPageComponent,
-    UsuariosComponent,
-    ContenidoCursoComponent
+    UsuariosComponent
   ],
   imports: [
     CommonModule,

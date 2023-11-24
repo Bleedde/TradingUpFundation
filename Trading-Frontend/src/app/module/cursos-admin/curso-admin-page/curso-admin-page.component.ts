@@ -61,17 +61,6 @@ export class CursoAdminPageComponent {
 
   }
 
-  modalActivateContent(datos:boolean){
-    this.sectionUser = false;
-    this.sectionContent = datos;
-    this.sectionBook = false;
-    this.sectionClass = false;
-    this.sectionPrerecorded = false;
-    this,this.startA = false;
-    this.sectionExercises = false;
-    this.sectionEditUser = false;
-  }
-
   modalActivateBook(datos:boolean){
     this.sectionUser = false;
     this.sectionBook = datos;

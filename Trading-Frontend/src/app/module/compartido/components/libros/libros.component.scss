@@ -89,5 +89,10 @@
     border-color: #9965dd!important;
 }
 
-
-
+.tarjeticas{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    align-content: center;
+    justify-items: center;
+}
