@@ -8,6 +8,7 @@ import { ReadPrerecordedsServiceService } from 'src/app/module/service/prerecord
 import { UpdatePrerecordedServiceService } from 'src/app/module/service/prerecordedClassServices/update-prerecorded-service.service';
 import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 import { ClassPrerecordedDomain } from 'src/app/shared/domains/ClassPrerecordedDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -17,6 +18,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./clases-pregrabadas.component.scss']
 })
 export class ClasesPregrabadasComponent {
+  private alerts: Alerts = new Alerts();
   youtubeVideo: String = 'https://www.youtube.com/embed/';
 
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
@@ -108,7 +110,7 @@ export class ClasesPregrabadasComponent {
         (res: GenericResponse) => {
           console.log("Esta es la Respuesta: " + res.message)
           if (res.httpResponse == 200) {
-            window.location.reload()
+            this.alerts.showModalCreated();
           }
         }
       )
@@ -129,25 +131,27 @@ export class ClasesPregrabadasComponent {
 
   readClassesPrerecordedService(level: number) {
     this.listClassPrerecordedDomain = [];
+  
     this.readPrerecordedsServiceService.readClassesPrerecordedService(level).subscribe(
       (res: GenericResponse) => {
-        if (res.httpResponse === 200 && res.objectResponse.length > 0){
-          for (let classPrerecordedItem of res.objectResponse) {
-            let url = classPrerecordedItem.urlVideo;
+        if (res.httpResponse === 200 && Array.isArray(res.objectResponse) && res.objectResponse.length > 0) {
+          for (const classPrerecordedItem of res.objectResponse) {
+            const url = classPrerecordedItem.urlVideo;
             classPrerecordedItem.urlVideo = this.youtubeVideo + url;
-            this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classPrerecordedItem.urlVideo);
-            classPrerecordedItem.urlVideo = this.safeUrl;
+            const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(classPrerecordedItem.urlVideo);
+            classPrerecordedItem.urlVideo = safeUrl;
             this.listClassPrerecordedDomain.push(classPrerecordedItem);
           }
-        }else{
-          alert('No hay clases pregrabadas');
+        } else {
+          this.alerts.showModalPrerecorded();
         }
       },
       (error) => {
         console.error('Error al enviar el formulario:', error);
       }
-    )
+    );
   }
+  
 
   editClassPrerecorded(i: number) {
     this.editClassPrerecordedDomain = true;
@@ -186,7 +190,7 @@ export class ClasesPregrabadasComponent {
         console.log("Esta es la Respuesta: " + res.message)
         console.log(res.httpResponse)
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalUpdated();
         }
       }
     )
@@ -198,7 +202,7 @@ export class ClasesPregrabadasComponent {
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalDelete();  
         }
       }
     )

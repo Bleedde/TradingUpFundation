@@ -86,13 +86,15 @@
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="title">
+                        <input type="text" class="form-control" formControlName="title" [placeholder]="classForm.get('title')?.hasError('required') && classForm.get('title')?.touched ? 'El titulo es obligatorio.' : ''"
+                        [ngClass]="{'error-placeholder': classForm.get('title')?.hasError('required') && classForm.get('title')?.touched}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" formControlName="description">
+                        <input type="email" class="form-control" formControlName="description" [placeholder]="classForm.get('description')?.hasError('required') && classForm.get('description')?.touched ? 'La descripción es obligatoria.' : ''"
+                        [ngClass]="{'error-placeholder': classForm.get('description')?.hasError('required') && classForm.get('description')?.touched}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -109,7 +111,8 @@
                 <div class="row mb-3">
                     <label for="text" class="col-sm-2 col-form-label">Video:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="urlVideo">
+                        <input type="text" class="form-control" formControlName="urlVideo" [placeholder]="classForm.get('urlVideo')?.hasError('required') && classForm.get('urlVideo')?.touched ? 'La url del video es obligatoria' : ''"
+                        [ngClass]="{'error-placeholder': classForm.get('urlVideo')?.hasError('required') && classForm.get('urlVideo')?.touched}">
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center pt-4">

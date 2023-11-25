@@ -7,6 +7,7 @@ import { UpdateBookServiceService } from 'src/app/module/service/bookServices/up
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 import { BookDomain } from 'src/app/shared/domains/BookDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -16,6 +17,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./libros.component.scss']
 })
 export class LibrosComponent {
+  private alerts: Alerts = new Alerts();
   fileNameVariable!: string;
   imageFileNameVariable!: string
   fileType!: string;
@@ -161,7 +163,7 @@ export class LibrosComponent {
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            window.location.reload();
+            this.alerts.showModalCreated()
             // Realiza acciones adicionales si es necesario
           }
         },
@@ -207,7 +209,7 @@ export class LibrosComponent {
             console.log(bookItem.id)
           }
         }else{
-          alert('no hay libros')
+          this.alerts.showModalBooks();
         }
         
       }
@@ -230,34 +232,53 @@ export class LibrosComponent {
   }
 
   updateBook() {
-    this.book = {
-      id: this.listBookDomain[this.id].id,
-      name: this.bookForm.controls['name'].value != ''
-        ? this.bookForm.controls['name'].value
-        : this.listBookDomain[this.id].name,
-      description: this.bookForm.controls['description'].value != ''
-        ? this.bookForm.controls['description'].value
-        : this.listBookDomain[this.id].description,
-      file: this.bookForm.controls['file'].value != ''
-        ? this.bookForm.controls['file'].value
-        : this.listBookDomain[this.id].file,
-      image: this.bookForm.controls['image'].value != ''
-        ? this.bookForm.controls['image'].value
-        : this.listBookDomain[this.id].image,
-      level: this.bookForm.controls['level'].value != null
-        ? this.bookForm.controls['level'].value
-        : this.listBookDomain[this.id].level,
-    }
-
-    this.updateBookServiceService.updateBookService(this.book).subscribe(
-      (res: GenericResponse) => {
-        console.log("Esta es la Respuesta: " + res.message)
-        console.log(res.httpResponse)
-        if (res.httpResponse == 200) {
-          window.location.reload()
+    if (!this.bookForm.valid) {
+      return this.bookForm.markAllAsTouched();
+    } else {
+      const formData = new FormData();
+      // Agrega los demás campos de formulario
+      formData.append('id', this.listBookDomain[this.id].id.toString()); // Suponiendo que tengas una variable que almacena el ID del ejercicio a actualizar
+      formData.append('name', this.bookForm.get('name')?.value || '');
+      formData.append('description', this.bookForm.get('description')?.value || '');
+      const fileInput = this.bookForm.get('file'); 
+      if (fileInput instanceof FormControl) {
+        const file: File | null = fileInput.value;
+        if (file) {
+          const blob = new Blob([this.fileToUpload!], { type: this.fileType });
+          formData.append('file', this.fileToUpload!, this.fileNameVariable);
         }
       }
-    )
+      const fileInputImage = this.bookForm.get('image');
+      if (fileInputImage instanceof FormControl) {
+        const image: File | null = fileInputImage.value;
+        if (image) {
+          const blob = new Blob([this.imageFileToUpload!], { type: this.imageFileType });
+          formData.append('image', this.imageFileToUpload!, this.imageFileNameVariable); // Usa el nombre real del archivo
+        }
+      }
+      const selectedLevel = this.bookForm.get('level')?.value || '1';
+      formData.append('level', selectedLevel);
+      
+      
+      // Imprime los datos antes de la llamada al servicio
+      console.log('Datos a enviar:');
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      
+      // Llama al servicio para enviar los datos al backend
+      this.updateBookServiceService.updateBookService(formData).subscribe(
+        (res: GenericResponse) => {
+          console.log('Respuesta del servidor: ' + res.message);
+          if (res.httpResponse === 200) {
+            this.alerts.showModalUpdated();
+          }
+        },
+        (error) => {
+          console.error('Error al enviar el formulario:', error);
+        }
+      );
+    }
   }
 
   deleteBook(i: number) {
@@ -266,12 +287,11 @@ export class LibrosComponent {
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalDelete();
         }
       }
     )
   }
-
 
   cancelarEdicion() {
     this.editBookDomain = false;
@@ -280,20 +300,4 @@ export class LibrosComponent {
     this.bookForm.setValue(this.valoresInicialesFormulario);
   }
   
-  /*
-  book1 = BOOK1;
-  book2 = BOOK2;
-  registroPdf: any [][] = [[],[]];
-  constructor(){
-    this.registroPdf = [[
-      {imagen: this.book1, titulo: "Tradin Sin Ego", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
-    {imagen: this.book2, titulo: "Chartismo", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
-    {imagen: this.book1, titulo: "Velas Japonesas", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"}],
-
-    [{imagen: this.book2, titulo: "Chartismo", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
-    {imagen: this.book1, titulo: "Tradin Sin Ego", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"},
-    {imagen: this.book2, titulo: "Chartismo", descripcion: "Aprende a controlar tus cesgos egolatras", nivel: "nivel 1", link: "/aaa"}]
-      
-      ];
-  }*/
 }

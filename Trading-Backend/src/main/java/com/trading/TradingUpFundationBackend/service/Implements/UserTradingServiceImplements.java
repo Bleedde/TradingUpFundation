@@ -223,6 +223,7 @@ public class UserTradingServiceImplements implements IUserTradingService {
                 entity.setAuditedAccount(userTradingDTO.getAuditedAccount());
                 entity.setBacktesting(userTradingDTO.getBacktesting());
                 entity.setUserLevel(userTradingDTO.getUserLevel());
+                entity.setStatus(userTradingDTO.isStatus());
                 entity.setUserRole(userTradingDTO.getUserRole());
                 String rawPassword = this.encryption.decrypt(entity.getPassword());
                 if(!rawPassword.equals(userTradingDTO.getPassword())){

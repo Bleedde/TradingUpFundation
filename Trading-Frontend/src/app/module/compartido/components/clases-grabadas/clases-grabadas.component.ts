@@ -8,6 +8,7 @@ import { UpdateClassServiceService } from 'src/app/module/service/classServices/
 import { CompartidoServiceService } from 'src/app/module/service/compartido-service.service';
 import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 import { ClassDomain } from 'src/app/shared/domains/ClassDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
 
@@ -17,6 +18,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./clases-grabadas.component.scss']
 })
 export class ClasesGrabadasComponent implements OnInit {
+  private alerts: Alerts = new Alerts();
   youtubeVideo: String = 'https://www.youtube.com/embed/';
 
   safeUrl: SafeResourceUrl | undefined; // Variable para la URL segura
@@ -108,7 +110,7 @@ export class ClasesGrabadasComponent implements OnInit {
         (res: GenericResponse) => {
           console.log("Esta es la Respuesta: " + res.message)
           if (res.httpResponse == 200) {
-            window.location.reload()
+            this.alerts.showModalCreated();
           }
         }
       )
@@ -140,7 +142,7 @@ export class ClasesGrabadasComponent implements OnInit {
             this.listClassDomain.push(classItem);
           }
         }else{
-          alert('No hay clases grabadas');
+          this.alerts.showModalClasses();
         }
       },
       (error) => {
@@ -187,7 +189,7 @@ export class ClasesGrabadasComponent implements OnInit {
         console.log("Esta es la Respuesta: " + res.message)
         console.log(res.httpResponse)
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalUpdated();
         }
       }
     )
@@ -199,7 +201,7 @@ export class ClasesGrabadasComponent implements OnInit {
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalDelete();
         }
       }
     )

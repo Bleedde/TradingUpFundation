@@ -6,6 +6,7 @@ import { ReadUserIdService } from 'src/app/module/service/userServices/read-user
 import { UpdateUsersServiceService } from 'src/app/module/service/userServices/update-users-service.service';
 import { UserDomain } from 'src/app/shared/domains/UserDomain';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,7 +14,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-
+  private alerts: Alerts = new Alerts();
   userForm!: FormGroup;
   editUserDomain!: boolean;
   id!: number;
@@ -24,7 +25,7 @@ export class EditUserComponent implements OnInit {
     this.userForm = formulary.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.nullValidator]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       level: [0, [Validators.required]],
       status: [[Validators.required]],
       backtesting: ['', Validators.nullValidator],
@@ -95,7 +96,7 @@ export class EditUserComponent implements OnInit {
         if (response) {
           if (response.httpResponse === 200) {
             console.log("Usuario actualizado con éxito" + response.httpResponse)
-            window.location.reload();
+            this.alerts.showModalUpdated();
           } else {
             console.error("El servidor respondió con un error:", response.message);
           }

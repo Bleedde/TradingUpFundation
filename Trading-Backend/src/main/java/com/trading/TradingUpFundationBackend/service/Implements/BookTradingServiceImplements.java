@@ -50,6 +50,7 @@ public class BookTradingServiceImplements implements IBookTradingService {
      */
     @Override//Annotation that represent an override for a method in another interface
     public ResponseEntity<ObjectResponse> createBookTrading(BookTradingDTO bookTradingDTO) {
+        System.out.println(bookTradingDTO);
         try{
             int idNew;
             List<BookTradingEntity> bookTradingEntityList = this.repository.findAll();

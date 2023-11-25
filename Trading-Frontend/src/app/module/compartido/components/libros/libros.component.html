@@ -96,13 +96,15 @@
           <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre Libro:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="name">
+              <input type="text" class="form-control" formControlName="name" [placeholder]="bookForm.get('name')?.hasError('required') && bookForm.get('name')?.touched ? 'El nombre del libro es obligatorio.' : ''"
+              [ngClass]="{'error-placeholder': bookForm.get('name')?.hasError('required') && bookForm.get('name')?.touched}">
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Descripcion:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="description">
+              <input type="text" class="form-control" formControlName="description" [placeholder]="bookForm.get('description')?.hasError('required') && bookForm.get('description')?.touched ? 'La descripcion es obligatoria' : ''"
+              [ngClass]="{'error-placeholder': bookForm.get('description')?.hasError('required') && bookForm.get('description')?.touched}">
             </div>
           </div>
           <div class="row mb-3">
@@ -133,7 +135,7 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Imagen:</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" formControlName="image" placeholder="{{book.name}}">
+              <input type="file" class="form-control" formControlName="image" (change)="handleInputEventImage($event)">
             </div>
           </div>
           <div class="row mb-3">
@@ -162,7 +164,7 @@
           <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Archivo:</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control mb-2" formControlName="file" placeholder="{{book.file}}">
+              <input type="file" class="form-control mb-2" formControlName="file" (change)="handleInputEvent($event)">
             </div>
           </div>
           <div class="d-flex align-items-center justify-content-center pt-4">

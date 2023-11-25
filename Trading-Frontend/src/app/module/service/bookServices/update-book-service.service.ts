@@ -14,7 +14,7 @@ export class UpdateBookServiceService {
 
   API: string = "http://localhost:8080/book";
 
-  updateBookService(bookDomain: BookDomain) :Observable<GenericResponse> {
-    return this.http.put<GenericResponse>(this.API + "/book_update", bookDomain)
+  updateBookService(formData: FormData) :Observable<GenericResponse> {
+    return this.http.put<GenericResponse>(this.API + "/book_update", formData)
   }
 }

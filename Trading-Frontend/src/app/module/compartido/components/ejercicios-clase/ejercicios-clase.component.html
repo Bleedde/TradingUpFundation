@@ -94,13 +94,15 @@
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="title">
+                        <input type="text" class="form-control" formControlName="title" [placeholder]="exerciseForm.get('title')?.hasError('required') && exerciseForm.get('title')?.touched ? 'El titulo es obligatorio.' : ''"
+                        [ngClass]="{'error-placeholder': exerciseForm.get('title')?.hasError('required') && exerciseForm.get('title')?.touched}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="description" class="col-sm-2 col-form-label">Descripción:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="description">
+                        <input type="text" class="form-control" formControlName="description" [placeholder]="exerciseForm.get('description')?.hasError('required') && exerciseForm.get('description')?.touched ? 'La descripción es obligatoria' : ''"
+                        [ngClass]="{'error-placeholder': exerciseForm.get('description')?.hasError('required') && exerciseForm.get('description')?.touched}">
                     </div>
                 </div>
                 <div class="row mb-3">

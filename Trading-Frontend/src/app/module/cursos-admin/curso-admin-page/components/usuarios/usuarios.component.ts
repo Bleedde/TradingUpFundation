@@ -9,6 +9,7 @@ import { CreateUserServiceService } from 'src/app/module/service/userServices/cr
 import { DeleteUserServiceService } from 'src/app/module/service/userServices/delete-user-service.service';
 import { UpdateUsersServiceService } from 'src/app/module/service/userServices/update-users-service.service';
 import { GenericResponse } from 'src/app/shared/response/GenericResponse';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
+  private alerts: Alerts = new Alerts();
 
   userForm!: FormGroup;
   userDomain!: UserDomain;
@@ -101,7 +103,7 @@ export class UsuariosComponent implements OnInit {
         (res: GenericResponse) => {
           console.log("Esta es la Respuesta: " + res.message)
           if (res.httpResponse == 200) {
-            window.location.reload()
+            this.alerts.showModalCreated();
           }
         }
       )
@@ -178,7 +180,7 @@ export class UsuariosComponent implements OnInit {
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalUpdated();
         }
       }
     )
@@ -197,7 +199,7 @@ export class UsuariosComponent implements OnInit {
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalDelete();
         }
       }
     )

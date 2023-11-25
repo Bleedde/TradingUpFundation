@@ -11,6 +11,7 @@ import { ReadFileExerciseService } from 'src/app/module/service/exercises/read-f
 import { UpdateExerciseServiceService } from 'src/app/module/service/exercises/update-exercise-service.service';
 import { DatosUserServiceService } from 'src/app/module/service/userServices/datos-user-service.service';
 import { ReadUserIdService } from 'src/app/module/service/userServices/read-user-id.service';
+import { Alerts } from 'src/app/shared/alerts/alerts';
 import { BOOK1, GRAFICEXERCISE } from 'src/app/shared/constants';
 import { ExerciseDomain } from 'src/app/shared/domains/ExerciseDomain';
 import { ExerciseSolution } from 'src/app/shared/domains/ExerciseSolution';
@@ -22,6 +23,7 @@ import { GenericResponse } from 'src/app/shared/response/GenericResponse';
   styleUrls: ['./ejercicios-clase.component.scss']
 })
 export class EjerciciosClaseComponent implements OnInit{
+  private alerts: Alerts = new Alerts();
   graficExercise = GRAFICEXERCISE;
   userRole!: string;
   userName!: string;
@@ -168,8 +170,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            window.location.reload();
-            // Realiza acciones adicionales si es necesario
+            this.alerts.showModalCreated();
           }
         },
         (error) => {
@@ -224,7 +225,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            window.location.reload();
+            this.alerts.showModalCreated();
           }
         },
         (error) => {
@@ -275,7 +276,7 @@ export class EjerciciosClaseComponent implements OnInit{
           }
         }
         else{
-          alert("no hay ejercicios resueltos")
+          this.alerts.showModalExerciseA();
         }
       }
     )
@@ -323,7 +324,7 @@ export class EjerciciosClaseComponent implements OnInit{
           }
         }
         else{
-          alert("no hay ejercicios")
+          this.alerts.showModalExerciseB();
         }
       },
       (error) => {
@@ -382,7 +383,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            window.location.reload();
+            this.alerts.showModalUpdated();
           }
         },
         (error) => {
@@ -399,7 +400,7 @@ export class EjerciciosClaseComponent implements OnInit{
         console.log("Esta es la Respuesta: " + res.message)
 
         if (res.httpResponse == 200) {
-          window.location.reload()
+          this.alerts.showModalDelete();
         }
       }
     )
