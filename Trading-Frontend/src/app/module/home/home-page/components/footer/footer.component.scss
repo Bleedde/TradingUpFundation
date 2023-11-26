@@ -54,7 +54,8 @@
 }
 
 .pie-pagina .grupo1 .red-social a :hover{
-    color: aqua;
+    color: rgb(143, 96, 230);
+    transition: 0.2s;
 }
 
 .pie-pagina .grupo2{
@@ -75,6 +76,11 @@
         grid-gap: 30px;
         padding: 35px 0px;
     }
+}
+
+p{
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 

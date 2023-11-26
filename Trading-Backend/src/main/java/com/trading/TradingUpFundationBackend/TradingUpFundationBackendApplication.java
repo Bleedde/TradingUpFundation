@@ -40,7 +40,7 @@ public class TradingUpFundationBackendApplication {
 		if (userList.isEmpty()) {
 			UserTradingEntity admin = new UserTradingEntity();
 			admin.setId(this.idLogic.getHigherNumber(idList) + 1);
-			admin.setEmail("admin@gmail.com");
+			admin.setEmail("tradingupfundation@gmail.com");
 			admin.setPassword(this.encryption.encrypt("password"));
 			admin.setUserRole("admin");
 			admin.setStatus(true);
