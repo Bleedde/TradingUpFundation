@@ -20,7 +20,7 @@ p{
     height:  calc(25em + 25vh);
 }
 
-@media screen and (max-width:992px){
+@media screen and (max-width:1200px){
     .grid_columns{
        display: grid;
        align-items: center;
@@ -30,7 +30,7 @@ p{
     
 }
 
-@media screen and (min-width:993px){
+@media screen and (min-width:1201px){
     .flex_columns{
        display: flex;
        align-items: end;

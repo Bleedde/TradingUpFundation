@@ -54,6 +54,31 @@ export class Alerts{
           });
       }
 
+      showModalCreatedSolution(){
+        Swal.fire({
+            title: 'Respuesta Creada con Exito',
+            icon: 'success',
+            iconColor: '#ba74ff',
+            width: 600,
+            padding: "3em",
+            color: "#3B216F",
+            confirmButtonColor: '#3B216F',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+          }).then((result) => {
+            if (result.value) {
+              // El usuario hizo clic en OK
+              window.location.reload();
+            }
+            else{
+                setTimeout(() => {
+                    window.location.reload();
+                  }, 100); 
+            }
+            // También puedes agregar lógica adicional para otros casos si es necesario
+          });
+      }
+
       showModalDelete(){
         Swal.fire({
             title: 'Eliminado con exito',

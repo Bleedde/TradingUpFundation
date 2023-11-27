@@ -225,7 +225,7 @@ export class EjerciciosClaseComponent implements OnInit{
         (res: GenericResponse) => {
           console.log('Respuesta del servidor: ' + res.message);
           if (res.httpResponse === 200) {
-            this.alerts.showModalCreated();
+            this.alerts.showModalCreatedSolution();
           }
         },
         (error) => {
