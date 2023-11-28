@@ -7,7 +7,7 @@
       <div class="card-body bg_purple rounded-bottom">
           <div class="row col-12 ">
               <div class="col-12 col-md-8 d-flex flex-column align-items-start justify-content-center">
-                  <p class="text-center fs-5 text-black p-5 text-white">¡Bienvenido a nuestra sección de clases prerabadas! 
+                  <p class="text-center fs-5 text-black p-5 text-white">¡Bienvenido a nuestra sección de clases pregrabadas! 
                       Aprende a tu ritmo y descubre un mundo de conocimiento a tu alcance. ¡Comienza a explorar ahora!</p>
               </div>
               <div class="col-4 d-md-flex d-none align-items-center justify-content-center">
@@ -94,14 +94,14 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre Libro:</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre del Libro:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" formControlName="name" [placeholder]="bookForm.get('name')?.hasError('required') && bookForm.get('name')?.touched ? 'El nombre del libro es obligatorio.' : ''"
               [ngClass]="{'error-placeholder': bookForm.get('name')?.hasError('required') && bookForm.get('name')?.touched}">
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripcion:</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" formControlName="description" [placeholder]="bookForm.get('description')?.hasError('required') && bookForm.get('description')?.touched ? 'La descripcion es obligatoria' : ''"
               [ngClass]="{'error-placeholder': bookForm.get('description')?.hasError('required') && bookForm.get('description')?.touched}">
@@ -139,13 +139,13 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre Libro:</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label"> del Libro:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" formControlName="name" placeholder="{{book.name}}">
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripcion:</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" formControlName="description" placeholder="{{book.description}}">
             </div>
