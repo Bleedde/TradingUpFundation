@@ -52,6 +52,6 @@ If your are interested of know more about this proyect, below this line you can 
 - Brahian Barrios: ttreyygh@gmail.com
 - Juan Ospina : pataca09872gmail.com
 - Andres Perez: edisonandresperezmartinez@gmail.com
-- Laura Orjuela:
-- James Acosta:
+- Laura Orjuela: ljorjuela59@gmail.com
+- James Acosta: jamesesteb15@gmail.com
 - Gustavo Garzon: Androidesito18@gmail.com
