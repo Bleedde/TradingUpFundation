@@ -50,7 +50,7 @@ CONTACTS
 
 If your are interested of know more about this proyect, below this line you can find the emails of all the integrants of the workteam: 
 - Brahian Barrios: ttreyygh@gmail.com
-- Juan Ospina: pataca0987gmail.com
+- Juan Ospina: pataca0987@gmail.com
 - Andres Perez: edisonandresperezmartinez@gmail.com
 - Laura Orjuela: ljorjuela59@gmail.com
 - James Acosta: jamesesteb15@gmail.com
